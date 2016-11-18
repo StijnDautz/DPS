@@ -38,14 +38,15 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="GameInstance.cs" />
-    <Compile Include="GameMode.cs" />
-    <Compile Include="GameModeManager.cs" />
-    <Compile Include="GameState.cs" />
-    <Compile Include="GameStateManager.cs" />
-    <Compile Include="ILoopObject.cs" />
-    <Compile Include="Object.cs" />
-    <Compile Include="ObjectList.cs" />
+    <Compile Include="GameManagement\GameInstance.cs" />
+    <Compile Include="GameManagement\GameMode.cs" />
+    <Compile Include="GameManagement\GameModeManager.cs" />
+    <Compile Include="GameManagement\GameState.cs" />
+    <Compile Include="GameManagement\GameStateManager.cs" />
+    <Compile Include="GameManagement\ILoopObject.cs" />
+    <Compile Include="GameManagement\Object.cs" />
+    <Compile Include="GameManagement\ObjectList.cs" />
+    <Compile Include="GameManagement\World.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
