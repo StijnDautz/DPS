@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DPS
 {
-    class World : ObjectList
+    abstract class World : ObjectList
     {
         private int tileWidth;
         private int tileHeight;
@@ -52,7 +52,7 @@ namespace DPS
 
         protected virtual Object FindType(char type)
         {
-            return new Object("");
+            return null;
         }
 
         private void AddTile(Object tile, char type, int x, int y)
