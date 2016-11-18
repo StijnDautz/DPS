@@ -7,27 +7,66 @@ using Microsoft.Xna.Framework;
 
 namespace DPS
 {
-    class ObjectList : ILoopObject
+    class ObjectList : Object
     {
-        ObjectList()
+        private List<Object> _objects;
+
+        public List<Object> Objects
+        {
+            get { return _objects; }
+        }
+
+        public ObjectList(string id) : base(id)
         {
 
         }
 
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
-
+            foreach(Object o in _objects)
+            {
+                o.Update(gameTime);
+            }
         }
 
-        public void Draw()
+        public override void Draw(GameTime gameTime)
         {
-
+            foreach(Object o in _objects)
+            {
+                o.Draw(gameTime);
+            }
         }
 
-        public void Reset()
+        public override void Reset()
         {
+            foreach(Object o in _objects)
+            {
+                o.Reset();
+            }
+        }
 
+        public void Add(Object o)
+        {
+            _objects.Add(o);
+        }
+
+        public Object Find(string id)
+        {
+            foreach (Object o in _objects)
+            {
+                //check wether o is of type ObjectList - if so Search into this 
+                if(o is ObjectList)
+                {
+                    ObjectList subList = o as ObjectList;
+                    subList.Find(o.Id);
+                }
+
+                if(o.Id == id)
+                {
+                    return o;
+                }
+            }
+            return null;
         }
     }
-
 }

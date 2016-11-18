@@ -15,35 +15,35 @@ namespace DPS
         private Vector2 _position;
         private Vector2 _velocity;
 
-        string Id
+        public string Id
         {
             get { return _id; }
         }
-        bool Visible
+        public bool Visible
         {
             get { return _visible; }
             set { _visible = value; }
         }
 
-        ObjectList Parent
+        public ObjectList Parent
         {
             get { return _parent; }
             set { _parent = value; }
         }
 
-        Vector2 Position
+        public Vector2 Position
         {
             get { return _position; }
             set { _position = value; }
         }
 
-        Vector2 Velocity
+        public Vector2 Velocity
         {
             get { return _velocity; }
             set { _velocity = value; }
         }
 
-        Object(string id)
+        public Object(string id)
         {
             _id = id;
             _position = Vector2.Zero;
@@ -56,7 +56,7 @@ namespace DPS
 
         }
 
-        public virtual void Draw()
+        public virtual void Draw(GameTime gameTime)
         {
 
         }

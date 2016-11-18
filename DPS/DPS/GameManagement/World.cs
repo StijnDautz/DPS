@@ -40,7 +40,18 @@ namespace DPS
         {
             foreach(string tile in lines)
             {
-                //for(int i = 0; i < tile.Length;)
+                for(int i = 0; i < tile.Length; i++)
+                {
+
+                }
+            }
+        }
+
+        protected virtual void AssignTile(char tile)
+        {
+            switch (tile)
+            {
+                
             }
         }
     }
