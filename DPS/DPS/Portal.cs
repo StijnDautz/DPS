@@ -28,13 +28,18 @@ namespace DPS
 
         }
 
+        void Teleport()
+        {
+
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
         }
-        public override void Draw()
+        public override void Draw(GameTime gameTime)
         {
-            base.Draw();
+            base.Draw(gameTime);
         }
         public override void Reset()
         {

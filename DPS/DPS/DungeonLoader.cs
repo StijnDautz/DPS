@@ -9,11 +9,11 @@ namespace DPS
 {
     class DungeonLoader
     {
-        string path = "DungeonLoader.txt";
+        string path;
         int width = 4;
         int height = 4;
         Random r = new Random();
-        string dungeon = "Fire";
+        string dungeon;
         string[,] writeString;
 
         public DungeonLoader(string path, string dungeon)
