@@ -19,6 +19,7 @@ namespace DPS
         {
             get { return _id; }
         }
+
         public bool Visible
         {
             get { return _visible; }
