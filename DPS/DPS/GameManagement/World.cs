@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,15 +10,17 @@ namespace DPS
 {
     class World : ObjectList
     {
-        public World(string id) : base(id)
-        {
+        private int tileWidth;
+        private int tileHeight;
 
+        public World(string id, string assetName) : base(id)
+        {
+            Load(assetName);
         }
 
         public virtual void Load(string assetName)
         {
-
-            
+            ReadTiles(ReadFile(assetName));
         }
 
         private List<string> ReadFile(string assetName)
@@ -38,20 +41,30 @@ namespace DPS
 
         private void ReadTiles(List<string> lines)
         {
-            foreach(string tile in lines)
+            for(int y = 0; y < lines.Count; y++)
             {
-                for(int i = 0; i < tile.Length; i++)
+                for(int x = 0; x < lines[y].Length; x++)
                 {
-
+                    AddTile(FindType(lines[y][x]), lines[y][x], x, y);
                 }
             }
         }
 
-        protected virtual void AssignTile(char tile)
+        protected virtual Object FindType(char type)
         {
-            switch (tile)
+            return new Object("");
+        }
+
+        private void AddTile(Object tile, char type, int x, int y)
+        {
+            if (tile != null)
             {
-                
+                tile.Position = new Vector2(x * tileWidth, y * tileHeight);
+                Add(tile);
+            }
+            else
+            {
+                throw new Exception("tile type: " + type + "was not found");
             }
         }
     }
