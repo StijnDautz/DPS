@@ -2,11 +2,10 @@
 
 namespace DPS
 {
-#if WINDOWS || LINUX
     /// <summary>
     /// The main class.
     /// </summary>
-    public static class Program
+    class DPS : GameInstance
     {
         /// <summary>
         /// The main entry point for the application.
@@ -14,9 +13,15 @@ namespace DPS
         [STAThread]
         static void Main()
         {
-            using (var game = new Game1())
+            using (var game = new GameInstance())
                 game.Run();
         }
+
+        protected override void LoadContent()
+        {
+            base.LoadContent();
+
+
+        }
     }
-#endif
 }

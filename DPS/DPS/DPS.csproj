@@ -38,7 +38,11 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
+    <Compile Include="GameInstance.cs" />
+    <Compile Include="GameMode.cs" />
+    <Compile Include="GameModeManager.cs" />
+    <Compile Include="GameState.cs" />
+    <Compile Include="GameStateManager.cs" />
     <Compile Include="ILoopObject.cs" />
     <Compile Include="Object.cs" />
     <Compile Include="ObjectList.cs" />

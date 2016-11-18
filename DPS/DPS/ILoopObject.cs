@@ -10,7 +10,7 @@ namespace DPS
     interface ILoopObject
     {
         void Update(GameTime gameTime);
-        void Draw();
+        void Draw(GameTime gameTime);
         void Reset();
     }
 }
