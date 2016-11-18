@@ -49,6 +49,7 @@
     <Compile Include="GameManagement\Object.cs" />
     <Compile Include="GameManagement\ObjectList.cs" />
     <Compile Include="GameManagement\World.cs" />
+    <Compile Include="GameManagement\World\DungeonWorld.cs" />
     <Compile Include="Portal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
