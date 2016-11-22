@@ -8,16 +8,8 @@ using System.Threading.Tasks;
 
 namespace DPS
 {
-    abstract class World : ObjectList
+    abstract partial class World : ObjectList
     {
-        private int tileWidth;
-        private int tileHeight;
-
-        public World(string id, string assetName) : base(id)
-        {
-            Load(assetName);
-        }
-
         public virtual void Load(string assetName)
         {
             ReadTiles(ReadFile(assetName));
@@ -41,9 +33,9 @@ namespace DPS
 
         private void ReadTiles(List<string> lines)
         {
-            for(int y = 0; y < lines.Count; y++)
+            for (int y = 0; y < lines.Count; y++)
             {
-                for(int x = 0; x < lines[y].Length; x++)
+                for (int x = 0; x < lines[y].Length; x++)
                 {
                     AddTile(FindType(lines[y][x]), lines[y][x], x, y);
                 }

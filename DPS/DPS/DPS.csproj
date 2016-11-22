@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Dungeon.cs" />
     <Compile Include="DungeonLoader.cs" />
+    <Compile Include="GameManagement\AssetManager.cs" />
     <Compile Include="GameManagement\GameInstance.cs" />
     <Compile Include="GameManagement\GameMode.cs" />
     <Compile Include="GameManagement\GameModeManager.cs" />
@@ -48,7 +49,10 @@
     <Compile Include="GameManagement\ILoopObject.cs" />
     <Compile Include="GameManagement\Object.cs" />
     <Compile Include="GameManagement\ObjectList.cs" />
-    <Compile Include="GameManagement\World.cs" />
+    <Compile Include="GameManagement\Texture.cs" />
+    <Compile Include="GameManagement\TexturedObject.cs" />
+    <Compile Include="GameManagement\World\World.cs" />
+    <Compile Include="GameManagement\World\WorldLoading.cs" />
     <Compile Include="Portal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
