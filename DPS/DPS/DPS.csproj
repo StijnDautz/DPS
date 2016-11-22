@@ -49,10 +49,15 @@
     <Compile Include="GameManagement\ILoopObject.cs" />
     <Compile Include="GameManagement\Object.cs" />
     <Compile Include="GameManagement\ObjectList.cs" />
+<<<<<<< HEAD
     <Compile Include="GameManagement\Texture.cs" />
     <Compile Include="GameManagement\TexturedObject.cs" />
     <Compile Include="GameManagement\World\World.cs" />
     <Compile Include="GameManagement\World\WorldLoading.cs" />
+=======
+    <Compile Include="GameManagement\World.cs" />
+    <Compile Include="GameManagement\World\DungeonWorld.cs" />
+>>>>>>> 943cadd87dcdabb3155257683b5c674bd1f69f83
     <Compile Include="Portal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
