@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DPS
+namespace Engine
 {
     /// <summary>
     /// The main class.

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DPS
+namespace Engine
 {
     class Object : ILoopObject
     {
@@ -15,6 +15,7 @@ namespace DPS
         private ObjectList _parent;
         private Vector2 _position;
         private Vector2 _velocity;
+        private Rectangle _boundingBox;
 
         public string Id
         {
@@ -43,6 +44,12 @@ namespace DPS
         {
             get { return _velocity; }
             set { _velocity = value; }
+        }
+
+        public Rectangle BoundingBox
+        {
+            get { return _boundingBox; }
+            set { _boundingBox = value; }
         }
 
         public Object(string id)

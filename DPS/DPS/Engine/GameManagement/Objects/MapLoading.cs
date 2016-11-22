@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPS
+namespace Engine
 {
-    abstract partial class World : ObjectList
+    partial class Map : Object
     {
         public virtual void Load(string assetName)
         {
@@ -51,8 +51,7 @@ namespace DPS
         {
             if (tile != null)
             {
-                tile.Position = new Vector2(x * tileWidth, y * tileHeight);
-                Add(tile);
+                _grid[x, y] = tile;
             }
             else
             {

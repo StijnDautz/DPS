@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace DPS
+namespace Engine
 {
     class Portal : Object
     {
@@ -37,9 +38,9 @@ namespace DPS
         {
             base.Update(gameTime);
         }
-        public override void Draw(GameTime gameTime)
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            base.Draw(gameTime);
+            base.Draw(gameTime, spriteBatch);
         }
         public override void Reset()
         {

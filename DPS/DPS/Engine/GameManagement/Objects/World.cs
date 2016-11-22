@@ -6,12 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPS
+namespace Engine
 {
     abstract partial class World : ObjectList
     {
-        private int tileWidth;
-        private int tileHeight;
         private bool _isTopDown;
         private List<string> _songs;
         private int _currentSong;
@@ -25,7 +23,6 @@ namespace DPS
         public World(string id, string assetName) : base(id)
         {
             _isTopDown = true;
-            Load(assetName);
         }
 
         public override void Update(GameTime gameTime)

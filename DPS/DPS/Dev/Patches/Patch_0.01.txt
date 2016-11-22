@@ -1,0 +1,20 @@
+﻿<p>
+    Patch 0.01</p>
+<p>
+    - Objects of type ObjectList can now contain the new Object Map and so can objects of type World.</p>
+<p>
+    - A Map is a subType of Object and contains a 2D array of type Object. It can be read from a file.</p>
+<p>
+    - Maps now replace the previous feature of fileReading in World and so a World can now contain multiple Maps, from file read 2D Object arrays.</p>
+<p>
+    - Project files were organized.</p>
+<p>
+    - The IControlledLoopObject interface was included, which implements ILoopObject and adds a InputHandling function</p>
+<p>
+    - Pawn was added, which implements IControlledLoopObject and is a subType of TexturedObject.</p>
+<p>
+    - A InputManager was added to support the InputHandling in Pawn.</p>
+<p>
+    - Looping through all Objects in World (GameMode) and HUD (GameState) were moved from these classes to ObjectList to reduce the lines of code.</p>
+<p>
+    - Dev folder was added to keep track of the project&#39;s progress</p>

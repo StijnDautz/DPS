@@ -6,34 +6,39 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPS
+namespace Engine
 {
-    class GameStateManager
+    class GameModeManager : IControlledLoopObject
     {
-        private List<GameState> _gameStates;
-        private GameState _current;
+        private List<GameMode> _gameModes;
+        private GameMode _current;
 
-        GameStateManager()
+        public GameModeManager()
         {
 
         }
 
         public void SwitchTo(string id)
         {
-            foreach(GameState g in _gameStates)
+            foreach(GameMode g in _gameModes)
             {
-                if(g.Id == id)
+                if (g.Id == id)
                 {
                     _current = g;
                     return;
                 }
             }
-            throw new Exception("gameState was not found");
+            throw new Exception("gameMode was not found");
         }
 
-        public void Add(GameState g)
+        public void Add(GameMode g)
         {
-            _gameStates.Add(g);
+            _gameModes.Add(g);
+        }
+
+        public void Reset()
+        {
+            _current.Reset();
         }
 
         public void Update(GameTime gameTime)
@@ -43,12 +48,12 @@ namespace DPS
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            _current.Draw(gameTime);
+            _current.Draw(gameTime, spriteBatch);
         }
 
-        public void Reset()
+        public void HandleInput(GameTime gameTime)
         {
-            _current.Reset();
+            _current.HandleInput(gameTime);
         }
     }
 }

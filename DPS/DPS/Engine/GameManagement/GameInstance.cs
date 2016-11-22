@@ -6,25 +6,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPS
+namespace Engine
 {
     class GameInstance : Game
     {
+        protected GraphicsDeviceManager _graphics; 
         private GameModeManager _gameModeManager;
         public static AssetManager assetManager;
         SpriteBatch spriteBatch;
 
         public GameInstance()
-        {            
+        {
+            _graphics = new GraphicsDeviceManager(this);
             assetManager = new AssetManager(Content);
             _gameModeManager = new GameModeManager();
-            spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         protected override void LoadContent()
         {
             base.LoadContent();
-
+            spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)

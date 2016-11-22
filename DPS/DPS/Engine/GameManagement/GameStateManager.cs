@@ -6,34 +6,34 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPS
+namespace Engine
 {
-    class GameModeManager
+    class GameStateManager
     {
-        private List<GameMode> _gameModes;
-        private GameMode _current;
+        private List<GameState> _gameStates;
+        private GameState _current;
 
-        public GameModeManager()
+        GameStateManager()
         {
 
         }
 
         public void SwitchTo(string id)
         {
-            foreach(GameMode g in _gameModes)
+            foreach(GameState g in _gameStates)
             {
-                if (g.Id == id)
+                if(g.Id == id)
                 {
                     _current = g;
                     return;
                 }
             }
-            throw new Exception("gameMode was not found");
+            throw new Exception("gameState was not found");
         }
 
-        public void Add(GameMode g)
+        public void Add(GameState g)
         {
-            _gameModes.Add(g);
+            _gameStates.Add(g);
         }
 
         public void Update(GameTime gameTime)
@@ -43,7 +43,7 @@ namespace DPS
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            _current.Draw(gameTime);
+            _current.Draw(gameTime, spriteBatch);
         }
 
         public void Reset()

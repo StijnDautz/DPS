@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPS
+namespace Engine
 {
     class Texture
     {
@@ -63,6 +63,12 @@ namespace DPS
             _isAnimated = false;
         }
 
+        public void Reset()
+        {
+            _elapsedTime = 0;
+            _currentFrame = 1;
+        }
+
         public void Update(GameTime gameTime)
         {
             //if Texture isAnimated, Update it
@@ -83,7 +89,7 @@ namespace DPS
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.Draw(_sprite, position)
+            spriteBatch.Draw(_sprite, position);
         }
     }
 }

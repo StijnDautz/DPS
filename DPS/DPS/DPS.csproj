@@ -38,28 +38,29 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Dungeon.cs" />
-    <Compile Include="DungeonLoader.cs" />
-    <Compile Include="DungeonWorld.cs" />
-    <Compile Include="GameManagement\AssetManager.cs" />
-    <Compile Include="GameManagement\GameInstance.cs" />
-    <Compile Include="GameManagement\GameMode.cs" />
-    <Compile Include="GameManagement\GameModeManager.cs" />
-    <Compile Include="GameManagement\GameState.cs" />
-    <Compile Include="GameManagement\GameStateManager.cs" />
-    <Compile Include="GameManagement\ILoopObject.cs" />
-    <Compile Include="GameManagement\Object.cs" />
-    <Compile Include="GameManagement\ObjectList.cs" />
-    <Compile Include="GameManagement\Texture.cs" />
-    <Compile Include="GameManagement\TexturedObject.cs" />
-    <Compile Include="GameManagement\World\DungeonWorld.cs" />
-    <Compile Include="GameManagement\World\World.cs" />
-    <Compile Include="GameManagement\World\WorldLoading.cs" />
-    <Compile Include="Portal.cs" />
+    <Compile Include="Not Implemented\Dungeon.cs" />
+    <Compile Include="Not Implemented\DungeonLoader.cs" />
+    <Compile Include="Engine\GameManagement\Managers\AssetManager.cs" />
+    <Compile Include="Engine\GameManagement\GameInstance.cs" />
+    <Compile Include="Engine\GameManagement\GameMode.cs" />
+    <Compile Include="Engine\GameManagement\GameModeManager.cs" />
+    <Compile Include="Engine\GameManagement\GameState.cs" />
+    <Compile Include="Engine\GameManagement\GameStateManager.cs" />
+    <Compile Include="Engine\GameManagement\IControlledLoopObject.cs" />
+    <Compile Include="Engine\GameManagement\ILoopObject.cs" />
+    <Compile Include="Engine\GameManagement\Managers\InputManager.cs" />
+    <Compile Include="Engine\GameManagement\Objects\Map.cs" />
+    <Compile Include="Engine\GameManagement\Objects\MapLoading.cs" />
+    <Compile Include="Engine\GameManagement\Objects\Object.cs" />
+    <Compile Include="Engine\GameManagement\Objects\ObjectList.cs" />
+    <Compile Include="Engine\GameManagement\Objects\Pawn.cs" />
+    <Compile Include="Engine\GameManagement\Texture.cs" />
+    <Compile Include="Engine\GameManagement\Objects\TexturedObject.cs" />
+    <Compile Include="Content\Classes\Worlds\DungeonWorld.cs" />
+    <Compile Include="Engine\GameManagement\Objects\World.cs" />
+    <Compile Include="Engine\GameManagement\Objects\Portal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="World.cs" />
-    <Compile Include="WorldLoading.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -70,10 +71,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico" />
+    <Content Include="Dev\Patches\Patch_0.01.txt">
+      <SubType>Component</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
