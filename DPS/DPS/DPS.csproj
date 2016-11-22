@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Dungeon.cs" />
     <Compile Include="DungeonLoader.cs" />
+    <Compile Include="DungeonWorld.cs" />
     <Compile Include="GameManagement\AssetManager.cs" />
     <Compile Include="GameManagement\GameInstance.cs" />
     <Compile Include="GameManagement\GameMode.cs" />
@@ -49,18 +50,16 @@
     <Compile Include="GameManagement\ILoopObject.cs" />
     <Compile Include="GameManagement\Object.cs" />
     <Compile Include="GameManagement\ObjectList.cs" />
-<<<<<<< HEAD
     <Compile Include="GameManagement\Texture.cs" />
     <Compile Include="GameManagement\TexturedObject.cs" />
+    <Compile Include="GameManagement\World\DungeonWorld.cs" />
     <Compile Include="GameManagement\World\World.cs" />
     <Compile Include="GameManagement\World\WorldLoading.cs" />
-=======
-    <Compile Include="GameManagement\World.cs" />
-    <Compile Include="GameManagement\World\DungeonWorld.cs" />
->>>>>>> 943cadd87dcdabb3155257683b5c674bd1f69f83
     <Compile Include="Portal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="World.cs" />
+    <Compile Include="WorldLoading.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">
@@ -70,12 +69,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\DungeonFire.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\DungeonGrass.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
