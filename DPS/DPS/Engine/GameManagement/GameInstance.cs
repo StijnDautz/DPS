@@ -14,12 +14,14 @@ namespace Engine
         private GameModeManager _gameModeManager;
         public static AssetManager assetManager;
         SpriteBatch spriteBatch;
+        public static InputManager inputManager;
 
         public GameInstance()
         {
             _graphics = new GraphicsDeviceManager(this);
             assetManager = new AssetManager(Content);
             _gameModeManager = new GameModeManager();
+            inputManager = new InputManager();
         }
 
         protected override void LoadContent()
@@ -39,5 +41,6 @@ namespace Engine
             base.Draw(gameTime);
             _gameModeManager.Draw(gameTime, spriteBatch);
         }
+
     }
 }

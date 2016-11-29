@@ -38,6 +38,8 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Engine\GameManagement\Objects\Button.cs" />
+    <Compile Include="Engine\GameManagement\Objects\TextObject.cs" />
     <Compile Include="Not Implemented\Dungeon.cs" />
     <Compile Include="Not Implemented\DungeonLoader.cs" />
     <Compile Include="Engine\GameManagement\Managers\AssetManager.cs" />

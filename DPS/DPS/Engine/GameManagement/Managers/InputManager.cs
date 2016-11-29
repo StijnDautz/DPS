@@ -15,7 +15,7 @@ namespace Engine
         private KeyboardState _previousKeyboardState;
         private KeyboardState _currentKeyboardState;
 
-        InputManager()
+        public InputManager()
         {
 
         }
