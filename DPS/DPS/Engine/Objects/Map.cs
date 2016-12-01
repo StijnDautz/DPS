@@ -8,11 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    partial class Map : Object, IControlledLoopObject
+    abstract partial class Map : ObjectList, IControlledLoopObject
     {
         private int _tileWidth;
         private int _tileHeight;
         private Object[,] _grid;
+        private List<Pawn> _pawns;
+        private World _world;
 
         public int TileWidth
         {
@@ -36,14 +38,26 @@ namespace Engine
             get { return _grid.GetLength(0); }
         }
 
-        Map(string id, string assetName) : base(id)
+        public World World
         {
+            set { _world = value; }
+        }
+
+        public Map(string id, string assetName) : base(id)
+        {
+            _tileWidth = 72;
+            _tileHeight = 55;
             Load(assetName);
         }
 
-        Object getTile(int x, int y)
+        public Object getTile(Point p)
         {
-            return _grid[x, y];
+            return _grid[p.X, p.Y];
+        }
+
+        public Point getPositionInGrid(Vector2 position)
+        {
+            return new Point((int)Math.Floor(position.X / _tileWidth), (int)Math.Floor(position.Y / TileHeight));
         }
 
         public override void Reset()
@@ -69,22 +83,29 @@ namespace Engine
             base.Draw(gameTime, spriteBatch);
             foreach(Object o in _grid)
             {
-                o.Draw(gameTime, spriteBatch);
+                if (o.Visible)
+                { o.Draw(gameTime, spriteBatch); }
             }
         }
 
-        public virtual void HandleInput(GameTime gameTime)
+        public override void HandleInput(GameTime gameTime)
         {
-            foreach(Object o in _grid)
+            foreach(Pawn p in _pawns)
             {
-                if(o is Pawn)
-                {
-                    Pawn pawn = o as Pawn;
-                    pawn.HandleInput(gameTime);
-                }
+                p.HandleInput(gameTime);
             }
         }
 
+        public override void Add(Object o)
+        {
+            base.Add(o);
 
+            //if object is Pawn add it to list of pawns, which is used to prevent unnecessary calls of HandleInput(gameTime)
+            if(o is Pawn)
+            {
+                Pawn p = o as Pawn;
+                _pawns.Add(p);
+            }
+        }
     }
 }

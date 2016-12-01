@@ -10,7 +10,7 @@ namespace Engine
 {
     class Pawn : TexturedObject, IControlledLoopObject
     {
-        Pawn(string id, string assetName) : base(id, assetName)
+        public Pawn(string id, string assetName) : base(id, assetName)
         {
 
         }

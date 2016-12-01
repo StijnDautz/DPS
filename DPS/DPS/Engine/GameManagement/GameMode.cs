@@ -10,12 +10,12 @@ namespace Engine
 {
     /*
      * A GameMode contains a list of gameStates and a world
-     * and handles input for objects of type Pawn in world
      */
     class GameMode
     {
         private string _id;
         private World _world;
+        private bool _canUpdateWorldTime;
         private GameStateManager _gameStateManager;
 
         public string Id
@@ -28,12 +28,23 @@ namespace Engine
             get { return _world; }
         }
 
+        public bool CanUpdateWorldTime
+        {
+            get { return _canUpdateWorldTime; }
+            set { _canUpdateWorldTime = value; }
+        }
 
+        public GameStateManager GameStateManager
+        {
+            get { return _gameStateManager; }
+        }
 
-        GameMode(string id, GameStateManager g)
+        public GameMode(string id, World world)
         {
             _id = id;
-            _gameStateManager = g;
+            _gameStateManager = new GameStateManager();
+            _canUpdateWorldTime = true;
+            _world = world;
         }
 
         public void Reset()

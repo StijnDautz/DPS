@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Engine
-{ 
+{
     /*
      * GameState contains a HUD
      * Therefore a GameMode can have multiple HUD overlays
@@ -30,19 +30,20 @@ namespace Engine
         public GameState(string id)
         {
             _id = id;
+            _HUD = new ObjectList("HUD");
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             _HUD.Update(gameTime);
         }
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             _HUD.Draw(gameTime, spriteBatch);
         }
 
-        public void Reset()
+        public virtual void Reset()
         {
             _HUD.Reset();
         }

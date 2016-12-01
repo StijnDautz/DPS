@@ -17,4 +17,4 @@
 <p>
     - Looping through all Objects in World (GameMode) and HUD (GameState) were moved from these classes to ObjectList to reduce the lines of code.</p>
 <p>
-    - Dev folder was added to keep track of the project&#39;s progress</p>
+    - Dev folder was added to keep track of the project's progress</p>

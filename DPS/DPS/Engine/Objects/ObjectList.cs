@@ -23,18 +23,13 @@ namespace Engine
 
         public ObjectList(string id) : base(id)
         {
-
+            _objects = new List<Object>();
         }
 
         public override void Reset()
         {
             foreach (Object o in Objects)
             {
-                if (o is ObjectList)
-                {
-                    ObjectList subList = o as ObjectList;
-                    subList.Reset();
-                }
                 o.Reset();
             }
         }
@@ -43,11 +38,6 @@ namespace Engine
         {
             foreach (Object o in Objects)
             {
-                if (o is ObjectList)
-                {
-                    ObjectList subList = o as ObjectList;
-                    subList.Update(gameTime);
-                }
                 o.Update(gameTime);
             }
         }
@@ -56,36 +46,25 @@ namespace Engine
         {
             foreach (Object o in Objects)
             {
-                if (o is ObjectList)
-                {
-                    ObjectList subList = o as ObjectList;
-                    subList.Draw(gameTime, spriteBatch);
-                }
-                o.Draw(gameTime, spriteBatch);
+                if (o.Visible)
+                { o.Draw(gameTime, spriteBatch); }
             }
         }
 
-        public void HandleInput(GameTime gameTime)
+        public virtual void HandleInput(GameTime gameTime)
         {
-            foreach(Object o in _objects)
-            {
-                if(o is ObjectList)
-                {
-                    ObjectList subList = o as ObjectList;
-                    subList.HandleInput(gameTime);
-                }
-                if(o is Pawn)
-                {
-                    Pawn pawn = o as Pawn;
-                    pawn.HandleInput(gameTime);
-                }
-            }
+
         }
 
-        public void Add(Object o)
+        public virtual void Add(Object o)
         {
             o.Parent = this;
             _objects.Add(o);
+        }
+
+        public void Remove(Object o)
+        {
+            _objects.Remove(o);
         }
 
         public Object Find(string id)

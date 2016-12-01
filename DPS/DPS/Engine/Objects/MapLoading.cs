@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    partial class Map : Object
+    partial class Map : ObjectList
     {
         public virtual void Load(string assetName)
         {
@@ -17,9 +17,8 @@ namespace Engine
 
         private List<string> ReadFile(string assetName)
         {
-            StreamReader stream = new StreamReader(assetName);
+            StreamReader stream = new StreamReader("Content/Maps/" + assetName + ".txt");
             List<string> lines = new List<string>();
-
 
             //read lines from file
             string line = stream.ReadLine();
@@ -33,6 +32,7 @@ namespace Engine
 
         private void ReadTiles(List<string> lines)
         {
+            _grid = new Object[lines[0].Length, lines.Count];
             for (int y = 0; y < lines.Count; y++)
             {
                 for (int x = 0; x < lines[y].Length; x++)
@@ -51,6 +51,7 @@ namespace Engine
         {
             if (tile != null)
             {
+                tile.Position = new Vector2(x * _tileWidth, y * _tileHeight);
                 _grid[x, y] = tile;
             }
             else

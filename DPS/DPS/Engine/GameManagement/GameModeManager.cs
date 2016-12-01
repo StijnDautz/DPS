@@ -12,10 +12,17 @@ namespace Engine
     {
         private List<GameMode> _gameModes;
         private GameMode _current;
+        private TimeManager _timeManager;
+
+        public TimeManager TimeManager
+        {
+            get { return _timeManager; }
+        }
 
         public GameModeManager()
         {
-
+            _timeManager = new TimeManager();
+            _gameModes = new List<GameMode>();
         }
 
         public void SwitchTo(string id)
@@ -43,6 +50,10 @@ namespace Engine
 
         public void Update(GameTime gameTime)
         {
+            if(_current.CanUpdateWorldTime)
+            {
+                _timeManager.Update(gameTime);
+            }
             _current.Update(gameTime);
         }
 

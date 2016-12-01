@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPS
+namespace Content
 {
-    class DungeonWorld : World
+    class MainWorld : World
     {
-        DungeonWorld(string id, string assetName) : base(id, assetName)
+        public MainWorld() : base()
         {
-
+            AddMap(new MainMap("MainMap", "MainMap"));
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Content;
+using System;
 
 namespace Engine
 {
@@ -13,15 +14,15 @@ namespace Engine
         [STAThread]
         static void Main()
         {
-            using (var game = new GameInstance())
+            using (var game = new DPS())
                 game.Run();
         }
 
         protected override void LoadContent()
         {
             base.LoadContent();
-
-
+            GameModeManager.Add(new MainGameMode("MainGM", new MainWorld()));
+            GameModeManager.SwitchTo("MainGM");
         }
     }
 }

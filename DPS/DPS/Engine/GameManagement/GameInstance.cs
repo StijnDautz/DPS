@@ -10,14 +10,20 @@ namespace Engine
 {
     class GameInstance : Game
     {
-        protected GraphicsDeviceManager _graphics; 
+        protected GraphicsDeviceManager graphics;
         private GameModeManager _gameModeManager;
         public static AssetManager assetManager;
-        SpriteBatch spriteBatch;
+        private SpriteBatch _spriteBatch;
+
+        protected GameModeManager GameModeManager
+        {
+            get { return _gameModeManager; }
+        }
 
         public GameInstance()
         {
-            _graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+            graphics = new GraphicsDeviceManager(this);
             assetManager = new AssetManager(Content);
             _gameModeManager = new GameModeManager();
         }
@@ -25,7 +31,7 @@ namespace Engine
         protected override void LoadContent()
         {
             base.LoadContent();
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)
@@ -37,7 +43,9 @@ namespace Engine
         protected override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            _gameModeManager.Draw(gameTime, spriteBatch);
+            _spriteBatch.Begin();
+            _gameModeManager.Draw(gameTime, _spriteBatch);
+            _spriteBatch.End();
         }
     }
 }

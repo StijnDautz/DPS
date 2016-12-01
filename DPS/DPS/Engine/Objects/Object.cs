@@ -12,6 +12,7 @@ namespace Engine
     {
         private string _id;
         private bool _visible;
+        private bool _canCollide;
         private ObjectList _parent;
         private Vector2 _position;
         private Vector2 _velocity;
@@ -26,6 +27,11 @@ namespace Engine
         {
             get { return _visible; }
             set { _visible = value; }
+        }
+
+        public bool CanCollide
+        {
+            get { return _canCollide; }
         }
 
         public ObjectList Parent
@@ -58,6 +64,7 @@ namespace Engine
             _position = Vector2.Zero;
             _velocity = Vector2.Zero;
             _visible = true;
+            _canCollide = false;
         }
 
         public virtual void Update(GameTime gameTime)

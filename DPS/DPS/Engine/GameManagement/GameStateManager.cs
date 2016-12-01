@@ -13,9 +13,9 @@ namespace Engine
         private List<GameState> _gameStates;
         private GameState _current;
 
-        GameStateManager()
+        public GameStateManager()
         {
-
+            _gameStates = new List<GameState>();
         }
 
         public void SwitchTo(string id)
