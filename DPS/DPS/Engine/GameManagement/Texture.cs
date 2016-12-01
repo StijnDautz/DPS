@@ -56,7 +56,7 @@ namespace Engine
 
         public Texture(string assetName)
         {
-            _sprite = GameInstance.assetManager.GetTexture(assetName);
+            _sprite = GameInstance.AssetManager.GetTexture(assetName);
             _frames = 1;
             _currentFrame = 1;
             _frameTime = 200;

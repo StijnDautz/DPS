@@ -36,7 +36,7 @@ namespace Engine
 
         public TextObject(string id, string assetname) : base(id)
         {
-            _spriteFont = GameInstance.assetManager.GetFont(assetname);
+            _spriteFont = GameInstance.AssetManager.GetFont(assetname);
             _color = Color.White;
         }
 

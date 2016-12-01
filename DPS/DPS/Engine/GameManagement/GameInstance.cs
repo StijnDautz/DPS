@@ -12,20 +12,32 @@ namespace Engine
     {
         protected GraphicsDeviceManager graphics;
         private GameModeManager _gameModeManager;
-        public static AssetManager assetManager;
+        private static AssetManager _assetManager;
         private SpriteBatch _spriteBatch;
+        private static InputManager _inputManager;
 
         protected GameModeManager GameModeManager
         {
             get { return _gameModeManager; }
         }
 
+        public static AssetManager AssetManager
+        {
+            get { return _assetManager; }
+        }
+
+        public static InputManager InputManager
+        {
+            get { return _inputManager; }
+        }
+
         public GameInstance()
         {
             Content.RootDirectory = "Content";
             graphics = new GraphicsDeviceManager(this);
-            assetManager = new AssetManager(Content);
+            _assetManager = new AssetManager(Content);
             _gameModeManager = new GameModeManager();
+            _inputManager = new InputManager();
         }
 
         protected override void LoadContent()
