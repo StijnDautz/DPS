@@ -101,5 +101,21 @@ namespace Engine
         {
             _grid[x, y] = null;
         }
+
+        public Point getClosestFreeSpot()
+        {
+            for (int y = 0; y < Rows; y++)
+            {
+                for(int x = 0; x < Colums; x++)
+                {
+                    if(_grid[x, y] == null)
+                    {
+                        return new Point(x, y);
+                    }
+                }
+            }
+            return new Point(-1, -1);
+        }
+
     }
 }
