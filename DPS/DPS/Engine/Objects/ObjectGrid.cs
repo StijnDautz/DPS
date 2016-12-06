@@ -97,6 +97,11 @@ namespace Engine
             o.Position = new Vector2(Position.X + x * Spacing.X, Position.Y + y * Spacing.Y);
         }
 
+        public void RemoveObject(Object o)
+        {
+            RemoveObject((int)o.Position.X, (int)o.Position.Y);
+        }
+
         public void RemoveObject(int x, int y)
         {
             _grid[x, y] = null;
