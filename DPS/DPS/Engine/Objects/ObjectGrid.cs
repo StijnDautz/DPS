@@ -102,7 +102,7 @@ namespace Engine
             _grid[x, y] = null;
         }
 
-        public Point getClosestFreeSpot()
+        public bool AddToFirstFreeSpot(Object o)
         {
             for (int y = 0; y < Rows; y++)
             {
@@ -110,12 +110,12 @@ namespace Engine
                 {
                     if(_grid[x, y] == null)
                     {
-                        return new Point(x, y);
+                        AddObject(x, y, o);
+                        return true;
                     }
                 }
             }
-            return new Point(-1, -1);
+            return false;
         }
-
     }
 }
