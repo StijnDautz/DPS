@@ -43,6 +43,7 @@
     <Compile Include="Content\Classes\GameStates\StartPlayGS.cs" />
     <Compile Include="Content\Classes\Worlds\MainObjectGrid.cs" />
     <Compile Include="Content\Classes\Worlds\MainWorld.cs" />
+    <Compile Include="Engine\GameManagement\Managers\CollisionHelper.cs" />
     <Compile Include="Engine\GameManagement\Managers\PathFinder.cs" />
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
     <Compile Include="Engine\Objects\Button.cs" />
