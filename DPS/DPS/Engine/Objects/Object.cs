@@ -55,6 +55,19 @@ namespace Engine
             set { _position = value; }
         }
 
+        public Vector2 GlobalPosition
+        {
+            get
+            {
+                Vector2 pos = Vector2.Zero;
+                if(Parent != null)
+                {
+                    pos = Position + Parent.GlobalPosition;
+                }
+                return pos;
+            }
+        }
+
         public Vector2 Velocity
         {
             get { return _velocity; }
