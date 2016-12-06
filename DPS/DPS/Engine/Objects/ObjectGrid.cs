@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    abstract partial class ObjectGrid : Object
+    partial class ObjectGrid : Object
     {
         private Object[,] _grid;
         private int _tileSize;

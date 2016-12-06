@@ -17,16 +17,25 @@ namespace Engine
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            Vector2 playerpos = new Vector2(12, 12);//moet met speler locatie gelinkt worden
-            bool inventoryfull = false; //linken met inventory, als aantal items
-
-            if (playerpos.X > _itempos.X && playerpos.X < _itempos.X + itemsize && playerpos.Y > _itempos.Y && playerpos.Y < _itempos.Y + itemsize && inventoryfull == false)
+            if (Parent is Map)
             {
-                _visible = false;
-                //(add item to objectgrid inventory)
-            }
+                Vector2 playerpos;
+                foreach (Pawn p in Parent.Pawns)
+                {
+                    if(p is Character)  //verandert in toekomst
+                    {
+                        playerpos = p.Position;
+                    }
+                }
 
+                bool inventoryfull = false; //linken met inventory, als aantal items
+
+                if (playerpos.X > Position.X && playerpos.X < Position.X + Width && playerpos.Y > Position.Y && playerpos.Y < Position.Y + Height && inventoryfull == false)
+                {
+                    visible = false;
+                    //(add item to objectgrid inventory)
+                }
+            }
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

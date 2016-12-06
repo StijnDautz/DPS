@@ -47,6 +47,7 @@
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
     <Compile Include="Engine\Objects\Button.cs" />
     <Compile Include="Engine\Objects\Character.cs" />
+    <Compile Include="Engine\Objects\Inventory.cs" />
     <Compile Include="Engine\Objects\Pickup.cs" />
     <Compile Include="Engine\Objects\ICharacter.cs" />
     <Compile Include="Engine\Objects\ObjectGrid.cs" />
