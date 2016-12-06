@@ -32,6 +32,15 @@ namespace Engine
         public bool CanCollide
         {
             get { return _canCollide; }
+            set
+            {
+                _canCollide = value;
+                if(_parent is Map)
+                {
+                    Map m = _parent as Map;
+                    m.UpdateCollisionMap(this);
+                }
+            }
         }
 
         public ObjectList Parent
@@ -58,6 +67,16 @@ namespace Engine
             set { _boundingBox = value; }
         }
 
+        public int Width
+        {
+            get { return BoundingBox.Width; }
+        }
+
+        public int Height
+        {
+            get { return BoundingBox.Height; }
+        }
+
         public Object(string id)
         {
             _id = id;
@@ -65,11 +84,12 @@ namespace Engine
             _velocity = Vector2.Zero;
             _visible = true;
             _canCollide = false;
+            _boundingBox = new Rectangle((int)Position.X, (int)Position.Y, 0, 0);
         }
 
         public virtual void Update(GameTime gameTime)
         {
-
+            Position += Velocity;
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

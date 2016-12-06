@@ -8,104 +8,58 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    abstract partial class Map : ObjectList, IControlledLoopObject
+    partial class Map : ObjectList, IControlledLoopObject
     {
-        private int _tileWidth;
-        private int _tileHeight;
-        private Object[,] _grid;
-        private List<Pawn> _pawns;
         private World _world;
-
-        public int TileWidth
-        {
-            get { return _tileWidth; }
-            set { _tileWidth = value; }
-        }
-
-        public int TileHeight
-        {
-            get { return _tileHeight; }
-            set { _tileHeight = value; }
-        }
-
-        public int Rows
-        {
-            get { return _grid.GetLength(1); }
-        }
-
-        public int Colums
-        {
-            get { return _grid.GetLength(0); }
-        }
+        private int[,] _collisionMap;
 
         public World World
         {
             set { _world = value; }
+            get { return _world; }
         }
 
-        public Map(string id, string assetName) : base(id)
+        public int[,] CollisionMap
         {
-            _tileWidth = 72;
-            _tileHeight = 55;
-            Load(assetName);
+            get { return _collisionMap; }
         }
 
-        public Object getTile(Point p)
+        public Map(string id, ObjectGrid grid, int tileSize) : base(id)
         {
-            return _grid[p.X, p.Y];
-        }
-
-        public Point getPositionInGrid(Vector2 position)
-        {
-            return new Point((int)Math.Floor(position.X / _tileWidth), (int)Math.Floor(position.Y / TileHeight));
-        }
-
-        public override void Reset()
-        {
-            base.Reset();
-            foreach(Object o in _grid)
-            {
-                o.Reset();
-            }
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-            foreach(Object o in _grid)
-            {
-                o.Update(gameTime);
-            }
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            base.Draw(gameTime, spriteBatch);
-            foreach(Object o in _grid)
-            {
-                if (o.Visible)
-                { o.Draw(gameTime, spriteBatch); }
-            }
-        }
-
-        public override void HandleInput(GameTime gameTime)
-        {
-            foreach(Pawn p in _pawns)
-            {
-                p.HandleInput(gameTime);
-            }
+            Add(grid);
+            _collisionMap = new int[grid.Rows, grid.Colums];
+            BoundingBox = grid.BoundingBox;
         }
 
         public override void Add(Object o)
         {
             base.Add(o);
-
-            //if object is Pawn add it to list of pawns, which is used to prevent unnecessary calls of HandleInput(gameTime)
-            if(o is Pawn)
+            if(o.CanCollide)
             {
-                Pawn p = o as Pawn;
-                _pawns.Add(p);
+                _collisionMap[(int)o.Position.X / World.TileSize, (int)o.Position.Y / World.TileSize]++;
             }
+        }
+
+        public void UpdateCollisionMap(Object o)
+        {
+            int modifier = -1;
+            if(o.CanCollide)
+            {
+                modifier = 1;
+            }
+            _collisionMap[(int)o.Position.X / World.TileSize, (int)o.Position.Y / World.TileSize] += modifier;
+        }
+
+        public bool Collides(Point p)
+        {
+            if(_collisionMap[p.X, p.Y] > 1)
+            { return true; }
+            return false;
+        }
+
+        public Point getPositionInGrid(Vector2 position)
+        {
+            return new Point((int)position.X / World.TileSize, (int)position.Y / World.TileSize);
         }
     }
 }

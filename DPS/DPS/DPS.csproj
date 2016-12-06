@@ -41,7 +41,7 @@
     <Compile Include="Content\Classes\AIScripts\AIScript.cs" />
     <Compile Include="Content\Classes\GameManagement\MainGameMode.cs" />
     <Compile Include="Content\Classes\GameStates\StartPlayGS.cs" />
-    <Compile Include="Content\Classes\Worlds\MainMap.cs" />
+    <Compile Include="Content\Classes\Worlds\MainObjectGrid.cs" />
     <Compile Include="Content\Classes\Worlds\MainWorld.cs" />
     <Compile Include="Engine\GameManagement\Managers\PathFinder.cs" />
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
@@ -49,6 +49,7 @@
     <Compile Include="Engine\Objects\Character.cs" />
     <Compile Include="Engine\Objects\Pickup.cs" />
     <Compile Include="Engine\Objects\ICharacter.cs" />
+    <Compile Include="Engine\Objects\ObjectGrid.cs" />
     <Compile Include="Engine\Objects\TextObject.cs" />
     <Compile Include="Not Implemented\Dungeon.cs" />
     <Compile Include="Not Implemented\DungeonLoader.cs" />
@@ -62,7 +63,7 @@
     <Compile Include="Engine\GameManagement\ILoopObject.cs" />
     <Compile Include="Engine\GameManagement\Managers\InputManager.cs" />
     <Compile Include="Engine\Objects\Map.cs" />
-    <Compile Include="Engine\Objects\MapLoading.cs" />
+    <Compile Include="Engine\Objects\GridObjectLoading.cs" />
     <Compile Include="Engine\Objects\Object.cs" />
     <Compile Include="Engine\Objects\ObjectList.cs" />
     <Compile Include="Engine\Objects\Pawn.cs" />
@@ -81,7 +82,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Maps\MainMap.txt" />
+    <Content Include="Content\ObjectGrids\MainMap.txt" />
     <Content Include="Icon.ico" />
     <Content Include="Dev\Patches\Patch_0.01.txt">
       <SubType>Component</SubType>

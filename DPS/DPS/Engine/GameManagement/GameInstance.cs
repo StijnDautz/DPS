@@ -49,12 +49,15 @@ namespace Engine
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            _gameModeManager.HandleInput(gameTime);
             _gameModeManager.Update(gameTime);
+            _inputManager.Update();
         }
 
         protected override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
+            GraphicsDevice.Clear(Color.White);
             _spriteBatch.Begin();
             _gameModeManager.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();

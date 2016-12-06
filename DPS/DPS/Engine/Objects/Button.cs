@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework;
 
 namespace Engine
 {
-    class Button : TexturedObject
+    abstract class Button : TexturedObject
     {
 
         public Button(string id, string assetName) : base(id, assetName)
@@ -22,7 +22,7 @@ namespace Engine
             if (GameInstance.InputManager.LeftMouseButtonPressed)
             {
                 Vector2 mousePosition = GameInstance.InputManager.mousePosition;
-                if (mousePosition.X > BoundingBox.X && mousePosition.X < BoundingBox.X + BoundingBox.Width && mousePosition.Y > BoundingBox.Y && mousePosition.Y < BoundingBox.Y + BoundingBox.Height)
+                if (mousePosition.X > Position.X && mousePosition.X < Position.X + Width && mousePosition.Y > Position.Y && mousePosition.Y < Position.Y + Width)
                 {
                     ActionWhenPressed();
                 }
