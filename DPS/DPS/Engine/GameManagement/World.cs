@@ -13,6 +13,9 @@ namespace Engine
     {
         private bool _isTopDown;
         private List<Map> _maps;
+        private Vector2 _cameraPosition;
+        private Vector2 _dimensions;
+        private int _tileSize;
 
         public bool IsTopDown
         {
@@ -20,10 +23,34 @@ namespace Engine
             set { _isTopDown = value; }
         }
 
+        public Vector2 CameraPosition
+        {
+            set { _cameraPosition = value; }
+            get { return _cameraPosition; }
+        }
+
+        public int Width
+        {
+            get { return (int)_dimensions.X; }
+        }
+
+        public int Heigth
+        {
+            get { return (int)_dimensions.Y; }
+        }
+
+        public int TileSize
+        {
+            get { return _tileSize; }
+            set { _tileSize = value; }
+        }
+
         public World() : base()
         {
             _isTopDown = true;
             _maps = new List<Map>();
+            _cameraPosition = Vector2.Zero;
+            _tileSize = 60;
         }
 
         public void Reset()
@@ -62,6 +89,14 @@ namespace Engine
         {
             _maps.Add(map);
             map.World = this;
+
+            //check if world dimensions should be set
+            //only one map can define the world dimensions
+            if(map.Width > _dimensions.X)
+            {
+                _dimensions.X = map.Width;
+                _dimensions.Y = map.Height;
+            }
         }
     }
 }

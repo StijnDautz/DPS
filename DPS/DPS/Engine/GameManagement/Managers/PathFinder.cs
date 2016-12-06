@@ -45,7 +45,7 @@ namespace Engine
                 //check if new Point should be added
                 foreach(Point p in points)
                 {
-                    if (!map.getTile(p).CanCollide)
+                    if (!map.Collides(p))
                     {
                         Tile adjecentTile = new Tile(startPoint, end, p);
                         if (!tiles.Contains(adjecentTile))

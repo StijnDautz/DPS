@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Content
 {
-    class MainMap : Map
+    class MainObjectGrid : ObjectGrid
     {
-        public MainMap(string id, string assetName) : base(id, assetName)
+        public MainObjectGrid(string id, string assetName, int tileSize) : base(id, assetName, tileSize)
         {
-            
+
         }
 
         protected override Engine.Object FindType(char type)
@@ -20,7 +20,7 @@ namespace Content
             {
                 case '.': return new TexturedObject("walltile", "Textures/Tiles/spr_wall");
                 default: throw new Exception("character of type: " + type + "was not associated with an Object");
-            }           
+            }
         }
     }
 }

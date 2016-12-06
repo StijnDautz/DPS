@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Engine
 {
@@ -30,16 +31,72 @@ namespace Engine
             get { return _gender; }
         }
 
-        Character(string id, string assetName, string name, int age, bool gender) : base(id, assetName)
+        public Character(string id, string assetName, string name, int age, bool gender) : base(id, assetName)
         {
             _name = name;
             _age = age;
             _gender = gender;
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if (Parent is Map)
+            {
+                Map map = Parent as Map;
+                Vector2 halfedScreen = new Vector2(GraphicsDeviceManager.DefaultBackBufferWidth / 2, GraphicsDeviceManager.DefaultBackBufferHeight / 2);
+                Vector2 newCameraPosition = new Vector2(Position.X - halfedScreen.X, Position.Y - halfedScreen.Y);
+                //make sure camera will stay within world dimensions
+                //X
+                if (newCameraPosition.X < 0)
+                {
+                    newCameraPosition.X = 0;
+                }
+                else if (newCameraPosition.X > map.World.Width - GraphicsDeviceManager.DefaultBackBufferWidth)
+                {
+                    newCameraPosition.X = map.World.Width - GraphicsDeviceManager.DefaultBackBufferWidth;
+                }
+                //Y
+                if (newCameraPosition.Y < 0)
+                {
+                    newCameraPosition.Y = 0;
+                }
+                else if (newCameraPosition.Y > map.World.Heigth - GraphicsDeviceManager.DefaultBackBufferHeight)
+                {
+                    newCameraPosition.Y = map.World.Heigth - GraphicsDeviceManager.DefaultBackBufferHeight;
+                }
+                //set new CameraPosition
+                map.World.CameraPosition = newCameraPosition;
+            }
+        }
+
         public override void HandleInput(GameTime gameTime)
         {
             base.HandleInput(gameTime);
+            if(GameInstance.InputManager.isKeyHolding(Keys.W))
+            {
+                Velocity = new Vector2(Velocity.X, -10);
+            }
+            else if(GameInstance.InputManager.isKeyHolding(Keys.S))
+            {
+                Velocity = new Vector2(Velocity.X, 10);
+            }
+            else
+            {
+                Velocity = new Vector2(Velocity.X, 0);
+            }
+            if(GameInstance.InputManager.isKeyHolding(Keys.D))
+            {
+                Velocity = new Vector2(10, Velocity.Y);
+            }
+            else if(GameInstance.InputManager.isKeyHolding(Keys.A))
+            {
+                Velocity = new Vector2(-10, Velocity.Y);
+            }
+            else
+            {
+                Velocity = new Vector2(0, Velocity.Y);
+            }
         }
     }
 }

@@ -11,7 +11,9 @@ namespace Content
     {
         public MainWorld() : base()
         {
-            AddMap(new MainMap("MainMap", "MainMap"));
+            Map m = new Map("MainMap", new MainObjectGrid("mainGrid", "MainMap", 60), TileSize);
+            m.Add(new Character("player", "Textures/Tiles/spr_wall", "Stijn", 18, true));
+            AddMap(m);
         }
     }
 }

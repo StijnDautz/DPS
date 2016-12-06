@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    partial class Map : ObjectList
+    abstract partial class ObjectGrid
     {
-        public virtual void Load(string assetName)
+        public void Load(string assetName)
         {
             ReadTiles(ReadFile(assetName));
         }
@@ -51,7 +51,7 @@ namespace Engine
         {
             if (tile != null)
             {
-                tile.Position = new Vector2(x * _tileWidth, y * _tileHeight);
+                tile.Position = new Vector2(x * _tileSize, y * _tileSize);
                 _grid[x, y] = tile;
             }
             else

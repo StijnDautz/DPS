@@ -15,56 +15,112 @@ namespace Engine
     class ObjectList : Object, IControlledLoopObject
     {
         private List<Object> _objects;
+        private List<Pawn> _pawns;
 
         public List<Object> Objects
         {
             get { return _objects; }
         }
 
+        public List<Pawn> Pawns
+        {
+            get { return _pawns; }
+        }
+        
         public ObjectList(string id) : base(id)
         {
             _objects = new List<Object>();
+            _pawns = new List<Pawn>();
         }
 
         public override void Reset()
         {
-            foreach (Object o in Objects)
+            foreach(Object o in Objects)
             {
                 o.Reset();
+            }
+            foreach(Pawn p in _pawns)
+            {
+                if(p.Visible)
+                {
+                    p.Reset();
+                }
             }
         }
 
         public override void Update(GameTime gameTime)
         {
-            foreach (Object o in Objects)
+            foreach(Object o in _objects)
             {
-                o.Update(gameTime);
+                if(o.Visible)
+                {
+                    o.Update(gameTime);
+                }
+            }
+            foreach(Pawn p in _pawns)
+            {
+                if(p.Visible)
+                {
+                    p.Update(gameTime);
+                }
             }
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach (Object o in Objects)
+            foreach(Object o in Objects)
             {
                 if (o.Visible)
-                { o.Draw(gameTime, spriteBatch); }
+                {
+                    o.Draw(gameTime, spriteBatch);
+                }
+            }
+            foreach(Pawn p in _pawns)
+            {
+                if(p.Visible)
+                {
+                    p.Draw(gameTime, spriteBatch);
+                }
             }
         }
 
         public virtual void HandleInput(GameTime gameTime)
         {
-
+            foreach(Pawn p in _pawns)
+            {
+                if(p.Visible)
+                {
+                    p.HandleInput(gameTime);
+                }
+            }
         }
 
         public virtual void Add(Object o)
         {
             o.Parent = this;
-            _objects.Add(o);
+            //if object is Pawn add it to list of pawns, which is used to prevent unnecessary calls of HandleInput(gameTime)
+            if (o is Pawn)
+            {
+                Pawn p = o as Pawn;
+                _pawns.Add(p);
+            }
+            else
+            {
+                _objects.Add(o);
+            }
         }
 
         public void Remove(Object o)
         {
-            _objects.Remove(o);
+            if (o is Pawn)
+            {
+                Pawn p = o as Pawn;
+                _pawns.Remove(p);
+            }
+            else
+            {
+                _objects.Remove(o);
+            }
         }
 
         public Object Find(string id)
