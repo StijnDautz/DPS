@@ -91,6 +91,11 @@ namespace Engine
             return _grid[p.X, p.Y];
         }
 
+        public Object getTile(Vector2 p)
+        {
+            return getTile(GetPositionInGrid(p));
+        }
+
         public void AddObject(int x, int y, Object o)
         {
             _grid[x, y] = o;
@@ -100,6 +105,12 @@ namespace Engine
         public Point GetPositionInGrid(Object o)
         {
             return new Point((int)o.Position.X / (_tileSize + _spacing.X), (int)o.Position.Y / (_tileSize + _spacing.Y));
+        }
+
+        public Point GetPositionInGrid(Vector2 p)
+        {
+            Vector2 pos = p - GlobalPosition;
+            return new Point((int)pos.X / (_tileSize + _spacing.X), (int)pos.Y / (_tileSize + _spacing.Y));
         }
 
         public void RemoveObject(Object o)
