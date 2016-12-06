@@ -29,17 +29,24 @@ namespace Engine
 
         public void MovePickup(Object o, Vector2 m)
         {
-            _grid.GetPositionInGrid
+            Point p = _grid.GetPositionInGrid(m);
+            Object swapobject = _grid.getTile(p);
 
-            if(_grid.getTile(p) == null)
+            if(swapobject == null)
             {
-
+                _grid.AddObject(p.X, p.Y, o);
+            }
+            else
+            {
+                SwapPickup(o, swapobject);
             }
         }
 
-        public void SwapPickup(Object o, Object p)
+        public void SwapPickup(Object o, Object swappickup)
         {
-
+            Vector2 temp = o.Position;
+            o.Position = swappickup.Position;
+            swappickup.Position = temp;
         }
 
 

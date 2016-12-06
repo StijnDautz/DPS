@@ -14,10 +14,11 @@ namespace Engine
         {
         }
 
+        //waarschijnlijk bug playerpos = null
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (Parent is Map)
+            if (Parent is Map && Parent.Pawns.Count > 0)
             {
                 Vector2 playerpos;
                 foreach (Pawn p in Parent.Pawns)
@@ -38,6 +39,8 @@ namespace Engine
             }
         }
 
+
+        /*
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
@@ -53,3 +56,4 @@ namespace Engine
         }
     }
 }
+*/
