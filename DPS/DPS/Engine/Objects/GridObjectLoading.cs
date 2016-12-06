@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    abstract partial class ObjectGrid
+    partial class ObjectGrid
     {
         public void Load(string assetName)
         {
