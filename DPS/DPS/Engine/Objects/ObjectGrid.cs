@@ -97,14 +97,19 @@ namespace Engine
             o.Position = new Vector2(Position.X + x * Spacing.X, Position.Y + y * Spacing.Y);
         }
 
-        public void RemoveObject(Object o)
+        public Point GetPositionInGrid(Object o)
         {
-            RemoveObject((int)o.Position.X, (int)o.Position.Y);
+            return new Point((int)o.Position.X / (_tileSize + _spacing.X), (int)o.Position.Y / (_tileSize + _spacing.Y));
         }
 
-        public void RemoveObject(int x, int y)
+        public void RemoveObject(Object o)
         {
-            _grid[x, y] = null;
+            RemoveObject(GetPositionInGrid(o));
+        }
+
+        public void RemoveObject(Point p)
+        {
+            _grid[p.X, p.Y] = null;
         }
 
         public bool AddToFirstFreeSpot(Object o)
