@@ -13,7 +13,7 @@ namespace Engine
         private string _id;
         private bool _visible;
         private bool _canCollide;
-        private ObjectList _parent;
+        private Object _parent;
         private Vector2 _position;
         private Vector2 _velocity;
         private Rectangle _boundingBox;
@@ -43,9 +43,16 @@ namespace Engine
             }
         }
 
-        public ObjectList Parent
+        public Object Parent
         {
-            get { return _parent; }
+            get
+            {
+                if(_parent != null)
+                {
+                    return _parent.Parent;
+                }
+                return this;
+            }
             set { _parent = value; }
         }
 

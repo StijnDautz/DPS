@@ -51,8 +51,7 @@ namespace Engine
         {
             if (tile != null)
             {
-                tile.Position = new Vector2(x * _tileSize, y * _tileSize);
-                _grid[x, y] = tile;
+                AddObject(x, y, tile);
             }
             else
             {

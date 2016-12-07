@@ -45,14 +45,14 @@ namespace Engine
         {
             _tileSize = tileSize;
             Load(assetName);
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Rows * tileSize, Colums * tileSize);
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Colums * tileSize, Rows * tileSize);
         }
 
         //Create empty ObjectGrid
         public ObjectGrid(string id, int rows, int collums, int tileSize) : base(id)
         {
             _tileSize = tileSize;
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, rows * tileSize, collums * tileSize);
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Colums * tileSize, Rows * tileSize);
             _grid = new Object[rows, collums];
         }
 
@@ -99,7 +99,8 @@ namespace Engine
         public void AddObject(int x, int y, Object o)
         {
             _grid[x, y] = o;
-            o.Position = new Vector2(Position.X + x * Spacing.X, Position.Y + y * Spacing.Y);
+            o.Position = new Vector2(x * (_tileSize + Spacing.X), y * (_tileSize + Spacing.Y));
+            o.Parent = this;
         }
 
         public Point GetPositionInGrid(Object o)
