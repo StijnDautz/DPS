@@ -20,40 +20,24 @@ namespace Engine
             base.Update(gameTime);
             if (Parent is Map && Parent.Pawns.Count > 0)
             {
-                Vector2 playerpos;
+                Character c;
                 foreach (Pawn p in Parent.Pawns)
                 {
-                    if(p is Character)  //verandert in toekomst
+                    if (p is Character)  //verandert in toekomst
                     {
-                        playerpos = p.Position;
+                        c = p as Character;
                     }
                 }
-
-                bool inventoryfull = false; //linken met inventory, als aantal items
-
-                if (playerpos.X > Position.X && playerpos.X < Position.X + Width && playerpos.Y > Position.Y && playerpos.Y < Position.Y + Height && inventoryfull == false)
+                if (CollisionHelper.CollidesWith(c, this))
                 {
-                    visible = false;
-                    //(add item to objectgrid inventory)
+                    if (c.Inventory.AddPickup(this))
+                    {
+                        Parent.Remove(this);
+                    }
                 }
+                double t = gameTime.TotalGameTime.TotalSeconds * 3.0f;
+                Position = new Vector2(Position.X, Position.Y + (float)Math.Sin(t) * 0.2f);
             }
-        }
-
-
-        /*
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            base.Draw(gameTime, spriteBatch);
-            Texture2D idtexture = nonexistent;
-
-            bool visible = true;
-            Vector2 _itempos = new Vector2(12, 12);//staat bij pickup als parameter
-            int animationoffset = 10;
-            double anisin = 0 + 0.25 * Math.PI;
-
-            if (onground == true)
-            spriteBatch.Draw(idtexture, new Vector2(_itempos.X, _itempos.Y + (float)Math.Sin(anisin) * animationoffset), Color.White);
         }
     }
 }
-*/

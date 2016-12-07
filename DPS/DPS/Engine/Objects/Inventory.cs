@@ -49,13 +49,11 @@ namespace Engine
             swappickup.Position = temp;
         }
 
-
         /*field van het type wapen
          *functie find strongest weapon
          *in addpickup functie als er een wapen is toegevoegd, opnieuw uitrekenen, if(o is weapon)
          *in removepickup als het sterkste wapen is geremoved, ook opnieuw uitrekenen, if(field==removedpickup)
-         *functi
-         * 
+         *sub-type weapon van pickup, heeft damage
          * */
     }
 }
