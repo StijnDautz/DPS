@@ -27,7 +27,7 @@ namespace Engine
         public Map(string id, ObjectGrid grid, int tileSize) : base(id)
         {
             Add(grid);
-            _collisionMap = new int[grid.Rows, grid.Colums];
+            _collisionMap = new int[grid.Rows, grid.Collums];
             BoundingBox = grid.BoundingBox;
         }
 

@@ -16,6 +16,7 @@ namespace Engine
         private Vector2 _cameraPosition;
         private Vector2 _dimensions;
         private int _tileSize;
+        private Character _player;
 
         public bool IsTopDown
         {
@@ -45,8 +46,14 @@ namespace Engine
             set { _tileSize = value; }
         }
 
-        public World() : base()
+        public Character Player
         {
+            get { return _player; }
+        }
+
+        public World(Character player) : base()
+        {
+            _player = player;
             _isTopDown = true;
             _maps = new List<Map>();
             _cameraPosition = Vector2.Zero;

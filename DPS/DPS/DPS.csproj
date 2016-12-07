@@ -49,10 +49,12 @@
     <Compile Include="Engine\Objects\Button.cs" />
     <Compile Include="Engine\Objects\Character.cs" />
     <Compile Include="Engine\Objects\Inventory.cs" />
+    <Compile Include="Engine\Objects\NPC.cs" />
     <Compile Include="Engine\Objects\Pickup.cs" />
     <Compile Include="Engine\Objects\ICharacter.cs" />
     <Compile Include="Engine\Objects\ObjectGrid.cs" />
     <Compile Include="Engine\Objects\TextObject.cs" />
+    <Compile Include="Engine\Objects\Weapon.cs" />
     <Compile Include="Not Implemented\Dungeon.cs" />
     <Compile Include="Not Implemented\DungeonLoader.cs" />
     <Compile Include="Engine\GameManagement\Managers\AssetManager.cs" />

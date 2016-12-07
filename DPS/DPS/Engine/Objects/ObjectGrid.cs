@@ -19,9 +19,14 @@ namespace Engine
             get { return _grid.GetLength(1); }
         }
 
-        public int Colums
+        public int Collums
         {
             get { return _grid.GetLength(0); }
+        }
+
+        public Object[,] Grid
+        {
+            get { return _grid; }
         }
 
         public Point Spacing
@@ -31,7 +36,7 @@ namespace Engine
             {
                 for(int x = 0; x < Rows; x++)
                 {
-                    for(int y = 0; y < Colums; y++)
+                    for(int y = 0; y < Collums; y++)
                     {
                         _grid[x, y].Position = new Vector2(x * (_tileSize + value.X), y * (_tileSize + value.Y));
                     }
@@ -45,21 +50,21 @@ namespace Engine
         {
             _tileSize = tileSize;
             Load(assetName);
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Colums * tileSize, Rows * tileSize);
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Collums * tileSize, Rows * tileSize);
         }
 
         //Create empty ObjectGrid
         public ObjectGrid(string id, int rows, int collums, int tileSize) : base(id)
         {
             _tileSize = tileSize;
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Colums * tileSize, Rows * tileSize);
             _grid = new Object[rows, collums];
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, collums * tileSize, rows * tileSize);
         }
 
         public override void Reset()
         {
             base.Reset();
-            _grid = new Object[Rows, Colums];
+            _grid = new Object[Rows, Collums];
         }
 
         public override void Update(GameTime gameTime)
@@ -128,7 +133,7 @@ namespace Engine
         {
             for (int y = 0; y < Rows; y++)
             {
-                for(int x = 0; x < Colums; x++)
+                for(int x = 0; x < Collums; x++)
                 {
                     if(_grid[x, y] == null)
                     {
@@ -138,6 +143,15 @@ namespace Engine
                 }
             }
             return false;
+        }
+
+        //BUG??????????????????????????????????????????????????????????????????????????
+        public void SwapObjects(Point o, Point p)
+        {
+            Object temp = _grid[o.X, o.Y];
+            Object temp2 = _grid[p.X, p.Y];
+            _grid[o.X, o.Y] = temp2;
+            _grid[p.X, p.Y] = temp;
         }
     }
 }

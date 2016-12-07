@@ -21,7 +21,7 @@ namespace Engine
         protected override void LoadContent()
         {
             base.LoadContent();
-            GameModeManager.Add(new MainGameMode("MainGM", new MainWorld()));
+            GameModeManager.Add(new MainGameMode("MainGM", new MainWorld(new Character("player", "Textures/Tiles/spr_wall", "BaasFrank", 19, true))));
             GameModeManager.SwitchTo("MainGM");
         }
     }
