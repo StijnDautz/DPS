@@ -9,10 +9,10 @@ namespace Content
 {
     class MainWorld : World
     {
-        public MainWorld() : base()
+        public MainWorld(Character character) : base(character)
         {
             Map m = new Map("MainMap", new MainObjectGrid("mainGrid", "MainMap", 60), TileSize);
-            m.Add(new Character("player", "Textures/Tiles/spr_wall", "Stijn", 18, true));
+            m.Add(character);
             AddMap(m);
         }
     }
