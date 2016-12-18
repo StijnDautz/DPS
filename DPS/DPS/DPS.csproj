@@ -46,6 +46,7 @@
     <Compile Include="Engine\GameManagement\Managers\CollisionHelper.cs" />
     <Compile Include="Engine\GameManagement\Managers\PathFinder.cs" />
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
+    <Compile Include="Engine\GameManagement\WorldUpdate.cs" />
     <Compile Include="Engine\Objects\Button.cs" />
     <Compile Include="Engine\Objects\Character.cs" />
     <Compile Include="Engine\Objects\Inventory.cs" />

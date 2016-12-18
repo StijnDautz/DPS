@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    class World : IControlledLoopObject
+    partial class World : IControlledLoopObject
     {
         private bool _isTopDown;
         private List<Map> _maps;
@@ -17,6 +17,7 @@ namespace Engine
         private Vector2 _dimensions;
         private int _tileSize;
         private Character _player;
+        private bool _canUpdateCamera;
 
         public bool IsTopDown
         {
@@ -58,20 +59,12 @@ namespace Engine
             _maps = new List<Map>();
             _cameraPosition = Vector2.Zero;
             _tileSize = 60;
+            _canUpdateCamera = true;
         }
 
         public void Reset()
         {
 
-        }
-
-        public void Update(GameTime gameTime)
-        {
-            foreach(Map m in _maps)
-            {
-                //Maps get updated, whether they are visible or not
-                m.Update(gameTime);
-            }
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

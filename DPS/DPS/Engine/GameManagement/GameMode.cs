@@ -11,12 +11,13 @@ namespace Engine
     /*
      * A GameMode contains a list of gameStates and a world
      */
-    class GameMode
+    class GameMode : IControlledLoopObject
     {
         private string _id;
         private World _world;
-        private bool _canUpdateWorldTime;
+        //is set in GameState and used in GameModeManager
         private GameStateManager _gameStateManager;
+        private GameModeManager _parent;
 
         public string Id
         {
@@ -28,22 +29,25 @@ namespace Engine
             get { return _world; }
         }
 
-        public bool CanUpdateWorldTime
-        {
-            get { return _canUpdateWorldTime; }
-            set { _canUpdateWorldTime = value; }
-        }
-
         public GameStateManager GameStateManager
         {
             get { return _gameStateManager; }
+        }
+
+        public GameModeManager Parent
+        {
+            get { return _parent; }
+            set { _parent = value; }
         }
 
         public GameMode(string id, World world)
         {
             _id = id;
             _gameStateManager = new GameStateManager();
-            _canUpdateWorldTime = true;
+            //set this as parent of gameStateManager
+            _gameStateManager.Parent = this;
+
+            //set parent of World (this)
             _world = world;
         }
 
@@ -68,6 +72,7 @@ namespace Engine
         public void HandleInput(GameTime gameTime)
         {
             _world.HandleInput(gameTime);
+            _gameStateManager.HandleInput(gameTime);
         }
     }
 }

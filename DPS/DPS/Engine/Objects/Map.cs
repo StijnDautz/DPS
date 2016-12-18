@@ -10,14 +10,7 @@ namespace Engine
 {
     partial class Map : ObjectList, IControlledLoopObject
     {
-        private World _world;
         private int[,] _collisionMap;
-
-        public World World
-        {
-            set { _world = value; }
-            get { return _world; }
-        }
 
         public int[,] CollisionMap
         {
@@ -29,6 +22,14 @@ namespace Engine
             Add(grid);
             _collisionMap = new int[grid.Rows, grid.Collums];
             BoundingBox = grid.BoundingBox;
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            foreach(Object o in Objects)
+            {
+                o.Draw(gameTime, spriteBatch);
+            }
         }
 
         public override void Add(Object o)

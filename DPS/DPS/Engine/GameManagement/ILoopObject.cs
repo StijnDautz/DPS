@@ -10,8 +10,8 @@ namespace Engine
 {
     interface ILoopObject
     {
-        void Update(GameTime gameTime);
         void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+        void Update(GameTime gameTime);
         void Reset();
     }
 }

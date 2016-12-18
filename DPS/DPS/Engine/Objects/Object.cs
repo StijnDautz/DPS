@@ -11,6 +11,7 @@ namespace Engine
     class Object : ILoopObject
     {
         private string _id;
+        private float _depth;
         private bool _visible;
         private bool _canCollide;
         private Object _parent;
@@ -21,6 +22,12 @@ namespace Engine
         public string Id
         {
             get { return _id; }
+        }
+
+        public float Depth
+        {
+            get { return _depth; }
+            set { _depth = value; }
         }
 
         public bool Visible
@@ -47,7 +54,7 @@ namespace Engine
         {
             get
             {
-                if(_parent != null)
+                if (_parent != null)
                 {
                     return _parent.Parent;
                 }
@@ -56,23 +63,25 @@ namespace Engine
             set { _parent = value; }
         }
 
+        public ObjectList ObjectList
+        {
+            get { return Parent as ObjectList; }
+        }
+
         public Vector2 Position
         {
             get { return _position; }
-            set { _position = value; }
+            set
+            {
+                _position = value;
+                _boundingBox.X = (int)value.X;
+                _boundingBox.Y = (int)value.Y;
+            }
         }
 
         public Vector2 GlobalPosition
         {
-            get
-            {
-                Vector2 pos = Vector2.Zero;
-                if(Parent != null)
-                {
-                    pos = Position + Parent.GlobalPosition;
-                }
-                return pos;
-            }
+            get { return ObjectList.Position + Position; }
         }
 
         public Vector2 Velocity
@@ -100,6 +109,7 @@ namespace Engine
         public Object(string id)
         {
             _id = id;
+            _depth = 1;
             _position = Vector2.Zero;
             _velocity = Vector2.Zero;
             _visible = true;
@@ -109,7 +119,9 @@ namespace Engine
 
         public virtual void Update(GameTime gameTime)
         {
-            Position += Velocity;
+            Vector2 newPos = _position + _velocity;
+            if(!IsColliding(newPos))
+            { UpdateMovement(newPos); }
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -120,6 +132,39 @@ namespace Engine
         public virtual void Reset()
         {
 
+        }
+
+        public virtual void OnCollision(Object collider)
+        {
+
+        }
+
+        private bool IsColliding(Vector2 newPos)
+        {
+            bool collided = false;
+            //has Object moved?
+            if (Velocity.Length() > 0)
+            {
+                //can the object collide, if so check if it has collided, if so call OnCollision
+                if (_canCollide)
+                {
+                    foreach (Object o in ObjectList.Objects)
+                    {
+                        if (CollisionHelper.CollidesWith(this, newPos, o))
+                        {
+                            OnCollision(o);
+                            o.OnCollision(this);
+                            collided = true;
+                        }
+                    }
+                }
+            }
+            return collided;
+        }
+
+        private void UpdateMovement(Vector2 newPos)
+        {
+            _position = newPos;
         }
     }
 }

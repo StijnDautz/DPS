@@ -33,13 +33,7 @@ namespace Engine
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
-            if(Parent is Map)
-            {
-                Map map = Parent as Map;
-                _sprite.Draw(spriteBatch, Position + map.Position - map.World.CameraPosition);
-            }
-            else
-            { _sprite.Draw(spriteBatch, Position); }
+            _sprite.Draw(spriteBatch, GlobalPosition - ObjectList.World.CameraPosition * Depth);
         }
     }
 }

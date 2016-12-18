@@ -8,10 +8,17 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    class GameStateManager
+    class GameStateManager : IControlledLoopObject
     {
         private List<GameState> _gameStates;
         private GameState _current;
+        private GameMode _parent;
+
+        public GameMode Parent
+        {
+            set { _parent = value; }
+            get { return _parent; }
+        }
 
         public GameStateManager()
         {
@@ -33,7 +40,9 @@ namespace Engine
 
         public void Add(GameState g)
         {
+            g.Parent = this;
             _gameStates.Add(g);
+            g.HUD.World = Parent.World;
         }
 
         public void Update(GameTime gameTime)
@@ -49,6 +58,11 @@ namespace Engine
         public void Reset()
         {
             _current.Reset();
+        }
+
+        public void HandleInput(GameTime gameTime)
+        {
+            _current.HandleInput(gameTime);
         }
     }
 }

@@ -13,16 +13,23 @@ namespace Engine
         private List<GameMode> _gameModes;
         private GameMode _current;
         private TimeManager _timeManager;
+        private bool _canUpdateWorldTime;
 
         public TimeManager TimeManager
         {
             get { return _timeManager; }
         }
 
+        public bool CanUpdateWorldTime
+        {
+            set { _canUpdateWorldTime = value; }
+        }
+
         public GameModeManager()
         {
             _timeManager = new TimeManager();
             _gameModes = new List<GameMode>();
+            _canUpdateWorldTime = false;
         }
 
         public void SwitchTo(string id)
@@ -40,6 +47,7 @@ namespace Engine
 
         public void Add(GameMode g)
         {
+            g.Parent = this;
             _gameModes.Add(g);
         }
 
@@ -50,7 +58,7 @@ namespace Engine
 
         public void Update(GameTime gameTime)
         {
-            if(_current.CanUpdateWorldTime)
+            if(_canUpdateWorldTime)
             {
                 _timeManager.Update(gameTime);
             }

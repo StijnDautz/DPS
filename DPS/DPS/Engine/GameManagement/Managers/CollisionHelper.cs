@@ -3,20 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Engine
 {
     static class CollisionHelper
     {
-        public static bool CollidesWith(Object o, Object p)
+        public static bool CollidesWith(Object objM, Vector2 posM, Object objC)
         {
-            if(o.BoundingBox.X + o.Width < p.BoundingBox.X)
+            //set create temp BoundingBox on new position
+            Rectangle BoundingBox = objM.BoundingBox;
+            BoundingBox.X = (int)posM.X;
+            BoundingBox.Y = (int)posM.Y;
+
+            if(BoundingBox.X + objM.Width < objC.BoundingBox.X)
             { return false; }
-            if(p.BoundingBox.X + p.Width < o.BoundingBox.X)
+            if(objC.BoundingBox.X + objC.Width < BoundingBox.X)
             { return false; }
-            if(o.BoundingBox.Y + o.Height < p.BoundingBox.Y)
+            if(BoundingBox.Y + objM.Height < objC.BoundingBox.Y)
             { return false; }
-            if(p.BoundingBox.Y + p.Height < o.BoundingBox.Y)
+            if(objC.BoundingBox.Y + objC.Height < BoundingBox.Y)
             { return false; }
             return true;
         }

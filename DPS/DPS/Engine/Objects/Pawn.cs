@@ -15,21 +15,6 @@ namespace Engine
 
         }
 
-        public override void Reset()
-        {
-            base.Reset();
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            base.Draw(gameTime, spriteBatch);
-        }
-
         public virtual void HandleInput(GameTime gameTime)
         {
             

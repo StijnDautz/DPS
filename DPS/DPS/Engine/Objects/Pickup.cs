@@ -18,21 +18,24 @@ namespace Engine
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (Parent is Map)
+            if (ObjectList is Map)
             {
                 //Update position
                 double t = gameTime.TotalGameTime.TotalSeconds * 3.0f;
                 Position = new Vector2(Position.X, Position.Y + (float)Math.Sin(t) * 0.2f);
+            }
+        }
 
-                Map map = Parent as Map;
-                Character player = map.World.Player;
-                if (CollisionHelper.CollidesWith(player, this))
-                {
-                    if (player.Inventory.AddPickup(this))
-                    {
-                        map.Remove(this);
-                    }
-                }
+        /*
+         * if collision with player, check if object can be added to inventory, if so remove it from the ObjectList
+         */
+        public override void OnCollision(Object collider)
+        {
+            base.OnCollision(collider);
+            Character player = ObjectList.World.Player;
+            if(collider == player && player.Inventory.AddPickup(this))
+            {
+                ObjectList.Remove(this);
             }
         }
     }

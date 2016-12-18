@@ -16,6 +16,7 @@ namespace Engine
     {
         private List<Object> _objects;
         private List<Pawn> _pawns;
+        private World _world;
 
         public List<Object> Objects
         {
@@ -25,6 +26,12 @@ namespace Engine
         public List<Pawn> Pawns
         {
             get { return _pawns; }
+        }
+
+        public World World
+        {
+            get { return _world; }
+            set { _world = value; }
         }
         
         public ObjectList(string id) : base(id)
@@ -39,13 +46,6 @@ namespace Engine
             {
                 o.Reset();
             }
-            foreach(Pawn p in _pawns)
-            {
-                if(p.Visible)
-                {
-                    p.Reset();
-                }
-            }
         }
 
         public override void Update(GameTime gameTime)
@@ -57,13 +57,6 @@ namespace Engine
                     o.Update(gameTime);
                 }
             }
-            foreach(Pawn p in _pawns)
-            {
-                if(p.Visible)
-                {
-                    p.Update(gameTime);
-                }
-            }
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -73,13 +66,6 @@ namespace Engine
                 if (o.Visible)
                 {
                     o.Draw(gameTime, spriteBatch);
-                }
-            }
-            foreach(Pawn p in _pawns)
-            {
-                if(p.Visible)
-                {
-                    p.Draw(gameTime, spriteBatch);
                 }
             }
         }
@@ -104,10 +90,7 @@ namespace Engine
                 Pawn p = o as Pawn;
                 _pawns.Add(p);
             }
-            else
-            {
-                _objects.Add(o);
-            }
+            _objects.Add(o);
         }
 
         public void Remove(Object o)
@@ -117,10 +100,7 @@ namespace Engine
                 Pawn p = o as Pawn;
                 _pawns.Remove(p);
             }
-            else
-            {
-                _objects.Remove(o);
-            }
+            _objects.Remove(o);
         }
 
         public Object Find(string id)

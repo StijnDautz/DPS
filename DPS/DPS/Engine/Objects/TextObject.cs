@@ -45,7 +45,7 @@ namespace Engine
             base.Draw(gameTime, spriteBatch);
             if(Visible)
             {
-                spriteBatch.DrawString(_spriteFont, _text, Position, _color);
+                spriteBatch.DrawString(_spriteFont, _text, GlobalPosition, _color);
             }
         }
     }
