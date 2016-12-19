@@ -8,12 +8,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    class Object : ILoopObject
+    partial class Object : ILoopObject
     {
         private string _id;
         private float _depth;
         private bool _visible;
-        private bool _canCollide;
         private Object _parent;
         private Vector2 _position;
         private Vector2 _velocity;
@@ -34,20 +33,6 @@ namespace Engine
         {
             get { return _visible; }
             set { _visible = value; }
-        }
-
-        public bool CanCollide
-        {
-            get { return _canCollide; }
-            set
-            {
-                _canCollide = value;
-                if(_parent is Map)
-                {
-                    Map m = _parent as Map;
-                    m.UpdateCollisionMap(this);
-                }
-            }
         }
 
         public Object Parent
@@ -110,18 +95,12 @@ namespace Engine
         {
             _id = id;
             _depth = 1;
-            _position = Vector2.Zero;
-            _velocity = Vector2.Zero;
+            _hasPhysics = false;
             _visible = true;
             _canCollide = false;
+            _position = Vector2.Zero;
+            _velocity = Vector2.Zero;
             _boundingBox = new Rectangle((int)Position.X, (int)Position.Y, 0, 0);
-        }
-
-        public virtual void Update(GameTime gameTime)
-        {
-            Vector2 newPos = _position + _velocity;
-            if(!IsColliding(newPos))
-            { UpdateMovement(newPos); }
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -132,39 +111,6 @@ namespace Engine
         public virtual void Reset()
         {
 
-        }
-
-        public virtual void OnCollision(Object collider)
-        {
-
-        }
-
-        private bool IsColliding(Vector2 newPos)
-        {
-            bool collided = false;
-            //has Object moved?
-            if (Velocity.Length() > 0)
-            {
-                //can the object collide, if so check if it has collided, if so call OnCollision
-                if (_canCollide)
-                {
-                    foreach (Object o in ObjectList.Objects)
-                    {
-                        if (CollisionHelper.CollidesWith(this, newPos, o))
-                        {
-                            OnCollision(o);
-                            o.OnCollision(this);
-                            collided = true;
-                        }
-                    }
-                }
-            }
-            return collided;
-        }
-
-        private void UpdateMovement(Vector2 newPos)
-        {
-            _position = newPos;
         }
     }
 }

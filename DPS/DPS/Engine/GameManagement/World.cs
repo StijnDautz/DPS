@@ -19,6 +19,9 @@ namespace Engine
         private Character _player;
         private bool _canUpdateCamera;
 
+        //physics
+        private float _gravity;
+
         public bool IsTopDown
         {
             get { return _isTopDown; }
@@ -52,6 +55,13 @@ namespace Engine
             get { return _player; }
         }
 
+        //phyics
+        public float Gravity
+        {
+            get { return _gravity; }
+            set { _gravity = value; }
+        }
+
         public World(Character player) : base()
         {
             _player = player;
@@ -60,6 +70,7 @@ namespace Engine
             _cameraPosition = Vector2.Zero;
             _tileSize = 60;
             _canUpdateCamera = true;
+            _gravity = 780f;
         }
 
         public void Reset()
