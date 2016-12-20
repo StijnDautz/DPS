@@ -70,7 +70,7 @@ namespace Engine
             _cameraPosition = Vector2.Zero;
             _tileSize = 60;
             _canUpdateCamera = true;
-            _gravity = 780f;
+            _gravity = 350f;
         }
 
         public void Reset()

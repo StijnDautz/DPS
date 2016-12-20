@@ -1,6 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +11,7 @@ namespace Engine
         private bool _canCollide;
         private bool _hasPhysics;
         private bool _canBlock;
+        private bool _inAir;
 
         public bool HasPhysics
         {
@@ -38,6 +38,11 @@ namespace Engine
             set { _canBlock = value; }
         }
 
+        public bool InAir
+        {
+            get { return _inAir; }
+        }
+
         public virtual void Update(GameTime gameTime)
         {
             float elapsedTime = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
@@ -49,77 +54,34 @@ namespace Engine
             }
             newPos += _position + _velocity * elapsedTime;
 
-
-            //set create temp BoundingBox on new position
             if ((newPos - _position).Length() > 0)
             {
                 UpdateMovementAndColllision(newPos, elapsedTime);
+                if(_inAir)
+                {
+                    _velocity.Y += ObjectList.World.Gravity * elapsedTime;
+                    _velocity.X /= 1.007f;
+                }
             }
         }
 
         private void UpdateMovementAndColllision(Vector2 newPos, float elapsedTime)
         {
-            bool collisionBottom = false;
-            bool collisionTop = false;
-            bool collisionLeft = false;
-            bool collisionRight = false;
-
-            //has Object moved?
-            //can the object collide, if so check if it has collided, if so call OnCollision
             if (_canCollide)
             {
-                foreach (Object o in ObjectList.Objects)
+                Vector2 direction = newPos - _position;
+                _inAir = canMoveDown(newPos);
+                if (direction.Y > 0 && _inAir || direction.Y < 0 && canMoveUp(newPos))
                 {
-                    if (o._canCollide && this != o)
-                    {
-                        bool collidesOnXAxis = CollisionHelper.CollidesWith(this, new Vector2(newPos.X, _position.Y), o);
-                        bool collidesOnYAxis = CollisionHelper.CollidesWith(this, new Vector2(_position.X, newPos.Y), o);
-
-                        if (collidesOnXAxis || collidesOnYAxis)
-                        {
-                            o.OnCollision(this);
-                            if (o._canBlock)
-                            {
-                                if (collidesOnXAxis)
-                                {
-                                    if (!collisionLeft)
-                                    {
-                                        collisionLeft = CollisionHelper.CollidedAtLeft(this, newPos, o);
-                                    }
-                                    if (!collisionRight)
-                                    { collisionRight = CollisionHelper.CollidedAtRight(this, newPos, o); }
-                                }
-                                if (collidesOnYAxis)
-                                {
-                                    if (!collisionBottom)
-                                    { collisionBottom = CollisionHelper.CollidedAtBottom(this, newPos, o); }
-                                    if (!collisionTop)
-                                    { collisionTop = CollisionHelper.CollidedAtTop(this, newPos, o); }
-                                }
-                            }
-                        }
-                    }
+                    _position.Y = newPos.Y;
+                }
+                if (direction.X > 0 && canMoveRight(newPos) || direction.X < 0 && canMoveLeft(newPos))
+                {
+                    _position.X = newPos.X;
                 }
             }
-            UpdateMovement(collisionBottom, collisionTop, collisionLeft, collisionRight, newPos, newPos - _position, elapsedTime);
         }
-
-        private void UpdateMovement(bool down, bool up, bool left, bool right, Vector2 newPos, Vector2 direction, float elapsedTime)
-        {
-            if ((direction.Y > 0 && !down) || (direction.Y < 0 && !up))
-            {
-                _position.Y = newPos.Y;
-            }
-            if ((direction.X < 0 && !left) || (direction.X > 0 && !right))
-            {
-                _position.X = newPos.X;
-            }
-            if (!down)
-            {
-                _velocity.Y += ObjectList.World.Gravity * elapsedTime;
-            }
-        }
-
+    
         private Vector2 UpdatePhysics(float elapsedTime)
         {
             World world = ObjectList.World;
@@ -133,6 +95,54 @@ namespace Engine
         public virtual void OnCollision(Object collider)
         {
 
+        }
+
+        private bool canMoveDown(Vector2 newPos)
+        {
+            foreach (Object o in ObjectList.Objects)
+            {
+                if (o._canCollide && this != o && CollisionHelper.CollidesWith(this, new Vector2(_position.X, newPos.Y), o) && CollisionHelper.CollidedAtBottom(this, newPos, o))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool canMoveUp(Vector2 newPos)
+        {
+            foreach (Object o in ObjectList.Objects)
+            {
+                if (o._canCollide && this != o && CollisionHelper.CollidesWith(this, new Vector2(_position.X, newPos.Y), o) && CollisionHelper.CollidedAtTop(this, newPos, o))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool canMoveLeft(Vector2 newPos)
+        {
+            foreach (Object o in ObjectList.Objects)
+            {
+                if (o._canCollide && this != o && CollisionHelper.CollidesWith(this, new Vector2(newPos.X, _position.Y), o) && CollisionHelper.CollidedAtLeft(this, newPos, o))
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool canMoveRight(Vector2 newPos)
+        {
+            foreach (Object o in ObjectList.Objects)
+            {
+                if (o._canCollide && this != o && CollisionHelper.CollidesWith(this, new Vector2(newPos.X, _position.Y), o) && CollisionHelper.CollidedAtRight(this, newPos, o))
+                {
+                    return false;
+                }
+            }
+            return true;
         }
     }
 }

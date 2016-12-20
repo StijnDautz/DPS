@@ -56,22 +56,25 @@ namespace Engine
         public override void HandleInput(GameTime gameTime)
         {
             base.HandleInput(gameTime);
-            if(GameInstance.InputManager.isKeyHolding(Keys.D))
+            if (!InAir)
             {
-                Velocity = new Vector2(250, Velocity.Y);
-            }
-            else if(GameInstance.InputManager.isKeyHolding(Keys.A))
-            {
-                Velocity = new Vector2(-250, Velocity.Y);
-            }
-            else
-            {
-                Velocity = new Vector2(0, Velocity.Y);
-            }
+                if (GameInstance.InputManager.isKeyHolding(Keys.D))
+                {
+                    Velocity = new Vector2(260, Velocity.Y);
+                }
+                else if (GameInstance.InputManager.isKeyHolding(Keys.A) && !InAir)
+                {
+                    Velocity = new Vector2(-260, Velocity.Y);
+                }
+                else
+                {
+                    Velocity = new Vector2(0, Velocity.Y);
+                }
 
-            if(GameInstance.InputManager.isKeyPressed(Keys.Space))
-            {
-                Velocity = new Vector2(Velocity.X, -1200);
+                if (GameInstance.InputManager.isKeyPressed(Keys.Space) && !InAir)
+                {
+                    Velocity = new Vector2(Velocity.X, -600);
+                }
             }
         }
     }

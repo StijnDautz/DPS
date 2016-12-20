@@ -98,6 +98,7 @@ namespace Engine
             _hasPhysics = false;
             _visible = true;
             _canCollide = false;
+            _inAir = true;
             _position = Vector2.Zero;
             _velocity = Vector2.Zero;
             _boundingBox = new Rectangle((int)Position.X, (int)Position.Y, 0, 0);
