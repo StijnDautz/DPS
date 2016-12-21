@@ -43,6 +43,9 @@ namespace Engine
             _age = age;
             _gender = gender;
             _inventory = new Inventory(id + "inventory");
+            HasPhysics = true;
+            CanCollide = true;
+            canBlock = true;
         }
 
         public override void Update(GameTime gameTime)
@@ -53,29 +56,25 @@ namespace Engine
         public override void HandleInput(GameTime gameTime)
         {
             base.HandleInput(gameTime);
-            if(GameInstance.InputManager.isKeyHolding(Keys.W))
+            if (!InAir)
             {
-                Velocity = new Vector2(Velocity.X, -10);
-            }
-            else if(GameInstance.InputManager.isKeyHolding(Keys.S))
-            {
-                Velocity = new Vector2(Velocity.X, 10);
-            }
-            else
-            {
-                Velocity = new Vector2(Velocity.X, 0);
-            }
-            if(GameInstance.InputManager.isKeyHolding(Keys.D))
-            {
-                Velocity = new Vector2(10, Velocity.Y);
-            }
-            else if(GameInstance.InputManager.isKeyHolding(Keys.A))
-            {
-                Velocity = new Vector2(-10, Velocity.Y);
-            }
-            else
-            {
-                Velocity = new Vector2(0, Velocity.Y);
+                if (GameInstance.InputManager.isKeyHolding(Keys.D))
+                {
+                    Velocity = new Vector2(260, Velocity.Y);
+                }
+                else if (GameInstance.InputManager.isKeyHolding(Keys.A) && !InAir)
+                {
+                    Velocity = new Vector2(-260, Velocity.Y);
+                }
+                else
+                {
+                    Velocity = new Vector2(0, Velocity.Y);
+                }
+
+                if (GameInstance.InputManager.isKeyPressed(Keys.Space) && !InAir)
+                {
+                    Velocity = new Vector2(Velocity.X, -600);
+                }
             }
         }
     }

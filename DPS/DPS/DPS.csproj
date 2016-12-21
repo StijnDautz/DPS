@@ -53,6 +53,7 @@
     <Compile Include="Engine\Objects\Character.cs" />
     <Compile Include="Engine\Objects\Inventory.cs" />
     <Compile Include="Engine\Objects\NPC.cs" />
+    <Compile Include="Engine\Objects\ObjectUpdate.cs" />
     <Compile Include="Engine\Objects\Pickup.cs" />
     <Compile Include="Engine\Objects\ICharacter.cs" />
     <Compile Include="Engine\Objects\ObjectGrid.cs" />
