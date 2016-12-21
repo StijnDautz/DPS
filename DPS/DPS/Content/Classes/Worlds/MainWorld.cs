@@ -11,7 +11,7 @@ namespace Content
     {
         public MainWorld(Character character) : base(character)
         {
-            Map m = new Map("MainMap", new MainObjectGrid("mainGrid", "MainMap", 60), TileSize);
+            Map m = new Map("DummyLevel", new DungeonIce4("mainGrid", "DummyLevel", 96), TileSize);
             m.Add(character);
             AddMap(m);
         }

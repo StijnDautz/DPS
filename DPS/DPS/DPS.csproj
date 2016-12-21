@@ -41,6 +41,8 @@
     <Compile Include="Content\Classes\AIScripts\AIScript.cs" />
     <Compile Include="Content\Classes\GameManagement\MainGameMode.cs" />
     <Compile Include="Content\Classes\GameStates\StartPlayGS.cs" />
+    <Compile Include="Content\Classes\Objectgrids\DungeonDirt5.cs" />
+    <Compile Include="Content\Classes\Objectgrids\DungeonIce4.cs" />
     <Compile Include="Content\Classes\Worlds\MainObjectGrid.cs" />
     <Compile Include="Content\Classes\Worlds\MainWorld.cs" />
     <Compile Include="Engine\GameManagement\Managers\CollisionHelper.cs" />
