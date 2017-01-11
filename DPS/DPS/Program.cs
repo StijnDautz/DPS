@@ -18,11 +18,16 @@ namespace Engine
                 game.Run();
         }
 
+        
         protected override void LoadContent()
         {
             base.LoadContent();
-            GameModeManager.Add(new MainGameMode("MainGM", new MainWorld(new Character("player", "Textures/Tiles/spr_wall", "BaasFrank", 19, true))));
+            Character Frank = new Character("player", "Textures/Tiles/spr_wall", "BaasFrank", 19, true);
+            Frank.Position = new Microsoft.Xna.Framework.Vector2(200, 300);
+
+            GameModeManager.Add(new MainGameMode("MainGM", new MainWorld(Frank)));
             GameModeManager.SwitchTo("MainGM");
+
         }
     }
 }
