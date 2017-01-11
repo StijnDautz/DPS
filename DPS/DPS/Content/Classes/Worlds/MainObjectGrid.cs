@@ -11,7 +11,7 @@ namespace Content
     {
         public MainObjectGrid(string id, string assetName, int tileSize) : base(id, assetName, tileSize)
         {
-
+            CanCollide = true;
         }
 
         protected override Engine.Object FindType(char type)

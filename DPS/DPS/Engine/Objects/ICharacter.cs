@@ -4,14 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DPS.Engine.GameManagement.Objects
+namespace Engine
 {
+    public enum movementState
+    {
+        IDLE, WALKING, RUNNING, JUMPING, FALLING, ATTACK, JUMPATTACK,
+    }
+
     interface ICharacter
     {
         string Name { get; }
-        int Age { get; }
-        bool Gender { get; }
+        movementState MovementState { get; }
+        int Health { get; set; }
         //Inventory Inventory { get; }
-        int Happiness { get; }
     }
 }

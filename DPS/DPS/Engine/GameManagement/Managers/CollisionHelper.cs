@@ -9,22 +9,25 @@ namespace Engine
 {
     static class CollisionHelper
     {
-        public static bool CollidesWith(Object oldObj, Vector2 newPos, Object objC)
+        public static bool CollidesWith(Object obj1, Vector2 offset1, Object obj2, Vector2 offset2, float elapsedTime)
         {
-            if (newPos.Y + oldObj.Height < objC.Position.Y)
+            Vector2 pos1 = obj1.Position + offset1 * elapsedTime;
+            Vector2 pos2 = obj2.Position + offset2 * elapsedTime;
+
+            if (pos1.Y + obj1.Height < obj2.Position.Y)
             { return false; }
-            if (objC.BoundingBox.Y + objC.Height < newPos.Y)
+            if (obj2.Position.Y + obj2.Height < pos1.Y)
             { return false; }
-            if (newPos.X + oldObj.Width < objC.BoundingBox.X)
+            if (pos1.X + obj1.Width < obj2.Position.X)
             { return false; }
-            if (objC.BoundingBox.X + objC.Width < newPos.X)
+            if (obj2.Position.X + obj2.Width < pos1.X)
             { return false; }
             return true;
         }
 
-        public static bool CollidedAtBottom(Object oldObj, Vector2 newPos, Object objC)
+        public static bool CollidedAtBottom(Object oldObj, Object objC)
         {
-            return oldObj.GlobalPosition.Y + oldObj.Height <= objC.GlobalPosition.Y && newPos.Y + oldObj.Height >= objC.GlobalPosition.Y;
+            return oldObj.GlobalPosition.Y + oldObj.Height <= objC.GlobalPosition.Y && oldObj.GlobalPosition.Y + oldObj.Height >= objC.GlobalPosition.Y;
         }
 
         public static bool CollidedAtLeft(Object oldObj, Vector2 newPos, Object objC)

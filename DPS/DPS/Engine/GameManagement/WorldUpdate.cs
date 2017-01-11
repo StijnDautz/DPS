@@ -16,7 +16,8 @@ namespace Engine
                 //Maps get updated, whether they are visible or not
                 m.Update(gameTime);
             }
-            if(_canUpdateCamera)
+            UpdateCollision(gameTime);
+            if (_canUpdateCamera)
             {
                 UpdateCamera();
             }
@@ -50,6 +51,48 @@ namespace Engine
                 }
                 //set new CameraPosition
                 CameraPosition = newCameraPosition;
+            }
+        }
+
+        private void UpdateCollision(GameTime gameTime)
+        {
+            float elapsedTime = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
+            //Update velocity
+            foreach(Map m in _maps)
+            {
+                foreach(Object o in m.Objects)
+                {
+                    o.ApplyPhysics(elapsedTime);
+                }
+            }
+            //loop through all objects and check for collision with the ones with a higher index, so collisions only get detected ones
+            //if collision, call onCollision and set the bool to true, so the positionChange will be resolved
+            foreach (Map m1 in _maps)
+            {
+                for (int i = 0; i < m1.Objects.Count; i++)
+                {
+                    foreach (Map m2 in _maps)
+                    {
+                        //set to true, if false it will be detected and set properly
+                        m1.Objects[i].InAir = true;
+                        for (int j = i + 1; j < m2.Objects.Count; j++)
+                        {
+                            if (m1.Objects[i].CanCollide && m2.Objects[j].CanCollide)
+                            {
+                                m1.Objects[i].SetupCollision(m2.Objects[j], elapsedTime);
+                            }
+                        }
+                    }
+                }
+            }
+
+            //resolve positionChange of objects that collided
+            foreach (Map m in _maps)
+            {
+                foreach(Object o in m.Objects)
+                {
+                    o.ApplyPosition(elapsedTime);
+                }
             }
         }
     }

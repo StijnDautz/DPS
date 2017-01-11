@@ -8,25 +8,20 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    partial class ObjectGrid : Object
+    partial class ObjectGrid : ObjectList
     {
-        private Object[,] _grid;
         private int _tileSize;
+        private Point dimensions;
         private Point _spacing;
 
         public int Rows
         {
-            get { return _grid.GetLength(1); }
+            get { return dimensions.X; }
         }
 
         public int Collums
         {
-            get { return _grid.GetLength(0); }
-        }
-
-        public Object[,] Grid
-        {
-            get { return _grid; }
+            get { return dimensions.Y; }
         }
 
         public Point Spacing
@@ -38,7 +33,7 @@ namespace Engine
                 {
                     for(int y = 0; y < Collums; y++)
                     {
-                        _grid[x, y].Position = new Vector2(x * (_tileSize + value.X), y * (_tileSize + value.Y));
+                        getTile(x, y).Position = new Vector2(x * (_tileSize + value.X), y * (_tileSize + value.Y));
                     }
                 }
                 _spacing = value;
@@ -54,58 +49,37 @@ namespace Engine
         }
 
         //Create empty ObjectGrid
-        public ObjectGrid(string id, int rows, int collums, int tileSize) : base(id)
+        public ObjectGrid(string id, int rows, int collums, int tileSize) : base(id, rows * collums)
         {
+            dimensions = new Point(rows, collums);
             _tileSize = tileSize;
-            _grid = new Object[rows, collums];
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, collums * tileSize, rows * tileSize);
-        }
-
-        public override void Reset()
-        {
-            base.Reset();
-            _grid = new Object[Rows, Collums];
-        }
-
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-            foreach(Object o in _grid)
-            {
-                if(o != null && o.Visible)
-                {
-                    o.Update(gameTime);
-                }
-            }
-        }
-
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            base.Draw(gameTime, spriteBatch);
-            foreach(Object o in _grid)
-            {
-                if(o != null && o.Visible)
-                {
-                    o.Draw(gameTime, spriteBatch);
-                }
-            }
         }
 
         public Object getTile(Point p)
         {
-            return _grid[p.X, p.Y];
+            return Objects[p.X * dimensions.Y + p.Y];
+        }
+
+        public Object getTile(int x, int y)
+        {
+            return Objects[x * dimensions.Y + y];
+        }
+
+        public void setTile(int x, int y, Object o)
+        {
+            Objects[x * dimensions.Y + y] = o;
+        }
+
+        //TODO double func
+        public void removeTile(Point p)
+        {
+            Objects[p.X * dimensions.Y + p.Y] = null;
         }
 
         public Object getTile(Vector2 p)
         {
             return getTile(GetPositionInGrid(p));
-        }
-
-        public void AddObject(int x, int y, Object o)
-        {
-            _grid[x, y] = o;
-            o.Position = new Vector2(x * (_tileSize + Spacing.X), y * (_tileSize + Spacing.Y));
-            o.Parent = this;
         }
 
         public Point GetPositionInGrid(Object o)
@@ -121,12 +95,7 @@ namespace Engine
 
         public void RemoveObject(Object o)
         {
-            RemoveObject(GetPositionInGrid(o));
-        }
-
-        public void RemoveObject(Point p)
-        {
-            _grid[p.X, p.Y] = null;
+            removeTile(GetPositionInGrid(o));
         }
 
         public bool AddToFirstFreeSpot(Object o)
@@ -135,9 +104,9 @@ namespace Engine
             {
                 for(int x = 0; x < Collums; x++)
                 {
-                    if(_grid[x, y] == null)
+                    if(getTile(x, y) == null)
                     {
-                        AddObject(x, y, o);
+                        setTile(x, y, o);
                         return true;
                     }
                 }
@@ -148,10 +117,10 @@ namespace Engine
         //BUG??????????????????????????????????????????????????????????????????????????
         public void SwapObjects(Point o, Point p)
         {
-            Object temp = _grid[o.X, o.Y];
-            Object temp2 = _grid[p.X, p.Y];
-            _grid[o.X, o.Y] = temp2;
-            _grid[p.X, p.Y] = temp;
+            Object temp = getTile(o);
+            Object temp2 = getTile(p);
+            setTile(o.X, o.Y, temp2);
+            setTile(p.X, p.Y, temp);
         }
     }
 }
