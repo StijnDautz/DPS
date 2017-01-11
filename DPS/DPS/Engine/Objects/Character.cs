@@ -70,26 +70,67 @@ namespace Engine
             base.HandleInput(gameTime);
 
             float speed = GameInstance.InputManager.isKeyHolding(Keys.LeftShift) ? _runSpeed : _walkSpeed;
+            if (ObjectList.World.IsTopDown)
+            {
+                HandleTopDownInput(speed);
+            }
+            else
+            {
 
+            }
+                   
+        }
+
+        private void HandleTopDownInput(float speed)
+        {
             if (GameInstance.InputManager.isKeyHolding(Keys.D))
             {
-                Velocity = new Vector2(speed, Velocity.Y);
+                VelocityX = speed;
                 Mirrored = false;
             }
             else if (GameInstance.InputManager.isKeyHolding(Keys.A))
             {
-                Velocity = new Vector2(-speed, Velocity.Y);
+                VelocityX = -speed;
                 Mirrored = true;
             }
             else
             {
                 VelocityX = 0;
             }
+            if(GameInstance.InputManager.isKeyHolding(Keys.S))
+            {
+                VelocityY = speed;
+            }
+            if(GameInstance.InputManager.isKeyHolding(Keys.W))
+            {
+                VelocityY = -speed;
+            }
+            else
+            {
+                VelocityY = 0;
+            }                                       
+        }
 
+        private void HandleSideInput(float speed)
+        {
+            if (GameInstance.InputManager.isKeyHolding(Keys.D))
+            {
+                VelocityX = speed;
+                Mirrored = false;
+            }
+            else if (GameInstance.InputManager.isKeyHolding(Keys.A))
+            {
+                VelocityX = -speed;
+                Mirrored = true;
+            }
+            else
+            {
+                VelocityX = 0;
+            }
             if (GameInstance.InputManager.isKeyPressed(Keys.Space))
             {
                 Velocity = new Vector2(VelocityX, -600);
-            }           
+            }
         }
 
         private movementState UpdateMovementState(float elapsedTime)
