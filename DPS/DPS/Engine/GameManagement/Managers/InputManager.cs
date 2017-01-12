@@ -28,7 +28,7 @@ namespace Engine
             _currentKeyboardState = Keyboard.GetState();
         }
 
-        public Vector2 mousePosition
+        public Vector2 MousePosition
         {
             get { return new Vector2(_currentMouseState.Position.X, _currentMouseState.Position.Y); }
         }
@@ -41,6 +41,16 @@ namespace Engine
         public bool RightMouseButtonPressed
         {
             get { return _currentMouseState.RightButton == ButtonState.Pressed && _previousMouseState.RightButton == ButtonState.Released; }
+        }
+
+        public bool LeftMouseButtonHolding
+        {
+            get { return _currentMouseState.LeftButton == ButtonState.Pressed && _previousMouseState.LeftButton == ButtonState.Pressed; }
+        }
+
+        public bool LeftMouseButtonReleased
+        {
+            get { return _currentMouseState.LeftButton == ButtonState.Released && _previousMouseState.LeftButton == ButtonState.Pressed; }
         }
 
         public bool isKeyPressed(Keys key)

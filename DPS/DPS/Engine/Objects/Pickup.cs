@@ -38,5 +38,10 @@ namespace Engine
                 ObjectList.Remove(this);
             }
         }
+
+        public virtual void OnClicked()
+        {
+
+        }
     }
 }

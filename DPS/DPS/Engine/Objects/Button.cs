@@ -21,7 +21,7 @@ namespace Engine
 
             if (GameInstance.InputManager.LeftMouseButtonPressed)
             {
-                Vector2 mousePosition = GameInstance.InputManager.mousePosition;
+                Vector2 mousePosition = GameInstance.InputManager.MousePosition;
                 if (mousePosition.X > Position.X && mousePosition.X < Position.X + Width && mousePosition.Y > Position.Y && mousePosition.Y < Position.Y + Width)
                 {
                     ActionWhenPressed();

@@ -56,22 +56,17 @@ namespace Engine
 
         public void MovePickup(Pickup movingPickup, Vector2 MousePosition)
         {
-            Point p = GetPositionInGrid(MousePosition);
+            int p = GetPositionInGrid(MousePosition);
             Pickup switchPickup = getTile(p) as Pickup;
 
             if(switchPickup == null)
             {
-                setTile(p.X, p.Y, movingPickup);
+ //               setTile(p.X, p.Y, movingPickup);
             }
             else
             {
-                SwapPickup(p, GetPositionInGrid(movingPickup));
+ //               SwapPickup(p, GetPositionInGrid(movingPickup));
             }
-        }
-
-        public void SwapPickup(Point o, Point swappickup)
-        {
-            SwapObjects(o, swappickup);
         }
 
         public Weapon FindStrongestWeapon()
@@ -89,6 +84,11 @@ namespace Engine
                 }
             }
             return strongest;
+        }
+
+        public Pickup getPickupOnClick(Vector2 mousePosition)
+        {
+            return getTile(mousePosition) as Pickup;
         }
     }
 }

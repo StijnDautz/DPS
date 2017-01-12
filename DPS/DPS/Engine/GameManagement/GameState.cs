@@ -39,7 +39,7 @@ namespace Engine
         {
             get { return _gameStateManager.Parent; }
         }
-        
+
         protected World World
         {
             get { return GameMode.World; }
@@ -49,6 +49,12 @@ namespace Engine
         {
             get { return _gameStateManager.Parent.Parent; }
         }
+
+        protected bool IsMouseVisible
+        {
+            set { GameModeManager.GameInstance.IsMouseVisible = value; }
+        }
+
             
         public GameState(string id)
         {

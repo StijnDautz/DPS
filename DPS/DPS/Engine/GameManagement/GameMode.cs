@@ -40,13 +40,13 @@ namespace Engine
             set { _parent = value; }
         }
 
-        public GameMode(string id, World world)
+        public GameMode(string id, World world, GameModeManager gm)
         {
             _id = id;
             _gameStateManager = new GameStateManager();
             //set this as parent of gameStateManager
             _gameStateManager.Parent = this;
-
+            _parent = gm;
             //set parent of World (this)
             _world = world;
         }

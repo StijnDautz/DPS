@@ -19,6 +19,7 @@ namespace Content
         public override void Init()
         {
             base.Init();
+            IsMouseVisible = false;
             World.Player.CanMove = true;
         }
 

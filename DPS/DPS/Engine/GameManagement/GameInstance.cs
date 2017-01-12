@@ -42,6 +42,7 @@ namespace Engine
             _graphics = new GraphicsDeviceManager(this);
             _assetManager = new AssetManager(Content);
             _gameModeManager = new GameModeManager();
+            _gameModeManager.GameInstance = this;
             _inputManager = new InputManager();
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;

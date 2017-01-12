@@ -13,7 +13,14 @@ namespace Engine
         private List<GameMode> _gameModes;
         private GameMode _current;
         private TimeManager _timeManager;
+        private GameInstance _gameInstance;
         private bool _canUpdateWorldTime;
+
+        public GameInstance GameInstance
+        {
+            get { return _gameInstance; }
+            set { _gameInstance = value; }
+        }
 
         public TimeManager TimeManager
         {

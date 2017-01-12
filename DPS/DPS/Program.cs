@@ -25,7 +25,7 @@ namespace Engine
             Character Frank = new Character("player", "Textures/Tiles/spr_wall", "BaasFrank", 19, true);
             Frank.Position = new Microsoft.Xna.Framework.Vector2(200, 300);
 
-            GameModeManager.Add(new MainGameMode("MainGM", new MainWorld(Frank)));
+            GameModeManager.Add(new MainGameMode("MainGM", new MainWorld(Frank), GameModeManager));
             GameModeManager.SwitchTo("MainGM");
 
         }

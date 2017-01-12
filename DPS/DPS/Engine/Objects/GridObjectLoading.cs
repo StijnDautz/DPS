@@ -52,7 +52,7 @@ namespace Engine
             if (tile != null)
             {
                 Objects.Add(tile);
-                tile.Position = new Vector2(x * (_tileSize + Spacing.X), y * (_tileSize + Spacing.Y));
+                tile.Position = new Vector2(x * (_tileSize), y * (_tileSize));
                 tile.Parent = this;
             }
             else

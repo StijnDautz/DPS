@@ -12,7 +12,6 @@ namespace Engine
     {
         private int _tileSize;
         private Point dimensions;
-        private Point _spacing;
 
         public int Rows
         {
@@ -24,22 +23,6 @@ namespace Engine
             get { return dimensions.Y; }
         }
 
-        public Point Spacing
-        {
-            get { return _spacing; }
-            set
-            {
-                for(int x = 0; x < Rows; x++)
-                {
-                    for(int y = 0; y < Collums; y++)
-                    {
-                        getTile(x, y).Position = new Vector2(x * (_tileSize + value.X), y * (_tileSize + value.Y));
-                    }
-                }
-                _spacing = value;
-            }
-        }
-
         //Create ObjectGrid read from a file
         public ObjectGrid(string id, string assetName, int tileSize) : base(id)
         {
@@ -49,32 +32,29 @@ namespace Engine
         }
 
         //Create empty ObjectGrid
-        public ObjectGrid(string id, int rows, int collums, int tileSize) : base(id, rows * collums)
+        public ObjectGrid(string id, int collums, int rows, int tileSize) : base(id, rows * collums)
         {
-            dimensions = new Point(rows, collums);
+            dimensions = new Point(collums, rows);
             _tileSize = tileSize;
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, collums * tileSize, rows * tileSize);
         }
 
-        public Object getTile(Point p)
+        public int GetPositionInGrid(Vector2 p)
         {
-            return Objects[p.X * dimensions.Y + p.Y];
+            Vector2 pos = p - GlobalPosition;
+            return (int)pos.X / (_tileSize) + (int)pos.Y / (_tileSize) * Collums;
         }
 
-        public Object getTile(int x, int y)
+        public int GetPositionInGrid(Object o)
         {
-            return Objects[x * dimensions.Y + y];
-        }
-
-        public void setTile(int x, int y, Object o)
-        {
-            Objects[x * dimensions.Y + y] = o;
-        }
-
-        //TODO double func
-        public void removeTile(Point p)
-        {
-            Objects[p.X * dimensions.Y + p.Y] = null;
+            for (int i = 0; i < Objects.Count; i++)
+            {
+                if(Objects[i] == o)
+                {
+                    return i;
+                }
+            }
+            return -1;
         }
 
         public Object getTile(Vector2 p)
@@ -82,20 +62,38 @@ namespace Engine
             return getTile(GetPositionInGrid(p));
         }
 
-        public Point GetPositionInGrid(Object o)
+        //i is index of object in Objects
+        public Object getTile(int i)
         {
-            return new Point((int)o.Position.X / (_tileSize + _spacing.X), (int)o.Position.Y / (_tileSize + _spacing.Y));
-        }
-
-        public Point GetPositionInGrid(Vector2 p)
-        {
-            Vector2 pos = p - GlobalPosition;
-            return new Point((int)pos.X / (_tileSize + _spacing.X), (int)pos.Y / (_tileSize + _spacing.Y));
+            if (i < 0 || i > Objects.Count - 1)
+            {
+                return null;
+            }
+            else
+            {
+                return Objects[i];
+            }
         }
 
         public void RemoveObject(Object o)
         {
-            removeTile(GetPositionInGrid(o));
+            removeTile(GetPositionInGrid(o.Position));
+        }
+
+        public void removeTile(int i)
+        {
+            Objects[i] = null;
+        }
+
+        public void setTile(int x, int y, Object o)
+        {
+            Objects[x * dimensions.Y + y] = o;
+        }
+
+        public void setTile(int i, Object o)
+        {
+            Objects[i] = o;
+            o.Position = new Vector2(i % Collums, i / Collums) * _tileSize;
         }
 
         public bool AddToFirstFreeSpot(Object o)
@@ -104,20 +102,17 @@ namespace Engine
             {
                 o.Parent = this;
                 Objects.Add(o);
-                int x = (Objects.Count - 1) % Collums;
-                o.Position = new Vector2(x * _tileSize, (Objects.Count - 1) / Collums * _tileSize);
+                o.Position = new Vector2((Objects.Count - 1) % Collums, (Objects.Count - 1) / Collums) * _tileSize;
                 return true;
             }
             return false;
         }
 
-        //BUG??????????????????????????????????????????????????????????????????????????
-        public void SwapObjects(Point o, Point p)
+        public void SwapObjects(Object i, Object j)
         {
-            Object temp = getTile(o);
-            Object temp2 = getTile(p);
-            setTile(o.X, o.Y, temp2);
-            setTile(p.X, p.Y, temp);
+            int temp = GetPositionInGrid(j);
+            setTile(GetPositionInGrid(i), j);
+            setTile(temp, i);
         }
     }
 }

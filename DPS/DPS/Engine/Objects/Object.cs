@@ -98,6 +98,15 @@ namespace Engine
             }
         }
 
+        public Vector2 GlobalOrigin
+        {
+            get
+            {
+                Vector2 g = GlobalPosition;
+                return new Vector2(g.X + Width / 2, g.Y + Height / 2);
+            }
+        }
+
         public Vector2 Velocity
         {
             get { return _velocity; }
