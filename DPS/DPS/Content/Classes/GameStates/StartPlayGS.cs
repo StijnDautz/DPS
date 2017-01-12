@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 
 namespace Content
 {
@@ -19,6 +20,15 @@ namespace Content
         {
             base.Update(gameTime);
             
+        }
+
+        public override void HandleInput(GameTime gameTime)
+        {
+            base.HandleInput(gameTime);
+            if (GameInstance.InputManager.isKeyPressed(Keys.I))
+            {
+                GameStateManager.SwitchTo("inventory");
+            }
         }
     }
 }

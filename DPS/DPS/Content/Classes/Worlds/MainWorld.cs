@@ -12,7 +12,7 @@ namespace Content
     {
         public MainWorld(Character character) : base(character)
         {
-            IsTopDown = false;
+            IsTopDown = true;
             Map m = new Map("MainMap", new MainObjectGrid("mainGrid", "MainMap", 60), TileSize);
             AddMap(m);
             m.Add(character);

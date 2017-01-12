@@ -77,8 +77,7 @@ namespace Engine
             else
             {
 
-            }
-                   
+            }                  
         }
 
         private void HandleTopDownInput(float speed)

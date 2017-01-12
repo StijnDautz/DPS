@@ -11,6 +11,7 @@ namespace Content
         public MainGameMode(string id, Engine.World world) : base(id, world)
         {
             GameStateManager.Add(new StartPlayGS("StartPlayGS"));
+            GameStateManager.Add(new InventoryGS("inventory"));
             GameStateManager.SwitchTo("StartPlayGS");
         }
     }

@@ -38,6 +38,8 @@ namespace Engine
             _assetManager = new AssetManager(Content);
             _gameModeManager = new GameModeManager();
             _inputManager = new InputManager();
+            graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 720;
         }
 
         protected override void LoadContent()

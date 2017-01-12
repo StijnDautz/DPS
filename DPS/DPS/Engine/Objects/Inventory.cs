@@ -20,7 +20,7 @@ namespace Engine
 
         public Inventory(string id) : base (id)
         {
-            _grid = new ObjectGrid("inventorygrid", 5, 5, 60);
+            _grid = new ObjectGrid("inventorygrid", 4, 2, 60);
             Add(_grid);
             _strongestWeapon = FindStrongestWeapon();
             _equipedWeapon = _strongestWeapon;

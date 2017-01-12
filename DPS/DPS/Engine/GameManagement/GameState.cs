@@ -16,7 +16,7 @@ namespace Engine
     {
         private string _id;
         private ObjectList _HUD;
-        private GameStateManager _parent;
+        private GameStateManager _gameStateManager;
 
         public string Id
         {
@@ -29,19 +29,25 @@ namespace Engine
             set { _HUD = value; }
         }
 
-        public GameStateManager Parent
+        public GameStateManager GameStateManager
         {
-            set { _parent = value; }
+            get { return _gameStateManager; }
+            set { _gameStateManager = value; }
         }
 
         protected GameMode GameMode
         {
-            get { return _parent.Parent; }
+            get { return _gameStateManager.Parent; }
+        }
+        
+        protected World World
+        {
+            get { return GameMode.World; }
         }
 
         protected GameModeManager GameModeManager
         {
-            get { return _parent.Parent.Parent; }
+            get { return _gameStateManager.Parent.Parent; }
         }
             
         public GameState(string id)
@@ -68,6 +74,17 @@ namespace Engine
         public virtual void HandleInput(GameTime gameTime)
         {
 
+        }
+
+        public virtual void Setup()
+        {
+
+        }
+
+        protected void Add(Object o)
+        {
+            o.Depth = 0;
+            _HUD.Add(o);
         }
     }
 }
