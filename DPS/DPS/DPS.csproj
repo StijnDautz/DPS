@@ -40,6 +40,7 @@
   <ItemGroup>
     <Compile Include="Content\Classes\AIScripts\AIScript.cs" />
     <Compile Include="Content\Classes\GameManagement\MainGameMode.cs" />
+    <Compile Include="Content\Classes\GameStates\InventoryGS.cs" />
     <Compile Include="Content\Classes\GameStates\StartPlayGS.cs" />
     <Compile Include="Content\Classes\Objectgrids\DungeonDirt5.cs" />
     <Compile Include="Content\Classes\Objectgrids\DungeonIce4.cs" />

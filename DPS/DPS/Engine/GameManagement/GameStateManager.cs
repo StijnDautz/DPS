@@ -40,9 +40,10 @@ namespace Engine
 
         public void Add(GameState g)
         {
-            g.Parent = this;
+            g.GameStateManager = this;
             _gameStates.Add(g);
             g.HUD.World = Parent.World;
+            g.Setup();
         }
 
         public void Update(GameTime gameTime)

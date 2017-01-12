@@ -10,7 +10,7 @@ namespace Engine
 {
     class GameInstance : Game
     {
-        protected GraphicsDeviceManager graphics;
+        private static GraphicsDeviceManager _graphics;
         private GameModeManager _gameModeManager;
         private static AssetManager _assetManager;
         private SpriteBatch _spriteBatch;
@@ -19,6 +19,11 @@ namespace Engine
         protected GameModeManager GameModeManager
         {
             get { return _gameModeManager; }
+        }
+
+        public static GraphicsDeviceManager GraphicsDeviceManager
+        {
+            get { return _graphics; }
         }
 
         public static AssetManager AssetManager
@@ -34,10 +39,12 @@ namespace Engine
         public GameInstance()
         {
             Content.RootDirectory = "Content";
-            graphics = new GraphicsDeviceManager(this);
+            _graphics = new GraphicsDeviceManager(this);
             _assetManager = new AssetManager(Content);
             _gameModeManager = new GameModeManager();
             _inputManager = new InputManager();
+            _graphics.PreferredBackBufferWidth = 1280;
+            _graphics.PreferredBackBufferHeight = 720;
         }
 
         protected override void LoadContent()
