@@ -12,8 +12,8 @@ namespace Content
     {
         public MainWorld(Character character) : base(character)
         {
-            IsTopDown = false;
-            Map m = new Map("MainMap", new MainObjectGrid("mainGrid", "MainMap", 60), TileSize);
+            IsTopDown = true;
+            Map m = new Map("Overworld", new Overworld("mainGrid", "Overworld", 96), TileSize);
             AddMap(m);
             m.Add(character);
             TexturedObject t = new TexturedObject("floor", "Textures/Tiles/spr_wall");

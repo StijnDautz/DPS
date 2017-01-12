@@ -52,8 +52,8 @@ namespace Engine
             canBlock = true;
             _attackSpeed = 1;
             _attackDuration = 0;
-            _walkSpeed = 200;
-            _runSpeed = 500;
+            _walkSpeed = 400;
+            _runSpeed = 600;
             _attacking = false;
         }
 
@@ -101,7 +101,7 @@ namespace Engine
             {
                 VelocityY = speed;
             }
-            if(GameInstance.InputManager.isKeyHolding(Keys.W))
+            else if(GameInstance.InputManager.isKeyHolding(Keys.W))
             {
                 VelocityY = -speed;
             }
