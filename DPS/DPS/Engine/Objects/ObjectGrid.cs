@@ -100,16 +100,13 @@ namespace Engine
 
         public bool AddToFirstFreeSpot(Object o)
         {
-            for (int y = 0; y < Rows; y++)
+            if(Objects.Count < Rows * Collums)
             {
-                for(int x = 0; x < Collums; x++)
-                {
-                    if(getTile(x, y) == null)
-                    {
-                        setTile(x, y, o);
-                        return true;
-                    }
-                }
+                o.Parent = this;
+                Objects.Add(o);
+                int x = (Objects.Count - 1) % Collums;
+                o.Position = new Vector2(x * _tileSize, (Objects.Count - 1) / Collums * _tileSize);
+                return true;
             }
             return false;
         }

@@ -85,7 +85,17 @@ namespace Engine
 
         public Vector2 GlobalPosition
         {
-            get { return ObjectList.Position + Position; }
+            get
+            {
+                if (_parent != null)
+                {
+                    return _parent.GlobalPosition + Position;
+                }
+                else
+                {
+                    return Position;
+                }
+            }
         }
 
         public Vector2 Velocity

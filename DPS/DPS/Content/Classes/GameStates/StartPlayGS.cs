@@ -16,10 +16,10 @@ namespace Content
 
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Init()
         {
-            base.Update(gameTime);
-            
+            base.Init();
+            World.Player.CanMove = true;
         }
 
         public override void HandleInput(GameTime gameTime)

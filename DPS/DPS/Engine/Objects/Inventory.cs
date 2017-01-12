@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    class Inventory : ObjectList 
+    class Inventory : ObjectGrid
     {
-        private ObjectGrid _grid;
         private Weapon _strongestWeapon;
         private Weapon _equipedWeapon;
 
@@ -18,10 +17,8 @@ namespace Engine
             get { return _equipedWeapon; }
         }
 
-        public Inventory(string id) : base (id)
+        public Inventory(string id) : base(id, 2, 4, 109)
         {
-            _grid = new ObjectGrid("inventorygrid", 4, 2, 60);
-            Add(_grid);
             _strongestWeapon = FindStrongestWeapon();
             _equipedWeapon = _strongestWeapon;
         }
@@ -36,7 +33,12 @@ namespace Engine
                     _strongestWeapon = w;
                 }
             }
-            return _grid.AddToFirstFreeSpot(o);
+            if(AddToFirstFreeSpot(o))
+            {
+                o.Depth = 0;
+                return true;
+            }
+            return false;
         }
 
         public void RemovePickup(Pickup o)
@@ -49,27 +51,27 @@ namespace Engine
                     _strongestWeapon = FindStrongestWeapon();
                 }
             }
-            _grid.RemoveObject(o);
+            RemoveObject(o);
         }
 
         public void MovePickup(Pickup movingPickup, Vector2 MousePosition)
         {
-            Point p = _grid.GetPositionInGrid(MousePosition);
-            Pickup switchPickup = _grid.getTile(p) as Pickup;
+            Point p = GetPositionInGrid(MousePosition);
+            Pickup switchPickup = getTile(p) as Pickup;
 
             if(switchPickup == null)
             {
-                _grid.setTile(p.X, p.Y, movingPickup);
+                setTile(p.X, p.Y, movingPickup);
             }
             else
             {
-                SwapPickup(p, _grid.GetPositionInGrid(movingPickup));
+                SwapPickup(p, GetPositionInGrid(movingPickup));
             }
         }
 
         public void SwapPickup(Point o, Point swappickup)
         {
-            _grid.SwapObjects(o, swappickup);
+            SwapObjects(o, swappickup);
         }
 
         public Weapon FindStrongestWeapon()

@@ -81,6 +81,11 @@ namespace Engine
 
         }
 
+        public virtual void Init()
+        {
+
+        }
+
         protected void Add(Object o)
         {
             o.Depth = 0;

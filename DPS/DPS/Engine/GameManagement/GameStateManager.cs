@@ -32,6 +32,8 @@ namespace Engine
                 if(g.Id == id)
                 {
                     _current = g;
+                    //intitialize the gameState
+                    g.Init();
                     return;
                 }
             }

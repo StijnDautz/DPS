@@ -70,13 +70,20 @@ namespace Engine
             base.HandleInput(gameTime);
 
             float speed = GameInstance.InputManager.isKeyHolding(Keys.LeftShift) ? _runSpeed : _walkSpeed;
-            if (ObjectList.World.IsTopDown)
+            if (CanMove)
             {
-                HandleTopDownInput(speed);
+                if (ObjectList.World.IsTopDown)
+                {
+                    HandleTopDownInput(speed);
+                }
+                else
+                {
+                    HandleSideInput(speed);
+                }
             }
             else
             {
-
+                Velocity = Vector2.Zero;
             }                  
         }
 
