@@ -25,29 +25,35 @@ namespace Engine
 
         private void UpdateCamera()
         {
+
             if (_player.ObjectList is Map)
             {
                 Map map = _player.ObjectList as Map;
-                Vector2 halfedScreen = new Vector2(GraphicsDeviceManager.DefaultBackBufferWidth / 2, GraphicsDeviceManager.DefaultBackBufferHeight / 2);
+                int screenWidth = GameInstance.GraphicsDeviceManager.PreferredBackBufferWidth;
+                int screenHeight = GameInstance.GraphicsDeviceManager.PreferredBackBufferHeight;
+
+                Vector2 halfedScreen = new Vector2(screenWidth / 2, screenHeight / 2);
                 Vector2 newCameraPosition = new Vector2(_player.Position.X - halfedScreen.X + _player.Width / 2, _player.Position.Y - halfedScreen.Y + _player.Height / 2);
                 //make sure camera will stay within world dimensions
                 //X
+                var temp = Width - screenWidth;
                 if (newCameraPosition.X < 0)
                 {
                     newCameraPosition.X = 0;
                 }
-                else if (newCameraPosition.X > Width - GraphicsDeviceManager.DefaultBackBufferWidth)
+                else if (newCameraPosition.X > temp)
                 {
-                    newCameraPosition.X = Width - GraphicsDeviceManager.DefaultBackBufferWidth;
+                    newCameraPosition.X = temp;
                 }
                 //Y
+                temp = Heigth - screenHeight;
                 if (newCameraPosition.Y < 0)
                 {
                     newCameraPosition.Y = 0;
                 }
-                else if (newCameraPosition.Y > Heigth - GraphicsDeviceManager.DefaultBackBufferHeight)
+                else if (newCameraPosition.Y > temp)
                 {
-                    newCameraPosition.Y = Heigth - GraphicsDeviceManager.DefaultBackBufferHeight;
+                    newCameraPosition.Y = temp;
                 }
                 //set new CameraPosition
                 CameraPosition = newCameraPosition;
