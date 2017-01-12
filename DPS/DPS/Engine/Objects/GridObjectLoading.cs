@@ -32,7 +32,7 @@ namespace Engine
 
         private void ReadTiles(List<string> lines)
         {
-            _grid = new Object[lines[0].Length, lines.Count];
+            dimensions = new Point(lines[0].Length, lines.Count);
             for (int y = 0; y < lines.Count; y++)
             {
                 for (int x = 0; x < lines[y].Length; x++)
@@ -51,7 +51,9 @@ namespace Engine
         {
             if (tile != null)
             {
-                AddObject(x, y, tile);
+                Objects.Add(tile);
+                tile.Position = new Vector2(x * (_tileSize + Spacing.X), y * (_tileSize + Spacing.Y));
+                tile.Parent = this;
             }
             else
             {

@@ -13,6 +13,7 @@ namespace Engine
         private string _id;
         private float _depth;
         private bool _visible;
+        private bool _mirrored;
         private Object _parent;
         private Vector2 _position;
         private Vector2 _velocity;
@@ -33,6 +34,12 @@ namespace Engine
         {
             get { return _visible; }
             set { _visible = value; }
+        }
+
+        public bool Mirrored
+        {
+            get { return _mirrored; }
+            set { _mirrored = value; }
         }
 
         public Object Parent
@@ -64,6 +71,18 @@ namespace Engine
             }
         }
 
+        public float PositionX
+        {
+            get { return _position.X; }
+            set { _position.X = value; }
+        }
+
+        public float PositionY
+        {
+            get { return _position.Y; }
+            set { _position.Y = value; }
+        }
+
         public Vector2 GlobalPosition
         {
             get { return ObjectList.Position + Position; }
@@ -73,6 +92,18 @@ namespace Engine
         {
             get { return _velocity; }
             set { _velocity = value; }
+        }
+
+        public float VelocityY
+        {
+            get { return _velocity.Y; }
+            set { _velocity.Y = value; }
+        }
+
+        public float VelocityX
+        {
+            get { return _velocity.X; }
+            set { _velocity.X = value; }
         }
 
         public Rectangle BoundingBox
@@ -95,13 +126,15 @@ namespace Engine
         {
             _id = id;
             _depth = 1;
-            _hasPhysics = false;
             _visible = true;
+            _mirrored = false;
+            _hasPhysics = false;
             _canCollide = false;
             _inAir = true;
             _position = Vector2.Zero;
             _velocity = Vector2.Zero;
             _boundingBox = new Rectangle((int)Position.X, (int)Position.Y, 0, 0);
+            _collisionDimension = new bool[2];
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

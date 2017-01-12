@@ -11,16 +11,19 @@ namespace Engine
     {
         private ObjectGrid _grid;
         private Weapon _strongestWeapon;
+        private Weapon _equipedWeapon;
 
-        public Weapon StrongestWeapon
+        public Weapon EquipedWeapon
         {
-            get { return _strongestWeapon; }
+            get { return _equipedWeapon; }
         }
 
         public Inventory(string id) : base (id)
         {
             _grid = new ObjectGrid("inventorygrid", 5, 5, 60);
             Add(_grid);
+            _strongestWeapon = FindStrongestWeapon();
+            _equipedWeapon = _strongestWeapon;
         }
 
         public bool AddPickup(Pickup o)
@@ -56,7 +59,7 @@ namespace Engine
 
             if(switchPickup == null)
             {
-                _grid.AddObject(p.X, p.Y, movingPickup);
+                _grid.setTile(p.X, p.Y, movingPickup);
             }
             else
             {
@@ -72,7 +75,7 @@ namespace Engine
         public Weapon FindStrongestWeapon()
         {
             Weapon strongest = null;
-            foreach(Object o in _grid.Grid)
+            foreach(Object o in Objects)
             {
                 if(o is Weapon)
                 {
