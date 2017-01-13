@@ -5,11 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
+using MySql.Data.MySqlClient;
 
 namespace Engine
 {
     class Character : Pawn, ICharacter
     {
+        //Database gegevens
+        private const String SERVER = "web0106.zxcs.nl";//<-- moet nog vervangen worden?
+                                                        //port = 3306?
+        private const String DATABASE = "u13357p9566_highscore";
+        private const String UID = "u13357p9566_dps";
+        private const String PASSWORD = "toeganggeweigerd6";
+        private static MySqlConnection dbConn;
+        //Einde database gegevens
+
+
         private string _name;
         private movementState _movementState;
         private Inventory _inventory;
@@ -84,7 +95,46 @@ namespace Engine
             else
             {
                 Velocity = Vector2.Zero;
-            }                  
+            }
+
+            //Highscore test. Als je op H drukt wordt er een random waarde in de highscore lijst gezet met als username Random.
+            //Als dit verplaatst wordt, verplaats dan ook de "using MySql.Data.MySqlClient;"
+            if (GameInstance.InputManager.isKeyPressed(Keys.H))
+            {
+                //Database initializeren (dit kan ook ergens anders, dan hoef je het niet steeds opnieuw te doen.
+                MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
+                builder.Server = SERVER;
+                builder.UserID = UID;
+                builder.Password = PASSWORD;
+                builder.Database = DATABASE;
+
+                String connString = builder.ToString();
+
+                builder = null;
+
+                Console.WriteLine(connString);
+
+                dbConn = new MySqlConnection(connString);
+                //Einde initializatie
+
+                //Variabeles die nodig zijn voor de query
+                Random rnd = new Random();
+                int score = rnd.Next(0, 50);
+                string username = "Random";
+
+                //Score in database zetten:
+                string query = string.Format("INSERT INTO highscore(username,score) VALUES ('{0}','{1}')", username, score);
+                MySqlCommand cmd = new MySqlCommand(query, dbConn);
+
+                dbConn.Open();
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                dbConn.Close();
+                //Einde score in database zetten
+            }
+
+
         }
 
         private void HandleTopDownInput(float speed)
@@ -137,6 +187,7 @@ namespace Engine
             {
                 Velocity = new Vector2(VelocityX, -600);
             }
+
         }
 
         private movementState UpdateMovementState(float elapsedTime)
