@@ -5,19 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace Engine
 {
     class Character : Pawn, ICharacter
     {
         //Database gegevens
-        private const String SERVER = "web0106.zxcs.nl";//<-- moet nog vervangen worden?
+        private const String SERVER = "dpstudios.nl";//<-- moet nog vervangen worden?
                                                         //port = 3306?
         private const String DATABASE = "u13357p9566_highscore";
         private const String UID = "u13357p9566_dps";
         private const String PASSWORD = "toeganggeweigerd6";
-        private static MySqlConnection dbConn;
+        private static SqlConnection dbConn;
         //Einde database gegevens
 
 
@@ -102,11 +102,13 @@ namespace Engine
             if (GameInstance.InputManager.isKeyPressed(Keys.H))
             {
                 //Database initializeren (dit kan ook ergens anders, dan hoef je het niet steeds opnieuw te doen.
-                MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
-                builder.Server = SERVER;
+                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                /*builder.Server = SERVER;
                 builder.UserID = UID;
                 builder.Password = PASSWORD;
-                builder.Database = DATABASE;
+                builder.Database = DATABASE;*/
+                //builder.ConnectionString = "Server="+SERVER+";Database="+DATABASE+";User Id="+UID+";Password="+PASSWORD+";";
+                builder.ConnectionString = "Server=dpstudios.nl;Database=u13357p9566_highscore;Uid=u13357p9566_dps;Password=toeganggeweigerd6;";
 
                 String connString = builder.ToString();
 
@@ -114,7 +116,7 @@ namespace Engine
 
                 Console.WriteLine(connString);
 
-                dbConn = new MySqlConnection(connString);
+                dbConn = new SqlConnection(connString);
                 //Einde initializatie
 
                 //Variabeles die nodig zijn voor de query
@@ -124,14 +126,16 @@ namespace Engine
 
                 //Score in database zetten:
                 string query = string.Format("INSERT INTO highscore(username,score) VALUES ('{0}','{1}')", username, score);
-                MySqlCommand cmd = new MySqlCommand(query, dbConn);
+                SqlCommand cmd = new SqlCommand(query, dbConn);
 
+                /*werkt nog niet:
                 dbConn.Open();
 
-                MySqlDataReader reader = cmd.ExecuteReader();
+                SqlDataReader reader = cmd.ExecuteReader();
 
                 dbConn.Close();
                 //Einde score in database zetten
+                */
             }
 
 
