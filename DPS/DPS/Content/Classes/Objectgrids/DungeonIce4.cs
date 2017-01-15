@@ -33,14 +33,22 @@ namespace Content
                     case '6': return SetupCollisionTile("walltile", "6.TileSet4");
                     case '7': return SetupCollisionTile("walltile", "7.TileSet4");
                     case '8': return SetupCollisionTile("walltile", "8.TileSet4");
+                    case '9': return SetupCollisionTile("walltile", "9.TileSet4");
+                    case 'a': return SetupCollisionTile("walltile", "9.TileSet4");
+                    case 'b': return SetupCollisionTile("walltile", "9.TileSet4");
+                    case 'c': return SetupCollisionTile("walltile", "9.TileSet4");
+                    case 'f': return SetupCollisionTile("platformtile", "f.TileSet4");
+                    case 'g': return SetupCollisionTile("platformtile", "g.TileSet4");
+                    case 'h': return SetupCollisionTile("platformtile", "h.TileSet4");
                     case 'j': return SetupCollisionTile("walltile", "j.TileSet4");
-                    case 'k': return SetupCollisionTile("walltile", "k.TileSet4");
+                    case 'k': return SetupCollisionTile("emptytile", "0.Overworld");
                     case 'l': return SetupCollisionTile("walltile", "l.TileSet4");
                     case 'm': return SetupCollisionTile("walltile", "m.TileSet4");
                     case 'n': return SetupCollisionTile("walltile", "n.TileSet4");
                     case 'o': return SetupCollisionTile("walltile", "o.TileSet4");
+                    case 'p': return SetupCollisionTile("walltile", "p.TileSet4");
 
-                    default: throw new Exception("character of type: " + type + "was not associated with an Object");
+                default: throw new Exception("character of type: " + type + "was not associated with an Object");
                 }
             }
         }
