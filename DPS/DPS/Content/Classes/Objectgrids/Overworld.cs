@@ -85,8 +85,8 @@ namespace Content
                 case 'W': return SetupCollisionTile("Overworldtile", "W.Overworld(1)");
                 case 'X': return SetupCollisionTile("Overworldtile", "X.Overworld(1)");
                 case '6': return SetupCollisionTile("Overworldtile", "6.Overworld");
-                case '0': return SetupCollisionTile("Overworldtile", "0.Overworld");
-                case ' ': return SetupCollisionTile("OverworldTile", "0.Overworld");
+                case '0': return SetupCollisionTile("emptytile", "0.Overworld");
+                case ' ': return SetupCollisionTile("emptytile", "0.Overworld");
 
                 default: throw new Exception("character of type: " + type + "was not associated with an Object");
             }
