@@ -22,7 +22,7 @@ namespace Engine
         protected override void LoadContent()
         {
             base.LoadContent();
-            GameModeManager.Add(new MainGameMode("MainGM", new MainWorld(50000, 50000), GameModeManager));
+            GameModeManager.Add(new MainGameMode("MainGM", new DungeonWorld1(50000, 50000), GameModeManager));
             GameModeManager.SwitchTo("MainGM");
 
         }
