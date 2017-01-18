@@ -8,7 +8,7 @@ namespace Content
 {
     class DungeonWorld1 : Engine.World
     {
-        public DungeonWorld1(int width, int height) : base(width, height)
+        public DungeonWorld1(string id, int width, int height, Engine.GameMode gameMode) : base(id, width, height, gameMode)
         {
             var player = new Engine.Character("player", this, "Textures/Tiles/a.Overworld", "Sjraar");
             Player = player;

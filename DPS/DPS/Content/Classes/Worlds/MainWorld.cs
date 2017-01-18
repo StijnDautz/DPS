@@ -10,7 +10,7 @@ namespace Content
 {
     class MainWorld : World
     {
-        public MainWorld(int width, int height) : base(width, height)
+        public MainWorld(string id, int width, int height, GameMode gameMode) : base(id, width, height, gameMode)
         {
             IsTopDown = true;
             CanUpdate = true;

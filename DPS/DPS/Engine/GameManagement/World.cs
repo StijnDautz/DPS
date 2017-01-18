@@ -17,6 +17,7 @@ namespace Engine
         private Vector2 _cameraPosition;
         private int _tileSize;
         private Character _player;
+        private GameMode _gameMode;
         private bool _canUpdate;
 
         //physics
@@ -61,6 +62,11 @@ namespace Engine
             get { return _collisionObjects; }
         }
 
+        public GameMode GameMode
+        {
+            get { return _gameMode; }
+        }
+
         //phyics
         public float Gravity
         {
@@ -68,13 +74,14 @@ namespace Engine
             set { _gravity = value; }
         }
 
-        public World(int width, int height) : base("world", null)
+        public World(string id, int width, int height, GameMode gameMode) : base(id, null)
         {
             setBoundingBoxDimensions(width, height);
             _isTopDown = true;
             _collisionObjects = new List<Object>();
             _characters = new List<Character>();
             _cameraPosition = Vector2.Zero;
+            _gameMode = gameMode;
             _tileSize = 60;
             _gravity = 350f;
             _canUpdate = true;
