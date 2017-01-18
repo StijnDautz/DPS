@@ -9,6 +9,7 @@ namespace Content
 {
     class DungeonWorld1 : Engine.World
     {
+
         public DungeonWorld1(string id, int width, int height, Engine.GameMode gameMode) : base(id, width, height, gameMode)
         {
             IsTopDown = false;
