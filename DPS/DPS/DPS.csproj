@@ -49,6 +49,7 @@
     <Compile Include="Content\Classes\Worlds\DungeonWorld1.cs" />
     <Compile Include="Content\Classes\Worlds\MainObjectGrid.cs" />
     <Compile Include="Content\Classes\Worlds\MainWorld.cs" />
+    <Compile Include="Content\Classes\Worlds\RandomGenerator.cs" />
     <Compile Include="Engine\GameManagement\Managers\CollisionHelper.cs" />
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
     <Compile Include="Engine\GameManagement\WorldUpdate.cs" />
