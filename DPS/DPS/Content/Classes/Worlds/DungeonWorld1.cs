@@ -126,7 +126,7 @@ namespace Content
                 Level1 leveltje = new Level1("level1", this, i.ToString(), 96);
                 for (int x = 0; x < 49; x++)
                 {
-                    for (int y = 0; y < 29; y++)
+                    for (int y = 0; x < 30; y++)
                     {
                         if (grid[x, y] != null && int.Parse(grid[x, y]) == i)
                         {
