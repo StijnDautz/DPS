@@ -9,30 +9,13 @@ namespace Engine
 {
     class Inventory : ObjectGrid
     {
-        private Weapon _strongestWeapon;
-        private Weapon _equipedWeapon;
-
-        public Weapon EquipedWeapon
+        public Inventory(string id, Object parent) : base(id, parent, 4, 2, 109, 109)
         {
-            get { return _equipedWeapon; }
-        }
 
-        public Inventory(string id, Object parent) : base(id, parent, 4, 2, 109)
-        {
-            _strongestWeapon = FindStrongestWeapon();
-            _equipedWeapon = _strongestWeapon;
         }
 
         public bool AddPickup(Pickup o)
         {
-            if(o is Weapon)
-            {
-                Weapon w = o as Weapon;
-                if(_strongestWeapon == null || w.Damage > _strongestWeapon.Damage)
-                {
-                    _strongestWeapon = w;
-                }
-            }
             if(AddToFirstFreeSpot(o))
             {
                 o.Parent = this;
@@ -44,20 +27,12 @@ namespace Engine
 
         public void RemovePickup(Pickup o)
         {
-            if (o is Weapon)
-            {
-                Weapon w = o as Weapon;
-                if (w.Damage == _strongestWeapon.Damage)
-                {
-                    _strongestWeapon = FindStrongestWeapon();
-                }
-            }
             RemoveObject(o);
         }
 
         public void MovePickup(Pickup movingPickup, Vector2 MousePosition)
         {
-            int p = GetPositionInGrid(MousePosition);
+            Point p = GetPositionInGrid(MousePosition);
             Pickup switchPickup = getTile(p) as Pickup;
 
             if(switchPickup == null)
@@ -68,24 +43,7 @@ namespace Engine
             {
  //               SwapPickup(p, GetPositionInGrid(movingPickup));
             }
-        }
-
-        public Weapon FindStrongestWeapon()
-        {
-            Weapon strongest = null;
-            foreach(Object o in Objects)
-            {
-                if(o is Weapon)
-                {
-                    Weapon w = o as Weapon;
-                    if(strongest == null || w.Damage > strongest.Damage)
-                    {
-                        strongest = w;
-                    }
-                }
-            }
-            return strongest;
-        }
+        } 
 
         public Pickup getPickupOnClick(Vector2 mousePosition)
         {

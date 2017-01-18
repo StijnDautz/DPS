@@ -13,10 +13,10 @@ namespace Engine
     {
         private bool _isTopDown;
         private List<Object> _collisionObjects;
-        private List<Character> _characters;
+        private List<Player> _characters;
         private Vector2 _cameraPosition;
         private int _tileSize;
-        private Character _player;
+        private Player _player;
         private GameMode _gameMode;
         private bool _canUpdate;
 
@@ -35,7 +35,7 @@ namespace Engine
             get { return _cameraPosition; }
         }
 
-        public List<Character> Characters
+        public List<Player> Characters
         {
             get { return _characters; }
         }
@@ -46,7 +46,7 @@ namespace Engine
             set { _tileSize = value; }
         }
 
-        public Character Player
+        public Player Player
         {
             get { return _player; }
             set { _player = value; }
@@ -79,7 +79,7 @@ namespace Engine
             setBoundingBoxDimensions(width, height);
             _isTopDown = true;
             _collisionObjects = new List<Object>();
-            _characters = new List<Character>();
+            _characters = new List<Player>();
             _cameraPosition = Vector2.Zero;
             _gameMode = gameMode;
             _tileSize = 60;
@@ -89,7 +89,7 @@ namespace Engine
 
         public void HandleInput(GameTime gameTime)
         {
-            foreach(Character c in _characters)
+            foreach(Player c in _characters)
             {
                 c.HandleInput(gameTime);
             }
@@ -97,18 +97,18 @@ namespace Engine
 
         public override void Add(Object o)
         {
-            if(o is Character)
+            if(o is Player)
             {
-                _characters.Add(o as Character);
+                _characters.Add(o as Player);
             }
             Objects.Add(o);
         }
 
         public override void Remove(Object o)
         {
-            if(o is Character)
+            if(o is Player)
             {
-                _characters.Remove(o as Character);
+                _characters.Remove(o as Player);
             }
             Objects.Remove(o);
         }
