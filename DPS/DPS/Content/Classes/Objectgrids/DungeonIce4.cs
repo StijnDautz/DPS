@@ -4,20 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Engine;
+
 namespace Content
 {
     class Level1 : ObjectGrid
     {
-        public Level1(string id, string assetName, int tileSize) : base(id, assetName, tileSize)
+        public Level1(string id, Engine.Object parent, string assetName, int tileSize) : base(id, parent, assetName, tileSize)
         {
 
         }
 
         private TexturedObject SetupCollisionTile(string id, string assetName)
         {
-            TexturedObject Tile = new TexturedObject(id, "Textures/Tiles/" + assetName);
+            TexturedObject Tile = new TexturedObject(id, this, "Textures/Tiles/" + assetName);
             Tile.CanCollide = true;
-            Tile.canBlock = true;
+            Tile.CanBlock = true;
             return Tile;
         }
 
