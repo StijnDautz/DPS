@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Engine;
 
 namespace Content
 {
@@ -10,7 +11,9 @@ namespace Content
     {
         public DungeonWorld1(string id, int width, int height, Engine.GameMode gameMode) : base(id, width, height, gameMode)
         {
+            IsTopDown = false;
             var player = new Engine.Character("player", this, "Textures/Tiles/a.Overworld", "Sjraar");
+            player.Position = new Microsoft.Xna.Framework.Vector2(49000, 9000);
             Player = player;
             Add(player);
 
@@ -121,25 +124,20 @@ namespace Content
             for (int i = 1; i < 101; i++)
             {
                 Level1 leveltje = new Level1("level1", this, i.ToString(), 96);
-                for (int x = 0; x < 50; x++)
+                for (int x = 0; x < 49; x++)
                 {
-                    for (int y = 0; x < 30; y++)
+                    for (int y = 0; y < 29; y++)
                     {
-                        if (int.Parse(grid[x, y]) == i)
+                        if (grid[x, y] != null && int.Parse(grid[x, y]) == i)
                         {
-                            leveltje.PositionX = x * 20;
-                            leveltje.PositionY = y * 10;
+                            leveltje.PositionX = x * 20 * 96;
+                            leveltje.PositionY = y * 10 * 96;
                         }
                     }
                 }
-
+                leveltje.CanCollide = true;
                 Add(leveltje);
-
             }
-
-            
-            
-
         }
     }
 }

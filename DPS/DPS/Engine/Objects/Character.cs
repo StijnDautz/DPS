@@ -59,6 +59,7 @@ namespace Engine
             _name = name;
             _inventory = new Inventory(id + "inventory", World);
             HasPhysics = true;
+            CanCollide = true;
             CanBlock = true;
             _attackSpeed = 1;
             _attackDuration = 0;
@@ -127,8 +128,6 @@ namespace Engine
                 //Einde score in database zetten
                 */
             }
-
-
         }
 
         private void HandleTopDownInput(float speed)
@@ -181,7 +180,6 @@ namespace Engine
             {
                 Velocity = new Vector2(VelocityX, -600);
             }
-
         }
 
         private movementState UpdateMovementState(float elapsedTime)
