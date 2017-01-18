@@ -54,7 +54,7 @@ namespace Content
 
             if(input.isKeyPressed(Keys.I) || input.isKeyPressed(Keys.Escape))
             {
-                GameStateManager.SwitchTo("StartPlayGS");
+                GameStateManager.SwitchTo("StartPlay");
             }
 
             if(input.LeftMouseButtonPressed)

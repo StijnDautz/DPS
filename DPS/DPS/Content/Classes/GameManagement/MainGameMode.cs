@@ -8,11 +8,18 @@ namespace Content
 {
     class MainGameMode : Engine.GameMode
     {
-        public MainGameMode(string id, Engine.World world, Engine.GameModeManager gm) : base(id, world, gm)
+        public MainGameMode(string id, Engine.GameModeManager gm) : base(id, gm)
         {
-            GameStateManager.Add(new StartPlayGS("StartPlayGS", GameStateManager));
+
+        }
+
+        public override void Setup()
+        {
+            base.Setup();
+            GameStateManager.Add(new StartPlayGS("StartPlay", GameStateManager));
             GameStateManager.Add(new InventoryGS("inventory", GameStateManager));
-            GameStateManager.SwitchTo("StartPlayGS");
+            GameStateManager.Add(new MainMenuGS("MainMenu", GameStateManager));
+            GameStateManager.SwitchTo("StartPlay");
         }
     }
 }

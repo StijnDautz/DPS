@@ -167,7 +167,7 @@ namespace Engine
                 for(int y = p.Y - 1; y < yBoundary; y++)
                 {
                     Object o = getTile(x, y);
-                    if(o.CanCollide)
+                    if(o != null && o.CanCollide)
                     { 
                         o.CheckCollision(collider, elapsedTime);
                     }
