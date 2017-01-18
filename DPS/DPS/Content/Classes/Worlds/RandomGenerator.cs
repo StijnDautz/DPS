@@ -10,9 +10,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-
-
-namespace DPS.Content.Classes.Worlds
+namespace Engine
 {
     /// <summary>
     /// This is the main type for your game.
@@ -32,24 +30,13 @@ namespace DPS.Content.Classes.Worlds
         public List<Room> connected = new List<Room>();
     }
 
-
-    public class RandomGenerator : Game
+    public class RandomDungeonGenerator
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-
-        Vector2 camera = new Vector2();
-        Vector2 mousePos;
-
         Random r = new Random();
-        int tileAmount = 2000;
         Vector2 position = new Vector2(30, 25);
         int width = 3 * 20;
         int height = 5 * 10;
         char[,] grid;
-        Texture2D tile;
-        Texture2D tile2;
-        Texture2D tile3;
         int jumpHeight = 3;
 
         //Vector2 door1, door2, door3, door4;
@@ -58,15 +45,17 @@ namespace DPS.Content.Classes.Worlds
         //List<Vector2> doors = new List<Vector2>();
         List<Door> doors = new List<Door>();
 
-
-
         //List<Rectangle> rooms = new List<Rectangle>();
         List<Room> rooms = new List<Room>();
 
-        public RandomGenerator()
+        public RandomDungeonGenerator()
         {
-            graphics = new GraphicsDeviceManager(this);
-            Content.RootDirectory = "Content";
+            
+        }
+
+        //Generates dungeons
+        public char[,] Generate()
+        {
             grid = new char[width, height];
             door1.location = new Vector2(0, 10);
             door1.direc = Door.direction.right;
@@ -121,11 +110,9 @@ namespace DPS.Content.Classes.Worlds
                     grid[(int)d.location.X - 1, (int)d.location.Y + 1] = '2';
                     grid[(int)d.location.X - 1, (int)d.location.Y + 2] = '2';
 
-
                     room.rectangle.Location = new Point((int)d.location.X - 2 - r.Next(2, 7), (int)d.location.Y - 1);
                     room.rectangle.Size = new Point(width - room.rectangle.Location.X - 2, 5);
                 }
-
                 rooms.Add(room);
             }
 
@@ -142,15 +129,6 @@ namespace DPS.Content.Classes.Worlds
                     {
                         grid[x, y] = '0';
                     }
-
-                    //if (x > 0 && x < width - 1)
-                    //{
-                    //    if (grid[x, y] == '2' && grid[x + 1, y] == '0' && grid[x - 1, y] == '0')
-                    //    {
-                    //        grid[x, y] = '0';
-                    //    }
-                    //}
-
                 }
             }
 
@@ -171,21 +149,7 @@ namespace DPS.Content.Classes.Worlds
             }
 
             //klaar
-        }
-
-        /// <summary>
-        /// Allows the game to perform any initialization it needs to before starting to run.
-        /// This is where it can query for any required services and load any non-graphic
-        /// related content.  Calling base.Initialize will enumerate through any components
-        /// and initialize them as well.
-        /// </summary>
-        protected override void Initialize()
-        {
-            // TODO: Add your initialization logic here
-
-
-            base.Initialize();
-
+            return grid;
         }
 
         //verbindt alle kamers met gangen
@@ -423,7 +387,7 @@ namespace DPS.Content.Classes.Worlds
         {
             for (int i = 0; i < 100; i++)
             {
-                Room room = new Game8.Room();
+                Room room = new Room();
                 int counter = 0;
                 bool exit = false;
 
@@ -460,7 +424,6 @@ namespace DPS.Content.Classes.Worlds
 
             }
         }
-
 
         //Zoekt naar een bepaalde kamer
         Room CollisionChecker(Vector2 current)
@@ -529,85 +492,5 @@ namespace DPS.Content.Classes.Worlds
                 return true;
             return false;
         }
-
-        /// <summary>
-        /// LoadContent will be called once per game and is the place to load
-        /// all of your content.
-        /// </summary>
-        protected override void LoadContent()
-        {
-            // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);
-            tile = Content.Load<Texture2D>("dirt");
-            tile2 = Content.Load<Texture2D>("clay");
-            tile3 = Content.Load<Texture2D>("stone");
-
-            // TODO: use this.Content to load your game content here
-        }
-
-        /// <summary>
-        /// UnloadContent will be called once per game and is the place to unload
-        /// game-specific content.
-        /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Unload any non ContentManager content here
-        }
-
-        /// <summary>
-        /// Allows the game to run logic such as updating the world,
-        /// checking for collisions, gathering input, and playing audio.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Update(GameTime gameTime)
-        {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
-                Exit();
-            MouseState mouse = Mouse.GetState();
-            mousePos += new Vector2(mouse.Position.X, mouse.Position.Y);
-
-            if (mousePos.X < 100 || mousePos.X > 700 || mousePos.Y < 100 || mousePos.Y > 500)
-            {
-                camera = (mousePos - new Vector2(GraphicsDevice.Viewport.Width / 2, GraphicsDevice.Viewport.Height / 2)) * 0.01f;
-            }
-
-            // TODO: Add your update logic here
-
-            base.Update(gameTime);
-        }
-
-        /// <summary>
-        /// This is called when the game should draw itself.
-        /// </summary>
-        /// <param name="gameTime">Provides a snapshot of timing values.</param>
-        protected override void Draw(GameTime gameTime)
-        {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-            spriteBatch.Begin();
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    if (grid[x, y] == '1')
-                    {
-                        spriteBatch.Draw(tile, new Vector2(x * tile.Width, y * tile.Height) - camera, Color.White);
-                    }
-                    else if (grid[x, y] == '2')
-                    {
-                        spriteBatch.Draw(tile2, new Vector2(x * tile.Width, y * tile.Height) - camera, Color.White);
-                    }
-                    else if (grid[x, y] == '4')
-                    {
-                        spriteBatch.Draw(tile3, new Vector2(x * tile.Width, y * tile.Height) - camera, Color.White);
-                    }
-                }
-            }
-            spriteBatch.End();
-
-            base.Draw(gameTime);
-        }
     }
 }
-

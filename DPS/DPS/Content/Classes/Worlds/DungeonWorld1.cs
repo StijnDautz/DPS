@@ -10,6 +10,9 @@ namespace Content
     {
         public DungeonWorld1(int width, int height) : base(width, height)
         {
+            var player = new Engine.Character("player", this, "Textures/Tiles/a.Overworld", "Sjraar");
+            Player = player;
+            Add(player);
             for(int i = 1; i < 101; i++)
             {
                 Add(new Level1("level1", this, i.ToString(), 96));

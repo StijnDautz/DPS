@@ -32,13 +32,37 @@ namespace Engine
 
         private void ReadTiles(List<string> lines)
         {
-            _collums = lines[0].Length;
-            _rows = lines.Count;
+            if (lines.Count != 0)
+            {
+                _collums = lines[0].Length;
+                _rows = lines.Count;
+            }
+            else
+            {
+                RandomDungeonGenerator generator = new RandomDungeonGenerator();
+                char[,] grid = generator.Generate();
+                ReadTiles(grid);
+                _collums = grid.GetLength(0);
+                _rows = grid.GetLength(1);
+                return;
+            }
+
             for (int y = 0; y < lines.Count; y++)
             {
                 for (int x = 0; x < lines[y].Length; x++)
                 {
                     AddTile(FindType(lines[y][x]), lines[y][x], x, y);
+                }
+            }
+        }
+
+        private void ReadTiles(char[,] grid)
+        {
+            for (int y = 0; y < grid.GetLength(1); y++)
+            {
+                for(int x = 0; x < grid.GetLength(0); x++)
+                {
+                    AddTile(FindType(grid[x, y]), grid[x, y], x, y);
                 }
             }
         }

@@ -34,6 +34,12 @@ namespace Content
                 case '6': return SetupCollisionTile("walltile", "6.TileSet4");
                 case '7': return SetupCollisionTile("walltile", "7.TileSet4");
                 case '8': return SetupCollisionTile("walltile", "8.TileSet4");
+                case 't':
+                case 's':
+                case 'u':
+                case 'x':
+                case 'v':
+                case 'w':
                 case '9': return SetupCollisionTile("walltile", "9.TileSet4");
                 case 'a': return SetupCollisionTile("walltile", "9.TileSet4");
                 case 'b': return SetupCollisionTile("walltile", "9.TileSet4");

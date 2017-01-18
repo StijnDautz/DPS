@@ -46,6 +46,13 @@ namespace Engine
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, collums * tileSize, rows * tileSize);
         }
 
+        public ObjectGrid(string id, Object parent, char[,] grid, int tileSize) : base(id, parent)
+        {
+            _collums = grid.GetLength(0);
+            _rows = grid.GetLength(1);
+            ReadTiles(grid);
+        }
+
         public int GetPositionInGrid(Vector2 p)
         {
             Vector2 pos = p - GlobalPosition;
