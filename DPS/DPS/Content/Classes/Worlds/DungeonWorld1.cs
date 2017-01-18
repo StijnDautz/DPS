@@ -17,6 +17,20 @@ namespace Content
             Player = player;
             Add(player);
 
+            //Items to progress in the Dungeon
+            Pickup SnowShoes = new Pickup("SnowShoes", World, "SnowShoes", "Capable of walking on Ice");
+            Add(SnowShoes);
+            UpgradePickup RocketCape = new UpgradePickup("Rocketcape", World, "Rocketcape", "Cape making high jumps possible");
+            Add(RocketCape);
+            Pickup Key1 = new Pickup("Hallowed_Key", World, "Hallowed_Key", "First ket in the Dungeon");
+            Add(Key1);
+            Pickup Key2 = new Pickup("Frozen_Key", World, "Frozen_Key", "Second key in the Dungeon");
+            Add(Key2);
+            Pickup Key3 = new Pickup("SkeletonKey", World, "SkeletonKey", "Final key in the Dungeon");
+            Add(Key3);
+            Pickup Presents = new Pickup("BluePresent", World, "BluePresent", "Present to break certain blocks");
+            Add(Presents);
+
             #region Grid
             string[,] grid = new string[49, 29];
             grid[25, 9] = "1";
