@@ -43,11 +43,11 @@ namespace Engine
             }
         }
 
-        public NPC(string id, string assetName, string name) : base(id, assetName)
+        public NPC(string id, Object parent, string assetName, string name) : base(id, parent, assetName)
         {
             _name = name;
             _health = 100;
-            _inventory = new Inventory(id + "inventory");
+            _inventory = new Inventory(id + "inventory", this);
             _attackDuration = 0;
             _attacking = false;
             _attackSpeed = 1;

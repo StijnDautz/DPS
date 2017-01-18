@@ -12,7 +12,7 @@ namespace Engine
     {
         private Texture _sprite;
 
-        public TexturedObject(string id, string assetName) : base(id)
+        public TexturedObject(string id, Object parent, string assetName) : base(id, parent)
         {
             _sprite = new Texture(assetName);
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, _sprite.Width, _sprite.Height);
@@ -33,7 +33,7 @@ namespace Engine
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
-            _sprite.Draw(spriteBatch, GlobalPosition - ObjectList.World.CameraPosition * Depth);
+            _sprite.Draw(spriteBatch, GlobalPosition - World.CameraPosition * Depth);
         }
     }
 }

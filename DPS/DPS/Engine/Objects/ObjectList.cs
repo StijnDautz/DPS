@@ -12,38 +12,27 @@ namespace Engine
      * As ObjectList is an Object and override Reset, Update and Draw.
      * Is: if(o is ObjectList) really necessary?
      */
-    class ObjectList : Object, IControlledLoopObject
+    class ObjectList : Object
     {
         private List<Object> _objects;
-        private List<Pawn> _pawns;
-        private World _world;
 
         public List<Object> Objects
         {
             get { return _objects; }
         }
 
-        public List<Pawn> Pawns
-        {
-            get { return _pawns; }
-        }
-
-        public World World
-        {
-            get { return _world; }
-            set { _world = value; }
-        }
-
-        public ObjectList(string id) : base(id)
+        public ObjectList(string id, Object parent) : base(id, parent)
         {
             _objects = new List<Object>();
-            _pawns = new List<Pawn>();
         }
 
-        public ObjectList(string id, int size) : base(id)
+        public ObjectList(string id, Object parent, int size) : base(id, parent)
         {
             _objects = new List<Object>(size);
-            _pawns = new List<Pawn>();
+            for(int i = 0; i < size; i++)
+            {
+                _objects.Add(null);
+            }
         }
 
         public override void Reset()
@@ -58,53 +47,44 @@ namespace Engine
         {
             foreach (Object o in _objects)
             {
-                if (o.Visible)
+                if (o != null)
                 {
-                    o.Update(gameTime);
+                    if (o.Visible)
+                    {
+                        o.Update(gameTime);
+                    }
                 }
             }
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            foreach (Object o in Objects)
+            foreach (Object o in _objects)
             {
-                if (o.Visible)
+                if (o != null)
                 {
-                    o.Draw(gameTime, spriteBatch);
-                }
-            }
-        }
-
-        public virtual void HandleInput(GameTime gameTime)
-        {
-            foreach (Pawn p in _pawns)
-            {
-                if (p.Visible)
-                {
-                    p.HandleInput(gameTime);
+                    if (o.Visible)
+                    {
+                        o.Draw(gameTime, spriteBatch);
+                    }
                 }
             }
         }
 
         public virtual void Add(Object o)
         {
-            o.Parent = this;
-            //if object is Pawn add it to list of pawns, which is used to prevent unnecessary calls of HandleInput(gameTime)
-            if (o is Pawn)
+            if(o is Character)
             {
-                Pawn p = o as Pawn;
-                _pawns.Add(p);
+                World.Characters.Add(o as Character);
             }
             _objects.Add(o);
         }
 
-        public void Remove(Object o)
+        public virtual void Remove(Object o)
         {
-            if (o is Pawn)
+            if(o is Character)
             {
-                Pawn p = o as Pawn;
-                _pawns.Remove(p);
+                World.Characters.Remove(o as Character);
             }
             _objects.Remove(o);
         }
@@ -130,7 +110,7 @@ namespace Engine
 
         public override void ApplyPhysics(float elapsedTime)
         {
-            if (HasPhysics && !ObjectList.World.IsTopDown)
+            if (HasPhysics && !World.IsTopDown)
             {
                 foreach (Object o in _objects)
                 {

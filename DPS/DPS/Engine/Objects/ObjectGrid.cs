@@ -11,20 +11,26 @@ namespace Engine
     partial class ObjectGrid : ObjectList
     {
         private int _tileSize;
-        private Point dimensions;
+        private int _collums;
+        private int _rows;
 
         public int Rows
         {
-            get { return dimensions.X; }
+            get { return _rows; }
         }
 
         public int Collums
         {
-            get { return dimensions.Y; }
+            get { return _collums; }
+        }
+
+        public int Size
+        {
+            get { return _collums * _rows; }
         }
 
         //Create ObjectGrid read from a file
-        public ObjectGrid(string id, string assetName, int tileSize) : base(id)
+        public ObjectGrid(string id, Object parent, string assetName, int tileSize) : base(id, parent)
         {
             _tileSize = tileSize;
             Load(assetName);
@@ -32,9 +38,10 @@ namespace Engine
         }
 
         //Create empty ObjectGrid
-        public ObjectGrid(string id, int collums, int rows, int tileSize) : base(id, rows * collums)
+        public ObjectGrid(string id, Object parent, int collums, int rows, int tileSize) : base(id, parent, rows * collums)
         {
-            dimensions = new Point(collums, rows);
+            _collums = collums;
+            _rows = rows;
             _tileSize = tileSize;
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, collums * tileSize, rows * tileSize);
         }
@@ -45,16 +52,15 @@ namespace Engine
             return (int)pos.X / (_tileSize) + (int)pos.Y / (_tileSize) * Collums;
         }
 
+        private Point GetPositionInGridAsPoint(Object o)
+        {
+            Vector2 pos = o.Position - Position;
+            return new Point((int)pos.X / _tileSize, (int)pos.Y / _tileSize);
+        }
+
         public int GetPositionInGrid(Object o)
         {
-            for (int i = 0; i < Objects.Count; i++)
-            {
-                if(Objects[i] == o)
-                {
-                    return i;
-                }
-            }
-            return -1;
+            return GetPositionInGrid(o.GlobalPosition);
         }
 
         public Object getTile(Vector2 p)
@@ -75,6 +81,11 @@ namespace Engine
             }
         }
 
+        private Object getTile(int x, int y)
+        {
+            return getTile(x + y * Collums);
+        }
+
         public void RemoveObject(Object o)
         {
             removeTile(GetPositionInGrid(o.Position));
@@ -87,32 +98,74 @@ namespace Engine
 
         public void setTile(int x, int y, Object o)
         {
-            Objects[x * dimensions.Y + y] = o;
+            Objects[x * _rows + y] = o;
         }
 
         public void setTile(int i, Object o)
         {
             Objects[i] = o;
-            o.Position = new Vector2(i % Collums, i / Collums) * _tileSize;
+            if (o != null)
+            {
+                o.Position = new Vector2(i % Collums, i / Collums) * _tileSize;
+            }
         }
 
         public bool AddToFirstFreeSpot(Object o)
         {
-            if(Objects.Count < Rows * Collums)
+            for (int i = 0; i < Size; i++)
             {
-                o.Parent = this;
-                Objects.Add(o);
-                o.Position = new Vector2((Objects.Count - 1) % Collums, (Objects.Count - 1) / Collums) * _tileSize;
-                return true;
+                if (Objects[i] == null)
+                {
+                    Objects[i] = o;
+                    o.Position = new Vector2((i) % Collums, (i) / Collums) * _tileSize;
+                    return true;
+                }
             }
             return false;
         }
 
-        public void SwapObjects(Object i, Object j)
+        public void SwapObjects(int index, Object i, int index2, Object j)
         {
-            int temp = GetPositionInGrid(j);
-            setTile(GetPositionInGrid(i), j);
-            setTile(temp, i);
+            setTile(index2, i);
+            setTile(index, j);
+        }
+
+        public override void SetupCollision(Object collider, float elapsedTime)
+        {
+            Point p = GetPositionInGridAsPoint(collider);
+
+            //Check for out of bounds
+            if(p.X < 1)
+            {
+                p.X = 1;
+            }
+            else if(p.X > 196)
+            {
+                p.X = 196;
+            }
+            if(p.Y < 1)
+            {
+                p.Y = 1;
+            }
+            else if(p.Y > 96)
+            {
+                p.Y= 96;
+            }
+
+            int xBoundary = p.X + 3;
+            int yBoundary = p.Y + 3;
+
+            for (int x = p.X - 1; x < xBoundary; x++)
+            {
+                for(int y = p.Y - 1; y < yBoundary; y++)
+                {
+                    Object o = getTile(x, y);
+                    if(o.CanCollide)
+                    { 
+                        o.CheckCollision(collider, elapsedTime);
+                    }
+                }
+            }
         }
     }
 }

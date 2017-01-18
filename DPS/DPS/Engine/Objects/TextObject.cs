@@ -34,9 +34,9 @@ namespace Engine
             { return _spriteFont.MeasureString(_text); }
         }
 
-        public TextObject(string id, string assetname) : base(id)
+        public TextObject(string id, string assetname, Object parent) : base(id, parent)
         {
-            _spriteFont = GameInstance.AssetManager.GetFont(assetname);
+            _spriteFont = GameInstance.AssetManager.GetFont("Fonts/" + assetname);
             _color = Color.White;
         }
 

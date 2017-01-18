@@ -10,7 +10,7 @@ namespace Engine
     abstract class Button : TexturedObject
     {
 
-        public Button(string id, string assetName) : base(id, assetName)
+        public Button(string id, Object parent, string assetName) : base(id, parent, assetName)
         {
 
         }

@@ -9,7 +9,7 @@ namespace Content
 {
     class MainObjectGrid : ObjectGrid
     {
-        public MainObjectGrid(string id, string assetName, int tileSize) : base(id, assetName, tileSize)
+        public MainObjectGrid(string id, Engine.Object parent, string assetName, int tileSize) : base(id, parent,assetName, tileSize)
         {
             CanCollide = true;
         }
@@ -18,7 +18,7 @@ namespace Content
         {
             switch (type)
             {
-                case '.': return new TexturedObject("walltile", "Textures/Tiles/spr_wall");
+                case '.': return new TexturedObject("walltile", this, "Textures/Tiles/spr_wall");
                 default: throw new Exception("character of type: " + type + "was not associated with an Object");
             }
         }

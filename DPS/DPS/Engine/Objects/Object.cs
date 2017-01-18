@@ -44,20 +44,25 @@ namespace Engine
 
         public Object Parent
         {
+            set { _parent = value; }
+        }
+
+        private Object ParentTemp
+        {
             get
             {
                 if (_parent != null)
                 {
-                    return _parent.Parent;
+                    return _parent.ParentTemp;
                 }
                 return this;
             }
             set { _parent = value; }
         }
 
-        public ObjectList ObjectList
+        public World World
         {
-            get { return Parent as ObjectList; }
+            get { return ParentTemp as World; }
         }
 
         public Vector2 Position
@@ -141,19 +146,24 @@ namespace Engine
             get { return BoundingBox.Height; }
         }
 
-        public Object(string id)
+        public Object(string id, Object parent)
         {
             _id = id;
             _depth = 1;
             _visible = true;
             _mirrored = false;
             _hasPhysics = false;
-            _canCollide = false;
             _inAir = true;
+            _parent = parent;
             _position = Vector2.Zero;
             _velocity = Vector2.Zero;
             _boundingBox = new Rectangle((int)Position.X, (int)Position.Y, 0, 0);
             _collisionDimension = new bool[2];
+        }
+
+        public void setBoundingBoxDimensions(int width, int height)
+        {
+            _boundingBox.Size = new Point(width, height);
         }
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -10,8 +10,8 @@ namespace Content
     {
         public MainGameMode(string id, Engine.World world, Engine.GameModeManager gm) : base(id, world, gm)
         {
-            GameStateManager.Add(new StartPlayGS("StartPlayGS"));
-            GameStateManager.Add(new InventoryGS("inventory"));
+            GameStateManager.Add(new StartPlayGS("StartPlayGS", GameStateManager));
+            GameStateManager.Add(new InventoryGS("inventory", GameStateManager));
             GameStateManager.SwitchTo("StartPlayGS");
         }
     }

@@ -9,15 +9,15 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    partial class World : IControlledLoopObject
+    partial class World : ObjectList, IControlledLoopObject
     {
         private bool _isTopDown;
-        private List<Map> _maps;
+        private List<Object> _collisionObjects;
+        private List<Character> _characters;
         private Vector2 _cameraPosition;
-        private Vector2 _dimensions;
         private int _tileSize;
         private Character _player;
-        private bool _canUpdateCamera;
+        private bool _canUpdate;
 
         //physics
         private float _gravity;
@@ -34,14 +34,9 @@ namespace Engine
             get { return _cameraPosition; }
         }
 
-        public int Width
+        public List<Character> Characters
         {
-            get { return (int)_dimensions.X; }
-        }
-
-        public int Heigth
-        {
-            get { return (int)_dimensions.Y; }
+            get { return _characters; }
         }
 
         public int TileSize
@@ -53,6 +48,17 @@ namespace Engine
         public Character Player
         {
             get { return _player; }
+            set { _player = value; }
+        }
+
+        public bool CanUpdate
+        {
+            set { _canUpdate = value; }
+        }
+
+        public List<Object> CollisionObjects
+        {
+            get { return _collisionObjects; }
         }
 
         //phyics
@@ -62,52 +68,47 @@ namespace Engine
             set { _gravity = value; }
         }
 
-        public World(Character player) : base()
+        public World(int width, int height) : base("world", null)
         {
-            _player = player;
+            setBoundingBoxDimensions(width, height);
             _isTopDown = true;
-            _maps = new List<Map>();
+            _collisionObjects = new List<Object>();
+            _characters = new List<Character>();
             _cameraPosition = Vector2.Zero;
             _tileSize = 60;
-            _canUpdateCamera = true;
             _gravity = 350f;
-        }
-
-        public void Reset()
-        {
-
-        }
-
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            foreach(Map m in _maps)
-            {
-                if (m.Visible)
-                { m.Draw(gameTime, spriteBatch); }
-            }
+            _canUpdate = true;
         }
 
         public void HandleInput(GameTime gameTime)
         {
-            foreach(Map m in _maps)
+            foreach(Character c in _characters)
             {
-                if (m.Visible)
-                { m.HandleInput(gameTime); }
+                c.HandleInput(gameTime);
             }
         }
 
-        protected void AddMap(Map map)
+        public override void Add(Object o)
         {
-            _maps.Add(map);
-            map.World = this;
-
-            //check if world dimensions should be set
-            //only one map can define the world dimensions
-            if(map.Width > _dimensions.X)
+            if(o is Character)
             {
-                _dimensions.X = map.Width;
-                _dimensions.Y = map.Height;
+                _characters.Add(o as Character);
             }
+            Objects.Add(o);
+        }
+
+        public override void Remove(Object o)
+        {
+            if(o is Character)
+            {
+                _characters.Remove(o as Character);
+            }
+            Objects.Remove(o);
+        }
+
+        public override void Reset()
+        {
+            
         }
     }
 }

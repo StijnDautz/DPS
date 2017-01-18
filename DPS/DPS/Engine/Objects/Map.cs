@@ -10,8 +10,9 @@ namespace Engine
 {
     partial class Map : ObjectList, IControlledLoopObject
     {
-        public Map(string id, ObjectGrid grid, int tileSize) : base(id)
+        public Map(string id, ObjectGrid grid, int tileSize, Object parent) : base(id, parent)
         {
+            grid.Parent = this;
             Add(grid);
             BoundingBox = grid.BoundingBox;
         }

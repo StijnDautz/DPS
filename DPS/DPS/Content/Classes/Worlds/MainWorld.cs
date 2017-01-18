@@ -10,23 +10,21 @@ namespace Content
 {
     class MainWorld : World
     {
-        public MainWorld(Character character) : base(character)
+        public MainWorld(int width, int height) : base(width, height)
         {
             IsTopDown = true;
-            Map m = new Map("Overworld", new Overworld("mainGrid", "Overworld", 96), TileSize);
-            AddMap(m);
-            m.Add(character);
-            TexturedObject t = new TexturedObject("floor", "Textures/Tiles/spr_wall");
-            t.CanCollide = true;
-            t.canBlock = true;
-            t.Position = new Vector2(0, 200);
-            m.Add(t);
-            TexturedObject t2 = new TexturedObject("floor", "Textures/Tiles/spr_wall");
-            t2.Position = new Vector2(100, 200);
-            t2.CanCollide = true;
-            t2.canBlock = true;
-            m.Add(t2);
+            CanUpdate = true;
+
+            Overworld grid = new Overworld("mainGrid", this, "OverWorld", 96);
+            grid.CanCollide = true;
+            Add(grid);
             
+            Character player = new Character("player", this, "Textures/Tiles/a.Overworld", "Sjraar");
+            player.CanCollide = true;
+            player.Position = new Vector2(300, 300);
+           // player.BoundingBox = new Rectangle((int)player.Position.X, (int)player.Position.Y, 1, 1);
+            Add(player);
+            Player = player;
         }
     }
 }

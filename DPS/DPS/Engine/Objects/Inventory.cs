@@ -17,7 +17,7 @@ namespace Engine
             get { return _equipedWeapon; }
         }
 
-        public Inventory(string id) : base(id, 2, 4, 109)
+        public Inventory(string id, Object parent) : base(id, parent, 4, 2, 109)
         {
             _strongestWeapon = FindStrongestWeapon();
             _equipedWeapon = _strongestWeapon;
@@ -35,6 +35,7 @@ namespace Engine
             }
             if(AddToFirstFreeSpot(o))
             {
+                o.Parent = this;
                 o.Depth = 0;
                 return true;
             }

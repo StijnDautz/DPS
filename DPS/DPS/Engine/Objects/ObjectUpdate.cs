@@ -9,8 +9,8 @@ namespace Engine
 {
     partial class Object
     {
-        private bool _canCollide;
         private bool _hasPhysics;
+        private bool _canCollide;
         private bool _canBlock;
         private bool _inAir;
         private bool[] _collisionDimension;
@@ -24,10 +24,24 @@ namespace Engine
         public bool CanCollide
         {
             get { return _canCollide; }
-            set { _canCollide = value; }
+            set
+            {
+                if (!(_parent is ObjectGrid))
+                {
+                    if (value && !_canCollide)
+                    {
+                        World.CollisionObjects.Add(this);
+                    }
+                    if (!value && _canCollide)
+                    {
+                        World.CollisionObjects.Remove(this);
+                    }
+                }
+                _canCollide = value;
+            }
         }
 
-        public bool canBlock
+        public bool CanBlock
         {
             get { return _canBlock; }
             set { _canBlock = value; }
@@ -56,9 +70,9 @@ namespace Engine
        
         public virtual void ApplyPhysics(float elapsedTime)
         {
-            if (_hasPhysics && !ObjectList.World.IsTopDown && InAir)
+            if (_hasPhysics && !World.IsTopDown && InAir)
             {
-                _velocity.Y += ObjectList.World.Gravity * elapsedTime;
+                _velocity.Y += World.Gravity * elapsedTime;
             }
         }
 
@@ -93,7 +107,7 @@ namespace Engine
                 collider.OnCollision(this);
 
                 //if both can block, check in which direction o can move
-                if (canBlock && collider.canBlock)
+                if (CanBlock && collider.CanBlock)
                 {
                     CheckCollisionDimensions(collider, elapsedTime);
                     collider.CheckCollisionDimensions(this, elapsedTime);
@@ -103,26 +117,41 @@ namespace Engine
 
         private void CheckCollisionDimensions(Object collider, float elapsedTime)
         {
-            //X
-            if (!_collisionDimension[0] && _velocity.X != 0)
+           /* if (Velocity.X != 0)
             {
-                if (!CollisionHelper.CollidesWith(this, Vec_VelocityY, collider, collider._velocity, elapsedTime))
+                if (Velocity.Y == 0)
                 {
                     _collisionDimension[0] = true;
                 }
             }
-            //Y
-            if (!_collisionDimension[1] && _velocity.Y != 0)
+            else if (Velocity.Y != 0)
             {
-                if (!CollisionHelper.CollidesWith(this, Vec_VelocityX, collider, collider._velocity, elapsedTime))
+                _collisionDimension[1] = true;
+            }
+            else
+            {*/
+                //X
+                if (!_collisionDimension[0])
                 {
-                    _collisionDimension[1] = true;
-                    if (_velocity.Y > 0 && _inAir)
+                    if (!CollisionHelper.CollidesWith(this, new Vector2(0, Velocity.Y), collider, collider._velocity, elapsedTime))
                     {
-                        InAir = false;
+                    
+                        _collisionDimension[0] = true;
                     }
                 }
-            }
+                //Y
+                if (!_collisionDimension[1])
+                {
+                    if (!CollisionHelper.CollidesWith(this, new Vector2(Velocity.X, 0), collider, collider._velocity, elapsedTime))
+                    {
+                        _collisionDimension[1] = true;
+                        if (_velocity.Y > 0 && _inAir)
+                        {
+                            InAir = false;
+                        }
+                    }
+                }
+           // }
         }
 
         public void ApplyPosition(float elapsedTime)

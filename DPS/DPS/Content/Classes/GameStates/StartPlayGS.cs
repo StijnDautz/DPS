@@ -11,7 +11,7 @@ namespace Content
 {
     class StartPlayGS : GameState
     {
-        public StartPlayGS(string id) : base(id)
+        public StartPlayGS(string id, GameStateManager gameStateManager) : base(id, gameStateManager)
         {
 
         }
@@ -20,7 +20,7 @@ namespace Content
         {
             base.Init();
             IsMouseVisible = false;
-            World.Player.CanMove = true;
+            World.CanUpdate = true;
         }
 
         public override void HandleInput(GameTime gameTime)

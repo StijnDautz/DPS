@@ -24,7 +24,7 @@ namespace Engine
             set { _destination = value; }
         }
 
-        public Portal(string id) : base(id)
+        public Portal(string id, Object parent) : base(id, parent)
         {
 
         }

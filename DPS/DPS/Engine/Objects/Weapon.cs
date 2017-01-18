@@ -15,7 +15,7 @@ namespace Engine
             get { return _damage; }
         }
         
-        public Weapon(string id, string assetName, int damage) : base(id, assetName)
+        public Weapon(string id, Object parent, string assetName, string discription, int damage) : base(id, parent, assetName, discription)
         {
             _damage = damage;
 

@@ -22,10 +22,7 @@ namespace Engine
         protected override void LoadContent()
         {
             base.LoadContent();
-            Character Frank = new Character("player", "Textures/Tiles/spr_wall", "BaasFrank", 19, true);
-            Frank.Position = new Microsoft.Xna.Framework.Vector2(200, 300);
-
-            GameModeManager.Add(new MainGameMode("MainGM", new MainWorld(Frank), GameModeManager));
+            GameModeManager.Add(new MainGameMode("MainGM", new MainWorld(50000, 50000), GameModeManager));
             GameModeManager.SwitchTo("MainGM");
 
         }

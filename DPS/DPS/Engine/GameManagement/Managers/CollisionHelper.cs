@@ -11,18 +11,23 @@ namespace Engine
     {
         public static bool CollidesWith(Object obj1, Vector2 offset1, Object obj2, Vector2 offset2, float elapsedTime)
         {
-            Vector2 pos1 = obj1.Position + offset1 * elapsedTime;
-            Vector2 pos2 = obj2.Position + offset2 * elapsedTime;
+            Vector2 pos1 = obj1.GlobalPosition + offset1 * elapsedTime;
+            Vector2 pos2 = obj2.GlobalPosition + offset2 * elapsedTime;
 
-            if (pos1.Y + obj1.Height < obj2.Position.Y)
+            if (pos1.Y + obj1.Height < pos2.Y)
             { return false; }
-            if (obj2.Position.Y + obj2.Height < pos1.Y)
+            if (pos2.Y + obj2.Height < pos1.Y)
             { return false; }
-            if (pos1.X + obj1.Width < obj2.Position.X)
+            if (pos1.X + obj1.Width < pos2.X)
             { return false; }
-            if (obj2.Position.X + obj2.Width < pos1.X)
+            if (pos2.X + obj2.Width < pos1.X)
             { return false; }
             return true;
+        }
+
+        public static bool CollidesWith(Object obj1, Object obj2)
+        {
+            return CollidesWith(obj1, Vector2.Zero, obj2, Vector2.Zero, 0);
         }
 
         public static bool CollidedAtBottom(Object oldObj, Object objC)

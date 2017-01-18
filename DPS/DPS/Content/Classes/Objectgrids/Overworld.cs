@@ -4,28 +4,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Engine;
+
 namespace Content
 {
     class Overworld : ObjectGrid
     {
-        public Overworld(string id, string assetName, int tileSize) : base(id, assetName, tileSize)
+        public Overworld(string id, Engine.Object parent, string assetName, int tileSize) : base(id, parent, assetName, tileSize)
         {
 
         }
 
         private TexturedObject SetupCollisionTile(string id, string assetName)
         {
-            TexturedObject Tile = new TexturedObject(id, "Textures/Tiles/" + assetName);
+            TexturedObject Tile = new TexturedObject(id, this, "Textures/Tiles/" + assetName);
             Tile.CanCollide = true;
-            Tile.canBlock = true;
+            Tile.CanBlock = true;
             return Tile;
         }
 
         private TexturedObject WalkableTile(string id, string assetName)
         {
-            TexturedObject Tile = new TexturedObject(id, "Textures/Tiles/" + assetName);
+            TexturedObject Tile = new TexturedObject(id, this, "Textures/Tiles/" + assetName);
             Tile.CanCollide = false;
-            Tile.canBlock = false;
+            Tile.CanBlock = false;
             return Tile;
         }
 
@@ -86,7 +87,6 @@ namespace Content
                 case '6': return SetupCollisionTile("Overworldtile", "6.Overworld");
                 case '0': return SetupCollisionTile("Overworldtile", "0.Overworld");
                 case ' ': return SetupCollisionTile("OverworldTile", "0.Overworld");
-
 
                 default: throw new Exception("character of type: " + type + "was not associated with an Object");
             }

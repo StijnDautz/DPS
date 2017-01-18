@@ -12,16 +12,17 @@ namespace Engine
     {
         private List<GameState> _gameStates;
         private GameState _current;
-        private GameMode _parent;
+        private GameMode _gameMode;
 
-        public GameMode Parent
+        public GameMode GameMode
         {
-            set { _parent = value; }
-            get { return _parent; }
+            set { _gameMode = value; }
+            get { return _gameMode; }
         }
 
-        public GameStateManager()
+        public GameStateManager(GameMode gameMode)
         {
+            _gameMode = gameMode;
             _gameStates = new List<GameState>();
         }
 
@@ -42,9 +43,7 @@ namespace Engine
 
         public void Add(GameState g)
         {
-            g.GameStateManager = this;
             _gameStates.Add(g);
-            g.HUD.World = Parent.World;
             g.Setup();
         }
 

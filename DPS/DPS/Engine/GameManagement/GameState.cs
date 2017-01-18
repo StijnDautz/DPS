@@ -29,37 +29,32 @@ namespace Engine
             set { _HUD = value; }
         }
 
-        public GameStateManager GameStateManager
-        {
-            get { return _gameStateManager; }
-            set { _gameStateManager = value; }
-        }
-
-        protected GameMode GameMode
-        {
-            get { return _gameStateManager.Parent; }
-        }
-
         protected World World
         {
-            get { return GameMode.World; }
+            get { return _gameStateManager.GameMode.World; }
         }
 
-        protected GameModeManager GameModeManager
+        protected GameStateManager GameStateManager
         {
-            get { return _gameStateManager.Parent.Parent; }
+            get { return _gameStateManager; }
+        }
+
+        protected GameInstance GameInstance
+        {
+            get { return _gameStateManager.GameMode.Parent.GameInstance; }
         }
 
         protected bool IsMouseVisible
         {
-            set { GameModeManager.GameInstance.IsMouseVisible = value; }
+            set { GameInstance.IsMouseVisible = value; }
         }
 
             
-        public GameState(string id)
+        public GameState(string id, GameStateManager gameStateManager)
         {
             _id = id;
-            _HUD = new ObjectList("HUD");      
+            _gameStateManager = gameStateManager;
+            _HUD = new ObjectList("HUD", World);      
         }
 
         public virtual void Update(GameTime gameTime)
@@ -92,7 +87,7 @@ namespace Engine
 
         }
 
-        protected void Add(Object o)
+        protected void AddToHud(Object o)
         {
             o.Depth = 0;
             _HUD.Add(o);

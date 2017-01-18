@@ -10,20 +10,22 @@ namespace Engine
 {
     class Pickup : TexturedObject
     {
-        public Pickup(string id, string assetName) : base(id, assetName)
+        TextObject _discription;
+        bool _discriptionShown;
+
+        public Pickup(string id, Object parent, string assetName, string discription) : base(id, parent, assetName)
         {
+            _discription = new TextObject("discription", "Hud", World.Player.Inventory);
+            _discription.Text = discription;
         }
 
         //waarschijnlijk bug playerpos = null
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (ObjectList is Map)
-            {
-                //Update position
-                double t = gameTime.TotalGameTime.TotalSeconds * 3.0f;
-                Position = new Vector2(Position.X, Position.Y + (float)Math.Sin(t) * 0.2f);
-            }
+            //Update position
+            double t = gameTime.TotalGameTime.TotalSeconds * 3.0f;
+            Position = new Vector2(Position.X, Position.Y + (float)Math.Sin(t) * 0.2f);
         }
 
         /*
@@ -32,16 +34,28 @@ namespace Engine
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
-            Character player = ObjectList.World.Player;
+            Character player = World.Player;
             if(collider == player && player.Inventory.AddPickup(this))
             {
-                ObjectList.Remove(this);
+                World.Remove(this);
             }
         }
 
         public virtual void OnClicked()
         {
 
+        }
+
+        public void UpdateDiscription(bool b)
+        {
+            if(b)
+            {
+                World.Player.Inventory.Add(_discription);
+            }
+            else
+            {
+                World.Player.Inventory.Remove(_discription);
+            }
         }
     }
 }

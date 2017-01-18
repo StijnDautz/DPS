@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Engine
 {
-    class Character : Pawn, ICharacter
+    class Character : TexturedObject, ICharacter
     {
         //Database gegevens
         private const String SERVER = "dpstudios.nl";//<-- moet nog vervangen worden?
@@ -47,20 +47,19 @@ namespace Engine
         {
             get { return _movementState; }
         }
-
+        
         public Inventory Inventory
         {
             get { return _inventory; }
         }
 
 
-        public Character(string id, string assetName, string name, int age, bool gender) : base(id, assetName)
+        public Character(string id, Object parent, string assetName, string name) : base(id, parent, assetName)
         {
             _name = name;
-            _inventory = new Inventory(id + "inventory");
+            _inventory = new Inventory(id + "inventory", World);
             HasPhysics = true;
-            CanCollide = true;
-            canBlock = true;
+            CanBlock = true;
             _attackSpeed = 1;
             _attackDuration = 0;
             _walkSpeed = 400;
@@ -76,25 +75,16 @@ namespace Engine
         }
 
         /*TODO Improve this method look at UpdateMovementState <3*/
-        public override void HandleInput(GameTime gameTime)
+        public virtual void HandleInput(GameTime gameTime)
         {
-            base.HandleInput(gameTime);
-
             float speed = GameInstance.InputManager.isKeyHolding(Keys.LeftShift) ? _runSpeed : _walkSpeed;
-            if (CanMove)
+            if (World.IsTopDown)
             {
-                if (ObjectList.World.IsTopDown)
-                {
-                    HandleTopDownInput(speed);
-                }
-                else
-                {
-                    HandleSideInput(speed);
-                }
+                HandleTopDownInput(speed);
             }
             else
             {
-                Velocity = Vector2.Zero;
+                HandleSideInput(speed);
             }
 
             //Highscore test. Als je op H drukt wordt er een random waarde in de highscore lijst gezet met als username Random.
