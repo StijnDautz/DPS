@@ -15,7 +15,8 @@ namespace Content
 
         protected override void ActionWhenPressed()
         {
-            World.GameMode.SwitchTo("Dungeon1");
+            World.GameMode.SwitchTo("MainWorld");
+            World.GameMode.GameStateManager.SwitchTo("StartPlay");
         }
     }
 }

@@ -10,6 +10,7 @@ namespace Content
 {
     class MainWorld : World
     {
+       
         public MainWorld(string id, int width, int height, GameMode gameMode) : base(id, width, height, gameMode)
         {
             IsTopDown = true;
@@ -18,13 +19,22 @@ namespace Content
             Overworld grid = new Overworld("mainGrid", this, "OverWorld", 96);
             grid.CanCollide = true;
             Add(grid);
-            
+
             Character player = new Character("player", this, "Textures/Tiles/a.Overworld", "Sjraar");
+
+            player.texture = new Texture("Textures/Tiles/Eend animatie");
+            player.texture.Frames = 8;
+            player.texture.isAnimated = true;
+           // player.Update();
+            
+
+
             player.CanCollide = true;
             player.Position = new Vector2(300, 300);
            // player.BoundingBox = new Rectangle((int)player.Position.X, (int)player.Position.Y, 1, 1);
             Add(player);
             Player = player;
         }
+
     }
 }

@@ -15,6 +15,9 @@ namespace Content
             IsTopDown = false;
             var player = new Engine.Character("player", this, "Textures/Tiles/a.Overworld", "Sjraar");
             player.Position = new Microsoft.Xna.Framework.Vector2(49000, 9000);
+            player.texture = new Texture("Textures/Tiles/Eend animatie");
+            player.texture.Frames = 8;
+            player.texture.isAnimated = true;
             Player = player;
             Add(player);
 
