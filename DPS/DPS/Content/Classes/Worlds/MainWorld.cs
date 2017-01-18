@@ -19,7 +19,7 @@ namespace Content
             grid.CanCollide = true;
             Add(grid);
             
-            Character player = new Character("player", this, "Textures/Tiles/a.Overworld", "Sjraar");
+            Player player = new Player("player", this, "Textures/Tiles/a.Overworld");
             player.CanCollide = true;
             player.Position = new Vector2(300, 300);
            // player.BoundingBox = new Rectangle((int)player.Position.X, (int)player.Position.Y, 1, 1);

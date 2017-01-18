@@ -12,10 +12,16 @@ namespace Content
         public DungeonWorld1(string id, int width, int height, Engine.GameMode gameMode) : base(id, width, height, gameMode)
         {
             IsTopDown = false;
-            var player = new Engine.Character("player", this, "Textures/Tiles/a.Overworld", "Sjraar");
+            //Add player to world
+            var player = new Engine.Player("player", this, "Textures/Tiles/a.Overworld");
             player.Position = new Microsoft.Xna.Framework.Vector2(49000, 9000);
+            player.CanCollide = true;
+            player.HasPhysics = true;
             Player = player;
             Add(player);
+
+            //Setup LevelGrid
+            ObjectGrid levelGrid = new ObjectGrid("levelGrid", this, 49, 29, 1920, 960);
 
             #region Grid
             string[,] grid = new string[49, 29];
@@ -121,23 +127,28 @@ namespace Content
             grid[15, 0] = "100";
             #endregion
 
+            //create randomDungeonGenerator
+            RandomDungeonGenerator dungeonGenerator = new RandomDungeonGenerator();
+
             for (int i = 1; i < 101; i++)
             {
-                Level1 leveltje = new Level1("level1", this, i.ToString(), 96);
+                Level1 room = new Level1("level1", levelGrid, i.ToString(), 96);
                 for (int x = 0; x < 49; x++)
                 {
                     for (int y = 0; y < 29; y++)
                     {
                         if (grid[x, y] != null && int.Parse(grid[x, y]) == i)
                         {
-                            leveltje.PositionX = x * 20 * 96;
-                            leveltje.PositionY = y * 10 * 96;
+                            room.PositionX = x * 20 * 96;
+                            room.PositionY = y * 10 * 96;
+                            levelGrid.setTile(x, y, room);
                         }
                     }
                 }
-                leveltje.CanCollide = true;
-                Add(leveltje);
+                room.CanCollide = true;
             }
+            levelGrid.CanCollide = true;
+            Add(levelGrid);
         }
     }
 }

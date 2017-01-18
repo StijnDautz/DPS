@@ -7,9 +7,8 @@ using Microsoft.Xna.Framework;
 
 namespace Engine
 {
-    class NPC : TexturedObject, ICharacter
+    class NPC : Character
     {
-        private string _name;
         private int _health;
         private Inventory _inventory;
         private movementState _movementState;
@@ -19,16 +18,6 @@ namespace Engine
         private float _runSpeed;
         private bool _attacking;
 
-        public string Name
-        {
-            get { return _name; }
-        }
-
-        public int Health
-        {
-            get { return _health; }
-            set { _health = value; }
-        }
 
         public movementState MovementState
         {
@@ -43,9 +32,8 @@ namespace Engine
             }
         }
 
-        public NPC(string id, Object parent, string assetName, string name) : base(id, parent, assetName)
+        public NPC(string id, Object parent, string assetName) : base(id, parent, assetName)
         {
-            _name = name;
             _health = 100;
             _inventory = new Inventory(id + "inventory", this);
             _attackDuration = 0;
@@ -60,18 +48,6 @@ namespace Engine
             base.Update(gameTime);
             float elapsedTime = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
             _movementState = UpdateMovementState(elapsedTime);
-        }
-
-        public override void OnCollision(Object collider)
-        {
-            base.OnCollision(collider);
-        
-            base.OnCollision(collider);
-            if (collider is ICharacter)
-            {
-                var character = collider as ICharacter;
-                character.Health -= _inventory.EquipedWeapon.Damage;
-            }   
         }
 
         private movementState UpdateMovementState(float elapsedTime)

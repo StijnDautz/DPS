@@ -73,18 +73,18 @@ namespace Engine
 
         public virtual void Add(Object o)
         {
-            if(o is Character)
+            if(o is Player)
             {
-                World.Characters.Add(o as Character);
+                World.Characters.Add(o as Player);
             }
             _objects.Add(o);
         }
 
         public virtual void Remove(Object o)
         {
-            if(o is Character)
+            if(o is Player)
             {
-                World.Characters.Remove(o as Character);
+                World.Characters.Remove(o as Player);
             }
             _objects.Remove(o);
         }

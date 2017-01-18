@@ -36,14 +36,16 @@ namespace Engine
             {
                 _collums = lines[0].Length;
                 _rows = lines.Count;
+                _grid = new Object[_collums, _rows];
             }
             else
             {
                 RandomDungeonGenerator generator = new RandomDungeonGenerator();
                 char[,] grid = generator.Generate();
-                ReadTiles(grid);
                 _collums = grid.GetLength(0);
                 _rows = grid.GetLength(1);
+                _grid = new Object[_collums, _rows];
+                ReadTiles(grid);
                 return;
             }
 
@@ -76,8 +78,7 @@ namespace Engine
         {
             if (tile != null)
             {
-                Add(tile);
-                tile.Position = new Vector2(x * (_tileSize), y * (_tileSize));
+                setTile(x, y, tile);
             }
             else
             {

@@ -8,11 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
-    partial class ObjectGrid : ObjectList
+    partial class ObjectGrid : Object
     {
-        private int _tileSize;
+        private int _tileWidth;
+        private int _tileHeight;
         private int _collums;
         private int _rows;
+        private Object[,] _grid;
 
         public int Rows
         {
@@ -29,148 +31,155 @@ namespace Engine
             get { return _collums * _rows; }
         }
 
+        public Object[,] Grid
+        {
+            get { return _grid; }
+        }
+
         //Create ObjectGrid read from a file
         public ObjectGrid(string id, Object parent, string assetName, int tileSize) : base(id, parent)
         {
-            _tileSize = tileSize;
+            _tileWidth = tileSize;
+            _tileHeight = tileSize;
             Load(assetName);
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Collums * tileSize, Rows * tileSize);
         }
 
         //Create empty ObjectGrid
-        public ObjectGrid(string id, Object parent, int collums, int rows, int tileSize) : base(id, parent, rows * collums)
+        public ObjectGrid(string id, Object parent, int collums, int rows, int tileWidth, int tileHeight) : base(id, parent)
         {
             _collums = collums;
             _rows = rows;
-            _tileSize = tileSize;
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, collums * tileSize, rows * tileSize);
+            _tileWidth = tileWidth;
+            _tileHeight = tileHeight;
+            _grid = new Object[collums, rows];
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, collums * tileWidth, rows * tileHeight);
         }
 
-        public ObjectGrid(string id, Object parent, char[,] grid, int tileSize) : base(id, parent)
+        public ObjectGrid(string id, Object parent, char[,] grid, int tileWidth, int tileHeight) : base(id, parent)
         {
             _collums = grid.GetLength(0);
             _rows = grid.GetLength(1);
             ReadTiles(grid);
         }
 
-        public int GetPositionInGrid(Vector2 p)
+        /*Find the Point of an Object in the grid*/
+        public Point GetPositionInGrid(Vector2 p)
         {
             Vector2 pos = p - GlobalPosition;
-            return (int)pos.X / (_tileSize) + (int)pos.Y / (_tileSize) * Collums;
+            return new Point((int)pos.X / _tileWidth, (int)pos.Y / _tileHeight);
         }
 
-        private Point GetPositionInGridAsPoint(Object o)
-        {
-            Vector2 pos = o.Position - Position;
-            return new Point((int)pos.X / _tileSize, (int)pos.Y / _tileSize);
-        }
-
-        public int GetPositionInGrid(Object o)
+        private Point GetPositionInGrid(Object o)
         {
             return GetPositionInGrid(o.GlobalPosition);
         }
 
+        /*Return a tile at a specific point in the grid*/
         public Object getTile(Vector2 p)
         {
             return getTile(GetPositionInGrid(p));
         }
 
-        //i is index of object in Objects
-        public Object getTile(int i)
+        public Object getTile(Point p)
         {
-            if (i < 0 || i > Objects.Count - 1)
+            if(WithinBoudaries(p.X, p.Y))
             {
-                return null;
+                return _grid[p.X, p.Y];
             }
-            else
-            {
-                return Objects[i];
-            }
+            return null;
         }
 
-        private Object getTile(int x, int y)
+        /*Check whether an object is within the objects boundaries or not*/
+        public bool WithinBoudaries(int x, int y)
         {
-            return getTile(x + y * Collums);
+            if(x < 0 || x > _collums || y < 0 || y > _rows)
+            {
+                return false;
+            }
+            return true;
         }
 
         public void RemoveObject(Object o)
         {
+            Vector2 pos = o.Position - Position;
             removeTile(GetPositionInGrid(o.Position));
         }
 
-        public void removeTile(int i)
+        public void removeTile(Point p)
         {
-            Objects[i] = null;
+            _grid[p.X, p.Y] = null;
         }
 
         public void setTile(int x, int y, Object o)
         {
-            Objects[x * _rows + y] = o;
-        }
-
-        public void setTile(int i, Object o)
-        {
-            Objects[i] = o;
-            if (o != null)
+            if (WithinBoudaries(x, y))
             {
-                o.Position = new Vector2(i % Collums, i / Collums) * _tileSize;
+                _grid[x, y] = o;
+                o.Position = new Vector2(x * _tileWidth, y * _tileHeight);
             }
         }
 
+        /*Find first free spot in _grid*/
         public bool AddToFirstFreeSpot(Object o)
         {
-            for (int i = 0; i < Size; i++)
+            //loop through grid and check if point is null, if so setTile and return true
+            for (int x = 0; x < _collums; x++)
             {
-                if (Objects[i] == null)
+                for (int y = 0; y < _rows; y++)
                 {
-                    Objects[i] = o;
-                    o.Position = new Vector2((i) % Collums, (i) / Collums) * _tileSize;
-                    return true;
+                    if (_grid[x, y] == null)
+                    {
+                        setTile(x, y, o);
+                        return true;
+                    }
                 }
             }
             return false;
         }
 
-        public void SwapObjects(int index, Object i, int index2, Object j)
+        public void SwapObjects(int x1, int y1, Object o1, int x2, int y2, Object o2)
         {
-            setTile(index2, i);
-            setTile(index, j);
+            setTile(x1, y1, o2);
+            setTile(x2, y2, o1);
         }
 
         public override void SetupCollision(Object collider, float elapsedTime)
         {
-            Point p = GetPositionInGridAsPoint(collider);
+            Point p = GetPositionInGrid(collider);
+            Object obj = getTile(p);
+            if(obj is ObjectGrid)
+            {
+                obj.SetupCollision(collider, elapsedTime);
+                return;
+            }
+            if(WithinBoudaries(p.X, p.Y))
+            {
+                int xBoundary = p.X + 3;
+                int yBoundary = p.Y + 3;
 
-            //Check for out of bounds
-            if(p.X < 1)
-            {
-                p.X = 1;
-            }
-            else if(p.X > 196)
-            {
-                p.X = 196;
-            }
-            if(p.Y < 1)
-            {
-                p.Y = 1;
-            }
-            else if(p.Y > 96)
-            {
-                p.Y= 96;
-            }
-
-            int xBoundary = p.X + 3;
-            int yBoundary = p.Y + 3;
-
-            for (int x = p.X - 1; x < xBoundary; x++)
-            {
-                for(int y = p.Y - 1; y < yBoundary; y++)
+                for (int x = p.X - 1; x < xBoundary; x++)
                 {
-                    Object o = getTile(x, y);
-                    if(o != null && o.CanCollide)
-                    { 
-                        o.CheckCollision(collider, elapsedTime);
+                    for (int y = p.Y - 1; y < yBoundary; y++)
+                    {
+                        Object o = getTile(new Point(x, y));
+                        if (o != null && o.CanCollide)
+                        {
+                            o.CheckCollision(collider, elapsedTime);
+                        }
                     }
+                }
+            }
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            base.Draw(gameTime, spriteBatch);
+            foreach (Object o in _grid)
+            {
+                if (o != null)
+                {
+                    o.Draw(gameTime, spriteBatch);
                 }
             }
         }

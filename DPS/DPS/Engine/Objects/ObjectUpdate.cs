@@ -15,7 +15,7 @@ namespace Engine
         private bool _inAir;
         private bool[] _collisionDimension;
 
-        protected bool HasPhysics
+        public bool HasPhysics
         {
             set { _hasPhysics = value; }
             get { return _hasPhysics; }
@@ -83,13 +83,9 @@ namespace Engine
 
         public virtual void SetupCollision(Object collider, float elapsedTime)
         {
-            if (collider is ObjectList)
+            if (collider is ObjectList || collider is ObjectGrid)
             {
-                var col = collider as ObjectList;
-                foreach (Object o2 in col.Objects)
-                {
-                    CheckCollision(o2, elapsedTime);
-                }
+                collider.SetupCollision(this, elapsedTime);
             }
             else
             {
@@ -117,19 +113,6 @@ namespace Engine
 
         private void CheckCollisionDimensions(Object collider, float elapsedTime)
         {
-           /* if (Velocity.X != 0)
-            {
-                if (Velocity.Y == 0)
-                {
-                    _collisionDimension[0] = true;
-                }
-            }
-            else if (Velocity.Y != 0)
-            {
-                _collisionDimension[1] = true;
-            }
-            else
-            {*/
                 //X
                 if (!_collisionDimension[0])
                 {
@@ -151,7 +134,6 @@ namespace Engine
                         }
                     }
                 }
-           // }
         }
 
         public void ApplyPosition(float elapsedTime)

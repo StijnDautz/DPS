@@ -11,7 +11,6 @@ namespace Engine
     class Pickup : TexturedObject
     {
         TextObject _discription;
-        bool _discriptionShown;
 
         public Pickup(string id, Object parent, string assetName, string discription) : base(id, parent, assetName)
         {
@@ -34,7 +33,7 @@ namespace Engine
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
-            Character player = World.Player;
+            Player player = World.Player;
             if(collider == player && player.Inventory.AddPickup(this))
             {
                 World.Remove(this);
@@ -44,18 +43,6 @@ namespace Engine
         public virtual void OnClicked()
         {
 
-        }
-
-        public void UpdateDiscription(bool b)
-        {
-            if(b)
-            {
-                World.Player.Inventory.Add(_discription);
-            }
-            else
-            {
-                World.Player.Inventory.Remove(_discription);
-            }
         }
     }
 }

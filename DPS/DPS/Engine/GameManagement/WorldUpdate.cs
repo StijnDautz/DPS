@@ -71,6 +71,7 @@ namespace Engine
             {
                 for(int j = i + 1; j < _collisionObjects.Count; j++)
                 {
+                    _collisionObjects[i].InAir = true;
                     _collisionObjects[i].SetupCollision(_collisionObjects[j], elapsedTime);
                 }
             }
