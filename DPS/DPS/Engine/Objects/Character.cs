@@ -105,7 +105,7 @@ namespace Engine
             }
             if(Velocity.Y != 0)
             {
-                _movementState = VelocityY > 0 ? movementState.JUMPING : movementState.FALLING;
+                _movementState = Velocity.Y < 0 ? movementState.JUMPING : movementState.FALLING;
             }
             else
             {
@@ -137,10 +137,9 @@ namespace Engine
                     break;
                 case movementState.DEATH: SetupAnimation(2, 6, 50, 976, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
                     break;
-                case movementState.JUMPING: SetupAnimation(3, 12, 90, 768, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
+                case movementState.JUMPING: SetupAnimation(3, 12, 45, 768, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
                     break;
             }
-
         }
     }
 }
