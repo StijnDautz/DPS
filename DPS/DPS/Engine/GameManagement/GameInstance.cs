@@ -37,6 +37,10 @@ namespace Engine
             get { return _inputManager; }
         }
 
+        public RenderTarget2D RenderTarget
+        {
+            get { return _renderTarget; }
+        }
 
         public GameInstance()
         {
