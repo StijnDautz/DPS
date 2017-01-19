@@ -12,7 +12,7 @@ namespace Engine
     {
         TextObject _discription;
 
-        public Pickup(string id, Object parent, string assetName, string discription) : base(id, parent, assetName)
+        public Pickup(string id, Object parent, SpriteSheet spriteSheet, string discription) : base(id, parent, spriteSheet)
         {
             _discription = new TextObject("discription", "Hud", World.Player.Inventory);
             _discription.Text = discription;

@@ -12,7 +12,7 @@ namespace Engine
     {
         SoundEffect clickSound; 
 
-        public Button(string id, Object parent, string assetName, string soundName) : base(id, parent, assetName)
+        public Button(string id, Object parent, SpriteSheet spriteSheet, string soundName) : base(id, parent, spriteSheet)
         {
             clickSound = GameInstance.AssetManager.GetSoundEffect("Soundeffects/Rocket");
             

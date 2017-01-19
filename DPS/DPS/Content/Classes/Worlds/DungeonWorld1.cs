@@ -13,7 +13,7 @@ namespace Content
         {
             IsTopDown = false;
             //Add player to world
-            var player = new Engine.Player("player", this, "Textures/Characters/Character");
+            var player = new Engine.Player("player", this, new SpriteSheetCharacter("Textures/Characters/Character"));
             player.Position = new Microsoft.Xna.Framework.Vector2(49000, 9000);
             player.CanCollide = true;
             player.HasPhysics = true;
@@ -21,17 +21,17 @@ namespace Content
             Add(player);
 
             //Items to progress in the Dungeon
-            Pickup SnowShoes = new Pickup("SnowShoes", World, "Textures/Items/SnowShoes", "Capable of walking on Ice");
+            Pickup SnowShoes = new Pickup("SnowShoes", World, new SpriteSheet("Textures/Items/SnowShoes"), "Capable of walking on Ice");
             Add(SnowShoes);
-            UpgradePickup RocketCape = new UpgradePickup("Rocketcape", World, "Textures/Items/Rocketcape", "Cape making high jumps possible");
+            UpgradePickup RocketCape = new UpgradePickup("Rocketcape", World, new SpriteSheet("Textures/Items/Rocketcape"), "Cape making high jumps possible");
             Add(RocketCape);
-            Pickup Key1 = new Pickup("Hallowed_Key", World, "Textures/Items/Hallowed_Key", "First ket in the Dungeon");
+            Pickup Key1 = new Pickup("Hallowed_Key", World, new SpriteSheet("Textures/Items/Hallowed_Key"), "First ket in the Dungeon");
             Add(Key1);
-            Pickup Key2 = new Pickup("Frozen_Key", World, "Textures/Items/Frozen_Key", "Second key in the Dungeon");
+            Pickup Key2 = new Pickup("Frozen_Key", World, new SpriteSheet("Textures/Items/Frozen_Key"), "Second key in the Dungeon");
             Add(Key2);
-            Pickup Key3 = new Pickup("SkeletonKey", World, "Textures/Items/SkeletonKey", "Final key in the Dungeon");
+            Pickup Key3 = new Pickup("SkeletonKey", World, new SpriteSheet("Textures/Items/SkeletonKey"), "Final key in the Dungeon");
             Add(Key3);
-            Pickup Presents = new Pickup("BluePresent", World, "Textures/Items/BluePresent", "Present to break certain blocks");
+            Pickup Presents = new Pickup("BluePresent", World, new SpriteSheet("Textures/Items/BluePresent"), "Present to break certain blocks");
             Add(Presents);
 
             //Setup LevelGrid

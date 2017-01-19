@@ -30,7 +30,7 @@ namespace Engine
             get { return _inventory; }
         }
 
-        public Player(string id, Object parent, string assetName) : base(id, parent, assetName)
+        public Player(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
             _inventory = new Inventory(id + "inventory", World);
             HasPhysics = true;

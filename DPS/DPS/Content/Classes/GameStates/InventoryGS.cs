@@ -23,14 +23,14 @@ namespace Content
         public override void Setup()
         {
             base.Setup();
-            var inventoryBackGround = new TexturedObject("inventory background", HUD, "HUD/inventory");
+            var inventoryBackGround = new TexturedObject("inventory background", HUD, new SpriteSheet("HUD/inventory"));
             inventoryBackGround.Position = new Vector2(240, 135);
             AddToHud(inventoryBackGround);
              
             var inventory = World.Player.Inventory;
             inventory.Position = new Vector2(575, 315);
             string discription = "test pickup up, most OP item in the game";
-            inventory.AddPickup(new Pickup("pickup", inventory, "Textures/Tiles/a.Overworld", discription));
+            inventory.AddPickup(new Pickup("pickup", inventory, new SpriteSheet("Textures/Tiles/a.Overworld"), discription));
             AddToHud(inventory);
         }
 

@@ -16,7 +16,7 @@ namespace Content
 
         private TexturedObject SetupCollisionTile(string id, string assetName)
         {
-            TexturedObject Tile = new TexturedObject(id, this, "Textures/Tiles/" + assetName);
+            TexturedObject Tile = new TexturedObject(id, this, new SpriteSheet("Textures/Tiles/" + assetName));
             Tile.CanCollide = true;
             Tile.CanBlock = true;
             return Tile;
@@ -24,7 +24,7 @@ namespace Content
 
         private TexturedObject WalkableTile(string id, string assetName)
         {
-            TexturedObject Tile = new TexturedObject(id, this, "Textures/Tiles/" + assetName);
+            TexturedObject Tile = new TexturedObject(id, this, new SpriteSheet("Textures/Tiles/" + assetName));
             Tile.CanCollide = false;
             Tile.CanBlock = false;
             return Tile;

@@ -8,7 +8,7 @@ namespace Content
 {
     class PlayButton : Engine.Button
     {
-        public PlayButton(string id, Engine.Object parent, string assetName, string soundName) : base(id, parent, assetName,soundName)
+        public PlayButton(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet, string soundName) : base(id, parent, spriteSheet,soundName)
         {
 
         }

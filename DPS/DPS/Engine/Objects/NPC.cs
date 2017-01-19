@@ -9,7 +9,7 @@ namespace Engine
 {
     class NPC : Character
     {
-        public NPC(string id, Object parent, string assetName) : base(id, parent, assetName)
+        public NPC(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
 
         }

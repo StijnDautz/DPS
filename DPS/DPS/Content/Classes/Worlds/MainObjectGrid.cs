@@ -18,7 +18,7 @@ namespace Content
         {
             switch (type)
             {
-                case '.': return new TexturedObject("walltile", this, "Textures/Tiles/spr_wall");
+                case '.': return new TexturedObject("walltile", this, new SpriteSheet("Textures/Tiles/spr_wall"));
                 default: throw new Exception("character of type: " + type + "was not associated with an Object");
             }
         }

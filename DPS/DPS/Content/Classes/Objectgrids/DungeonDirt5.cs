@@ -39,7 +39,7 @@ namespace Content
 
         private TexturedObject getTile(string s)
         {
-            return new TexturedObject("walltile", this, "Textures/Tiles/" + s);
+            return new TexturedObject("walltile", this, new SpriteSheet("Textures/Tiles/" + s));
         }
     }
 }

@@ -9,12 +9,6 @@ namespace Engine
 {
     class Character : TexturedObject
     {
-        public enum movementState
-        {
-            IDLE, WALKING, RUNNING, JUMPING, FALLING, ATTACK, JUMPATTACK, DEATH,
-        }
-
-        movementState _movementState;
         int _health, _damage, _speed;
         double _attackSpeed, _attackTime;
         bool _attacking;
@@ -43,7 +37,7 @@ namespace Engine
             set { _attackSpeed = value; }
         }
            
-        public Character(string id, Object parent, string assetName) : base(id, parent, assetName)
+        public Character(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
 
         }
@@ -53,10 +47,6 @@ namespace Engine
             base.Update(gameTime);
             float elapsedTime = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
             UpdateCombat(elapsedTime);
-            if(UpdateMovementState(elapsedTime))
-            {
-                UpdateAnimationState();
-            }
         }
 
         public override void OnCollision(Object collider)
@@ -87,58 +77,6 @@ namespace Engine
             else
             {
                 _attacking = false;
-            }
-        }
-
-
-        public virtual bool UpdateMovementState(float elapsedTime)
-        {
-            movementState tempState = _movementState;
-            if (_attacking && (_attackTime += elapsedTime) > _attackSpeed)
-            {
-                _attacking = false;
-                _attackTime = 0;
-            }
-            if (_attacking)
-            {
-                _movementState = InAir ? movementState.JUMPATTACK : movementState.ATTACK;
-            }
-            if(Velocity.Y != 0)
-            {
-                _movementState = Velocity.Y < 0 ? movementState.JUMPING : movementState.FALLING;
-            }
-            else
-            {
-                if(Velocity.X == 0)
-                {
-                    _movementState = movementState.IDLE;
-                }
-                else
-                {
-                    _movementState = movementState.WALKING;
-                }
-            }
-            if(tempState != _movementState)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public override void UpdateAnimationState()
-        {
-            switch(_movementState)
-            {
-                case movementState.IDLE: SetupAnimation(0, 2, 320, 128, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
-                    break;                
-                case movementState.WALKING: SetupAnimation(1, 16, 100, 1024, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
-                    break;
-                case movementState.RUNNING: SetupAnimation(1, 16, 20, 1024, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
-                    break;
-                case movementState.DEATH: SetupAnimation(2, 6, 50, 976, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
-                    break;
-                case movementState.JUMPING: SetupAnimation(3, 12, 45, 768, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
-                    break;
             }
         }
     }

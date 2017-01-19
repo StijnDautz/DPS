@@ -8,7 +8,7 @@ namespace Content
 {
     class ExitButton : Engine.Button
     {
-        public ExitButton(string id, Engine.Object parent, string assetName, string soundName) : base(id, parent, assetName, soundName)
+        public ExitButton(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet, string soundName) : base(id, parent, spriteSheet, soundName)
         {
 
         }

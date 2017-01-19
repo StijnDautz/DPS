@@ -37,7 +37,7 @@ namespace Content
             set { _attackSpeed = value; }
         }
 
-        public UpgradePickup(string id, Engine.Object parent, string assetName, string description) : base(id, parent, assetName, description)
+        public UpgradePickup(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet, string description) : base(id, parent, spriteSheet, description)
         {
 
         }

@@ -19,7 +19,7 @@ namespace Content
             grid.CanCollide = true;
             Add(grid);
             
-            Player player = new Player("player", this, "Textures/Tiles/a.Overworld");
+            Player player = new Player("player", this, new SpriteSheet("Textures/Tiles/a.Overworld"));
             player.CanCollide = true;
             player.Position = new Vector2(300, 300);
 

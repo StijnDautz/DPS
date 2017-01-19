@@ -16,7 +16,7 @@ namespace Content
 
         private TexturedObject SetupCollisionTile(string id, string assetName)
         {
-            TexturedObject Tile = new TexturedObject(id, this, "Textures/Tiles/" + assetName);
+            TexturedObject Tile = new TexturedObject(id, this, new SpriteSheet("Textures/Tiles/" + assetName));
             Tile.CanCollide = true;
             Tile.CanBlock = true;
             return Tile;
@@ -65,7 +65,7 @@ namespace Content
                 case 'q': return SetupCollisionTile("spike", "q.TileSet4");
                 case 'r': return SetupCollisionTile("spike", "r.TileSet4");
                 case '0':
-                case '-': return new TexturedObject("emptytile", this, "Textures/Tiles/0.Overworld");
+                case '-': return new TexturedObject("emptytile", this, new SpriteSheet("Textures/Tiles/0.Overworld"));
 
                 default: throw new Exception("character of type: " + type + "was not associated with an Object");
             }

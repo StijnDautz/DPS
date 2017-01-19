@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    class Texture
+    class SpriteSheet
     {
         private Texture2D _sprite;
         private int _frames, _currentFrame, _frameTime, _elapsedTime, _maxIndex, _index, _width;
@@ -62,7 +62,7 @@ namespace Engine
             set { _frameTime = value; }
         }
 
-        public Texture(string assetName)
+        public SpriteSheet(string assetName)
         {
             _sprite = GameInstance.AssetManager.GetTexture(assetName);
             Frames = 1;
@@ -78,8 +78,20 @@ namespace Engine
             _currentFrame = 1;
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime, Object obj)
         {
+            UpdateAnimationState(obj);
+            if (UpdateAnimation(gameTime))
+            {
+                AfterLastFrame();
+            }
+            SetupAnimation(obj);
+        }
+
+        protected bool UpdateAnimation(GameTime gameTime)
+        {
+            bool hasReset = false;
+
             //if Texture isAnimated, Update it
             if (_isAnimated == true)
             {
@@ -90,10 +102,27 @@ namespace Engine
                     if (_currentFrame > _frames - 1)
                     {
                         _currentFrame = 0;
+                        hasReset = true;
                     }
                     _elapsedTime = 0;
                 }
             }
+            return hasReset;
+        }
+
+        public virtual void UpdateAnimationState(Object obj)
+        {
+
+        }
+
+        public virtual void SetupAnimation(Object obj)
+        {
+            obj.BoundingBox = new Rectangle((int)obj.Position.X, (int)obj.Position.Y, Width, Height);
+        }
+
+        public virtual void AfterLastFrame()
+        {
+
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
@@ -109,7 +138,7 @@ namespace Engine
             spriteBatch.Draw(_sprite, position, new Rectangle(drawFrame, _index * Height, Width, Height), Color.White, 0, Vector2.Zero, 1, effect, 0);
         }
 
-        public void SetupAnimation(int index, int frames, int frameTime, int width)
+        public void ResetAnimation(int index, int frames, int frameTime, int width)
         {
             _elapsedTime = 0;
             _currentFrame = 0;
