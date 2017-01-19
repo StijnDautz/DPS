@@ -8,15 +8,15 @@ namespace Content
 {
     class ExitButton : Engine.Button
     {
-        public ExitButton(string id, Engine.Object parent, string assetName) : base(id, parent, assetName)
+        public ExitButton(string id, Engine.Object parent, string assetName, string soundName) : base(id, parent, assetName, soundName)
         {
 
         }
 
         protected override void ActionWhenPressed()
         {
+            base.ActionWhenPressed();
             World.GameMode.Parent.GameInstance.Exit();
-
         }
     }
 }

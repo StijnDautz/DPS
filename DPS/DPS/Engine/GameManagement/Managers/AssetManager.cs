@@ -34,7 +34,7 @@ namespace Engine
             return _contentManager.Load<Song>(assetName);
         }
 
-        public SoundEffect getSoundEffect(string assetName)
+        public SoundEffect GetSoundEffect(string assetName)
         {
            return _contentManager.Load<SoundEffect>(assetName);
         }
