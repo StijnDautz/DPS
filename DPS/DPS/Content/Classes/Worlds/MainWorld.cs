@@ -23,9 +23,6 @@ namespace Content
             player.CanCollide = true;
             player.Position = new Vector2(300, 300);
 
-            player.texture = new Texture("Textures/Tiles/Eend animatie");
-            player.texture.Frames = 8;
-            player.texture.isAnimated = true;
 
            // player.BoundingBox = new Rectangle((int)player.Position.X, (int)player.Position.Y, 1, 1);
             Add(player);

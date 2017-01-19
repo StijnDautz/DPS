@@ -15,8 +15,8 @@ namespace Content
 
         protected override void ActionWhenPressed()
         {
-            base.ActionWhenPressed();
-            
+            World.GameMode.Parent.GameInstance.Exit();
+
         }
     }
 }

@@ -13,8 +13,12 @@ namespace Content
         {
             AddToHud(new TexturedObject("background", HUD, "HUD/MainMenu"));
             PlayButton playButton = new PlayButton("playButton", HUD, "HUD/PlayButton");
-            playButton.Position = new Microsoft.Xna.Framework.Vector2(500, 400);
+            playButton.Position = new Microsoft.Xna.Framework.Vector2(550, 250);
             AddToHud(playButton);
+
+            ExitButton exitButton = new ExitButton("exitButton", HUD, "HUD/ExitButton");
+            exitButton.Position = new Microsoft.Xna.Framework.Vector2(550,400);
+            AddToHud(exitButton);
         }
 
         public override void Init()
