@@ -11,14 +11,10 @@ namespace Engine
     class Texture
     {
         private Texture2D _sprite;
-        private int _frames;
-        private int _currentFrame;
-        private int _frameTime;
-        private int _elapsedTime;
-        private bool _isAnimated;
-        private bool _mirror;
+        private int _frames, _currentFrame, _frameTime, _elapsedTime, _maxIndex, _index, _width;
+        private bool _isAnimated, _mirrored;
 
-        public bool isAnimated
+        public bool IsAnimated
         {
             get { return _isAnimated; }
             set { _isAnimated = value; }
@@ -31,12 +27,12 @@ namespace Engine
 
         public int Width
         {
-            get { return _sprite.Width / _frames; }
+            get { return _width / _frames; }
         }
 
         public int Height
         {
-            get { return _sprite.Height; }
+            get { return _sprite.Height / _maxIndex; }
         }
 
         public int Frames
@@ -50,9 +46,15 @@ namespace Engine
             }
         }
 
-        public bool Mirror
+        public int Maxindex
         {
-            set { _mirror = value; }
+            set { _maxIndex = value; }
+        }
+
+        public bool Mirrored
+        {
+            get { return _mirrored; }
+            set { _mirrored = value; }
         }
 
         public int FrameTime
@@ -63,9 +65,11 @@ namespace Engine
         public Texture(string assetName)
         {
             _sprite = GameInstance.AssetManager.GetTexture(assetName);
-            _frames = 1;
-            _currentFrame = 1;
+            Frames = 1;
+            _maxIndex = 1;
+            _currentFrame = 0;
             _frameTime = 200;
+            _width = _sprite.Width;
         }
 
         public void Reset()
@@ -83,9 +87,9 @@ namespace Engine
                 if (_elapsedTime > _frameTime)
                 {
                     _currentFrame++;
-                    if (_currentFrame > _frames)
+                    if (_currentFrame > _frames - 1)
                     {
-                        _currentFrame = 1;
+                        _currentFrame = 0;
                     }
                     _elapsedTime = 0;
                 }
@@ -94,7 +98,24 @@ namespace Engine
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            spriteBatch.Draw(_sprite, position);
+            SpriteEffects effect = SpriteEffects.None;
+            int drawFrame = _currentFrame * Width;
+            if(_mirrored)
+            {
+                drawFrame = (_frames - _currentFrame) * Width;
+                effect = SpriteEffects.FlipHorizontally;
+            }
+
+            spriteBatch.Draw(_sprite, position, new Rectangle(drawFrame, _index * Height, Width, Height), Color.White, 0, Vector2.Zero, 1, effect, 0);
         }
+
+        public void SetupAnimation(int index, int frames, int frameTime, int width)
+        {
+            _index = index;
+            _frames = frames;
+            _frameTime = frames;
+            _width = width;         
+        }
+
     }
 }

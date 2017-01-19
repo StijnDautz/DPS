@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using System.Data.SqlClient;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
@@ -20,19 +21,9 @@ namespace Engine
         private static SqlConnection dbConn;
         //Einde database gegevens
 
-
-        private movementState _movementState;
         private Inventory _inventory;
-        private float _attackSpeed;
-        private float _attackDuration;
         private float _walkSpeed;
         private float _runSpeed;
-        private bool _attacking;
-
-        public movementState MovementState
-        {
-            get { return _movementState; }
-        }
         
         public Inventory Inventory
         {
@@ -45,18 +36,16 @@ namespace Engine
             HasPhysics = true;
             CanCollide = true;
             CanBlock = true;
-            _attackSpeed = 1;
-            _attackDuration = 0;
             _walkSpeed = 400;
             _runSpeed = 600;
-            _attacking = false;
+            SetupSpriteSheet(4);
+            IsAnimated = true;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
         }          
-
 
         /*TODO Improve this method look at UpdateMovementState <3*/
         public virtual void HandleInput(GameTime gameTime)
@@ -163,6 +152,11 @@ namespace Engine
             {
                 Velocity = new Vector2(VelocityX, -300);
             }
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            base.Draw(gameTime, spriteBatch);
         }
     }
 }
