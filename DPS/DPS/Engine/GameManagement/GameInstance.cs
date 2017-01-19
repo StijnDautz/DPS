@@ -15,7 +15,6 @@ namespace Engine
         private static AssetManager _assetManager;
         private SpriteBatch _spriteBatch;
         private static InputManager _inputManager;
-        private RenderTarget2D _renderTarget;
 
         protected GameModeManager GameModeManager
         {
@@ -37,9 +36,9 @@ namespace Engine
             get { return _inputManager; }
         }
 
-        public RenderTarget2D RenderTarget
+        public SpriteBatch SpriteBatch
         {
-            get { return _renderTarget; }
+            get { return _spriteBatch; }
         }
 
         public GameInstance()
@@ -57,8 +56,6 @@ namespace Engine
         protected override void LoadContent()
         {
             base.LoadContent();
-            _renderTarget = new RenderTarget2D(GraphicsDevice, 50000, 50000, false, SurfaceFormat.Color, DepthFormat.Depth16, 1, RenderTargetUsage.PreserveContents);
-            GraphicsDevice.SetRenderTarget(_renderTarget);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
@@ -75,7 +72,6 @@ namespace Engine
             base.Draw(gameTime);
             GraphicsDevice.Clear(Color.White);
             _spriteBatch.Begin();
-            _spriteBatch.Draw(_renderTarget, Vector2.Zero, Color.White);
             _gameModeManager.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();
         }
