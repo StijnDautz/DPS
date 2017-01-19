@@ -15,6 +15,10 @@ namespace Engine
             {
                 UpdateCollision(gameTime);
                 UpdateCamera();
+                foreach(Object o in Objects)
+                {
+                    o.Update(gameTime);
+                }
             }
         }
 

@@ -13,7 +13,7 @@ namespace Content
         {
             IsTopDown = false;
             //Add player to world
-            var player = new Engine.Player("player", this, "Textures/Tiles/a.Overworld");
+            var player = new Engine.Player("player", this, "Textures/Characters/Character");
             player.Position = new Microsoft.Xna.Framework.Vector2(49000, 9000);
             player.CanCollide = true;
             player.HasPhysics = true;

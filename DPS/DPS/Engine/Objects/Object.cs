@@ -13,7 +13,6 @@ namespace Engine
         private string _id;
         private float _depth;
         private bool _visible;
-        private bool _mirrored;
         private Object _parent;
         private Vector2 _position;
         private Vector2 _velocity;
@@ -34,12 +33,6 @@ namespace Engine
         {
             get { return _visible; }
             set { _visible = value; }
-        }
-
-        public bool Mirrored
-        {
-            get { return _mirrored; }
-            set { _mirrored = value; }
         }
 
         public Object Parent
