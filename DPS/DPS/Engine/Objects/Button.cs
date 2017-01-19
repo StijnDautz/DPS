@@ -14,7 +14,7 @@ namespace Engine
 
         public Button(string id, Object parent, string assetName, string soundName) : base(id, parent, assetName)
         {
-            clickSound = GameInstance.AssetManager.getSoundEffect("Rocket");
+            clickSound = GameInstance.AssetManager.GetSoundEffect("Rocket");
             
         }
 

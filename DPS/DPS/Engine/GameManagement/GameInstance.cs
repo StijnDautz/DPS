@@ -57,7 +57,7 @@ namespace Engine
         protected override void LoadContent()
         {
             base.LoadContent();
-            _renderTarget = new RenderTarget2D(GraphicsDevice, 50000, 50000, false, SurfaceFormat.Color, DepthFormat.Depth16, 1, RenderTargetUsage.PreserveContents);
+            _renderTarget = new RenderTarget2D(GraphicsDevice, 200, 200, false, SurfaceFormat.Color, DepthFormat.Depth16, 1, RenderTargetUsage.PreserveContents);
             GraphicsDevice.SetRenderTarget(_renderTarget);
             _spriteBatch = new SpriteBatch(GraphicsDevice);
         }
