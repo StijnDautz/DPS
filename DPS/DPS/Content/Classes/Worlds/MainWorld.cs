@@ -23,7 +23,6 @@ namespace Content
             player.CanCollide = true;
             player.Position = new Vector2(300, 300);
 
-
            // player.BoundingBox = new Rectangle((int)player.Position.X, (int)player.Position.Y, 1, 1);
             Add(player);
             Player = player;
