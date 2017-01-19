@@ -19,7 +19,7 @@ namespace Content
             GameStateManager.Add(new StartPlayGS("StartPlay", GameStateManager));
             GameStateManager.Add(new InventoryGS("inventory", GameStateManager));
             GameStateManager.Add(new MainMenuGS("MainMenu", GameStateManager));
-            GameStateManager.SwitchTo("StartPlay");
+            GameStateManager.SwitchTo("MainMenu");
         }
     }
 }
