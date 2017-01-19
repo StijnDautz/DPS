@@ -17,18 +17,11 @@ namespace Engine
         private int _elapsedTime;
         private bool _isAnimated;
         private bool _mirror;
-        private bool _isDynamic;
-        private bool _isCached;
 
         public bool isAnimated
         {
             get { return _isAnimated; }
             set { _isAnimated = value; }
-        }
-
-        public bool IsDynamic
-        {
-            set { _isDynamic = value; }
         }
 
         public Texture2D Sprite
@@ -97,22 +90,11 @@ namespace Engine
                     _elapsedTime = 0;
                 }
             }
-
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position, RenderTarget2D renderTarget)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            if (!_isDynamic && !_isCached)
-            {
-                spriteBatch.GraphicsDevice.SetRenderTarget(renderTarget);
-                spriteBatch.Draw(_sprite, position);
-                spriteBatch.GraphicsDevice.SetRenderTarget(null);
-                _isCached = true;
-            }
-            else
-            {
-                spriteBatch.Draw(_sprite, position);
-            }
+            spriteBatch.Draw(_sprite, position);
         }
     }
 }

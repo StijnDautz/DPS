@@ -175,11 +175,15 @@ namespace Engine
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
+            Vector2 CameraPosition = World.CameraPosition;
             foreach (Object o in _grid)
             {
-                if (o != null)
+                if (o != null )
                 {
-                    o.Draw(gameTime, spriteBatch);
+                    if (!(o.GlobalPosition.X + o.Width < CameraPosition.X || o.GlobalPosition.X > CameraPosition.X + GameInstance.GraphicsDeviceManager.PreferredBackBufferWidth || o.GlobalPosition.Y + o.Height < CameraPosition.Y || o.GlobalPosition.Y > CameraPosition.Y + GameInstance.GraphicsDeviceManager.PreferredBackBufferHeight))
+                    {
+                        o.Draw(gameTime, spriteBatch);
+                    }
                 }
             }
         }
