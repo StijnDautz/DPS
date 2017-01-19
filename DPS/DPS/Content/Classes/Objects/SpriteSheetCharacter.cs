@@ -48,13 +48,13 @@ namespace Content
                     ResetAnimation(2, 6, 50, 976);
                     break;
                 case animation.JUMPING:
-                    ResetAnimation(3, 12, 45, 768);
+                    ResetAnimation(3, 4, 53, 256);
                     break;
                 case animation.INAIR:
                     ResetAnimation(4, 3, 120, 192);
                     break;
                 case animation.FALLING:
-                    ResetAnimation(5, 5, 30, 320);
+                    ResetAnimation(5, 5, 60, 320);
                     break;
             }
             base.SetupAnimation(obj);
@@ -62,10 +62,6 @@ namespace Content
 
         public override void UpdateAnimationState(Engine.Object obj)
         {
-            if (_animation == animation.JUMPING)
-            {
-
-            }
             /*
             if (_attacking && (_attackTime += elapsedTime) > _attackSpeed)
             {
@@ -78,17 +74,27 @@ namespace Content
             }*/
             if (obj.Velocity.Y != 0)
             {
-                _animation = obj.Velocity.Y < 0 ? animation.JUMPING : animation.FALLING;
+                if (_animation != animation.INAIR)
+                {
+                    _animation = animation.JUMPING;
+                }
             }
             else
             {
-                if (obj.Velocity.X == 0)
+                if(_animation == animation.INAIR)
                 {
-                    _animation = animation.IDLE;
+                    _animation = animation.FALLING;
                 }
-                else
+                if (_animation != animation.FALLING)
                 {
-                    _animation = animation.WALKING;
+                    if (obj.Velocity.X == 0)
+                    {
+                        _animation = animation.IDLE;
+                    }
+                    else
+                    {
+                        _animation = animation.WALKING;
+                    }
                 }
             }
         }
@@ -99,6 +105,10 @@ namespace Content
             if (_animation == animation.JUMPING)
             {
                 _animation = animation.INAIR;
+            }
+            if(_animation == animation.FALLING)
+            {
+                _animation = animation.IDLE;
             }
         }
     }
