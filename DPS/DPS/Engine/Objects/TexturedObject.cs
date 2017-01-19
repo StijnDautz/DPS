@@ -12,6 +12,12 @@ namespace Engine
     {
         private Texture _sprite;
 
+        public Texture texture
+        {
+            get { return _sprite; }
+            set { _sprite = value; }
+        }
+
         public TexturedObject(string id, Object parent, string assetName) : base(id, parent)
         {
             _sprite = new Texture(assetName);
@@ -26,6 +32,7 @@ namespace Engine
 
         public override void Update(GameTime gameTime)
         {
+
             base.Update(gameTime);
             _sprite.Update(gameTime);
         }
