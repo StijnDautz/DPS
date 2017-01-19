@@ -103,9 +103,8 @@ namespace Engine
         {
             if(!b && _isDynamic)
             {
-               // _sprite = new RenderTarget2D(graphicsDevice, Width, Height, false, SurfaceFormat.col)
+                _sprite = new RenderTarget2D(graphicsDevice, Width, Height, false, SurfaceFormat.Color, DepthFormat.Depth16, 1, RenderTargetUsage.PreserveContents);
             }
-
         }
     }
 }

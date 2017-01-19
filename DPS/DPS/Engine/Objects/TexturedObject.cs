@@ -33,11 +33,7 @@ namespace Engine
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if (IsDynamic)
-            {
-                _sprite.Update(gameTime, );
-            }
-
+            _sprite.Update(gameTime);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
