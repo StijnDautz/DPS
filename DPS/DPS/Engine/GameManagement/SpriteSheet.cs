@@ -85,7 +85,6 @@ namespace Engine
             {
                 AfterLastFrame();
             }
-            SetupAnimation(obj);
         }
 
         protected bool UpdateAnimation(GameTime gameTime)
@@ -131,7 +130,7 @@ namespace Engine
             int drawFrame = _currentFrame * Width;
             if(_mirrored)
             {
-                drawFrame = (_frames - _currentFrame - 1) * Width;
+                //drawFrame = (_frames - _currentFrame - 1) * Width;
                 effect = SpriteEffects.FlipHorizontally;
             }
 
