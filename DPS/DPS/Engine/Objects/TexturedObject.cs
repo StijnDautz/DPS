@@ -50,10 +50,5 @@ namespace Engine
             }
             _sprite.Draw(spriteBatch, GlobalPosition - World.CameraPosition * Depth);
         }
-
-        public void SetupSpriteSheet(int maxIndex)
-        {
-            _sprite.Maxindex = maxIndex;
-        }
     }
 }

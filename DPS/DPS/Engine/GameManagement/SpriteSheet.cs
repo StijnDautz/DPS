@@ -46,7 +46,7 @@ namespace Engine
             }
         }
 
-        public int Maxindex
+        protected int Maxindex
         {
             set { _maxIndex = value; }
         }

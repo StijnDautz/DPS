@@ -18,7 +18,7 @@ namespace Content
 
         public SpriteSheetCharacter(string assetName) : base(assetName)
         {
-
+            Maxindex = 6;
         }
 
         public override void Update(GameTime gameTime, Engine.Object obj)
