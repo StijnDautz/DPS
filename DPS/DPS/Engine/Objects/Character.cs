@@ -53,8 +53,10 @@ namespace Engine
             base.Update(gameTime);
             float elapsedTime = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
             UpdateCombat(elapsedTime);
-            UpdateMovementState(elapsedTime);
-            UpdateAnimationState();
+            if(UpdateMovementState(elapsedTime))
+            {
+                UpdateAnimationState();
+            }
         }
 
         public override void OnCollision(Object collider)
@@ -89,8 +91,9 @@ namespace Engine
         }
 
 
-        private void UpdateMovementState(float elapsedTime)
+        public virtual bool UpdateMovementState(float elapsedTime)
         {
+            movementState tempState = _movementState;
             if (_attacking && (_attackTime += elapsedTime) > _attackSpeed)
             {
                 _attacking = false;
@@ -100,7 +103,7 @@ namespace Engine
             {
                 _movementState = InAir ? movementState.JUMPATTACK : movementState.ATTACK;
             }
-            if(InAir)
+            if(Velocity.Y != 0)
             {
                 _movementState = VelocityY > 0 ? movementState.JUMPING : movementState.FALLING;
             }
@@ -115,21 +118,26 @@ namespace Engine
                     _movementState = movementState.WALKING;
                 }
             }
+            if(tempState != _movementState)
+            {
+                return true;
+            }
+            return false;
         }
 
         public override void UpdateAnimationState()
         {
             switch(_movementState)
             {
-                case movementState.IDLE: SetupAnimation(0, 2, 320, 128, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 72));
+                case movementState.IDLE: SetupAnimation(0, 2, 320, 128, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
                     break;                
-                case movementState.WALKING: SetupAnimation(1, 16, 150, 1024, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 72));
+                case movementState.WALKING: SetupAnimation(1, 16, 100, 1024, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
                     break;
-                case movementState.RUNNING: SetupAnimation(1, 16, 20, 1024, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 72));
+                case movementState.RUNNING: SetupAnimation(1, 16, 20, 1024, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
                     break;
-                case movementState.DEATH: SetupAnimation(2, 6, 50, 976, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 72));
+                case movementState.DEATH: SetupAnimation(2, 6, 50, 976, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
                     break;
-                case movementState.JUMPING: SetupAnimation(3, 12, 35, 768, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 72));
+                case movementState.JUMPING: SetupAnimation(3, 12, 90, 768, new Rectangle((int)Position.X + 15, (int)Position.Y, 34, 80));
                     break;
             }
 

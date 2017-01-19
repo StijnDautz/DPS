@@ -15,7 +15,10 @@ namespace Engine
             {
                 UpdateCollision(gameTime);
                 UpdateCamera();
-                foreach(Object o in Objects)
+            }
+            foreach (Object o in Objects)
+            {
+                if (_canUpdate && o != null && o.Visible)
                 {
                     o.Update(gameTime);
                 }
@@ -66,6 +69,7 @@ namespace Engine
                 foreach (Object o in Objects)
                 {
                     o.ApplyPhysics(elapsedTime);
+                    o.InAir = true;
                 }
             }
 
@@ -75,7 +79,6 @@ namespace Engine
             {
                 for(int j = i + 1; j < _collisionObjects.Count; j++)
                 {
-                    _collisionObjects[i].InAir = true;
                     _collisionObjects[i].SetupCollision(_collisionObjects[j], elapsedTime);
                 }
             }

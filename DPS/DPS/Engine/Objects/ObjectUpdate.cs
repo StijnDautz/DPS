@@ -113,12 +113,15 @@ namespace Engine
 
         private void CheckCollisionDimensions(Object collider, float elapsedTime)
         {
-                //X
-                if (!_collisionDimension[0])
+            if (this is Character)
+            {
+                int x = 0;
+            }
+            //X
+            if (!_collisionDimension[0])
                 {
                     if (!CollisionHelper.CollidesWith(this, new Vector2(0, Velocity.Y), collider, collider._velocity, elapsedTime))
-                    {
-                    
+                    {                   
                         _collisionDimension[0] = true;
                     }
                 }
@@ -128,7 +131,7 @@ namespace Engine
                     if (!CollisionHelper.CollidesWith(this, new Vector2(Velocity.X, 0), collider, collider._velocity, elapsedTime))
                     {
                         _collisionDimension[1] = true;
-                        if (_velocity.Y > 0 && _inAir)
+                        if (_velocity.Y > 0)
                         {
                             InAir = false;
                         }

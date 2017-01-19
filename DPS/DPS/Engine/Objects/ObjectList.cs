@@ -47,12 +47,9 @@ namespace Engine
         {
             foreach (Object o in _objects)
             {
-                if (o != null)
+                if (o != null && o.Visible)
                 {
-                    if (o.Visible)
-                    {
-                        o.Update(gameTime);
-                    }
+                    o.Update(gameTime);
                 }
             }
         }

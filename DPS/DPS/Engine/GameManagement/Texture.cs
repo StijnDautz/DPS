@@ -111,9 +111,11 @@ namespace Engine
 
         public void SetupAnimation(int index, int frames, int frameTime, int width)
         {
+            _elapsedTime = 0;
+            _currentFrame = 0;
             _index = index;
             _frames = frames;
-            _frameTime = frames;
+            _frameTime = frameTime;
             _width = width;         
         }
 
