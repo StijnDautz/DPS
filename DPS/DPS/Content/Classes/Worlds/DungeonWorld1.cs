@@ -31,7 +31,7 @@ namespace Content
             Add(Key2);
             Pickup Key3 = new Pickup("SkeletonKey", World, "Textures/Items/SkeletonKey", "Final key in the Dungeon");
             Add(Key3);
-            Pickup Presents = new Pickup("BluePresent", World, "BluePresent", "Present to break certain blocks");
+            Pickup Presents = new Pickup("BluePresent", World, "Textures/Items/BluePresent", "Present to break certain blocks");
             Add(Presents);
 
             //Setup LevelGrid

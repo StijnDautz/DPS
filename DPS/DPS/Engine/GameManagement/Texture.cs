@@ -17,6 +17,7 @@ namespace Engine
         private int _elapsedTime;
         private bool _isAnimated;
         private bool _mirror;
+        private bool _isDynamic;
 
         public bool isAnimated
         {
@@ -66,7 +67,6 @@ namespace Engine
             _frames = 1;
             _currentFrame = 1;
             _frameTime = 200;
-            _isAnimated = false;
         }
 
         public void Reset()
@@ -77,7 +77,6 @@ namespace Engine
 
         public void Update(GameTime gameTime)
         {
-            int x = 1;
             //if Texture isAnimated, Update it
             if (_isAnimated == true)
             {
@@ -98,6 +97,15 @@ namespace Engine
         public void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             spriteBatch.Draw(_sprite, position);
+        }
+
+        public void IsDynamic(bool b, GraphicsDevice graphicsDevice)
+        {
+            if(!b && _isDynamic)
+            {
+               // _sprite = new RenderTarget2D(graphicsDevice, Width, Height, false, SurfaceFormat.col)
+            }
+
         }
     }
 }

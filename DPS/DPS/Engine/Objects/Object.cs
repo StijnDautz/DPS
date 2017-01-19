@@ -151,12 +151,8 @@ namespace Engine
             _id = id;
             _depth = 1;
             _visible = true;
-            _mirrored = false;
-            _hasPhysics = false;
             _inAir = true;
             _parent = parent;
-            _position = Vector2.Zero;
-            _velocity = Vector2.Zero;
             _boundingBox = new Rectangle((int)Position.X, (int)Position.Y, 0, 0);
             _collisionDimension = new bool[2];
         }
