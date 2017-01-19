@@ -27,7 +27,6 @@ namespace Engine
         private float _attackDuration;
         private float _walkSpeed;
         private float _runSpeed;
-        private int _health;
         private bool _attacking;
 
         public movementState MovementState
@@ -56,9 +55,8 @@ namespace Engine
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            float elapsedTime = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
-            _movementState = UpdateMovementState(elapsedTime);
-        }
+        }          
+
 
         /*TODO Improve this method look at UpdateMovementState <3*/
         public virtual void HandleInput(GameTime gameTime)
@@ -165,23 +163,6 @@ namespace Engine
             {
                 Velocity = new Vector2(VelocityX, -300);
             }
-        }
-
-        private movementState UpdateMovementState(float elapsedTime)
-        {
-            if (_attacking && (_attackDuration += elapsedTime) > _attackSpeed)
-            {
-                _attacking = false;
-                _attackDuration = 0;
-            }
-            if (_attacking)
-            {
-                return InAir ? movementState.JUMPATTACK : movementState.ATTACK;
-            }       
-            return InAir ? VelocityY > 0 ? movementState.JUMPING : movementState.FALLING : 
-                VelocityX == 0 ? movementState.IDLE : 
-                VelocityX == _walkSpeed ? movementState.WALKING : 
-                movementState.RUNNING;
         }
     }
 }
