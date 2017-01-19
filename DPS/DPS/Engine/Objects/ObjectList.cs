@@ -61,12 +61,9 @@ namespace Engine
         {
             foreach (Object o in _objects)
             {
-                if (o != null)
+                if (o != null && o.Visible)
                 {
-                    if (o.Visible)
-                    {
-                        o.Draw(gameTime, spriteBatch);
-                    }
+                    o.Draw(gameTime, spriteBatch);
                 }
             }
         }

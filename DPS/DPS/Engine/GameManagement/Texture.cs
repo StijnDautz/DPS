@@ -18,6 +18,12 @@ namespace Engine
         private bool _isAnimated;
         private bool _mirror;
 
+        public bool isAnimated
+        {
+            get { return _isAnimated; }
+            set { _isAnimated = value; }
+        }
+
         public Texture2D Sprite
         {
             get { return _sprite; }
@@ -71,6 +77,7 @@ namespace Engine
 
         public void Update(GameTime gameTime)
         {
+            int x = 1;
             //if Texture isAnimated, Update it
             if (_isAnimated == true)
             {
@@ -85,6 +92,7 @@ namespace Engine
                     _elapsedTime = 0;
                 }
             }
+
         }
 
         public void Draw(SpriteBatch spriteBatch, Vector2 position)

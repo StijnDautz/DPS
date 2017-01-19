@@ -146,7 +146,7 @@ namespace Engine
 
         public override void SetupCollision(Object collider, float elapsedTime)
         {
-            Point p = GetPositionInGrid(collider);
+            Point p = GetPositionInGrid(collider.GlobalPosition);
             Object obj = getTile(p);
             if(obj is ObjectGrid)
             {
