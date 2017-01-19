@@ -64,7 +64,7 @@ namespace Engine
 
         public void SetupSpriteSheet(int maxIndex)
         {
-            _sprite.Maxindex = 4;
+            _sprite.Maxindex = maxIndex;
         }
     }
 }

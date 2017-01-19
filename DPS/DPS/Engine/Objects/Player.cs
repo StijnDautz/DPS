@@ -38,7 +38,7 @@ namespace Engine
             CanBlock = true;
             _walkSpeed = 400;
             _runSpeed = 600;
-            SetupSpriteSheet(4);
+            SetupSpriteSheet(5);
             IsAnimated = true;
         }
 
