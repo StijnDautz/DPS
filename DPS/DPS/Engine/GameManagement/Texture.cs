@@ -18,11 +18,17 @@ namespace Engine
         private bool _isAnimated;
         private bool _mirror;
         private bool _isDynamic;
+        private bool _isCached;
 
         public bool isAnimated
         {
             get { return _isAnimated; }
             set { _isAnimated = value; }
+        }
+
+        public bool IsDynamic
+        {
+            set { _isDynamic = value; }
         }
 
         public Texture2D Sprite
@@ -94,16 +100,18 @@ namespace Engine
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        public void Draw(SpriteBatch spriteBatch, Vector2 position, RenderTarget2D renderTarget)
         {
-            spriteBatch.Draw(_sprite, position);
-        }
-
-        public void IsDynamic(bool b, GraphicsDevice graphicsDevice)
-        {
-            if(!b && _isDynamic)
+            if (!_isDynamic && !_isCached)
             {
-                _sprite = new RenderTarget2D(graphicsDevice, Width, Height, false, SurfaceFormat.Color, DepthFormat.Depth16, 1, RenderTargetUsage.PreserveContents);
+                spriteBatch.GraphicsDevice.SetRenderTarget(renderTarget);
+                spriteBatch.Draw(_sprite, position);
+                spriteBatch.GraphicsDevice.SetRenderTarget(null);
+                _isCached = true;
+            }
+            else
+            {
+                spriteBatch.Draw(_sprite, position);
             }
         }
     }

@@ -22,6 +22,7 @@ namespace Engine
         {
             _sprite = new Texture(assetName);
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, _sprite.Width, _sprite.Height);
+            _sprite.IsDynamic = true;
         }
 
         public override void Reset()
@@ -39,7 +40,7 @@ namespace Engine
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
-            _sprite.Draw(spriteBatch, GlobalPosition - World.CameraPosition * Depth);
+            _sprite.Draw(spriteBatch, GlobalPosition - World.CameraPosition * Depth, World.GameMode.Parent.GameInstance.RenderTarget);
         }
     }
 }
