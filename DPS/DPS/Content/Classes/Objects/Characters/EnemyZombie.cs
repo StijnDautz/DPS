@@ -60,7 +60,7 @@ namespace Content
         {
             base.UpdateBehaviour(gameTime);
             float elapedTime = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
-            Vector2 distanceToPlayer = World.Player.GlobalPosition - GlobalPosition;
+            Vector2 distanceToPlayer = World.Player.GlobalOrigin - GlobalOrigin;
             if (_reactionRange > distanceToPlayer.Length())
             {
                 Speed = _sprintSpeed;

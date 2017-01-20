@@ -41,10 +41,5 @@ namespace Engine
             base.Draw(gameTime, spriteBatch);
             _sprite.Draw(spriteBatch, GlobalPosition - World.CameraPosition * Depth);
         }
-
-        public virtual void UpdateAnimationState()
-        {
-
-        }
     }
 }
