@@ -36,6 +36,11 @@ namespace Engine
             get { return _attackSpeed; }
             set { _attackSpeed = value; }
         }
+
+        public bool Attacking
+        {
+            get { return _attacking; }
+        }
            
         public Character(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
@@ -70,14 +75,10 @@ namespace Engine
             //update attackTime
             _attackTime += elapsedTime;
 
-            //if attackTime has been long enough and character wants to attack, start new attack by resetting attackTime to 0
+            //if attackTime has been long enough and character wants to attack, start new attack by resetting attackTime to 0 
             if (_attacking && _attackTime > _attackSpeed)
             {
                 _attackTime = 0;
-            }
-            //else the character cannot attack
-            else
-            {
                 _attacking = false;
             }
         }

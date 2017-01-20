@@ -14,6 +14,7 @@ namespace Engine
         private bool _canBlock;
         private bool _inAir;
         private bool[] _collisionDimension;
+        private Engine.SFX _soundEffects;
 
         public bool HasPhysics
         {
@@ -53,9 +54,14 @@ namespace Engine
             set { _inAir = value; }
         }
 
+        public SFX SFX
+        {
+            get { return _soundEffects; }
+        }
+
         public virtual void Update(GameTime gameTime)
         {
-
+            _soundEffects.Update(gameTime, World.Player);
         }
        
         public virtual void ApplyPhysics(float elapsedTime)

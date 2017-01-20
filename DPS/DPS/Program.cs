@@ -24,7 +24,7 @@ namespace Engine
         {
             base.LoadContent();
             MainGameMode gameMode = new MainGameMode("MainGM", GameModeManager);
-            gameMode.AddWorld(new DungeonWorld1("Dungeon1", 50000, 50000, gameMode));
+            gameMode.AddWorld(new DungeonWorld1("Dungeon1", 94080, 26880, gameMode));
             gameMode.AddWorld(new MainWorld("MainWorld", 50000, 50000, gameMode));
             gameMode.SwitchTo("Dungeon1");
             gameMode.Setup();

@@ -26,6 +26,7 @@ namespace Content
                 snowball.Velocity = distanceToPlayer * 200;
                 snowball.HasPhysics = true;
                 snowball.CanCollide = true;
+                World.Add(snowball);
             }
         }
     }

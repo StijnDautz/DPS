@@ -48,9 +48,8 @@
     <Compile Include="Content\Classes\Objectgrids\Overworld.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemySnowMan.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemyZombie.cs" />
+    <Compile Include="Content\Classes\Objects\Characters\SpriteSheetSnowMan.cs" />
     <Compile Include="Content\Classes\Objects\Characters\SpriteSheetZombie.cs" />
-    <Compile Include="Content\Classes\Objects\Characters\Terror.cs" />
-    <Compile Include="Content\Classes\Objects\Characters\TerrorSheetCharacter.cs" />
     <Compile Include="Content\Classes\Objects\ExitButton.cs" />
     <Compile Include="Content\Classes\Objects\PlayButton.cs" />
     <Compile Include="Content\Classes\Objects\Characters\SpriteSheetCharacter.cs" />
@@ -61,6 +60,7 @@
     <Compile Include="Content\Classes\Worlds\RandomGenerator.cs" />
     <Compile Include="Engine\GameManagement\Managers\CollisionHelper.cs" />
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
+    <Compile Include="Engine\GameManagement\SFX.cs" />
     <Compile Include="Engine\GameManagement\WorldUpdate.cs" />
     <Compile Include="Engine\Objects\Button.cs" />
     <Compile Include="Engine\Objects\Character.cs" />
