@@ -18,7 +18,8 @@ namespace Content
 
         public SpriteSheetCharacter(string assetName) : base(assetName)
         {
-            Maxindex = 6;
+            Maxindex = 7;
+            IsAnimated = true;
         }
 
         public override void Update(GameTime gameTime, Engine.Object obj)

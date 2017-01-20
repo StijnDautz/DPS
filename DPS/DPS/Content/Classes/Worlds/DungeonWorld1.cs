@@ -15,10 +15,12 @@ namespace Content
             //Add player to world
             var player = new Engine.Player("player", this, new SpriteSheetCharacter("Textures/Characters/Character"));
             player.Position = new Microsoft.Xna.Framework.Vector2(49000, 9000);
-            player.CanCollide = true;
-            player.HasPhysics = true;
             Player = player;
             Add(player);
+
+            var zombie = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "Sound Effects - Zombie normal", "Sound Effects - Zombie scream");
+            zombie.Position = new Microsoft.Xna.Framework.Vector2(48700, 9300);
+            Add(zombie);
 
             //Items to progress in the Dungeon
             Pickup SnowShoes = new Pickup("SnowShoes", World, new SpriteSheet("Textures/Items/SnowShoes"), "Capable of walking on Ice");

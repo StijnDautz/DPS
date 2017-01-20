@@ -18,11 +18,6 @@ namespace Engine
             set { _sprite.Mirrored = value; }
         }
 
-        public bool IsAnimated
-        {
-            set { _sprite.IsAnimated = value; }
-        }
-
         public TexturedObject(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent)
         {
             _sprite = spriteSheet;

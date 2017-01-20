@@ -39,7 +39,9 @@ namespace Engine
            
         public Character(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
-
+            HasPhysics = true;
+            CanCollide = true;
+            CanBlock = true;
         }
 
         public override void Update(GameTime gameTime)

@@ -17,6 +17,12 @@ namespace Engine
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            UpdateBehaviour(gameTime);
+        }
+
+        protected virtual void UpdateBehaviour(GameTime gameTime)
+        {
+
         }
     }
 }
