@@ -133,3 +133,27 @@
 /processorParam:Quality=Best
 /build:Soundeffects/Sound Effects - Zombie scream.wav
 
+#begin Soundeffects/zombieNormal1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Soundeffects/zombieNormal1.wav
+
+#begin Soundeffects/zombieNormal2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Soundeffects/zombieNormal2.wav
+
+#begin Soundeffects/zombieNormal3.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Soundeffects/zombieNormal3.wav
+
+#begin Soundeffects/zombieNormal4.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Soundeffects/zombieNormal4.wav
+

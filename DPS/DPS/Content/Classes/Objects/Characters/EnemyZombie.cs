@@ -14,6 +14,7 @@ namespace Content
         private float _walkPath;
         SoundEffect _chillScream;
         SoundEffect _crazyScream;
+        SoundEffectInstance _playingSFX;
         
         public int WalkSpeed
         {
@@ -32,8 +33,10 @@ namespace Content
             _walkSpeed = 25;
             _walkLeftBoundary = -96;
             _walkRightBoudary = 96;
-            _chillScream = Engine.GameInstance.AssetManager.GetSoundEffect(chillScreamSFX);
+            _chillScream = Engine.GameInstance.AssetManager.GetSoundEffect(chillScreamSFX + Engine.GameInstance.RNG.Next(1, 5).ToString());
             _crazyScream = Engine.GameInstance.AssetManager.GetSoundEffect(crazyScreamSFX);
+            _playingSFX = _chillScream.CreateInstance();
+            _playingSFX.Play();
         }
 
         public override void Update(GameTime gameTime)
@@ -42,8 +45,14 @@ namespace Content
             base.Update(gameTime);
             if(tempSpeed != Speed)
             {
-                SoundEffect soundToPlay = Math.Abs(Speed) == _walkSpeed ? _chillScream : _crazyScream;
-                soundToPlay.Play();
+                SoundEffectInstance soundToPlay = Math.Abs(Speed) == _walkSpeed ? _chillScream.CreateInstance() : _crazyScream.CreateInstance();
+                if (_playingSFX != soundToPlay)
+                {
+                    _playingSFX.Stop();
+                    _playingSFX = soundToPlay;
+                    _playingSFX.IsLooped = true;
+                    _playingSFX.Play();
+                }
             }
         }
 
