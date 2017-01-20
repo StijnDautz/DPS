@@ -48,6 +48,8 @@
     <Compile Include="Content\Classes\Objectgrids\Overworld.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemyZombie.cs" />
     <Compile Include="Content\Classes\Objects\Characters\SpriteSheetZombie.cs" />
+    <Compile Include="Content\Classes\Objects\Characters\Terror.cs" />
+    <Compile Include="Content\Classes\Objects\Characters\TerrorSheetCharacter.cs" />
     <Compile Include="Content\Classes\Objects\ExitButton.cs" />
     <Compile Include="Content\Classes\Objects\PlayButton.cs" />
     <Compile Include="Content\Classes\Objects\Characters\SpriteSheetCharacter.cs" />

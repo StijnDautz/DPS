@@ -18,9 +18,14 @@ namespace Content
             Player = player;
             Add(player);
 
-            var zombie = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "Sound Effects - Zombie normal", "Sound Effects - Zombie scream");
-            zombie.Position = new Microsoft.Xna.Framework.Vector2(48700, 9300);
-            Add(zombie);
+            //var zombie = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "Sound Effects - Zombie normal", "Sound Effects - Zombie scream");
+            //zombie.Position = new Microsoft.Xna.Framework.Vector2(48700, 9300);
+            //Add(zombie);
+
+            var terror = new Terror("terror", this, new TerrorSheetCharacter("Textures/Characters/Eend Animatie"), "Sound Effects - Eend Hit", "Sound Effects - Eend Hit");
+            terror.Position = new Microsoft.Xna.Framework.Vector2(48700, 9300);
+            Add(terror);
+
 
             //Items to progress in the Dungeon
             Pickup SnowShoes = new Pickup("SnowShoes", World, new SpriteSheet("Textures/Items/SnowShoes"), "Capable of walking on Ice");
