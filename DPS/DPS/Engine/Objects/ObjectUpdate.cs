@@ -53,16 +53,6 @@ namespace Engine
             set { _inAir = value; }
         }
 
-        private Vector2 Vec_VelocityX
-        {
-            get { return new Vector2(_velocity.X, 0); }
-        }
-
-        private Vector2 Vec_VelocityY
-        {
-            get { return new Vector2(0, _velocity.Y); }
-        }
-
         public virtual void Update(GameTime gameTime)
         {
 
@@ -113,30 +103,32 @@ namespace Engine
 
         private void CheckCollisionDimensions(Object collider, float elapsedTime)
         {
-            if (this is Character)
-            {
-                int x = 0;
-            }
             //X
-            if (!_collisionDimension[0])
-                {
-                    if (!CollisionHelper.CollidesWith(this, new Vector2(0, Velocity.Y), collider, collider._velocity, elapsedTime))
-                    {                   
-                        _collisionDimension[0] = true;
-                    }
+            if (!_collisionDimension[0] && _velocity.X != 0)
+            {
+                if (!CollisionHelper.CollidesWith(this, new Vector2(0, Velocity.Y), collider, collider._velocity, elapsedTime))
+                {                   
+                    _collisionDimension[0] = true;
                 }
-                //Y
-                if (!_collisionDimension[1])
+            }
+
+            //Y
+            if (!_collisionDimension[1] && _velocity.Y != 0)
+            {
+                if (!CollisionHelper.CollidesWith(this, new Vector2(Velocity.X, 0), collider, collider._velocity, elapsedTime))
                 {
-                    if (!CollisionHelper.CollidesWith(this, new Vector2(Velocity.X, 0), collider, collider._velocity, elapsedTime))
+                    if (this is Character)
                     {
-                        _collisionDimension[1] = true;
-                        if (_velocity.Y > 0)
-                        {
-                            InAir = false;
-                        }
+                        int x = 0;
                     }
+                    if (_velocity.Y > 0)
+                    {
+                        _position.Y += collider.GlobalPosition.Y - (GlobalPosition.Y + Height + 0.001f);
+                    }
+                    _collisionDimension[1] = true;
+                    InAir = false;
                 }
+            }
         }
 
         public void ApplyPosition(float elapsedTime)
@@ -148,7 +140,7 @@ namespace Engine
             else
             {
                 _collisionDimension[0] = false;
-                _velocity.X = 0;
+               // _velocity.X = 0;
             }
             if(!_collisionDimension[1])
             {

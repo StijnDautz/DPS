@@ -39,7 +39,7 @@ namespace Content
                     ResetAnimation(0, 2, 320, 128);
                     break;
                 case animation.WALKING:
-                    ResetAnimation(1, 16, 100, 1024);
+                    ResetAnimation(1, 16, 40, 1024);
                     break;
                 case animation.RUNNING:
                     ResetAnimation(1, 16, 20, 1024);
@@ -54,7 +54,7 @@ namespace Content
                     ResetAnimation(4, 3, 120, 192);
                     break;
                 case animation.FALLING:
-                    ResetAnimation(5, 5, 60, 320);
+                    ResetAnimation(5, 5, 45, 320);
                     break;
             }
             base.SetupAnimation(obj);
@@ -72,6 +72,7 @@ namespace Content
             {
                 _movementState = InAir ? movementState.JUMPATTACK : movementState.ATTACK;
             }*/
+
             if (obj.Velocity.Y != 0)
             {
                 if (_animation != animation.INAIR)
@@ -87,13 +88,13 @@ namespace Content
                 }
                 if (_animation != animation.FALLING)
                 {
-                    if (obj.Velocity.X == 0)
+                    if (obj.VelocityX != 0)
                     {
-                        _animation = animation.IDLE;
+                        _animation = animation.WALKING;
                     }
                     else
                     {
-                        _animation = animation.WALKING;
+                        _animation = animation.IDLE;
                     }
                 }
             }

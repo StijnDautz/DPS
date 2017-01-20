@@ -44,11 +44,12 @@ namespace Engine
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
-            if (this is Character)
-            {
-                int x = 0;
-            }
             _sprite.Draw(spriteBatch, GlobalPosition - World.CameraPosition * Depth);
+        }
+
+        public virtual void UpdateAnimationState()
+        {
+
         }
     }
 }
