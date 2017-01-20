@@ -19,7 +19,7 @@ namespace Content
         public SpriteSheetZombie(string assetName) : base(assetName)
         {
             IsAnimated = true;
-            ResetAnimation(0, 4, 300, 248);
+            ResetAnimation(0, 4, 300, 256);
         }
 
         public override void UpdateAnimationState(Engine.Object obj)
@@ -46,10 +46,10 @@ namespace Content
                 switch (_animation)
                 {
                     case animation.WALKING:
-                        ResetAnimation(0, 4, 300, 248);
+                        ResetAnimation(0, 4, 300, 256);
                         break;
                     case animation.RUNNING:
-                        ResetAnimation(0, 4, 40, 248);
+                        ResetAnimation(0, 4, 40, 256);
                         break;
                 }
             }

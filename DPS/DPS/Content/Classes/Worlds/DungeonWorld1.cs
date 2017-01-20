@@ -18,7 +18,7 @@ namespace Content
             Player = player;
             Add(player);
 
-            var zombie = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "Sound Effects - Zombie normal", "Sound Effects - Zombie scream");
+            var zombie = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
             zombie.Position = new Microsoft.Xna.Framework.Vector2(48700, 9300);
             Add(zombie);
 

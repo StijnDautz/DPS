@@ -15,6 +15,7 @@ namespace Engine
         private static AssetManager _assetManager;
         private SpriteBatch _spriteBatch;
         private static InputManager _inputManager;
+        private static Random _rng;
 
         protected GameModeManager GameModeManager
         {
@@ -41,6 +42,11 @@ namespace Engine
             get { return _spriteBatch; }
         }
 
+        public static Random RNG
+        {
+            get { return _rng; }
+        }
+
         public GameInstance()
         {
             Content.RootDirectory = "Content";
@@ -49,6 +55,7 @@ namespace Engine
             _gameModeManager = new GameModeManager();
             _gameModeManager.GameInstance = this;
             _inputManager = new InputManager();
+            _rng = new Random();
             _graphics.PreferredBackBufferWidth = 1280;
             _graphics.PreferredBackBufferHeight = 720;
         }
