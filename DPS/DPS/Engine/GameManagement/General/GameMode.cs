@@ -35,7 +35,7 @@ namespace Engine
             get { return _gameStateManager; }
         }
 
-        public GameModeManager Parent
+        public GameModeManager GameModeManager
         {
             get { return _parent; }
             set { _parent = value; }

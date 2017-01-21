@@ -149,6 +149,10 @@ namespace Engine
             Point p = GetPositionInGrid(collider.GlobalPosition);
             if(!(p.X -1 < 0 || p.Y - 1 < 0 || p.X + 3 > _collums || p.Y + 3 > _rows))
             {
+                if (p == new Point(27, 9))
+                {
+                    Vector2 fdsp = this.GlobalPosition;
+                }
                 Object obj = getTile(p);
                 if (obj is ObjectGrid)
                 {

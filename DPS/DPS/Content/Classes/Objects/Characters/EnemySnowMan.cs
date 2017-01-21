@@ -9,24 +9,28 @@ namespace Content
 {
     class EnemySnowMan : Engine.NPC
     {
-        private int _reactionRange, _elapsedTime, _delay;
-        EnemySnowMan(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
+        private int _reactionRange, _delay, _elapsedTime;
+        public EnemySnowMan(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
-
+            _reactionRange = 1500;
+            _delay = 1800;
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)
         {
             base.UpdateBehaviour(gameTime);
-            Vector2 distanceToPlayer = World.Player.GlobalOrigin - GlobalOrigin;
-            if(_reactionRange < distanceToPlayer.Length())
+            Vector2 distanceToPlayer = World.Player.GlobalPosition - GlobalOrigin;
+            _elapsedTime += gameTime.ElapsedGameTime.Milliseconds;
+
+            if(_reactionRange > distanceToPlayer.Length() && _elapsedTime > _delay)
             {
-                Engine.TexturedObject snowball = new Engine.TexturedObject("snowball", World, new Engine.SpriteSheet("Textures/Items/Frozen_Key"));
+                _elapsedTime = 0;
+                var snowball = new ObjectSnowBall("snowball", World, new Engine.SpriteSheet("Textures/Projectiles/Snowball"));
+                snowball.Position = Mirrored ? new Vector2(PositionX, PositionY + 30) : new Vector2(PositionX + Width - 20, PositionY + 30);
                 distanceToPlayer.Normalize();
-                snowball.Velocity = distanceToPlayer * 200;
-                snowball.HasPhysics = true;
-                snowball.CanCollide = true;
+                snowball.Velocity = distanceToPlayer * 600;
                 World.Add(snowball);
+                Attacking = true;
             }
         }
     }

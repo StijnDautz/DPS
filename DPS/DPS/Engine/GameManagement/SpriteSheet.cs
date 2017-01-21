@@ -20,11 +20,6 @@ namespace Engine
             set { _isAnimated = value; }
         }
 
-        public Texture2D Sprite
-        {
-            get { return _sprite; }
-        }
-
         public int Width
         {
             get { return _width / _frames; }
@@ -35,7 +30,7 @@ namespace Engine
             get { return _sprite.Height / _maxIndex; }
         }
 
-        public int Frames
+        protected int Frames
         {
             get { return _frames; }
             set
@@ -57,7 +52,7 @@ namespace Engine
             set { _mirrored = value; }
         }
 
-        public int FrameTime
+        protected int FrameTime
         {
             set { _frameTime = value; }
         }
@@ -83,7 +78,7 @@ namespace Engine
             UpdateAnimationState(obj);
             if (UpdateAnimation(gameTime))
             {
-                AfterLastFrame();
+                AfterLastFrame(obj);
             }
         }
 
@@ -109,35 +104,39 @@ namespace Engine
             return hasReset;
         }
 
-        public virtual void UpdateAnimationState(Object obj)
+        protected virtual void UpdateAnimationState(Object obj)
         {
 
         }
 
-        public virtual void SetupAnimation(Object obj)
+        protected virtual void SetupAnimation(Object obj)
         {
             obj.BoundingBox = new Rectangle((int)obj.Position.X, (int)obj.Position.Y, Width, Height);
         }
 
-        public virtual void AfterLastFrame()
+        protected virtual void AfterLastFrame(Object obj)
         {
 
         }
 
-        public void Draw(SpriteBatch spriteBatch, Vector2 position)
+        protected virtual Rectangle getSourceRectangle(int frameToDraw)
+        {
+            return new Rectangle(frameToDraw, _index * Height, Width, Height);
+        }
+
+        public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             SpriteEffects effect = SpriteEffects.None;
-            int drawFrame = _currentFrame * Width;
+            int frameToDraw = _currentFrame * Width;
             if(_mirrored)
             {
                 //drawFrame = (_frames - _currentFrame - 1) * Width;
                 effect = SpriteEffects.FlipHorizontally;
             }
-
-            spriteBatch.Draw(_sprite, position, new Rectangle(drawFrame, _index * Height, Width, Height), Color.White, 0, Vector2.Zero, 1, effect, 0);
+            spriteBatch.Draw(_sprite, position, getSourceRectangle(frameToDraw), Color.White, 0, Vector2.Zero, 1, effect, 0);
         }
 
-        public void ResetAnimation(int index, int frames, int frameTime, int width)
+        protected void ResetAnimation(int index, int frames, int frameTime, int width)
         {
             _elapsedTime = 0;
             _currentFrame = 0;

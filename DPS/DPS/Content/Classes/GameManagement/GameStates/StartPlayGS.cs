@@ -13,7 +13,9 @@ namespace Content
     {
         public StartPlayGS(string id, GameStateManager gameStateManager) : base(id, gameStateManager)
         {
-
+            var timer = new Timer("timer", HUD);
+            timer.Position = new Vector2(1000, 600);
+            AddToHud(timer);
         }
 
         public override void Init()
@@ -21,6 +23,7 @@ namespace Content
             base.Init();
             IsMouseVisible = false;
             World.CanUpdate = true;
+            CanUpdateGameTime = true;          
         }
 
         public override void HandleInput(GameTime gameTime)

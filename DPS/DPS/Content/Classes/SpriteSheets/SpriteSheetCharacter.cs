@@ -32,36 +32,36 @@ namespace Content
             }
         }
 
-        public override void SetupAnimation(Engine.Object obj)
+        protected override void SetupAnimation(Engine.Object obj)
         {
             switch (_animation)
             {
                 case animation.IDLE:
-                    ResetAnimation(0, 2, 320, 128);
+                    ResetAnimation(0, 2, 320, 256);
                     break;
                 case animation.WALKING:
-                    ResetAnimation(1, 16, 40, 1024);
+                    ResetAnimation(1, 16, 40, 2048);
                     break;
                 case animation.RUNNING:
-                    ResetAnimation(1, 16, 20, 1024);
+                    ResetAnimation(1, 16, 20, 2048);
                     break;
                 case animation.DEATH:
-                    ResetAnimation(2, 6, 50, 976);
+                    ResetAnimation(2, 6, 50, 1952);
                     break;
                 case animation.JUMPING:
-                    ResetAnimation(3, 4, 53, 256);
+                    ResetAnimation(3, 4, 53, 512);
                     break;
                 case animation.INAIR:
-                    ResetAnimation(4, 3, 120, 192);
+                    ResetAnimation(4, 3, 120, 384);
                     break;
                 case animation.FALLING:
-                    ResetAnimation(5, 5, 45, 320);
+                    ResetAnimation(5, 5, 45, 640);
                     break;
             }
             base.SetupAnimation(obj);
         }
 
-        public override void UpdateAnimationState(Engine.Object obj)
+        protected override void UpdateAnimationState(Engine.Object obj)
         {
             /*
             if (_attacking && (_attackTime += elapsedTime) > _attackSpeed)
@@ -101,9 +101,9 @@ namespace Content
             }
         }
 
-        public override void AfterLastFrame()
+        protected override void AfterLastFrame(Engine.Object obj)
         {
-            base.AfterLastFrame();
+            base.AfterLastFrame(obj);
             if (_animation == animation.JUMPING)
             {
                 _animation = animation.INAIR;

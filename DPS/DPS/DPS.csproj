@@ -38,24 +38,26 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Content\Classes\AIScripts\AIScript.cs" />
     <Compile Include="Content\Classes\GameManagement\MainGameMode.cs" />
-    <Compile Include="Content\Classes\GameStates\MainMenuGS.cs" />
-    <Compile Include="Content\Classes\GameStates\InventoryGS.cs" />
-    <Compile Include="Content\Classes\GameStates\StartPlayGS.cs" />
-    <Compile Include="Content\Classes\Objectgrids\DungeonDirt5.cs" />
-    <Compile Include="Content\Classes\Objectgrids\DungeonIce4.cs" />
-    <Compile Include="Content\Classes\Objectgrids\Overworld.cs" />
+    <Compile Include="Content\Classes\GameManagement\GameStates\MainMenuGS.cs" />
+    <Compile Include="Content\Classes\GameManagement\GameStates\InventoryGS.cs" />
+    <Compile Include="Content\Classes\GameManagement\GameStates\StartPlayGS.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Timer.cs" />
+    <Compile Include="Content\Classes\Objects\Objectgrids\DungeonDirt5.cs" />
+    <Compile Include="Content\Classes\Objects\Objectgrids\DungeonIce4.cs" />
+    <Compile Include="Content\Classes\Objects\Objectgrids\Overworld.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemySnowMan.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemyZombie.cs" />
-    <Compile Include="Content\Classes\Objects\Characters\SpriteSheetSnowMan.cs" />
-    <Compile Include="Content\Classes\Objects\Characters\SpriteSheetZombie.cs" />
-    <Compile Include="Content\Classes\Objects\ExitButton.cs" />
-    <Compile Include="Content\Classes\Objects\PlayButton.cs" />
-    <Compile Include="Content\Classes\Objects\Characters\SpriteSheetCharacter.cs" />
-    <Compile Include="Content\Classes\Objects\UpgradePickup.cs" />
+    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetSnowMan.cs" />
+    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetZombie.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\ExitButton.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\HealthBar.cs" />
+    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetHealthBar.cs" />
+    <Compile Include="Content\Classes\Objects\Weapons\ObjectSnowBall.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\PlayButton.cs" />
+    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetCharacter.cs" />
+    <Compile Include="Content\Classes\Objects\Pickups\UpgradePickup.cs" />
     <Compile Include="Content\Classes\Worlds\DungeonWorld1.cs" />
-    <Compile Include="Content\Classes\Worlds\MainObjectGrid.cs" />
     <Compile Include="Content\Classes\Worlds\MainWorld.cs" />
     <Compile Include="Content\Classes\Worlds\RandomGenerator.cs" />
     <Compile Include="Engine\GameManagement\Managers\CollisionHelper.cs" />
@@ -71,15 +73,13 @@
     <Compile Include="Engine\Objects\Pickup.cs" />
     <Compile Include="Engine\Objects\ObjectGrid.cs" />
     <Compile Include="Engine\Objects\TextObject.cs" />
-    <Compile Include="Not Implemented\Dungeon.cs" />
-    <Compile Include="Not Implemented\DungeonLoader.cs" />
+    <Compile Include="Engine\Objects\Weapon.cs" />
     <Compile Include="Engine\GameManagement\Managers\AssetManager.cs" />
-    <Compile Include="Engine\GameManagement\GameInstance.cs" />
-    <Compile Include="Engine\GameManagement\GameMode.cs" />
-    <Compile Include="Engine\GameManagement\GameModeManager.cs" />
-    <Compile Include="Engine\GameManagement\GameState.cs" />
-    <Compile Include="Engine\GameManagement\GameStateManager.cs" />
-    <Compile Include="Engine\GameManagement\IControlledLoopObject.cs" />
+    <Compile Include="Engine\GameManagement\General\GameInstance.cs" />
+    <Compile Include="Engine\GameManagement\General\GameMode.cs" />
+    <Compile Include="Engine\GameManagement\General\GameModeManager.cs" />
+    <Compile Include="Engine\GameManagement\General\GameState.cs" />
+    <Compile Include="Engine\GameManagement\General\GameStateManager.cs" />
     <Compile Include="Engine\GameManagement\ILoopObject.cs" />
     <Compile Include="Engine\GameManagement\Managers\InputManager.cs" />
     <Compile Include="Engine\Objects\GridObjectLoading.cs" />
@@ -102,7 +102,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\ObjectGrids\MainMap.txt" />
     <Content Include="Content\Soundeffects\Rocket.wav" />
     <Content Include="Content\Soundeffects\Rocket1.mp3" />
     <Content Include="Content\Soundeffects\snd_music.wma" />
@@ -125,9 +124,6 @@
     <Content Include="Content\Soundeffects\Sound Effects - Zombie normal.wav" />
     <Content Include="Content\Soundeffects\Sound Effects - Zombie scream.wav" />
     <Content Include="Icon.ico" />
-    <Content Include="Dev\Patches\Patch_0.01.txt">
-      <SubType>Component</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Engine\Content.mgcb" />

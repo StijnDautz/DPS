@@ -17,10 +17,11 @@ namespace Content
 
         animation _animation;
 
-        SpriteSheetSnowMan(string assetName) : base(assetName)
+        public SpriteSheetSnowMan(string assetName) : base(assetName)
         {
             IsAnimated = true;
-            ResetAnimation(0, 1, 1000, 64);
+            ResetAnimation(0, 2, 400, 224);
+            Maxindex = 2;
         }
 
         public override void Update(GameTime gameTime, Engine.Object obj)
@@ -33,9 +34,10 @@ namespace Content
             }
         }
 
-        public override void UpdateAnimationState(Engine.Object obj)
+        protected override void UpdateAnimationState(Engine.Object obj)
         {
             base.UpdateAnimationState(obj);
+            Mirrored = obj.World.Player.GlobalPosition.X > obj.GlobalPosition.X ? true : false;
             if(obj is EnemySnowMan)
             {
                 EnemySnowMan snowMan = obj as EnemySnowMan;
@@ -43,17 +45,30 @@ namespace Content
             }
         }
 
-        public override void SetupAnimation(Engine.Object obj)
+        protected override void SetupAnimation(Engine.Object obj)
         {
             base.SetupAnimation(obj);
             switch(_animation)
             {
                 case animation.IDLE:
-                    ResetAnimation(0, 1, 1000, 64);
+                    ResetAnimation(0, 2, 400, 224);
                     break;
                 case animation.THROWING:
-                    ResetAnimation(1, 5, 100, 320);
+                    ResetAnimation(1, 5, 200, 560);
                     break;
+            }
+        }
+
+        protected override void AfterLastFrame(Engine.Object obj)
+        {
+            base.AfterLastFrame(obj);
+            if(obj is EnemySnowMan)
+            {
+                EnemySnowMan snowMan = obj as EnemySnowMan;
+                if (_animation == animation.THROWING)
+                {
+                    snowMan.Attacking = false;
+                }
             }
         }
     }
