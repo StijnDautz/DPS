@@ -23,7 +23,7 @@ namespace Engine
             get { return _id; }
         }
 
-        public float Depth
+        public virtual float Depth
         {
             get { return _depth; }
             set { _depth = value; }

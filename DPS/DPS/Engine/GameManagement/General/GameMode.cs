@@ -11,7 +11,7 @@ namespace Engine
     /*
      * A GameMode contains a list of gameStates and a world
      */
-    class GameMode : IControlledLoopObject
+    class GameMode
     {
         private string _id;
         private List<World> _worlds;

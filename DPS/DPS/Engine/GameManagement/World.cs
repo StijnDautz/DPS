@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    partial class World : ObjectList, IControlledLoopObject
+    partial class World : ObjectList
     {
         private bool _isTopDown;
         private List<Object> _collisionObjects, _objectsToAdd, _objectsToRemove;

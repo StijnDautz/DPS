@@ -11,8 +11,8 @@ namespace Content
     {
         public HealthBar(string id, Engine.Object parent) : base(id, parent)
         {
-           //_health = new Engine.TexturedObject("health", this, new SpriteSheetHealthBar()
-           // Add(new Engine.TexturedObject("frame", this, ))
+            Add(new Engine.TexturedObject("health", this, new SpriteSheetHealthBar("HUD/HealthFilling")));
+            Add(new Engine.TexturedObject("frame", this, new Engine.SpriteSheet("HUD/HealthBorder")));
         }
     }
 }

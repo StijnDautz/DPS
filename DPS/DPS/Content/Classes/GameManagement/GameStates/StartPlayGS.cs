@@ -16,6 +16,10 @@ namespace Content
             var timer = new Timer("timer", HUD);
             timer.Position = new Vector2(1000, 600);
             AddToHud(timer);
+
+            var healthBar = new HealthBar("healthBar", HUD);
+            healthBar.Position = new Vector2(50, 600);
+            AddToHud(healthBar);
         }
 
         public override void Init()

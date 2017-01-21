@@ -35,6 +35,8 @@ namespace Engine
             _inventory = new Inventory(id + "inventory", World);
             _walkSpeed = 400;
             _runSpeed = 600;
+            MaxHealth = 1000;
+            Health = MaxHealth;
         }
 
         public override void Update(GameTime gameTime)

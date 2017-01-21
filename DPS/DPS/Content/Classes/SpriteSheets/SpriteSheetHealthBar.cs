@@ -12,7 +12,7 @@ namespace Content
     {
         private int _healthPercentage;
 
-        SpriteSheetHealthBar(string assetName) : base(assetName)
+        public SpriteSheetHealthBar(string assetName) : base(assetName)
         {
 
         }

@@ -21,6 +21,18 @@ namespace Engine
             get { return _objects; }
         }
 
+        public override float Depth
+        {
+            set
+            {
+                base.Depth = value;
+                foreach (Object o in _objects)
+                {
+                    o.Depth = value;
+                }
+            }
+        }
+
         public ObjectList(string id, Object parent) : base(id, parent)
         {
             _objects = new List<Object>();
