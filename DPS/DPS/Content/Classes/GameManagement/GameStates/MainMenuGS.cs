@@ -25,7 +25,8 @@ namespace Content
         {
             base.Init();
             World.CanUpdate = false;
-            GameInstance.IsMouseVisible = true;
+            IsMouseVisible = true;
+            CanUpdateGameTime = false;
         }
     }
 }

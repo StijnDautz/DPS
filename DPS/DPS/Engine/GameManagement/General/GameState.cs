@@ -12,7 +12,7 @@ namespace Engine
      * GameState contains a HUD
      * Therefore a GameMode can have multiple HUD overlays
      */
-    class GameState : IControlledLoopObject
+    class GameState
     {
         private string _id;
         private ObjectList _HUD;
@@ -41,7 +41,7 @@ namespace Engine
 
         protected GameInstance GameInstance
         {
-            get { return _gameStateManager.GameMode.Parent.GameInstance; }
+            get { return _gameStateManager.GameMode.GameModeManager.GameInstance; }
         }
 
         protected bool IsMouseVisible
@@ -49,7 +49,11 @@ namespace Engine
             set { GameInstance.IsMouseVisible = value; }
         }
 
-            
+        public bool CanUpdateGameTime
+        {
+            set { GameStateManager.GameMode.GameModeManager.CanUpdateGameTime = value; }
+        }
+
         public GameState(string id, GameStateManager gameStateManager)
         {
             _id = id;

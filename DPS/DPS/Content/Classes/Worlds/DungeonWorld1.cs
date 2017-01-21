@@ -22,6 +22,10 @@ namespace Content
             zombie.Position = new Microsoft.Xna.Framework.Vector2(48700, 9300);
             Add(zombie);
 
+            var snowman = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
+            snowman.Position = new Microsoft.Xna.Framework.Vector2(48400, 8900);
+            Add(snowman);
+
             //Items to progress in the Dungeon
             Pickup SnowShoes = new Pickup("SnowShoes", World, new SpriteSheet("Textures/Items/SnowShoes"), "Capable of walking on Ice");
             Add(SnowShoes);
