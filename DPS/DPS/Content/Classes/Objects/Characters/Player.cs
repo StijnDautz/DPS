@@ -30,13 +30,12 @@ namespace Engine
             get { return _inventory; }
         }
 
-        public Player(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
+        public Player(string id, Engine.Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
             _inventory = new Inventory(id + "inventory", World);
             _walkSpeed = 400;
             _runSpeed = 600;
-            MaxHealth = 1000;
-            Health = MaxHealth;
+            Health = 100;
         }
 
         public override void Update(GameTime gameTime)

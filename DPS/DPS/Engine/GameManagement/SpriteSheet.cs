@@ -12,7 +12,17 @@ namespace Engine
     {
         private Texture2D _sprite;
         private int _frames, _currentFrame, _frameTime, _elapsedTime, _maxIndex, _index, _width;
-        private bool _isAnimated, _mirrored;
+        private bool _isAnimated, _mirrored, _isLooping;
+
+        protected Texture2D Sprite
+        {
+            get { return _sprite; }
+        }
+
+        public int CurrentFrame
+        {
+            set { _currentFrame = value; }
+        }
 
         public bool IsAnimated
         {
@@ -52,6 +62,11 @@ namespace Engine
             set { _mirrored = value; }
         }
 
+        public bool IsLooping
+        {
+            set { _isLooping = value; }
+        }
+
         protected int FrameTime
         {
             set { _frameTime = value; }
@@ -64,6 +79,7 @@ namespace Engine
             _maxIndex = 1;
             _currentFrame = 0;
             _frameTime = 200;
+            _isLooping = true;
             _width = _sprite.Width;
         }
 
@@ -95,8 +111,15 @@ namespace Engine
                     _currentFrame++;
                     if (_currentFrame > _frames - 1)
                     {
-                        _currentFrame = 0;
-                        hasReset = true;
+                        if(_isLooping)
+                        {
+                            _currentFrame = 0;
+                            hasReset = true;
+                        }
+                        else
+                        {
+                            _currentFrame--;
+                        }
                     }
                     _elapsedTime = 0;
                 }
@@ -119,11 +142,6 @@ namespace Engine
 
         }
 
-        protected virtual Rectangle getSourceRectangle(int frameToDraw)
-        {
-            return new Rectangle(frameToDraw, _index * Height, Width, Height);
-        }
-
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             SpriteEffects effect = SpriteEffects.None;
@@ -133,7 +151,7 @@ namespace Engine
                 //drawFrame = (_frames - _currentFrame - 1) * Width;
                 effect = SpriteEffects.FlipHorizontally;
             }
-            spriteBatch.Draw(_sprite, position, getSourceRectangle(frameToDraw), Color.White, 0, Vector2.Zero, 1, effect, 0);
+            spriteBatch.Draw(_sprite, position, new Rectangle(frameToDraw, _index * Height, Width, Height), Color.White, 0, Vector2.Zero, 1, effect, 0);
         }
 
         protected void ResetAnimation(int index, int frames, int frameTime, int width)

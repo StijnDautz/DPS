@@ -7,9 +7,9 @@ using Engine;
 
 namespace Content
 {
-    class ObjectSnowBall : Engine.TexturedObject
+    class WeaponSnowBall : Engine.Weapon
     {
-        public ObjectSnowBall(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
+        public WeaponSnowBall(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet, Engine.Character owner, int damage) : base(id, parent, spriteSheet, owner, damage)
         {
             HasPhysics = true;
             CanCollide = true;
@@ -18,9 +18,12 @@ namespace Content
 
         public override void OnCollision(Engine.Object collider)
         {
-            base.OnCollision(collider);
-            if(!(collider is EnemySnowMan))
+            if (!(collider is EnemySnowMan))
             {
+                if (collider is Character)
+                {
+                     DealDamage(collider as Character);
+                }
                 World.Remove(this);
             }
         }

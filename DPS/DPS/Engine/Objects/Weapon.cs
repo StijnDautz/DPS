@@ -16,7 +16,7 @@ namespace Engine
             set { _damage = value; }
         }
 
-        Weapon(string id, Object parent, SpriteSheet spriteSheet, Character owner, int damage) : base(id, parent, spriteSheet)
+        public Weapon(string id, Object parent, SpriteSheet spriteSheet, Character owner, int damage) : base(id, parent, spriteSheet)
         {
             _damage = damage;
             _owner = owner;
@@ -25,21 +25,20 @@ namespace Engine
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
-            DealDamage(collider);
+            if (collider is Character)
+            {
+                DealDamage(collider as Character);
+            }
         }
 
-        private void DealDamage(Object collider)
+        protected void DealDamage(Character character)
         {
-            if(collider is Character)
+            //deal damage
+            character.Health -= _damage;
+            //if its health < 0, remove it cause it is death
+            if (character.Health <= 0)
             {
-                var character = collider as Character;
-                //deal damage
-                character.Health -= _damage;
-                //if its health < 0, remove it cause it is death
-                if(character.Health < 0)
-                {
-                    World.Remove(character);
-                }
+                character.Death = true;
             }
         }
     }

@@ -14,7 +14,7 @@ namespace Content
         public StartPlayGS(string id, GameStateManager gameStateManager) : base(id, gameStateManager)
         {
             var timer = new Timer("timer", HUD);
-            timer.Position = new Vector2(1000, 600);
+            timer.Position = new Vector2(GameInstance.GraphicsDeviceManager.PreferredBackBufferWidth - 130, 640);
             AddToHud(timer);
 
             var healthBar = new HealthBar("healthBar", HUD);

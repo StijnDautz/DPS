@@ -14,6 +14,8 @@ namespace Content
         {
             _reactionRange = 1500;
             _delay = 1800;
+            Damage = 100;
+            Health = 200;
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)
@@ -25,7 +27,7 @@ namespace Content
             if(_reactionRange > distanceToPlayer.Length() && _elapsedTime > _delay)
             {
                 _elapsedTime = 0;
-                var snowball = new ObjectSnowBall("snowball", World, new Engine.SpriteSheet("Textures/Projectiles/Snowball"));
+                var snowball = new WeaponSnowBall("snowball", World, new Engine.SpriteSheet("Textures/Projectiles/Snowball"), this, Damage);
                 snowball.Position = Mirrored ? new Vector2(PositionX, PositionY + 30) : new Vector2(PositionX + Width - 20, PositionY + 30);
                 distanceToPlayer.Normalize();
                 snowball.Velocity = distanceToPlayer * 600;

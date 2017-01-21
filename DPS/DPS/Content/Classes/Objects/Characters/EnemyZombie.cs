@@ -30,6 +30,7 @@ namespace Content
             _walkSpeed = 25;
             _walkLeftBoundary = -96;
             _walkRightBoudary = 96;
+            Health = 500;
             SFX.Add("chillScream", Engine.GameInstance.AssetManager.GetSoundEffect(chillScreamSFX + Engine.GameInstance.RNG.Next(1, 5).ToString()));
             SFX.Add("crazyScream", Engine.GameInstance.AssetManager.GetSoundEffect(crazyScreamSFX));
         }

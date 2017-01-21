@@ -13,9 +13,10 @@ namespace Content
 
         public Timer(string id, Engine.Object parent) : base(id, parent)
         {
-            //TODO get frame sprite from TickTick
             _time = new Engine.TextObject("time", "Hud", this);
-            //Add(new Engine.TexturedObject("frame", this, new Engine.SpriteSheet()));
+            var _timerFrame = new Engine.TexturedObject("frame", this, new Engine.SpriteSheet("Hud/TimerFrame"));
+            _timerFrame.Position = new Vector2(-22, -25);
+            Add(_timerFrame);
             Add(_time);
         }
 

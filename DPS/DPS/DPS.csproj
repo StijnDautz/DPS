@@ -53,7 +53,7 @@
     <Compile Include="Content\Classes\Objects\HUD\ExitButton.cs" />
     <Compile Include="Content\Classes\Objects\HUD\HealthBar.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetHealthBar.cs" />
-    <Compile Include="Content\Classes\Objects\Weapons\ObjectSnowBall.cs" />
+    <Compile Include="Content\Classes\Objects\Weapons\WeaponSnowBall.cs" />
     <Compile Include="Content\Classes\Objects\HUD\PlayButton.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetCharacter.cs" />
     <Compile Include="Content\Classes\Objects\Pickups\UpgradePickup.cs" />

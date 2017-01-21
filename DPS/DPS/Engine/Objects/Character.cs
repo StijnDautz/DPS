@@ -12,18 +12,24 @@ namespace Engine
         Weapon _weapon;
         int _health, _damage, _speed, _maxHealth;
         double _attackSpeed, _attackTime;
-        bool _tryAttack, _attacking;
+        bool _tryAttack, _attacking, _death;
 
         public int Health
         {
             get { return _health; }
-            set { _health = value; }
+            set
+            {
+                _health = value;
+                if(_health > _maxHealth)
+                {
+                    _maxHealth = _health;
+                }
+            }
         }
 
         public int MaxHealth
         {
             get { return _maxHealth; }
-            set { _maxHealth = value; }
         }
 
         public int Damage
@@ -48,6 +54,12 @@ namespace Engine
         {
             get { return _attacking; }
             set { _attacking = value; }
+        }
+
+        public bool Death
+        {
+            get { return _death; }
+            set { _death = value; }
         }
 
         public Weapon Weapon

@@ -5,12 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Engine;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Content
 {
     class SpriteSheetHealthBar : Engine.SpriteSheet
     {
-        private int _healthPercentage;
+        private double _healthPercentage;
 
         public SpriteSheetHealthBar(string assetName) : base(assetName)
         {
@@ -21,12 +22,13 @@ namespace Content
         {
             base.Update(gameTime, obj);
             var player = obj.World.Player;
-            _healthPercentage = player.Health / player.MaxHealth;
+            _healthPercentage = (double)player.Health / player.MaxHealth;
         }
 
-        protected override Rectangle getSourceRectangle(int frameToDraw)
+        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
-            return new Rectangle(frameToDraw, 0, _healthPercentage * Width, Height);
+            int offset = (int)((1 - _healthPercentage) * Height);
+            spriteBatch.Draw(Sprite, new Vector2(position.X, position.Y + offset), new Rectangle(0, offset, Width, Height), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
     }
 }
