@@ -36,6 +36,7 @@ namespace Engine
             _walkSpeed = 400;
             _runSpeed = 600;
             Health = 100;
+            Damage = 1000;
         }
 
         public override void Update(GameTime gameTime)
@@ -130,6 +131,12 @@ namespace Engine
 
         private void HandleSideInput(float speed)
         {
+            if(GameInstance.InputManager.LeftMouseButtonPressed)
+            {
+                var weapon = new Weapon("sword", World, new SpriteSheet("Textures/Weapons/CharacterW1"), this, Damage);
+                weapon.Position = new Vector2(Position.X + Width, PositionY);
+                World.Add(weapon);
+            }
             if (GameInstance.InputManager.isKeyHolding(Keys.D))
             {
                 VelocityX = speed;

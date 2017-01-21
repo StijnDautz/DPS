@@ -27,7 +27,7 @@ namespace Content
             if(_reactionRange > distanceToPlayer.Length() && _elapsedTime > _delay)
             {
                 _elapsedTime = 0;
-                var snowball = new WeaponSnowBall("snowball", World, new Engine.SpriteSheet("Textures/Projectiles/Snowball"), this, Damage);
+                var snowball = new WeaponSnowBall("snowball", World, new Engine.SpriteSheet("Textures/Weapons/Snowball"), this, Damage);
                 snowball.Position = Mirrored ? new Vector2(PositionX, PositionY + 30) : new Vector2(PositionX + Width - 20, PositionY + 30);
                 distanceToPlayer.Normalize();
                 snowball.Velocity = distanceToPlayer * 600;

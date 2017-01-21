@@ -20,12 +20,13 @@ namespace Engine
         {
             _damage = damage;
             _owner = owner;
+            CanCollide = true;
         }
 
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
-            if (collider is Character)
+            if (collider != _owner && collider is Character)
             {
                 DealDamage(collider as Character);
             }
