@@ -145,3 +145,9 @@
 /processorParam:Quality=Best
 /build:Soundeffects\snowManAttack.wav
 
+#begin Soundeffects/zombieCrazy.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Soundeffects/zombieCrazy.wav
+

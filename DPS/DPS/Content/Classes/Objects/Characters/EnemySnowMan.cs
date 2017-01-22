@@ -19,8 +19,6 @@ namespace Content
             Damage = 100;
             Health = 200;
             Mass = 2;
-            OnDamagedSFX = "snowManDamaged";
-            AttackSFX = "snowManAttack";
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)

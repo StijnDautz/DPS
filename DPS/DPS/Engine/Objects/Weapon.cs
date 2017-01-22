@@ -56,9 +56,6 @@ namespace Engine
                 x = -x;
             }
             character.Velocity += new Vector2(x, -100);
-
-            //play onDamagedSFX
-            character.SFX.SwitchTo("Damaged");
         }
     }
 }

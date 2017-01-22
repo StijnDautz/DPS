@@ -14,7 +14,7 @@ namespace Engine
         private bool _canBlock;
         private bool _inAir;
         private bool[] _collisionDimension;
-        private Engine.SFX _soundEffects;
+        private Engine.SFXManager _sfxManager;
 
         public bool HasPhysics
         {
@@ -54,14 +54,18 @@ namespace Engine
             set { _inAir = value; }
         }
 
-        public SFX SFX
+        public SFXManager SFXManager
         {
-            get { return _soundEffects; }
+            set { _sfxManager = value; }
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            _soundEffects.Update(gameTime, World.Player);
+            //update sfx manager
+            if(_sfxManager != null)
+            {
+                _sfxManager.Update(gameTime, World.Player);
+            }
         }
        
         public virtual void ApplyPhysics(float elapsedTime)
@@ -69,10 +73,6 @@ namespace Engine
             if (_hasPhysics && !World.IsTopDown && InAir)
             {
                 _velocity.Y += World.Gravity * elapsedTime * _mass;
-            }
-            if(this is Content.EnemySnowMan && VelocityX != 0)
-            {
-                int x = 0;
             }
             _velocity.X /= 1 + _mass * elapsedTime;
         }

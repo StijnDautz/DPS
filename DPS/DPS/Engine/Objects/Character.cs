@@ -32,16 +32,6 @@ namespace Engine
             set { _tryAttack = value; }
         }
 
-        public string OnDamagedSFX
-        {
-            set { SFX.Add("Damaged", GameInstance.AssetManager.GetSoundEffect(value)); }
-        }
-
-        public string AttackSFX
-        {
-            set { SFX.Add("Attack", GameInstance.AssetManager.GetSoundEffect(value)); }
-        }
-
         public int MaxHealth
         {
             get { return _maxHealth; }
@@ -104,7 +94,7 @@ namespace Engine
 
         protected virtual void OnAttack()
         {
-            SFX.SwitchTo("Attack");
+            
         }
 
         protected void IsAttackReady()

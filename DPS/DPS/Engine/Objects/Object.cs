@@ -153,7 +153,6 @@ namespace Engine
             _parent = parent;
             _boundingBox = new Rectangle((int)Position.X, (int)Position.Y, 0, 0);
             _collisionDimension = new bool[2];
-            _soundEffects = new SFX(this);
         }
 
         public void setBoundingBoxDimensions(int width, int height)

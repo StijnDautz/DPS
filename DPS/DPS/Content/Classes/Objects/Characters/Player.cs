@@ -42,8 +42,6 @@ namespace Engine
             _weapon1.Visible = false;
             World.Add(_weapon1);
             Mass = 1.9f;
-            OnDamagedSFX = "playerDamaged";
-            AttackSFX = "playerAttack";
         }
 
         public override void Update(GameTime gameTime)
