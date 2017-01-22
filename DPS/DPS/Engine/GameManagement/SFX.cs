@@ -56,9 +56,12 @@ namespace Engine
             {
                 _playingSFX.Stop();
             }
-            _playingSFX = _soundEffects[id].CreateInstance();
-            _playingSFX.Play();
-            _playingSFX.IsLooped = true;
+            if(_soundEffects.ContainsKey(id))
+            {
+                _playingSFX = _soundEffects[id].CreateInstance();
+                _playingSFX.Play();
+                _playingSFX.IsLooped = true;
+            }
         }
     }
 }

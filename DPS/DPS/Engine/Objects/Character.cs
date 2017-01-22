@@ -9,7 +9,6 @@ namespace Engine
 {
     class Character : TexturedObject
     {
-        Weapon _weapon;
         int _health, _damage, _speed, _maxHealth;
         double _attackSpeed, _attackTime;
         bool _tryAttack, _attacking, _death;
@@ -25,6 +24,22 @@ namespace Engine
                     _maxHealth = _health;
                 }
             }
+        }
+
+        public bool TryAttack
+        {
+            get { return _tryAttack; }
+            set { _tryAttack = value; }
+        }
+
+        public string OnDamagedSFX
+        {
+            set { SFX.Add("Damaged", GameInstance.AssetManager.GetSoundEffect(value)); }
+        }
+
+        public string AttackSFX
+        {
+            set { SFX.Add("Attack", GameInstance.AssetManager.GetSoundEffect(value)); }
         }
 
         public int MaxHealth
@@ -62,11 +77,6 @@ namespace Engine
             set { _death = value; }
         }
 
-        public Weapon Weapon
-        {
-            set { _weapon = value; }
-        }
-
         public Character(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
             HasPhysics = true;
@@ -78,30 +88,36 @@ namespace Engine
         {
             base.Update(gameTime);
             float elapsedTime = (float)gameTime.ElapsedGameTime.Milliseconds;
-            if(_weapon != null)
-            {
-                UpdateCombat(elapsedTime);
-            }
+            UpdateCombat(elapsedTime);
         }
 
         //Updates the attack state
-        private void UpdateCombat(float elapsedTime)
+        protected virtual void UpdateCombat(float elapsedTime)
         {
             _attackTime += elapsedTime;
             //TODO sync attackSpeed with anim speed
             /* if tryAttack && canAttack -> attack
              * This variable may be set to false when the fitting animation has ended
              * else when attackTime took longer then the attackSpeed*/
-            if(_attackTime > _attackSpeed)
+             IsAttackReady();
+        }
+
+        protected virtual void OnAttack()
+        {
+            SFX.SwitchTo("Attack");
+        }
+
+        protected void IsAttackReady()
+        {
+            if (_attackTime > _attackSpeed)
             {
-                if(_tryAttack)
+                if (_tryAttack)
                 {
+                    //OnAttack
+                    _tryAttack = false;
                     _attacking = true;
                     _attackTime = 0;
-                }
-                else
-                {
-                    _attacking = false;
+                    OnAttack();
                 }
             }
         }

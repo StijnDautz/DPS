@@ -14,6 +14,7 @@ namespace Content
             HasPhysics = true;
             CanCollide = true;
             CanBlock = true;
+            Mass = 0.4f;
         }
 
         public override void OnCollision(Engine.Object collider)

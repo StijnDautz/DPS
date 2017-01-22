@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
 
 namespace Engine
 {
@@ -23,6 +24,12 @@ namespace Engine
             CanCollide = true;
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            //as long as object doesnt move, make sure it is positioned according to its owner position
+        }
+
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
@@ -41,6 +48,17 @@ namespace Engine
             {
                 character.Death = true;
             }
+
+            //get vector from player to character
+            int x = 200;
+            if(World.Player.GlobalPosition.X - character.GlobalPosition.X > 0)
+            {
+                x = -x;
+            }
+            character.Velocity += new Vector2(x, -100);
+
+            //play onDamagedSFX
+            character.SFX.SwitchTo("Damaged");
         }
     }
 }

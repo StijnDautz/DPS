@@ -101,7 +101,15 @@ namespace Engine
             foreach(Object o in _objectsToRemove)
             {
                 Objects.Remove(o);
-                _collisionObjects.Remove(o);
+                if(o.CanCollide)
+                {
+                    _collisionObjects.Remove(o);
+
+                }
+                if(o is Player)
+                {
+                    _characters.Remove(o as Player);
+                }
             }
             _objectsToRemove.Clear();
         }
