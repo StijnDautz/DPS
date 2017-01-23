@@ -166,20 +166,20 @@ namespace Engine
             }
 
             //zet de randjes om de kamers
-            for (int y = 1; y < height - 1; y++)
-            {
-                for (int x = 1; x < width - 1; x++)
-                {
-                    if (grid[x, y] != '0' && grid[x, y] != '2' && grid[x, y] != 'a')
-                    {
-                        if (grid[x + 1, y] == '0' ||
-                        grid[x - 1, y] == '0' ||
-                        grid[x, y + 1] == '0' ||
-                        grid[x, y - 1] == '0')
-                            grid[x, y] = '4';
-                    }
-                }
-            }
+            //for (int y = 1; y < height - 1; y++)
+            //{
+            //    for (int x = 1; x < width - 1; x++)
+            //    {
+            //        if (grid[x, y] != '0' && grid[x, y] != '2' && grid[x, y] != 'a')
+            //        {
+            //            if (grid[x + 1, y] == '0' ||
+            //            grid[x - 1, y] == '0' ||
+            //            grid[x, y + 1] == '0' ||
+            //            grid[x, y - 1] == '0')
+            //                grid[x, y] = '4';
+            //        }
+            //    }
+            //}
 
             //klaar
             return grid;
