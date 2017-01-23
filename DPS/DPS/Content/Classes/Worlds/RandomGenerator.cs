@@ -45,6 +45,23 @@ namespace Engine
         //List<Vector2> doors = new List<Vector2>();
         List<Door> doors = new List<Door>();
 
+        public List<Door> Doors
+        {
+            get { return doors; }
+            set { doors = value; }
+        }
+
+        public int Width
+        {
+            get { return width; }
+            set { width = value; }
+        }
+        public int Height
+        {
+            get { return height; }
+            set { height = value; }
+        }
+
         //List<Rectangle> rooms = new List<Rectangle>();
         List<Room> rooms = new List<Room>();
 
@@ -57,28 +74,29 @@ namespace Engine
         public char[,] Generate()
         {
             grid = new char[width, height];
-            door1.location = new Vector2(0, 10);
-            door1.direc = Door.direction.right;
+            //door1.location = new Vector2(0, 10);
+            //door1.direc = Door.direction.right;
 
-            door2.location = new Vector2(0, 40);
-            door2.direc = Door.direction.right;
+            //door2.location = new Vector2(0, 40);
+            //door2.direc = Door.direction.right;
 
-            door3.location = new Vector2(59, 10);
-            door3.direc = Door.direction.left;
+            //door3.location = new Vector2(59, 10);
+            //door3.direc = Door.direction.left;
 
-            door4.location = new Vector2(59, 40);
-            door4.direc = Door.direction.left;
+            //door4.location = new Vector2(59, 40);
+            //door4.direc = Door.direction.left;
 
-            doors.Add(door1);
-            doors.Add(door2);
-            doors.Add(door3);
-            doors.Add(door4);
+            //doors.Add(door1);
+            //doors.Add(door2);
+            //doors.Add(door3);
+            //doors.Add(door4);
 
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
                 {
-                    grid[x, y] = '1';
+                    if(grid[x,y] == 0)
+                    grid[x, y] = 'k';
                 }
             }
             //creert de deuren
@@ -89,29 +107,47 @@ namespace Engine
 
                 if (d.direc == Door.direction.right)
                 {
-                    grid[(int)d.location.X, (int)d.location.Y] = '2';
-                    grid[(int)d.location.X, (int)d.location.Y + 1] = '2';
-                    grid[(int)d.location.X, (int)d.location.Y + 2] = '2';
+                    grid[(int)d.location.X, (int)d.location.Y] = 'd';
+                    grid[(int)d.location.X, (int)d.location.Y + 1] = '0';
+                    grid[(int)d.location.X, (int)d.location.Y + 2] = '0';
 
-                    grid[(int)d.location.X + 1, (int)d.location.Y] = '2';
-                    grid[(int)d.location.X + 1, (int)d.location.Y + 1] = '2';
-                    grid[(int)d.location.X + 1, (int)d.location.Y + 2] = '2';
+                    grid[(int)d.location.X + 1, (int)d.location.Y] = '0';
+                    grid[(int)d.location.X + 1, (int)d.location.Y + 1] = '0';
+                    grid[(int)d.location.X + 1, (int)d.location.Y + 2] = '0';
 
                     room.rectangle.Location = new Point((int)d.location.X + 2, (int)d.location.Y - 1);
                     room.rectangle.Size = new Point(r.Next(2, 7), 5);
                 }
                 if (d.direc == Door.direction.left)
                 {
-                    grid[(int)d.location.X, (int)d.location.Y] = '2';
-                    grid[(int)d.location.X, (int)d.location.Y + 1] = '2';
-                    grid[(int)d.location.X, (int)d.location.Y + 2] = '2';
+                    grid[(int)d.location.X, (int)d.location.Y] = 'e';
+                    grid[(int)d.location.X, (int)d.location.Y + 1] = '0';
+                    grid[(int)d.location.X, (int)d.location.Y + 2] = '0';
 
-                    grid[(int)d.location.X - 1, (int)d.location.Y] = '2';
-                    grid[(int)d.location.X - 1, (int)d.location.Y + 1] = '2';
-                    grid[(int)d.location.X - 1, (int)d.location.Y + 2] = '2';
+                    grid[(int)d.location.X - 1, (int)d.location.Y] = '0';
+                    grid[(int)d.location.X - 1, (int)d.location.Y + 1] = '0';
+                    grid[(int)d.location.X - 1, (int)d.location.Y + 2] = '0';
 
                     room.rectangle.Location = new Point((int)d.location.X - 2 - r.Next(2, 7), (int)d.location.Y - 1);
                     room.rectangle.Size = new Point(width - room.rectangle.Location.X - 2, 5);
+                }
+                if (d.direc == Door.direction.up)
+                {
+                    grid[(int)d.location.X, (int)d.location.Y] = 'p';
+                    grid[(int)d.location.X + 1, (int)d.location.Y] = 'p';
+                    grid[(int)d.location.X + 2, (int)d.location.Y] = 'p';
+
+                    room.rectangle.Location = new Point((int)d.location.X - 1, (int)d.location.Y + 1);
+                    room.rectangle.Size = new Point(5, 5);
+                }
+                if (d.direc == Door.direction.down)
+                {
+                    grid[(int)d.location.X, (int)d.location.Y] = 'p';
+                    grid[(int)d.location.X + 1, (int)d.location.Y] = 'p';
+                    grid[(int)d.location.X + 2, (int)d.location.Y] = 'p';
+
+                    room.rectangle.Location = new Point((int)d.location.X - 1, (int)d.location.Y - 5);
+                    room.rectangle.Size = new Point(5, 5);
                 }
                 rooms.Add(room);
             }
