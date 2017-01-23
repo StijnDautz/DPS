@@ -48,7 +48,7 @@
     <Compile Include="Content\Classes\Objects\Objectgrids\Overworld.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemySnowMan.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemyZombie.cs" />
-    <Compile Include="Content\Classes\Objects\Weapons\SpecialWeapon1.cs" />
+    <Compile Include="Content\Classes\Objects\Weapons\WeaponPlayer.cs" />
     <Compile Include="Content\Classes\SFX\SFXPlayer.cs" />
     <Compile Include="Content\Classes\SFX\SFXSnowMan.cs" />
     <Compile Include="Content\Classes\SFX\SFXZombie.cs" />
