@@ -93,7 +93,7 @@ namespace Engine
         /*Check whether an object is within the objects boundaries or not*/
         public bool WithinBoudaries(int x, int y)
         {
-            if(x < 0 || x > _collums || y < 0 || y > _rows)
+            if(x < 0 || x > _collums -1 || y < 0 || y > _rows - 1)
             {
                 return false;
             }
@@ -147,12 +147,8 @@ namespace Engine
         public override void SetupCollision(Object collider, float elapsedTime)
         {
             Point p = GetPositionInGrid(collider.GlobalPosition);
-            if(!(p.X -1 < 0 || p.Y - 1 < 0 || p.X + 3 > _collums || p.Y + 3 > _rows))
+            if (WithinBoudaries(p.X, p.Y))
             {
-                if (p == new Point(27, 9))
-                {
-                    Vector2 fdsp = this.GlobalPosition;
-                }
                 Object obj = getTile(p);
                 if (obj is ObjectGrid)
                 {
@@ -164,11 +160,27 @@ namespace Engine
 
                 for (int x = p.X - 1; x < xBoundary; x++)
                 {
+                    //if x is not in grid
+                    if (x < 0 || x > _collums - 1)
+                    {
+                        continue;
+                    }
                     for (int y = p.Y - 1; y < yBoundary; y++)
                     {
-                        Object o = getTile(new Point(x, y));
-                        if (o != null && o.CanCollide)
+                        //if y is not in grid
+                        if (y < 0 || y > _rows - 1)
                         {
+                            continue;
+                        }
+                        Object o = getTile(new Point(x, y));
+                        if (o != null && o.CanCollide && collider.CanCollide)
+                        {
+                            if (collider is Player)
+                            {
+
+                                    int i = 0;
+                                
+                            }
                             o.CheckCollision(collider, elapsedTime);
                         }
                     }

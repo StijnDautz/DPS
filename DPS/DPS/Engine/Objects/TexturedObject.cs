@@ -27,7 +27,6 @@ namespace Engine
         public override void Reset()
         {
             base.Reset();
-            _sprite.Reset();
         }
 
         public override void Update(GameTime gameTime)

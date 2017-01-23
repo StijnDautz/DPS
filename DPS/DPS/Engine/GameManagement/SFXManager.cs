@@ -30,7 +30,6 @@ namespace Engine
             }
         }
 
-
         protected Object Source
         {
             get { return _source; }
@@ -67,7 +66,6 @@ namespace Engine
         protected void Add(string name, SoundEffect sfx, bool loop)
         {
             _soundEffects.Add(name, new SFX(name, sfx, loop));
-
         }
 
         protected virtual void UpdateSFX()

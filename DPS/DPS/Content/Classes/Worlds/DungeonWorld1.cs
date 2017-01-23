@@ -14,17 +14,9 @@ namespace Content
             IsTopDown = false;
             //Add player to world
             var player = new Engine.Player("player", this, new SpriteSheetCharacter("Textures/Characters/Character"));
-            player.Position = new Microsoft.Xna.Framework.Vector2(49000, 9000);
+            player.Position = new Microsoft.Xna.Framework.Vector2(48500, 9000);
             Player = player;
             Add(player);
-
-            var zombie = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
-            zombie.Position = new Microsoft.Xna.Framework.Vector2(48700, 9300);
-            Add(zombie);
-
-            var snowman = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
-            snowman.Position = new Microsoft.Xna.Framework.Vector2(48400, 8900);
-            Add(snowman);
 
             //Items to progress in the Dungeon
             Pickup SnowShoes = new Pickup("SnowShoes", World, new SpriteSheet("Textures/Items/SnowShoes"), "Capable of walking on Ice");
@@ -146,9 +138,6 @@ namespace Content
             grid[15, 1] = "99";
             grid[15, 0] = "100";
             #endregion
-
-            //create randomDungeonGenerator
-            RandomDungeonGenerator dungeonGenerator = new RandomDungeonGenerator();
 
             for (int i = 1; i < 101; i++)
             {

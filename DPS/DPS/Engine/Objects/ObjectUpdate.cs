@@ -70,7 +70,7 @@ namespace Engine
        
         public virtual void ApplyPhysics(float elapsedTime)
         {
-            if (_hasPhysics && !World.IsTopDown && InAir)
+            if (_hasPhysics && !World.IsTopDown)
             {
                 _velocity.Y += World.Gravity * elapsedTime * _mass;
             }
@@ -102,6 +102,12 @@ namespace Engine
             //are o and c colliding?
             if (CollisionHelper.CollidesWith(this, _velocity, collider, collider._velocity, elapsedTime))
             {
+                if (this is Player || collider is Player)
+                {
+                    int x = 0;
+                }
+                
+
                 //call onCollisionFunc
                 OnCollision(collider);
                 collider.OnCollision(this);
@@ -118,26 +124,25 @@ namespace Engine
         private void CheckCollisionDimensions(Object collider, float elapsedTime)
         {
             //X
-            if (!_collisionDimension[0])
+            if (!_collisionDimension[0] && Velocity.X != 0)
             {
-                if (!CollisionHelper.CollidesWith(this, new Vector2(0, Velocity.Y), collider, collider._velocity, elapsedTime))
-                {                   
+                if (CollisionHelper.CollidesWith(this, new Vector2(Velocity.X, 0), collider, collider._velocity, elapsedTime))
+                {
                     _collisionDimension[0] = true;
                 }
             }
-
             //Y
-            if (!_collisionDimension[1])
+            if (!_collisionDimension[1] && Velocity.Y != 0)
             {
-                if (!CollisionHelper.CollidesWith(this, new Vector2(Velocity.X, 0), collider, collider._velocity, elapsedTime))
+                if (CollisionHelper.CollidesWith(this, new Vector2(0, Velocity.Y), collider, collider._velocity, elapsedTime))
                 {
-                    if (this is Character)
-                    {
-                        int x = 0;
-                    }
                     if (_velocity.Y > 0)
                     {
-                        _position.Y += collider.GlobalPosition.Y - (GlobalPosition.Y + Height + 0.001f);
+                        float downWardsOffset = collider.GlobalPosition.Y - (GlobalPosition.Y + Height + 0.001f);
+                        if(downWardsOffset > 0)
+                        {
+                            _position.Y += collider.GlobalPosition.Y - (GlobalPosition.Y + Height + 0.001f);
+                        }
                     }
                     _collisionDimension[1] = true;
                     InAir = false;
@@ -147,14 +152,13 @@ namespace Engine
 
         public void ApplyPosition(float elapsedTime)
         {
-            if(!_collisionDimension[0])
+            if (!_collisionDimension[0])
             {
                 _position.X += _velocity.X * elapsedTime;
             }
             else
             {
                 _collisionDimension[0] = false;
-               // _velocity.X = 0;
             }
             if(!_collisionDimension[1])
             {

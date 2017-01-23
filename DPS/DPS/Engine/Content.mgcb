@@ -67,24 +67,6 @@
 /processorParam:Quality=Best
 /build:Soundeffects/Sound Effects - Hit.wav
 
-#begin Soundeffects/Sound Effects - Medium enemy death.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Soundeffects/Sound Effects - Medium enemy death.wav
-
-#begin Soundeffects/Sound Effects - Player death.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Soundeffects/Sound Effects - Player death.wav
-
-#begin Soundeffects/Sound Effects - Small enemy death.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Soundeffects/Sound Effects - Small enemy death.wav
-
 #begin Soundeffects/zombieNormal1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -150,4 +132,22 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:Soundeffects/zombieCrazy.wav
+
+#begin Soundeffects\playerDeath.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Soundeffects\playerDeath.wav
+
+#begin Soundeffects\zombieDeath.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Soundeffects\zombieDeath.wav
+
+#begin Soundeffects\snowManDeath.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Soundeffects\snowManDeath.wav
 

@@ -10,18 +10,33 @@ namespace Engine
 {
     class SpriteSheet
     {
-        private Texture2D _sprite;
-        private int _frames, _currentFrame, _frameTime, _elapsedTime, _maxIndex, _index, _width;
-        private bool _isAnimated, _mirrored, _isLooping;
+        private Dictionary<string, Sprite> _sprites;
+        private Texture2D _spriteSheet;
+        private Sprite _sprite;
+        private int _currentFrame, _elapsedTime, _maxIndex;
+        private bool _isAnimated, _mirrored, _canUpdate;
 
-        protected Texture2D Sprite
+        public struct Sprite
         {
-            get { return _sprite; }
+            public string name;
+            public int index, frames, frameTime, frameWidth, width;
+            public bool loop;
+
+            public Sprite(string Name, int Index, int Frames, int FrameTime, int Width, int Height, bool Loop)
+            {
+                name = Name;
+                index = Index;
+                frames = Frames;
+                frameTime = FrameTime;
+                width = Width;
+                frameWidth = Width / frames;
+                loop = Loop;
+            }
         }
 
-        public int CurrentFrame
+        protected Sprite CurrentSprite
         {
-            set { _currentFrame = value; }
+            get { return _sprite; }
         }
 
         public bool IsAnimated
@@ -30,111 +45,103 @@ namespace Engine
             set { _isAnimated = value; }
         }
 
-        public int Width
-        {
-            get { return _width / _frames; }
-        }
-
-        public int Height
-        {
-            get { return _sprite.Height / _maxIndex; }
-        }
-
-        protected int Frames
-        {
-            get { return _frames; }
-            set
-            {
-                _frames = value;
-                if(value > 1)
-                { _isAnimated = true; }
-            }
-        }
-
-        protected int Maxindex
-        {
-            set { _maxIndex = value; }
-        }
-
         public bool Mirrored
         {
             get { return _mirrored; }
             set { _mirrored = value; }
         }
 
-        public bool IsLooping
+        protected int CurrentFrame
         {
-            set { _isLooping = value; }
+            set { _currentFrame = value; }
         }
 
-        protected int FrameTime
+        protected Texture2D spriteSheet
         {
-            set { _frameTime = value; }
+            get { return _spriteSheet; }
+        }
+
+        public int Width
+        {
+            get { return _spriteSheet.Width; }
+        }
+
+        public int Height
+        {
+            get { return _spriteSheet.Height; }
+        }
+
+        protected bool CanUpdate
+        {
+            set { _canUpdate = value; }
         }
 
         public SpriteSheet(string assetName)
         {
-            _sprite = GameInstance.AssetManager.GetTexture(assetName);
-            Frames = 1;
+            _spriteSheet = GameInstance.AssetManager.GetTexture(assetName);
+            _canUpdate = true;
             _maxIndex = 1;
-            _currentFrame = 0;
-            _frameTime = 200;
-            _isLooping = true;
-            _width = _sprite.Width;
+            _sprites = new Dictionary<string, Sprite>();
         }
 
-        public void Reset()
+        protected void Add(string id, int index, int frames, int frameTime, int width, bool loop)
         {
-            _elapsedTime = 0;
-            _currentFrame = 1;
+            _sprites.Add(id, new Sprite(id, index, frames, frameTime, width, _spriteSheet.Height, loop));
+            _maxIndex = _sprites.Count;
         }
 
         public virtual void Update(GameTime gameTime, Object obj)
         {
-            UpdateAnimationState(obj);
-            if (UpdateAnimation(gameTime))
+            if(IsAnimated)
             {
-                AfterLastFrame(obj);
-            }
-        }
-
-        protected bool UpdateAnimation(GameTime gameTime)
-        {
-            bool hasReset = false;
-
-            //if Texture isAnimated, Update it
-            if (_isAnimated == true)
-            {
-                _elapsedTime += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
-                if (_elapsedTime > _frameTime)
+                UpdateAnimation(gameTime.ElapsedGameTime.Milliseconds, obj);
+                if (_canUpdate)
                 {
-                    _currentFrame++;
-                    if (_currentFrame > _frames - 1)
+                    if (obj is Player)
                     {
-                        if(_isLooping)
+                        if ((obj as Player).InAir)
                         {
-                            _currentFrame = 0;
-                            hasReset = true;
-                        }
-                        else
-                        {
-                            _currentFrame--;
+                            int x = 0;
                         }
                     }
-                    _elapsedTime = 0;
+                    string anim = UpdateAnimationState(obj);
+                    if(anim != CurrentSprite.name)
+                    {
+                        SwitchTo(anim);
+                    }
                 }
             }
-            return hasReset;
         }
 
-        protected virtual void UpdateAnimationState(Object obj)
+        private void UpdateAnimation(int elapsedTime, Object obj)
         {
-
+            _elapsedTime += elapsedTime;
+            if (_elapsedTime > _sprite.frameTime)
+            {
+                _currentFrame++;
+                _elapsedTime = 0;
+                if (_currentFrame > _sprite.frames - 1)
+                {
+                    AfterLastFrame(obj);
+                    _currentFrame = 0;
+                }
+            }
         }
 
-        protected virtual void SetupAnimation(Object obj)
+        protected virtual string UpdateAnimationState(Object o)
         {
-            obj.BoundingBox = new Rectangle((int)obj.Position.X, (int)obj.Position.Y, Width, Height);
+            return "";
+        }
+       
+        protected virtual void SwitchTo(string id)
+        {
+            if (CurrentSprite.name != id)
+            {
+                _sprite = _sprites[id];
+                _currentFrame = 0;
+                _canUpdate = CurrentSprite.loop;
+                _elapsedTime = 0;
+            }
         }
 
         protected virtual void AfterLastFrame(Object obj)
@@ -145,24 +152,19 @@ namespace Engine
         public virtual void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             SpriteEffects effect = SpriteEffects.None;
-            int frameToDraw = _currentFrame * Width;
             if(_mirrored)
             {
                 //drawFrame = (_frames - _currentFrame - 1) * Width;
                 effect = SpriteEffects.FlipHorizontally;
             }
-            spriteBatch.Draw(_sprite, position, new Rectangle(frameToDraw, _index * Height, Width, Height), Color.White, 0, Vector2.Zero, 1, effect, 0);
+            if (IsAnimated)
+            {
+                spriteBatch.Draw(_spriteSheet, position, new Rectangle(_currentFrame * CurrentSprite.frameWidth, CurrentSprite.index * (Height / _maxIndex), _sprite.frameWidth, Height / _maxIndex), Color.White, 0, Vector2.Zero, 1, effect, 0);
+            }
+            else
+            {
+                spriteBatch.Draw(_spriteSheet, position);
+            }
         }
-
-        protected void ResetAnimation(int index, int frames, int frameTime, int width)
-        {
-            _elapsedTime = 0;
-            _currentFrame = 0;
-            _index = index;
-            _frames = frames;
-            _frameTime = frameTime;
-            _width = width;         
-        }
-
     }
 }

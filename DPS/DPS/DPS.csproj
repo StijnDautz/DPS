@@ -49,6 +49,7 @@
     <Compile Include="Content\Classes\Objects\Characters\EnemySnowMan.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemyZombie.cs" />
     <Compile Include="Content\Classes\SFX\SFXPlayer.cs" />
+    <Compile Include="Content\Classes\SFX\SFXSnowMan.cs" />
     <Compile Include="Content\Classes\SFX\SFXZombie.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetSnowMan.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetZombie.cs" />
