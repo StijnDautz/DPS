@@ -23,6 +23,7 @@ namespace Engine
                     o.Update(gameTime);
                 }
             }
+            UpdateObjectsList();
         }
 
         private void UpdateCamera()
@@ -88,6 +89,29 @@ namespace Engine
             {
                 o.ApplyPosition(elapsedTime);
             }
+        }
+
+        private void UpdateObjectsList()
+        {
+            foreach(Object o in _objectsToAdd)
+            {
+                Objects.Add(o);
+            }
+            _objectsToAdd.Clear();
+            foreach(Object o in _objectsToRemove)
+            {
+                Objects.Remove(o);
+                if(o.CanCollide)
+                {
+                    _collisionObjects.Remove(o);
+
+                }
+                if(o is Player)
+                {
+                    _characters.Remove(o as Player);
+                }
+            }
+            _objectsToRemove.Clear();
         }
     }
 }

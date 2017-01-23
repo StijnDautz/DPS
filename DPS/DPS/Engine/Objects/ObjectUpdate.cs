@@ -14,7 +14,7 @@ namespace Engine
         private bool _canBlock;
         private bool _inAir;
         private bool[] _collisionDimension;
-        private Engine.SFX _soundEffects;
+        private Engine.SFXManager _sfxManager;
 
         public bool HasPhysics
         {
@@ -54,22 +54,27 @@ namespace Engine
             set { _inAir = value; }
         }
 
-        public SFX SFX
+        public SFXManager SFXManager
         {
-            get { return _soundEffects; }
+            set { _sfxManager = value; }
         }
 
         public virtual void Update(GameTime gameTime)
         {
-            _soundEffects.Update(gameTime, World.Player);
+            //update sfx manager
+            if(_sfxManager != null)
+            {
+                _sfxManager.Update(gameTime, World.Player);
+            }
         }
        
         public virtual void ApplyPhysics(float elapsedTime)
         {
             if (_hasPhysics && !World.IsTopDown && InAir)
             {
-                _velocity.Y += World.Gravity * elapsedTime;
+                _velocity.Y += World.Gravity * elapsedTime * _mass;
             }
+            _velocity.X /= 1 + _mass * elapsedTime;
         }
 
         public virtual void OnCollision(Object collider)
@@ -79,13 +84,16 @@ namespace Engine
 
         public virtual void SetupCollision(Object collider, float elapsedTime)
         {
-            if (collider is ObjectList || collider is ObjectGrid)
+            if (_visible && collider._visible)
             {
-                collider.SetupCollision(this, elapsedTime);
-            }
-            else
-            {
-                CheckCollision(collider, elapsedTime);
+                if (collider is ObjectList || collider is ObjectGrid)
+                {
+                    collider.SetupCollision(this, elapsedTime);
+                }
+                else
+                {
+                    CheckCollision(collider, elapsedTime);
+                }
             }
         }
 
@@ -110,7 +118,7 @@ namespace Engine
         private void CheckCollisionDimensions(Object collider, float elapsedTime)
         {
             //X
-            if (!_collisionDimension[0] && _velocity.X != 0)
+            if (!_collisionDimension[0])
             {
                 if (!CollisionHelper.CollidesWith(this, new Vector2(0, Velocity.Y), collider, collider._velocity, elapsedTime))
                 {                   
@@ -119,7 +127,7 @@ namespace Engine
             }
 
             //Y
-            if (!_collisionDimension[1] && _velocity.Y != 0)
+            if (!_collisionDimension[1])
             {
                 if (!CollisionHelper.CollidesWith(this, new Vector2(Velocity.X, 0), collider, collider._velocity, elapsedTime))
                 {

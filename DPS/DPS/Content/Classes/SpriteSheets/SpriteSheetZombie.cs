@@ -22,7 +22,7 @@ namespace Content
             ResetAnimation(0, 4, 300, 256);
         }
 
-        public override void UpdateAnimationState(Engine.Object obj)
+        protected override void UpdateAnimationState(Engine.Object obj)
         {
             animation tempAnim = _animation;
             if(obj is EnemyZombie)
@@ -37,7 +37,7 @@ namespace Content
             Mirrored = obj.Velocity.X < 0 ? false : true;
         }
 
-        public override void SetupAnimation(Engine.Object obj)
+        protected override void SetupAnimation(Engine.Object obj)
         {
             if(obj is EnemyZombie)
             {

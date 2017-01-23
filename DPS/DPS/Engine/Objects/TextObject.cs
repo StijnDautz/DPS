@@ -38,6 +38,7 @@ namespace Engine
         {
             _spriteFont = GameInstance.AssetManager.GetFont("Fonts/" + assetname);
             _color = Color.White;
+            _text = "";
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -22,6 +22,7 @@ namespace Engine
         //Einde database gegevens
 
         private Inventory _inventory;
+        private Weapon _weapon1;
         private float _walkSpeed;
         private float _runSpeed;
         
@@ -30,70 +31,82 @@ namespace Engine
             get { return _inventory; }
         }
 
-        public Player(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
+        public Player(string id, Engine.Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
             _inventory = new Inventory(id + "inventory", World);
             _walkSpeed = 400;
             _runSpeed = 600;
+            Health = 500;
+            Damage = 1000;
+            _weapon1 = new Weapon("sword", World, new SpriteSheet("Hud/TimerFrame"), this, Damage);
+            _weapon1.Visible = false;
+            World.Add(_weapon1);
+            Mass = 1.9f;
         }
 
         public override void Update(GameTime gameTime)
         {
+            //set weapon.Visible false, if player attacks, this will be set to true, until loop reaches this point again
+            _weapon1.Visible = false;
             base.Update(gameTime);
-        }          
+        }
 
+        #region InputHandling
         /*TODO Improve this method look at UpdateMovementState <3*/
         public virtual void HandleInput(GameTime gameTime)
         {
-            float speed = GameInstance.InputManager.isKeyHolding(Keys.LeftShift) ? _runSpeed : _walkSpeed;
-            if (World.IsTopDown)
+            if (!Death)
             {
-                HandleTopDownInput(speed);
-            }
-            else
-            {
-                HandleSideInput(speed);
-            }
+                float speed = GameInstance.InputManager.isKeyHolding(Keys.LeftShift) ? _runSpeed : _walkSpeed;
+                if (World.IsTopDown)
+                {
+                    HandleTopDownInput(speed);
+                }
+                else
+                {
+                    HandleSideInput(speed);
+                }
 
-            //Highscore test. Als je op H drukt wordt er een random waarde in de highscore lijst gezet met als username Random.
-            //Als dit verplaatst wordt, verplaats dan ook de "using MySql.Data.MySqlClient;"
-            if (GameInstance.InputManager.isKeyPressed(Keys.H))
-            {
-                //Database initializeren (dit kan ook ergens anders, dan hoef je het niet steeds opnieuw te doen.
-                SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                /*builder.Server = SERVER;
-                builder.UserID = UID;
-                builder.Password = PASSWORD;
-                builder.Database = DATABASE;*/
-                //builder.ConnectionString = "Server="+SERVER+";Database="+DATABASE+";User Id="+UID+";Password="+PASSWORD+";";
-                builder.ConnectionString = "Server=dpstudios.nl;Database=u13357p9566_highscore;Uid=u13357p9566_dps;Password=toeganggeweigerd6;";
+                //Highscore test. Als je op H drukt wordt er een random waarde in de highscore lijst gezet met als username Random.
+                //Als dit verplaatst wordt, verplaats dan ook de "using MySql.Data.MySqlClient;"
+                if (GameInstance.InputManager.isKeyPressed(Keys.H))
+                {
+                    //Database initializeren (dit kan ook ergens anders, dan hoef je het niet steeds opnieuw te doen.
+                    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
+                    /*builder.Server = SERVER;
+                    builder.UserID = UID;
+                    builder.Password = PASSWORD;
+                    builder.Database = DATABASE;*/
+                    //builder.ConnectionString = "Server="+SERVER+";Database="+DATABASE+";User Id="+UID+";Password="+PASSWORD+";";
+                    builder.ConnectionString = "Server=dpstudios.nl;Database=u13357p9566_highscore;Uid=u13357p9566_dps;Password=toeganggeweigerd6;";
 
-                String connString = builder.ToString();
+                    String connString = builder.ToString();
 
-                builder = null;
+                    builder = null;
 
-                Console.WriteLine(connString);
+                    Console.WriteLine(connString);
 
-                dbConn = new SqlConnection(connString);
-                //Einde initializatie
+                    dbConn = new SqlConnection(connString);
+                    //Einde initializatie
 
-                //Variabeles die nodig zijn voor de query
-                Random rnd = new Random();
-                int score = rnd.Next(0, 50);
-                string username = "Random";
+                    //Variabeles die nodig zijn voor de query
+                    Random rnd = new Random();
+                    int score = rnd.Next(0, 50);
+                    string username = "Random";
 
-                //Score in database zetten:
-                string query = string.Format("INSERT INTO highscore(username,score) VALUES ('{0}','{1}')", username, score);
-                SqlCommand cmd = new SqlCommand(query, dbConn);
+                    //Score in database zetten:
+                    string query = string.Format("INSERT INTO highscore(username,score) VALUES ('{0}','{1}')", username, score);
+                    SqlCommand cmd = new SqlCommand(query, dbConn);
 
-                /*werkt nog niet:
-                dbConn.Open();
+                    /*werkt nog niet:
+                    dbConn.Open();
 
-                SqlDataReader reader = cmd.ExecuteReader();
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-                dbConn.Close();
-                //Einde score in database zetten
-                */
+                    dbConn.Close();
+                    //Einde score in database zetten
+                    */
+                }
             }
         }
 
@@ -129,6 +142,14 @@ namespace Engine
 
         private void HandleSideInput(float speed)
         {
+            if(GameInstance.InputManager.LeftMouseButtonPressed)
+            {
+                TryAttack = true;
+            }
+            else
+            {
+                TryAttack = false;
+            }
             if (GameInstance.InputManager.isKeyHolding(Keys.D))
             {
                 VelocityX = speed;
@@ -145,13 +166,29 @@ namespace Engine
             }
             if (GameInstance.InputManager.isKeyPressed(Keys.Space))
             {
-                Velocity = new Vector2(VelocityX, -300);
+                Velocity = new Vector2(VelocityX, -550);
             }
         }
+        #endregion
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
         }
+
+        #region Combat
+        protected override void UpdateCombat(float elapsedTime)
+        {
+            base.UpdateCombat(elapsedTime);
+            //set weapon position according to player movement
+            _weapon1.Position = Mirrored ? new Vector2(Position.X - _weapon1.Width, Position.Y + 50) : new Vector2(Position.X + Width, Position.Y + 50);
+        }
+
+        protected override void OnAttack()
+        {
+            base.OnAttack();
+            _weapon1.Visible = true;
+        }
+        #endregion
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    class GameStateManager : IControlledLoopObject
+    class GameStateManager
     {
         private List<GameState> _gameStates;
         private GameState _current;

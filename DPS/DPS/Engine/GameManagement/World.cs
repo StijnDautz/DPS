@@ -9,10 +9,10 @@ using System.Threading.Tasks;
 
 namespace Engine
 {
-    partial class World : ObjectList, IControlledLoopObject
+    partial class World : ObjectList
     {
         private bool _isTopDown;
-        private List<Object> _collisionObjects;
+        private List<Object> _collisionObjects, _objectsToAdd, _objectsToRemove;
         private List<Player> _characters;
         private Vector2 _cameraPosition;
         private int _tileSize;
@@ -80,6 +80,8 @@ namespace Engine
             _isTopDown = true;
             _collisionObjects = new List<Object>();
             _characters = new List<Player>();
+            _objectsToAdd = new List<Object>();
+            _objectsToRemove = new List<Object>();
             _cameraPosition = Vector2.Zero;
             _gameMode = gameMode;
             _tileSize = 60;
@@ -101,7 +103,7 @@ namespace Engine
             {
                 _characters.Add(o as Player);
             }
-            Objects.Add(o);
+            _objectsToAdd.Add(o);
         }
 
         public override void Remove(Object o)
@@ -110,7 +112,8 @@ namespace Engine
             {
                 _characters.Remove(o as Player);
             }
-            Objects.Remove(o);
+            _objectsToRemove.Add(o);
+            o = null;
         }
 
         public override void Reset()

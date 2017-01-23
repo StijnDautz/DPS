@@ -39,7 +39,10 @@ namespace Engine
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
             base.Draw(gameTime, spriteBatch);
-            _sprite.Draw(spriteBatch, GlobalPosition - World.CameraPosition * Depth);
+            if (Visible)
+            {
+                _sprite.Draw(spriteBatch, GlobalPosition - World.CameraPosition * Depth);
+            }
         }
     }
 }

@@ -11,7 +11,7 @@ namespace Engine
     partial class Object : ILoopObject
     {
         private string _id;
-        private float _depth;
+        private float _depth, _mass;
         private bool _visible;
         private Object _parent;
         private Vector2 _position;
@@ -23,13 +23,18 @@ namespace Engine
             get { return _id; }
         }
 
-        public float Depth
+        public float Mass
+        {
+            set { _mass = value; }
+        }
+
+        public virtual float Depth
         {
             get { return _depth; }
             set { _depth = value; }
         }
 
-        public bool Visible
+        public virtual bool Visible
         {
             get { return _visible; }
             set { _visible = value; }
@@ -148,7 +153,6 @@ namespace Engine
             _parent = parent;
             _boundingBox = new Rectangle((int)Position.X, (int)Position.Y, 0, 0);
             _collisionDimension = new bool[2];
-            _soundEffects = new SFX(this);
         }
 
         public void setBoundingBoxDimensions(int width, int height)

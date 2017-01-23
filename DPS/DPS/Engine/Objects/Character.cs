@@ -9,14 +9,32 @@ namespace Engine
 {
     class Character : TexturedObject
     {
-        int _health, _damage, _speed;
+        int _health, _damage, _speed, _maxHealth;
         double _attackSpeed, _attackTime;
-        bool _attacking;
+        bool _tryAttack, _attacking, _death;
 
         public int Health
         {
             get { return _health; }
-            set { _health = value; }
+            set
+            {
+                _health = value;
+                if(_health > _maxHealth)
+                {
+                    _maxHealth = _health;
+                }
+            }
+        }
+
+        public bool TryAttack
+        {
+            get { return _tryAttack; }
+            set { _tryAttack = value; }
+        }
+
+        public int MaxHealth
+        {
+            get { return _maxHealth; }
         }
 
         public int Damage
@@ -40,8 +58,15 @@ namespace Engine
         public bool Attacking
         {
             get { return _attacking; }
+            set { _attacking = value; }
         }
-           
+
+        public bool Death
+        {
+            get { return _death; }
+            set { _death = value; }
+        }
+
         public Character(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
             HasPhysics = true;
@@ -52,34 +77,38 @@ namespace Engine
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            float elapsedTime = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
+            float elapsedTime = (float)gameTime.ElapsedGameTime.Milliseconds;
             UpdateCombat(elapsedTime);
         }
 
-        public override void OnCollision(Object collider)
+        //Updates the attack state
+        protected virtual void UpdateCombat(float elapsedTime)
         {
-            base.OnCollision(collider);
-            if (collider is Character)
-            {
-                Character character = collider as Character;
-                if (_attacking && _attackTime < _attackSpeed)
-                {
-                     character._health -= _damage;
-                    _attacking = false;
-                }
-            }
+            _attackTime += elapsedTime;
+            //TODO sync attackSpeed with anim speed
+            /* if tryAttack && canAttack -> attack
+             * This variable may be set to false when the fitting animation has ended
+             * else when attackTime took longer then the attackSpeed*/
+             IsAttackReady();
         }
 
-        private void UpdateCombat(float elapsedTime)
+        protected virtual void OnAttack()
         {
-            //update attackTime
-            _attackTime += elapsedTime;
+            
+        }
 
-            //if attackTime has been long enough and character wants to attack, start new attack by resetting attackTime to 0 
-            if (_attacking && _attackTime > _attackSpeed)
+        protected void IsAttackReady()
+        {
+            if (_attackTime > _attackSpeed)
             {
-                _attackTime = 0;
-                _attacking = false;
+                if (_tryAttack)
+                {
+                    //OnAttack
+                    _tryAttack = false;
+                    _attacking = true;
+                    _attackTime = 0;
+                    OnAttack();
+                }
             }
         }
     }

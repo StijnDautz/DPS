@@ -9,25 +9,38 @@ namespace Content
 {
     class EnemySnowMan : Engine.NPC
     {
-        private int _reactionRange, _elapsedTime, _delay;
-        EnemySnowMan(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
-        {
+        private int _reactionRange;
+        private Vector2 _distanceToPlayer;
 
+        public EnemySnowMan(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
+        {
+            _reactionRange = 1500;
+            AttackSpeed = 1800;
+            Damage = 100;
+            Health = 200;
+            Mass = 2;
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)
         {
             base.UpdateBehaviour(gameTime);
-            Vector2 distanceToPlayer = World.Player.GlobalOrigin - GlobalOrigin;
-            if(_reactionRange < distanceToPlayer.Length())
-            {
-                Engine.TexturedObject snowball = new Engine.TexturedObject("snowball", World, new Engine.SpriteSheet("Textures/Items/Frozen_Key"));
-                distanceToPlayer.Normalize();
-                snowball.Velocity = distanceToPlayer * 200;
-                snowball.HasPhysics = true;
-                snowball.CanCollide = true;
-                World.Add(snowball);
-            }
+            //update distance to player
+            _distanceToPlayer = World.Player.GlobalPosition - GlobalOrigin;
+            //enemy tries to attack when player is in range
+            TryAttack = _reactionRange > _distanceToPlayer.Length();
+        }
+
+        protected override void OnAttack()
+        {
+            base.OnAttack();
+            //setup weapon
+            var snowball = new WeaponSnowBall("snowball", World, new Engine.SpriteSheet("Textures/Weapons/Snowball"), this, Damage);
+            snowball.Position = Mirrored ? new Vector2(PositionX, PositionY + 30) : new Vector2(PositionX + Width - 20, PositionY + 30);
+
+            //setup snowball velocity
+            _distanceToPlayer.Normalize();
+            snowball.Velocity = _distanceToPlayer * 800;
+            World.Add(snowball);
         }
     }
 }

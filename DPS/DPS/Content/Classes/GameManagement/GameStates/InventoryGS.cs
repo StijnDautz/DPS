@@ -39,6 +39,7 @@ namespace Content
             base.Init();
             World.CanUpdate = false;
             IsMouseVisible = true;
+            CanUpdateGameTime = false;
         }
 
         public override void Update(GameTime gameTime)

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Content
 {
@@ -32,78 +33,75 @@ namespace Content
             }
         }
 
-        public override void SetupAnimation(Engine.Object obj)
+        protected override void SetupAnimation(Engine.Object obj)
         {
             switch (_animation)
             {
                 case animation.IDLE:
-                    ResetAnimation(0, 2, 320, 128);
+                    ResetAnimation(0, 2, 320, 256);
                     break;
                 case animation.WALKING:
-                    ResetAnimation(1, 16, 40, 1024);
+                    ResetAnimation(1, 16, 40, 2048);
                     break;
                 case animation.RUNNING:
-                    ResetAnimation(1, 16, 20, 1024);
+                    ResetAnimation(1, 16, 20, 2048);
                     break;
                 case animation.DEATH:
-                    ResetAnimation(2, 6, 50, 976);
+                    //TODO set proper width
+                    ResetAnimation(2, 6, 110, 1152);
                     break;
                 case animation.JUMPING:
-                    ResetAnimation(3, 4, 53, 256);
+                    ResetAnimation(3, 4, 53, 512);
                     break;
                 case animation.INAIR:
-                    ResetAnimation(4, 3, 120, 192);
+                    ResetAnimation(4, 3, 120, 384);
                     break;
                 case animation.FALLING:
-                    ResetAnimation(5, 5, 45, 320);
+                    ResetAnimation(5, 5, 45, 640);
                     break;
             }
             base.SetupAnimation(obj);
         }
 
-        public override void UpdateAnimationState(Engine.Object obj)
+        protected override void UpdateAnimationState(Engine.Object obj)
         {
-            /*
-            if (_attacking && (_attackTime += elapsedTime) > _attackSpeed)
+            if (obj is Engine.Player && (obj as Engine.Player).Death)
             {
-                _attacking = false;
-                _attackTime = 0;
-            }
-            if (_attacking)
-            {
-                _movementState = InAir ? movementState.JUMPATTACK : movementState.ATTACK;
-            }*/
-
-            if (obj.Velocity.Y != 0)
-            {
-                if (_animation != animation.INAIR)
-                {
-                    _animation = animation.JUMPING;
-                }
+                _animation = animation.DEATH;
             }
             else
             {
-                if(_animation == animation.INAIR)
+                if (obj.Velocity.Y != 0)
                 {
-                    _animation = animation.FALLING;
-                }
-                if (_animation != animation.FALLING)
-                {
-                    if (obj.VelocityX != 0)
+                    if (_animation != animation.INAIR)
                     {
-                        _animation = animation.WALKING;
+                        _animation = animation.JUMPING;
                     }
-                    else
+                }
+                else
+                {
+                    if (_animation == animation.INAIR)
                     {
-                        _animation = animation.IDLE;
+                        _animation = animation.FALLING;
+                    }
+                    if (_animation != animation.FALLING)
+                    {
+                        if (obj.VelocityX != 0)
+                        {
+                            _animation = animation.WALKING;
+                        }
+                        else
+                        {
+                            _animation = animation.IDLE;
+                        }
                     }
                 }
             }
         }
 
-        public override void AfterLastFrame()
+        protected override void AfterLastFrame(Engine.Object obj)
         {
-            base.AfterLastFrame();
+            base.AfterLastFrame(obj);
             if (_animation == animation.JUMPING)
             {
                 _animation = animation.INAIR;
@@ -112,6 +110,16 @@ namespace Content
             {
                 _animation = animation.IDLE;
             }
+            if(_animation == animation.DEATH)
+            {
+                IsLooping = false;
+                CurrentFrame = 5;
+            }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
+        {
+            base.Draw(spriteBatch, position);
         }
     }
 }
