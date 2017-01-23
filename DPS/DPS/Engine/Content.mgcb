@@ -259,3 +259,99 @@
 /processorParam:Quality=Best
 /build:Soundeffects/Small Enemy Hit.wav
 
+#begin ../Content/Soundeffects/Death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Death.wav
+
+#begin ../Content/Soundeffects/Eend Hit(2).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Eend Hit(2).wav
+
+#begin ../Content/Soundeffects/Eend Hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Eend Hit.wav
+
+#begin ../Content/Soundeffects/Explosie 1(2).wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Explosie 1(2).wav
+
+#begin ../Content/Soundeffects/Explosie 2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Explosie 2.wav
+
+#begin ../Content/Soundeffects/Hit 2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Hit 2.wav
+
+#begin ../Content/Soundeffects/Hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Hit.wav
+
+#begin ../Content/Soundeffects/Medium Enemy Attack.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Medium Enemy Attack.wav
+
+#begin ../Content/Soundeffects/Medium Enemy Death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Medium Enemy Death.wav
+
+#begin ../Content/Soundeffects/Medium Enemy Hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Medium Enemy Hit.wav
+
+#begin ../Content/Soundeffects/Player Attack.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Player Attack.wav
+
+#begin ../Content/Soundeffects/Player Death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Player Death.wav
+
+#begin ../Content/Soundeffects/Player Hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Player Hit.wav
+
+#begin ../Content/Soundeffects/Small Enemy Attack.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Small Enemy Attack.wav
+
+#begin ../Content/Soundeffects/Small Enemy Death.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Small Enemy Death.wav
+
+#begin ../Content/Soundeffects/Small Enemy Hit.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:../Content/Soundeffects/Small Enemy Hit.wav
+
