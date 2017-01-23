@@ -99,10 +99,6 @@ namespace Engine
                 {
                     if (obj is Player)
                     {
-                        if ((obj as Player).InAir)
-                        {
-                            int x = 0;
-                        }
                     }
                     string anim = UpdateAnimationState(obj);
                     if(anim != CurrentSprite.name)

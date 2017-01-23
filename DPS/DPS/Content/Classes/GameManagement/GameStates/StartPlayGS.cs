@@ -25,7 +25,7 @@ namespace Content
         public override void Init()
         {
             base.Init();
-            IsMouseVisible = false;
+            IsMouseVisible = true;
             World.CanUpdate = true;
             CanUpdateGameTime = true;          
         }
