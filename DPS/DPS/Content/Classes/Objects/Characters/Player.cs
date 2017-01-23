@@ -38,7 +38,7 @@ namespace Engine
             _runSpeed = 600;
             Health = 500;
             Damage = 1000;
-            _weapon1 = new Weapon("sword", World, new SpriteSheet("Hud/TimerFrame"), this, Damage);
+            _weapon1 = new Content.WeaponPlayer("sword", World, new SpriteSheet("Hud/TimerFrame"), this, Damage);
             _weapon1.Visible = false;
             World.Add(_weapon1);
             Mass = 1.9f;
