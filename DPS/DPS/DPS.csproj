@@ -48,6 +48,7 @@
     <Compile Include="Content\Classes\Objects\Objectgrids\Overworld.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemySnowMan.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemyZombie.cs" />
+    <Compile Include="Content\Classes\Objects\Weapons\SpecialWeapon1.cs" />
     <Compile Include="Content\Classes\SFX\SFXPlayer.cs" />
     <Compile Include="Content\Classes\SFX\SFXZombie.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetSnowMan.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="Engine\Objects\Button.cs" />
     <Compile Include="Engine\Objects\Character.cs" />
     <Compile Include="Content\Classes\Objects\Characters\Player.cs" />
+    <Compile Include="Engine\Objects\DestructableObject.cs" />
     <Compile Include="Engine\Objects\Inventory.cs" />
     <Compile Include="Engine\Objects\NPC.cs" />
     <Compile Include="Engine\Objects\ObjectUpdate.cs" />

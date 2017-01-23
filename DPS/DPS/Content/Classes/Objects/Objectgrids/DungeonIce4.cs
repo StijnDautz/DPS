@@ -22,6 +22,14 @@ namespace Content
             return Tile;
         }
 
+        private DestructableObject DestructionBlock(string id, string assetName)
+        {
+            DestructableObject Tile = new DestructableObject(id, this, new SpriteSheet("Textures/Tiles/" + assetName));
+            Tile.CanCollide = true;
+            Tile.CanBlock = true;      
+            return Tile;
+        }
+
         protected override Engine.Object FindType(char type)
         {
             switch (type)
@@ -60,7 +68,7 @@ namespace Content
                 case 'm': return SetupCollisionTile("walltile", "m.TileSet4");
                 case 'n': return SetupCollisionTile("walltile", "n.TileSet4");
                 case 'o': return SetupCollisionTile("walltile", "o.TileSet4");
-                case 'p': return SetupCollisionTile("walltile", "p.TileSet4");
+                case 'p': return DestructionBlock("walltile", "p.TileSet4");
 
                 case 'q': return SetupCollisionTile("spike", "q.TileSet4");
                 case 'r': return SetupCollisionTile("spike", "r.TileSet4");

@@ -37,6 +37,10 @@ namespace Engine
             {
                 DealDamage(collider as Character);
             }
+            if (collider != _owner && collider is DestructableObject)
+            {
+                DealDamage(collider as DestructableObject);
+            }
         }
 
         protected void DealDamage(Character character)
@@ -56,6 +60,13 @@ namespace Engine
                 x = -x;
             }
             character.Velocity += new Vector2(x, -100);
+        }
+
+        protected void DealDamage(DestructableObject block)
+        {
+            block.Visible = false;
+            block.CanCollide = false;
+            World.Remove(block);
         }
     }
 }
