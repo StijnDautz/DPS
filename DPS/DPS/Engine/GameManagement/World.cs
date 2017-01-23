@@ -16,7 +16,6 @@ namespace Engine
         private List<Player> _characters;
         private Vector2 _cameraPosition;
         private int _tileSize;
-        private Player _player;
         private GameMode _gameMode;
         private bool _canUpdate;
 
@@ -48,8 +47,7 @@ namespace Engine
 
         public Player Player
         {
-            get { return _player; }
-            set { _player = value; }
+            get { return _gameMode.Player; }
         }
 
         public bool CanUpdate
@@ -74,7 +72,7 @@ namespace Engine
             set { _gravity = value; }
         }
 
-        public World(string id, int width, int height, GameMode gameMode) : base(id, null)
+        public World(string id, int width, int height) : base(id, null)
         {
             setBoundingBoxDimensions(width, height);
             _isTopDown = true;
@@ -83,10 +81,15 @@ namespace Engine
             _objectsToAdd = new List<Object>();
             _objectsToRemove = new List<Object>();
             _cameraPosition = Vector2.Zero;
-            _gameMode = gameMode;
             _tileSize = 60;
             _gravity = 350f;
             _canUpdate = true;
+        }
+
+        public virtual void Setup(GameMode gameMode)
+        {
+            _gameMode = gameMode;
+
         }
 
         public void HandleInput(GameTime gameTime)

@@ -102,12 +102,6 @@ namespace Engine
             //are o and c colliding?
             if (CollisionHelper.CollidesWith(this, _velocity, collider, collider._velocity, elapsedTime))
             {
-                if (this is Player || collider is Player)
-                {
-                    int x = 0;
-                }
-                
-
                 //call onCollisionFunc
                 OnCollision(collider);
                 collider.OnCollision(this);

@@ -10,22 +10,19 @@ namespace Content
 {
     class MainWorld : World
     {
-        public MainWorld(string id, int width, int height, GameMode gameMode) : base(id, width, height, gameMode)
+        public MainWorld(string id, int width, int height) : base(id, width, height)
         {
             IsTopDown = true;
             CanUpdate = true;
+        }
+
+        public override void Setup(GameMode gameMode)
+        {
+            base.Setup(gameMode);
 
             Overworld grid = new Overworld("mainGrid", this, "OverWorld", 96);
             grid.CanCollide = true;
             Add(grid);
-            
-            Player player = new Player("player", this, new SpriteSheet("Textures/Tiles/a.Overworld"));
-            player.CanCollide = true;
-            player.Position = new Vector2(300, 300);
-
-           // player.BoundingBox = new Rectangle((int)player.Position.X, (int)player.Position.Y, 1, 1);
-            Add(player);
-            Player = player;
         }
     }
 }

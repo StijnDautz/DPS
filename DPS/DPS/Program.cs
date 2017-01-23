@@ -1,6 +1,7 @@
 ﻿using Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
+using System.Collections.Generic;
 
 namespace Engine
 {
@@ -23,14 +24,24 @@ namespace Engine
         protected override void LoadContent()
         {
             base.LoadContent();
-            MainGameMode gameMode = new MainGameMode("MainGM", GameModeManager);
-            gameMode.AddWorld(new DungeonWorld1("Dungeon1", 94080, 26880, gameMode));
-            gameMode.AddWorld(new MainWorld("MainWorld", 50000, 50000, gameMode));
+
+            var worlds = new List<World>();
+            worlds.Add(new DungeonWorld1("Dungeon1", 94080, 26880));
+            worlds.Add(new MainWorld("MainWorld", 50000, 50000));
+            worlds.Add(new MiniDungeon1("MiniDungeon1", 7680, 2880));
+            worlds.Add(new MiniDungeon2("MiniDungeon2", 5760, 2880));
+            MainGameMode gameMode = new MainGameMode("MainGM", GameModeManager, worlds);
+
             gameMode.SwitchTo("Dungeon1");
+            gameMode.Player = new Engine.Player("player", gameMode.World, new SpriteSheetCharacter("Textures/Characters/Character"));
+            gameMode.Player.Position = new Microsoft.Xna.Framework.Vector2(41280, 18600);
+
             gameMode.Setup();
+            gameMode.SetupWorlds();
+            gameMode.World.Add(gameMode.Player);
+
             GameModeManager.Add(gameMode);
             GameModeManager.SwitchTo("MainGM");
-
         }
     }
 }
