@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Engine;
+using Microsoft.Xna.Framework;
 
 namespace Content
 {
@@ -30,11 +31,33 @@ namespace Content
             return Tile;
         }
 
-        private DestructableObject DestructionBlock(string id, string assetName)
+        private DestructableObject DestructionBlock(string id, string assetName, string type)
         {
             DestructableObject Tile = new DestructableObject(id, this, new SpriteSheet("Textures/Tiles/" + assetName));
             Tile.CanCollide = true;
-            Tile.CanBlock = true;      
+            Tile.CanBlock = true;
+            Tile.Type = type;
+            return Tile;
+            
+        }
+        private TexturedObject Platform(string id, string assetName, int size)
+        {
+            TexturedObject Tile = new TexturedObject(id, this, new SpriteSheet("Textures/Tiles/" + assetName));
+            Tile.CanCollide = true;
+            Tile.CanBlock = true;
+            if (size == 1)
+            {
+                Tile.BoundingBox = new Rectangle((int)Tile.PositionX, (int)Tile.PositionY, 144, 96);
+            }
+            if (size == 2)
+            {
+                Tile.BoundingBox = new Rectangle((int)Tile.PositionX, (int)Tile.PositionY, 240, 96);
+            }
+            if (size == 3)
+            {
+                Tile.BoundingBox = new Rectangle((int)Tile.PositionX, (int)Tile.PositionY, 500, 96);
+            }
+
             return Tile;
         }
 
@@ -50,7 +73,7 @@ namespace Content
                 case '6': return SetupCollisionTile("walltile", "6.TileSet4");
                 case '7': return SetupCollisionTile("walltile", "7.TileSet4");
                 case '8': return SetupCollisionTile("walltile", "8.TileSet4");
-                case 't':
+                case 't': return DestructionBlock("SuperJumpBlock", "9.TileSet4", "SuperJump");
                 case 's':
                 case 'u':
                 case 'x':
@@ -64,9 +87,9 @@ namespace Content
                 case 'd': return Door("door", "d.TileSet4");
                 case 'e': return Door("door", "e.TileSet4");
 
-                case 'f': return SetupCollisionTile("platformtile", "f.TileSet4");
-                case 'g': return SetupCollisionTile("platformtile", "g.TileSet4");
-                case 'h': return SetupCollisionTile("platformtile", "h.TileSet4");
+                case 'f': return Platform("platformtile", "f.TileSet4", 1);
+                case 'g': return Platform("platformtile", "g.TileSet4", 2);
+                case 'h': return Platform("platformtile", "h.TileSet4", 3);
 
                 case 'i': return SetupCollisionTile("ladder", "i.TileSet4");
 
@@ -76,12 +99,14 @@ namespace Content
                 case 'm': return SetupCollisionTile("walltile", "m.TileSet4");
                 case 'n': return SetupCollisionTile("walltile", "n.TileSet4");
                 case 'o': return SetupCollisionTile("walltile", "o.TileSet4");
-                case 'p': return DestructionBlock("walltile", "p.TileSet4");
+                case 'p': return DestructionBlock("walltile", "p.TileSet4", "Normal");
 
                 case 'q': return SetupCollisionTile("spike", "q.TileSet4");
                 case 'r': return SetupCollisionTile("spike", "r.TileSet4");
                 case '0':
                 case '-': return new TexturedObject("emptytile", this, new SpriteSheet("Textures/Tiles/0.Overworld"));
+                case '!': return new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
+                case '@': return new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
 
                 default: throw new Exception("character of type: " + type + "was not associated with an Object");
             }

@@ -37,7 +37,7 @@ namespace Engine
             {
                 DealDamage(collider as Character);
             }
-            if (collider != _owner && collider is DestructableObject)
+            if (collider != _owner && collider is DestructableObject && (collider as DestructableObject).Type == "Normal")
             {
                 DealDamage(collider as DestructableObject);
             }
