@@ -19,6 +19,7 @@ namespace Engine
         //is set in GameState and used in GameModeManager
         private GameStateManager _gameStateManager;
         private GameModeManager _parent;
+        private Player _player;
 
         public string Id
         {
@@ -41,12 +42,18 @@ namespace Engine
             set { _parent = value; }
         }
 
-        public GameMode(string id, GameModeManager gm)
+        public Player Player
+        {
+            get { return _player; }
+            set { _player = value; }
+        }
+
+        public GameMode(string id, GameModeManager gm, List<World> worlds)
         {
             _id = id;
             _gameStateManager = new GameStateManager(this);
             _parent = gm;
-            _worlds = new List<World>();
+            _worlds = worlds;
         }
 
         public virtual void Setup()
@@ -70,11 +77,6 @@ namespace Engine
                 _current.Update(gameTime);
             }
             _gameStateManager.Update(gameTime);
-            if (!World.Player.InAir)
-            {
-                //TODO remove
-                int x = 0;
-            }
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -95,11 +97,6 @@ namespace Engine
             _gameStateManager.HandleInput(gameTime);
         }
 
-        public void AddWorld(World world)
-        {
-            _worlds.Add(world);
-        }
-
         public void SwitchTo(string id)
         {
             foreach(World w in _worlds)
@@ -112,5 +109,14 @@ namespace Engine
             }
             throw new Exception("Could not find a world with id: " + id);
         }
+
+        public void SetupWorlds()
+        {
+            foreach(World w in _worlds)
+            {
+                w.Setup(this);
+            }
+        }
+
     }
 }

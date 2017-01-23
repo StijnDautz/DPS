@@ -19,7 +19,7 @@ namespace Content
         {
             _discription = -1;
         }
-
+        /*
         public override void Setup()
         {
             base.Setup();

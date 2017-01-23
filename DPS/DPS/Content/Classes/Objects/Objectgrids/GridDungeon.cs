@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework;
 
 namespace Content
 {
-    class Level1 : ObjectGrid
+    class GridDungeon : ObjectGrid
     {
-        public Level1(string id, Engine.Object parent, string assetName, int tileSize) : base(id, parent, assetName, tileSize)
+        public GridDungeon(string id, Engine.Object parent, string assetName, int tileSize) : base(id, parent, assetName, tileSize)
         {
 
         }

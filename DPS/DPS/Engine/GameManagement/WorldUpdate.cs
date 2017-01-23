@@ -28,13 +28,13 @@ namespace Engine
 
         private void UpdateCamera()
         {
-            if (_player != null)
+            if (Player != null)
             {
                 int screenWidth = GameInstance.GraphicsDeviceManager.PreferredBackBufferWidth;
                 int screenHeight = GameInstance.GraphicsDeviceManager.PreferredBackBufferHeight;
 
                 Vector2 halfedScreen = new Vector2(screenWidth / 2, screenHeight / 2);
-                Vector2 newCameraPosition = new Vector2(_player.Position.X - halfedScreen.X + _player.Width / 2, _player.Position.Y - halfedScreen.Y + _player.Height / 2);
+                Vector2 newCameraPosition = new Vector2(Player.Position.X - halfedScreen.X + Player.Width / 2, Player.Position.Y - halfedScreen.Y + Player.Height / 2);
                 //make sure camera will stay within world dimensions
                 //X
                 var temp = Width - screenWidth;

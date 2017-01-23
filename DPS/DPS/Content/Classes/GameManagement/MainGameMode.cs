@@ -8,7 +8,7 @@ namespace Content
 {
     class MainGameMode : Engine.GameMode
     {
-        public MainGameMode(string id, Engine.GameModeManager gm) : base(id, gm)
+        public MainGameMode(string id, Engine.GameModeManager gm, List<Engine.World> worlds) : base(id, gm, worlds)
         {
 
         }
