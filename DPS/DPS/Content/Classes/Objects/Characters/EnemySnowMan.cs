@@ -19,6 +19,7 @@ namespace Content
             Damage = 100;
             Health = 200;
             Mass = 2;
+            SFXManager = new SFXSnowMan(this);
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)

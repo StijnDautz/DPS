@@ -15,15 +15,15 @@ namespace Engine
             {
                 UpdateCollision(gameTime);
                 UpdateCamera();
-            }
-            foreach (Object o in Objects)
-            {
-                if (_canUpdate && o != null && o.Visible)
+                foreach (Object o in Objects)
                 {
-                    o.Update(gameTime);
+                    if (_canUpdate && o != null && o.Visible)
+                    {
+                        o.Update(gameTime);
+                    }
                 }
+                UpdateObjectsList();
             }
-            UpdateObjectsList();
         }
 
         private void UpdateCamera()

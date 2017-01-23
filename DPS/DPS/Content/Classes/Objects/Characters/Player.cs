@@ -42,6 +42,8 @@ namespace Engine
             _weapon1.Visible = false;
             World.Add(_weapon1);
             Mass = 1.9f;
+            SFXManager = new Content.SFXPlayer(this);
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, 128, 160);
         }
 
         public override void Update(GameTime gameTime)

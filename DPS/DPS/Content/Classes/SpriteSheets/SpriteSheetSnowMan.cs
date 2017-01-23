@@ -10,66 +10,26 @@ namespace Content
 {
     class SpriteSheetSnowMan : Engine.SpriteSheet
     {
-        private enum animation
-        {
-            IDLE, THROWING
-        }
-
-        animation _animation;
-
         public SpriteSheetSnowMan(string assetName) : base(assetName)
         {
             IsAnimated = true;
-            ResetAnimation(0, 2, 400, 224);
-            Maxindex = 2;
+            Add("idle", 0, 2, 400, 224, true);
+            Add("attack", 1, 5, 200, 260, false);
+            SwitchTo("idle");
         }
 
-        public override void Update(GameTime gameTime, Engine.Object obj)
+        protected override string UpdateAnimationState(Engine.Object obj)
         {
-            animation tempAnim = _animation;
-            base.Update(gameTime, obj);
-            if(tempAnim != _animation)
-            {
-                SetupAnimation(obj);
-            }
-        }
-
-        protected override void UpdateAnimationState(Engine.Object obj)
-        {
-            base.UpdateAnimationState(obj);
+            string anim = "idle";
             Mirrored = obj.World.Player.GlobalPosition.X > obj.GlobalPosition.X ? true : false;
             if(obj is EnemySnowMan)
             {
-                EnemySnowMan snowMan = obj as EnemySnowMan;
-                _animation = snowMan.Attacking ? animation.THROWING : animation.IDLE;
-            }
-        }
-
-        protected override void SetupAnimation(Engine.Object obj)
-        {
-            base.SetupAnimation(obj);
-            switch(_animation)
-            {
-                case animation.IDLE:
-                    ResetAnimation(0, 2, 400, 224);
-                    break;
-                case animation.THROWING:
-                    ResetAnimation(1, 5, 200, 560);
-                    break;
-            }
-        }
-
-        protected override void AfterLastFrame(Engine.Object obj)
-        {
-            base.AfterLastFrame(obj);
-            if(obj is EnemySnowMan)
-            {
-                EnemySnowMan snowMan = obj as EnemySnowMan;
-                if (_animation == animation.THROWING)
+                if((obj as EnemySnowMan).Attacking)
                 {
-                    snowMan.Attacking = false;
+                    anim = "attack";
                 }
             }
+            return anim;
         }
     }
 }

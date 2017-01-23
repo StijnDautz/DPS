@@ -9,50 +9,27 @@ namespace Content
 {
     class SpriteSheetZombie : Engine.SpriteSheet
     {
-        private enum animation
-        {
-            WALKING, RUNNING
-        }
-
-        animation _animation;
-
         public SpriteSheetZombie(string assetName) : base(assetName)
         {
             IsAnimated = true;
-            ResetAnimation(0, 4, 300, 256);
+            Add("walking", 0, 4, 300, 256, true);
+            Add("running", 1, 4, 40, 256, true);
+            SwitchTo("walking");
         }
 
-        protected override void UpdateAnimationState(Engine.Object obj)
+        protected override string UpdateAnimationState(Engine.Object obj)
         {
-            animation tempAnim = _animation;
-            if(obj is EnemyZombie)
+            string anim = "walking";
+            if (obj is EnemyZombie)
             {
-                EnemyZombie zombie = obj as EnemyZombie;
-                _animation = obj.VelocityX > zombie.WalkSpeed || obj.VelocityX < -zombie.WalkSpeed ? animation.RUNNING : animation.WALKING;
-            }     
-            if(tempAnim != _animation)
-            {
-                SetupAnimation(obj);
-            }
-            Mirrored = obj.Velocity.X < 0 ? false : true;
-        }
-
-        protected override void SetupAnimation(Engine.Object obj)
-        {
-            if(obj is EnemyZombie)
-            {
-                EnemyZombie zombie = obj as EnemyZombie;
-                base.SetupAnimation(obj);
-                switch (_animation)
+                var zombie = obj as EnemyZombie;
+                if (zombie.Speed == zombie.SprintSpeed)
                 {
-                    case animation.WALKING:
-                        ResetAnimation(0, 4, 300, 256);
-                        break;
-                    case animation.RUNNING:
-                        ResetAnimation(0, 4, 40, 256);
-                        break;
+                    SwitchTo("running");
                 }
+                Mirrored = obj.Velocity.X < 0 ? false : true;
             }
+            return anim;
         }
     }
 }

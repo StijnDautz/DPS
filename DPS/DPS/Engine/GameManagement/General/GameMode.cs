@@ -70,6 +70,11 @@ namespace Engine
                 _current.Update(gameTime);
             }
             _gameStateManager.Update(gameTime);
+            if (!World.Player.InAir)
+            {
+                //TODO remove
+                int x = 0;
+            }
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

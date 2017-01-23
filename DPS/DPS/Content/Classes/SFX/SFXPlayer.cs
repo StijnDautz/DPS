@@ -8,11 +8,38 @@ namespace Content
 {
     class SFXPlayer : Engine.SFXManager
     {
-        SFXPlayer(Engine.Object source) : base(source)
+        int _health;
+
+        public SFXPlayer(Engine.Object source) : base(source)
         {
             Add("attack", getSFX("playerAttack"), false);
             Add("damaged", getSFX("playerAttack"), false);
             Add("death", getSFX("playerDeath"), false);
+            _health = (source as Engine.Player).Health;
+        }
+
+        protected override void UpdateSFX()
+        {
+            base.UpdateSFX();
+            if(Source is Engine.Player)
+            {
+                var player = Source as Engine.Player;
+                if(player.Death)
+                {
+                    SwitchTo("death");
+                }
+                else if(player.Attacking)
+                {
+                    SwitchTo("attack");
+                }
+                else if(_health > player.Health)
+                {
+                    SwitchTo("damaged");
+                }
+
+                //update health of player, so damaged sfx wont play if it wasnt able to when the player was actually damaged
+                _health = player.Health;
+            }
         }
     }
 }

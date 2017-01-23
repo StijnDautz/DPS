@@ -28,7 +28,7 @@ namespace Content
         public override void Draw(SpriteBatch spriteBatch, Vector2 position)
         {
             int offset = (int)((1 - _healthPercentage) * Height);
-            spriteBatch.Draw(Sprite, new Vector2(position.X, position.Y + offset), new Rectangle(0, offset, Width, Height), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
+            spriteBatch.Draw(spriteSheet, new Vector2(position.X, position.Y + offset), new Rectangle(0, offset, Width, Height), Color.White, 0, Vector2.Zero, 1, SpriteEffects.None, 0);
         }
     }
 }
