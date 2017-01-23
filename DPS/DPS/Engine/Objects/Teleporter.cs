@@ -30,8 +30,8 @@ namespace Engine
                 collider.Position = _position;
 
                 //teleport its weapons
-                TeleportObject(player.wa)
-
+                TeleportObject(player.Weapon1);
+                TeleportObject(player.Weapon2);
             }
         }
         

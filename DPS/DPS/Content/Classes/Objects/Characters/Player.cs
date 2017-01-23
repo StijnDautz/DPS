@@ -34,6 +34,16 @@ namespace Engine
             get { return _inventory; }
         }
 
+        public Weapon Weapon1
+        {
+            get { return _weapon1; }
+        }
+
+        public Weapon Weapon2
+        {
+            get { return _weapon2; }
+        }
+
         public Player(string id, Engine.Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
             _inventory = new Inventory(id + "inventory", World);
