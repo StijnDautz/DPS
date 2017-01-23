@@ -107,8 +107,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Soundeffects\Death.wav" />
+    <Content Include="Content\Soundeffects\Eend Hit%282%29.wav" />
+    <Content Include="Content\Soundeffects\Eend Hit.wav" />
+    <Content Include="Content\Soundeffects\Explosie 1%282%29.wav" />
+    <Content Include="Content\Soundeffects\Explosie 2.wav" />
+    <Content Include="Content\Soundeffects\Hit 2.wav" />
+    <Content Include="Content\Soundeffects\Hit.wav" />
+    <Content Include="Content\Soundeffects\Medium Enemy Attack.wav" />
+    <Content Include="Content\Soundeffects\Medium Enemy Death.wav" />
+    <Content Include="Content\Soundeffects\Medium Enemy Hit.wav" />
+    <Content Include="Content\Soundeffects\Player Attack.wav" />
+    <Content Include="Content\Soundeffects\Player Death.wav" />
+    <Content Include="Content\Soundeffects\Player Hit.wav" />
     <Content Include="Content\Soundeffects\Rocket.wav" />
     <Content Include="Content\Soundeffects\Rocket1.mp3" />
+    <Content Include="Content\Soundeffects\Small Enemy Attack.wav" />
+    <Content Include="Content\Soundeffects\Small Enemy Death.wav" />
+    <Content Include="Content\Soundeffects\Small Enemy Hit.wav" />
     <Content Include="Content\Soundeffects\snd_music.wma" />
     <Content Include="Content\Soundeffects\Sound Effects - Eend hit.wav" />
     <Content Include="Content\Soundeffects\Sound Effects - Explosie 1.wav" />
