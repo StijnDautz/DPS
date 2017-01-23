@@ -25,21 +25,7 @@ namespace Engine
         public bool CanCollide
         {
             get { return _canCollide; }
-            set
-            {
-                if (!(_parent is ObjectGrid))
-                {
-                    if (value && !_canCollide)
-                    {
-                        World.CollisionObjects.Add(this);
-                    }
-                    if (!value && _canCollide)
-                    {
-                        World.CollisionObjects.Remove(this);
-                    }
-                }
-                _canCollide = value;
-            }
+            set { _canCollide = value; }
         }
 
         public bool CanBlock

@@ -12,7 +12,7 @@ namespace Engine
         private string _world;
         private Vector2 _position;
 
-        Teleporter(string id, Object parent, string world, Vector2 position) : base(id, parent)
+        public Teleporter(string id, Object parent, string world, Vector2 position) : base(id, parent)
         {
             _world = world;
             _position = position;
@@ -24,10 +24,22 @@ namespace Engine
             base.OnCollision(collider);
             if(collider is Player)
             {
-                World.GameMode.SwitchTo(_world);
-                collider.Parent = World;
+                var player = collider as Player;
+                //teleport player
+                TeleportObject(collider);
                 collider.Position = _position;
+
+                //teleport its weapons
+                TeleportObject(player.wa)
+
             }
+        }
+        
+        private void TeleportObject(Object o)
+        {
+            World.GameMode.SwitchTo(_world);
+            World.GameMode.World.Add(o);
+            World.Remove(o);
         }
     }
 }

@@ -95,21 +95,29 @@ namespace Engine
         {
             foreach(Object o in _objectsToAdd)
             {
+                if(o is Player)
+                {
+                    _characters.Add(o as Player);
+                }
+                if(o.CanCollide)
+                {
+                    _collisionObjects.Add(o);
+                }
                 Objects.Add(o);
             }
             _objectsToAdd.Clear();
             foreach(Object o in _objectsToRemove)
             {
-                Objects.Remove(o);
-                if(o.CanCollide)
-                {
-                    _collisionObjects.Remove(o);
-
-                }
                 if(o is Player)
                 {
                     _characters.Remove(o as Player);
                 }
+                if (o.CanCollide)
+                {
+                    _collisionObjects.Remove(o);
+
+                }
+                Objects.Remove(o);
             }
             _objectsToRemove.Clear();
         }

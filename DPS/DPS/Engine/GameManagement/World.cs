@@ -89,7 +89,6 @@ namespace Engine
         public virtual void Setup(GameMode gameMode)
         {
             _gameMode = gameMode;
-
         }
 
         public void HandleInput(GameTime gameTime)
@@ -102,10 +101,7 @@ namespace Engine
 
         public override void Add(Object o)
         {
-            if(o is Player)
-            {
-                _characters.Add(o as Player);
-            }
+            o.Parent = this;
             _objectsToAdd.Add(o);
         }
 
