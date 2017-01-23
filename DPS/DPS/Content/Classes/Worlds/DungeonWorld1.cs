@@ -14,7 +14,8 @@ namespace Content
             IsTopDown = false;
             //Add player to world
             var player = new Engine.Player("player", this, new SpriteSheetCharacter("Textures/Characters/Character"));
-            player.Position = new Microsoft.Xna.Framework.Vector2(33000, 6000);
+            player.Position = new Microsoft.Xna.Framework.Vector2(960, 21600);//27
+            //player.Position = new Microsoft.Xna.Framework.Vector2(41280, 18400);
             Player = player;
             Add(player);
 
