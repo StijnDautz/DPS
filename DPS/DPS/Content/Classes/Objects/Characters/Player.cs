@@ -25,10 +25,23 @@ namespace Engine
         private Weapon _weapon1;
         private float _walkSpeed;
         private float _runSpeed;
+
+        private bool _isSuperJumping;
+        private Weapon _weapon2;
         
         public Inventory Inventory
         {
             get { return _inventory; }
+        }
+
+        public Weapon Weapon1
+        {
+            get { return _weapon1; }
+        }
+
+        public Weapon Weapon2
+        {
+            get { return _weapon2; }
         }
 
         public Player(string id, Engine.Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
@@ -40,10 +53,14 @@ namespace Engine
             Damage = 1000;
             _weapon1 = new Content.WeaponPlayer("sword", World, new SpriteSheet("Hud/TimerFrame"), this, Damage);
             _weapon1.Visible = false;
+            _weapon2 = new Content.WeaponSuperJump("superJump", World, new Engine.SpriteSheet("Hud/TimerFrame - kopie"), this, 1);
+            _weapon2.Visible = false;
             World.Add(_weapon1);
+            World.Add(_weapon2);
             Mass = 1.9f;
             SFXManager = new Content.SFXPlayer(this);
             BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, 128, 160);
+            _isSuperJumping = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -51,6 +68,10 @@ namespace Engine
             //set weapon.Visible false, if player attacks, this will be set to true, until loop reaches this point again
             _weapon1.Visible = false;
             base.Update(gameTime);
+            //if (VelocityY < 50 && _isSuperJumping)
+            //{
+            //    _isSuperJumping = false;
+            //}
         }
 
         #region InputHandling
@@ -170,8 +191,39 @@ namespace Engine
             {
                 Velocity = new Vector2(VelocityX, -550);
             }
+            if (GameInstance.InputManager.isKeyPressed(Keys.R))
+            {
+                SuperJump();               
+            }
+            if (GameInstance.InputManager.isKeyPressed(Keys.E))
+            {
+                _isSuperJumping = false;
+                _weapon2.Visible = false;
+            }
+
         }
         #endregion
+
+        private void SuperJump()
+        {
+            Velocity = new Vector2(VelocityX, -550 * 10);
+            _isSuperJumping = true;
+            _weapon2.Visible = true; 
+        }
+
+        //public override void OnCollision(Object collider)
+        //{
+        //    base.OnCollision(collider);
+        //    if (_isSuperJumping)
+        //    {
+        //        if (collider is DestructableObject)
+        //        {
+        //            collider.Visible = false;
+        //            collider.CanCollide = false;
+        //            World.Remove(collider);
+        //        }
+        //    }
+        //}
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {

@@ -23,6 +23,10 @@ namespace Content
             Overworld grid = new Overworld("mainGrid", this, "OverWorld", 96);
             grid.CanCollide = true;
             Add(grid);
+
+            Teleporter teleporterMiniDungeon1 = new Teleporter("teleporter", this, "MiniDungeon1", new Vector2(300, 300));
+            teleporterMiniDungeon1.Position = new Vector2(690, 690);
+            Add(teleporterMiniDungeon1);
         }
     }
 }

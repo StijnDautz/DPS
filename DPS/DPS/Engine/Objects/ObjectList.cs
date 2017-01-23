@@ -83,6 +83,10 @@ namespace Engine
             {
                 World.Characters.Add(o as Player);
             }
+            if (o.CanCollide)
+            {
+                World.CollisionObjects.Add(this);
+            }
             _objects.Add(o);
         }
 
