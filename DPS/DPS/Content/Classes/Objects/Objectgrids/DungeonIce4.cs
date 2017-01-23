@@ -22,6 +22,14 @@ namespace Content
             return Tile;
         }
 
+        private TexturedObject Door(string id, string assetName)
+        {
+            TexturedObject Tile = new TexturedObject(id, this, new SpriteSheet("Textures/Tiles/" + assetName));
+            Tile.CanCollide = false;
+            Tile.CanBlock = true;
+            return Tile;
+        }
+
         private DestructableObject DestructionBlock(string id, string assetName)
         {
             DestructableObject Tile = new DestructableObject(id, this, new SpriteSheet("Textures/Tiles/" + assetName));
@@ -53,8 +61,8 @@ namespace Content
                 case 'b': return SetupCollisionTile("walltile", "9.TileSet4");
                 case 'c': return SetupCollisionTile("walltile", "9.TileSet4");
 
-                case 'd': return SetupCollisionTile("door", "d.TileSet4");
-                case 'e': return SetupCollisionTile("door", "e.TileSet4");
+                case 'd': return Door("door", "d.TileSet4");
+                case 'e': return Door("door", "e.TileSet4");
 
                 case 'f': return SetupCollisionTile("platformtile", "f.TileSet4");
                 case 'g': return SetupCollisionTile("platformtile", "g.TileSet4");
