@@ -15,7 +15,11 @@ namespace Content
 
         protected void AddGridToLevelGrid(int x, int y, Engine.ObjectGrid levelGrid, string[] assetNames)
         {
-            levelGrid.Grid[x, y] = new GridDungeon("subGrid", this, assetNames[Engine.GameInstance.RNG.Next(0, assetNames.Length)], 96);
+            int index = Engine.GameInstance.RNG.Next(0, assetNames.Length);
+            var subGrid = new GridDungeon("subGrid", this, assetNames[index], 96);
+            subGrid.Position = new Microsoft.Xna.Framework.Vector2(x * 20 * 96, y * 10 * 96);
+            subGrid.CanCollide = true;
+            levelGrid.Grid[x, y] = subGrid;
         }
     }
 }
