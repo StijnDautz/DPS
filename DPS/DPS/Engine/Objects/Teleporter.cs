@@ -22,7 +22,7 @@ namespace Engine
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
-            if(collider is Player)
+            if (collider is Player)
             {
                 var player = collider as Player;
                 //teleport player
@@ -34,7 +34,7 @@ namespace Engine
                 TeleportObject(player.Weapon2);
             }
         }
-        
+
         private void TeleportObject(Object o)
         {
             World.GameMode.SwitchTo(_world);
