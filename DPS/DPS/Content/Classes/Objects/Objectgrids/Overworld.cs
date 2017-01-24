@@ -56,7 +56,7 @@ namespace Content
                 case 't': return SetupCollisionTile("Overworldtile", "t.Overworld");
                 case 'u': return SetupCollisionTile("Overworldtile", "u.Overworld");
                 case 'v': return SetupCollisionTile("Overworldtile", "v.Overworld");
-                case 'w': return WalkableTile("Overworldtile", "w.Overworld");
+                case 'w': return SetupCollisionTile("Overworldtile", "w.Overworld");
                 case 'x': return SetupCollisionTile("Overworldtile", "x.Overworld");
                 case 'y': return SetupCollisionTile("Overworldtile", "y.Overworld");
                 case 'z': return SetupCollisionTile("Overworldtile", "z.Overworld");
