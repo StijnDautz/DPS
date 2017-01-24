@@ -14,8 +14,9 @@ namespace Content
         {
             IsAnimated = true;
             Add("idle", 0, 2, 400, 224, true);
-            Add("attack", 1, 5, 200, 260, false);
+            Add("attack", 1, 5, 200, 560, false);
             SwitchTo("idle");
+            CanUpdate = true;
         }
 
         protected override string UpdateAnimationState(Engine.Object obj)
@@ -30,6 +31,15 @@ namespace Content
                 }
             }
             return anim;
+        }
+
+        protected override void AfterLastFrame(Engine.Object obj)
+        {
+            base.AfterLastFrame(obj);
+            if(CurrentSprite.name == "attack")
+            {
+                CanUpdate = true;
+            }
         }
     }
 }

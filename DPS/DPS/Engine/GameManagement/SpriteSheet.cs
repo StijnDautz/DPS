@@ -112,9 +112,6 @@ namespace Engine
                 UpdateAnimation(gameTime.ElapsedGameTime.Milliseconds, obj);
                 if (_canUpdate)
                 {
-                    if (obj is Player)
-                    {
-                    }
                     string anim = UpdateAnimationState(obj);
                     if(anim != CurrentSprite.name)
                     {

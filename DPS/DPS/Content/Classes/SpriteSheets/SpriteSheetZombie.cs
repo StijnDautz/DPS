@@ -15,7 +15,7 @@ namespace Content
         {
             IsAnimated = true;
             Add("walking", 0, 4, 300, 256, true);
-            Add("running", 1, 4, 40, 256, true);
+            Add("running", 1, 4, 40, 252, true);
             SwitchTo("walking");
             MaxIndex = 1;
         }
@@ -26,7 +26,7 @@ namespace Content
             if (obj is EnemyZombie)
             {
                 var zombie = obj as EnemyZombie;
-                if (zombie.Speed == zombie.SprintSpeed)
+                if (zombie.Speed == zombie.SprintSpeed && CurrentSprite.name != "running")
                 {
                     SwitchTo("running");
                 }

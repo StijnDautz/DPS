@@ -39,6 +39,7 @@ namespace Content
             SFXManager = new SFXZombie(this);
             _weapon = new Engine.Weapon("weapon", World, new Engine.SpriteSheet("Hud/TimerFrame"), this, 75);
             World.Add(_weapon);
+            BoundingBox = new Rectangle(0, 0, 64, 89);
         }
 
         public override void Update(GameTime gameTime)

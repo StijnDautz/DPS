@@ -20,6 +20,7 @@ namespace Content
             Health = 200;
             Mass = 2;
             SFXManager = new SFXSnowMan(this);
+            BoundingBox = new Rectangle(0, 0, 112, 116);
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)
