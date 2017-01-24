@@ -131,6 +131,7 @@ namespace Engine
                 char[,] grid = generator.Generate();
                 _collums = grid.GetLength(0);
                 _rows = grid.GetLength(1);
+
                 _grid = new Object[_collums, _rows];
                 ReadTiles(grid);
                 return;
