@@ -52,8 +52,7 @@
     <Compile Include="Content\Classes\SFX\SFXPlayer.cs" />
     <Compile Include="Content\Classes\SFX\SFXSnowMan.cs" />
     <Compile Include="Content\Classes\SFX\SFXZombie.cs" />
-    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayerBig.cs" />
-    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayerSmall.cs" />
+    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayerTopDown.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetSnowMan.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetZombie.cs" />
     <Compile Include="Content\Classes\Objects\HUD\ExitButton.cs" />
@@ -61,7 +60,7 @@
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetHealthBar.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponSnowBall.cs" />
     <Compile Include="Content\Classes\Objects\HUD\PlayButton.cs" />
-    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayer.cs" />
+    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayerSide.cs" />
     <Compile Include="Content\Classes\Objects\Pickups\UpgradePickup.cs" />
     <Compile Include="Content\Classes\Worlds\DungeonWorld1.cs" />
     <Compile Include="Content\Classes\Worlds\MainWorld.cs" />

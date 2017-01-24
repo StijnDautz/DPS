@@ -81,6 +81,7 @@ namespace Engine
                 if(SpriteSheet != _spriteSheetSmall)
                 {
                     SpriteSheet = _spriteSheetSmall;
+                    BoundingBox = new Rectangle(0, 0, 64, 80);
                 }
             }
             else
@@ -88,6 +89,7 @@ namespace Engine
                 if(SpriteSheet != _spriteSheetBig)
                 {
                     SpriteSheet = _spriteSheetBig;
+                    BoundingBox = new Rectangle(0, 0, 128, 160);
                 }
             }
         }
