@@ -44,7 +44,7 @@ namespace Engine
             get { return _weapon2; }
         }
 
-        public Player(string id, Engine.Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
+        public Player(string id, Engine.Object parent, SpriteSheet spriteSheetBig) : base(id, parent, spriteSheetBig)
         {
             _inventory = new Inventory(id + "inventory", World);
             _walkSpeed = 400;
@@ -59,7 +59,7 @@ namespace Engine
             World.Add(_weapon2);
             Mass = 1.9f;
             SFXManager = new Content.SFXPlayer(this);
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y - 160, 128, 160);
+            BoundingBox = new Rectangle(0, 0, 128, 160);
             _isSuperJumping = false;
         }
 

@@ -9,11 +9,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Content
 {
-    class SpriteSheetCharacter : Engine.SpriteSheet
+    class SpriteSheetPlayer : Engine.SpriteSheet
     {
-        bool _inAir;
+        private bool _inAir;
+        private Texture2D _spriteSheetBig;
+        private Texture2D _spriteSheetSmall;
 
-        public SpriteSheetCharacter(string assetName) : base(assetName)
+        
+
+        public SpriteSheetPlayer(string spriteSheetBig, string spriteSheetSmall) : base(spriteSheetSmall)
         {
             IsAnimated = true;
             Add("idle", 0, 2, 320, 256, true);
@@ -25,11 +29,28 @@ namespace Content
             Add("attack", 6, 7, 40, 1792, false);
             Add("attackUp", 7, 8, 150, 2048, false);
             SwitchTo("idle");
+            _spriteSheetBig = GameInstance.AssetManager.GetTexture(spriteSheetBig);
+            _spriteSheetSmall = GameInstance.AssetManager.GetTexture(spriteSheetSmall);
         }
 
         public override void Update(GameTime gameTime, Engine.Object obj)
         {
             base.Update(gameTime, obj);
+            //update spriteSheet depending on world type
+            if(obj.World.IsTopDown)
+            {
+                if(spriteSheet != _spriteSheetSmall)
+                {
+                    spriteSheet = _spriteSheetSmall;
+                }
+            }
+            else
+            {
+                if(spriteSheet != _spriteSheetBig)
+                {
+                    spriteSheet = _spriteSheetBig;
+                }
+            }
         }
 
         protected override string UpdateAnimationState(Engine.Object o)
