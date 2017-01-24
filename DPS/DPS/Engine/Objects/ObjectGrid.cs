@@ -175,6 +175,7 @@ namespace Engine
                         Object o = getTile(new Point(x, y));
                         if (o != null && o.CanCollide && collider.CanCollide)
                         {
+                            //TODO remove
                             if (collider is Player)
                             {
 
