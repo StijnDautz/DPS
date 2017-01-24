@@ -33,7 +33,7 @@ namespace Engine
         public void MovePickup(Pickup movingPickup, Vector2 MousePosition)
         {
             Point p = GetPositionInGrid(MousePosition);
-            Pickup switchPickup = getTile(p) as Pickup;
+            Pickup switchPickup = GetTile(p) as Pickup;
 
             if(switchPickup == null)
             {
