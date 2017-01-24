@@ -19,7 +19,7 @@ namespace Engine
         public struct Sprite
         {
             public string name;
-            public int index, frames, frameTime, frameWidth, width;
+            public int index, frames, frameTime, width;
             public bool loop;
 
             public Sprite(string Name, int Index, int Frames, int FrameTime, int Width, int Height, bool Loop)
@@ -29,8 +29,12 @@ namespace Engine
                 frames = Frames;
                 frameTime = FrameTime;
                 width = Width;
-                frameWidth = Width / frames;
                 loop = Loop;
+            }
+
+            public int FrameWidth
+            {
+                get { return width / frames; }
             }
         }
 
@@ -75,6 +79,11 @@ namespace Engine
         protected bool CanUpdate
         {
             set { _canUpdate = value; }
+        }
+
+        protected int FrameHeight
+        {
+            get { return Height / _maxIndex;}
         }
 
         public SpriteSheet(string assetName)
@@ -156,7 +165,7 @@ namespace Engine
             }
             if (IsAnimated)
             {
-                spriteBatch.Draw(_spriteSheet, position, new Rectangle(_currentFrame * CurrentSprite.frameWidth, CurrentSprite.index * (Height / _maxIndex), _sprite.frameWidth, Height / _maxIndex), Color.White, 0, Vector2.Zero, 1, effect, 0);
+                spriteBatch.Draw(_spriteSheet, position, new Rectangle(_currentFrame * CurrentSprite.FrameWidth, CurrentSprite.index * (Height / _maxIndex), _sprite.FrameWidth, Height / _maxIndex), Color.White, 0, Vector2.Zero, 1, effect, 0);
             }
             else
             {

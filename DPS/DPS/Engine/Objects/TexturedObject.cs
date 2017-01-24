@@ -18,6 +18,12 @@ namespace Engine
             set { _sprite.Mirrored = value; }
         }
 
+        public SpriteSheet SpriteSheet
+        {
+            get { return _sprite; }
+            set { _sprite = value; }
+        }
+
         public TexturedObject(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent)
         {
             _sprite = spriteSheet;
