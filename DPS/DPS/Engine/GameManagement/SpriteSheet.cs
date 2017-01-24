@@ -86,6 +86,11 @@ namespace Engine
             get { return Height / _maxIndex;}
         }
 
+        protected int MaxIndex
+        {
+            set { _maxIndex = value; }
+        }
+
         public SpriteSheet(string assetName)
         {
             _spriteSheet = GameInstance.AssetManager.GetTexture(assetName);

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Engine;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Content
 {
@@ -15,6 +17,7 @@ namespace Content
             Add("walking", 0, 4, 300, 256, true);
             Add("running", 1, 4, 40, 256, true);
             SwitchTo("walking");
+            MaxIndex = 1;
         }
 
         protected override string UpdateAnimationState(Engine.Object obj)
@@ -30,6 +33,11 @@ namespace Content
                 Mirrored = obj.Velocity.X < 0 ? false : true;
             }
             return anim;
+        }
+
+        public override void Draw(SpriteBatch spriteBatch, Vector2 position)
+        {
+            base.Draw(spriteBatch, position);
         }
     }
 }

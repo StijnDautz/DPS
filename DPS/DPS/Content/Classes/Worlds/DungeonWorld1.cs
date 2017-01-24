@@ -20,11 +20,11 @@ namespace Content
             IsTopDown = false;
 
             var zombie = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
-            zombie.Position = new Microsoft.Xna.Framework.Vector2(48700, 9300);
+            zombie.Position = new Microsoft.Xna.Framework.Vector2(32200, 8200);
             Add(zombie);
 
             var snowman = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
-            snowman.Position = new Microsoft.Xna.Framework.Vector2(48400, 8900);
+            snowman.Position = new Microsoft.Xna.Framework.Vector2(31200, 8000);
             Add(snowman);
 
             //Items to progress in the Dungeon

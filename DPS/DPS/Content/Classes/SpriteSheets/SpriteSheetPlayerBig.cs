@@ -19,7 +19,7 @@ namespace Content
             Add("jumping", 3, 4, 53, 512, false);
             Add("inAir", 4, 3, 120, 384, true);
             Add("falling", 5, 5, 45, 640, false);
-            Add("attack", 6, 4, 40, 512, false);
+            Add("attack", 6, 4, 40, 1024, false);
             SwitchTo("idle");
         }
 
