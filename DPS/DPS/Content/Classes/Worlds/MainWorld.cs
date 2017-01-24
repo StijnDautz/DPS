@@ -24,10 +24,11 @@ namespace Content
             grid.CanCollide = true;
             Add(grid);
             
-            /*
-            Teleporter teleporterMiniDungeon1 = new Teleporter("teleporter", this, "MiniDungeon2", new Vector2(300, 300));
-            teleporterMiniDungeon1.Position = new Vector2(1500, 800);
-            Add(teleporterMiniDungeon1);*/
+            
+            Teleporter teleporterMiniDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(32000, 8000));
+            teleporterMiniDungeon1.Position = new Vector2(576, 4032);
+            teleporterMiniDungeon1.BoundingBox = new Rectangle(0, 0, 96, 96);
+            Add(teleporterMiniDungeon1);
         }
     }
 }
