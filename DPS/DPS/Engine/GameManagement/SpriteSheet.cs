@@ -59,6 +59,7 @@ namespace Engine
         protected Texture2D spriteSheet
         {
             get { return _spriteSheet; }
+            set { _spriteSheet = value; }
         }
 
         public int Width

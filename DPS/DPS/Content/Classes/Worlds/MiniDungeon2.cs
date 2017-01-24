@@ -17,7 +17,9 @@ namespace Content
         public override void Setup(GameMode gameMode)
         {
             base.Setup(gameMode);
+            IsTopDown = false;
             var levelGrid = new Engine.ObjectGrid("levelGrid", this, 3, 3, 1920, 960);
+            levelGrid.CanCollide = true;
             AddGridToLevelGrid(0, 0, levelGrid, new string[] { "96" });
             AddGridToLevelGrid(1, 0, levelGrid, new string[] { "97" });
             AddGridToLevelGrid(2, 0, levelGrid, new string[] { "98" });
@@ -26,6 +28,7 @@ namespace Content
             AddGridToLevelGrid(0, 2, levelGrid, new string[] { "100"});
             AddGridToLevelGrid(1, 1, levelGrid, new string[] { "99" });
             AddGridToLevelGrid(1, 2, levelGrid, new string[] { "93" });
+            Add(levelGrid);
         }
     }
 }
