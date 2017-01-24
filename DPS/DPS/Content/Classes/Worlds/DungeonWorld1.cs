@@ -24,7 +24,7 @@ namespace Content
             Add(zombie);
 
             var snowman = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
-            snowman.Position = new Microsoft.Xna.Framework.Vector2(31200, 8000);
+            snowman.Position = new Microsoft.Xna.Framework.Vector2(31200, 8100);
             Add(snowman);
 
             //Items to progress in the Dungeon

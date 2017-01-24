@@ -17,9 +17,10 @@ namespace Content
             _reactionRange = 1500;
             AttackSpeed = 1800;
             Damage = 100;
-            Health = 200;
+            Health = 500;
             Mass = 2;
             SFXManager = new SFXSnowMan(this);
+            BoundingBox = new Rectangle(0, 0, 112, 116);
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)
