@@ -165,9 +165,9 @@ namespace Engine
                 //}
 
                 //splits de grote grid in allemaal kleine grids
-                for (int x = 0; x < _collums; x++)
-                {
-                    for (int y = 0; y < _rows; y++)
+                for (int y = 0; y < _rows; y++)
+                    {
+                    for (int x = 0; x < _collums; x++)
                     {
                         if (y < 10)
                         {
@@ -188,30 +188,30 @@ namespace Engine
                         {
                             if (x < 20)
                             {
-                                grid1[x, y - 10] = grid[x, y];
+                                grid4[x, y - 10] = grid[x, y];
                             }
                             if (x > 19 && x < 40)
                             {
-                                grid2[x - 20, y - 10] = grid[x, y];
+                                grid5[x - 20, y - 10] = grid[x, y];
                             }
                             if (x > 39 && x < 60)
                             {
-                                grid3[x - 40, y - 10] = grid[x, y];
+                                grid6[x - 40, y - 10] = grid[x, y];
                             }
                         }
                         if (y > 19 && y < 30)
                         {
                             if (x < 20)
                             {
-                                grid1[x, y - 20] = grid[x, y];
+                                grid7[x, y - 20] = grid[x, y];
                             }
                             if (x > 19 && x < 40)
                             {
-                                grid2[x - 20, y - 20] = grid[x, y];
+                                grid8[x - 20, y - 20] = grid[x, y];
                             }
                             if (x > 39 && x < 60)
                             {
-                                grid3[x - 40, y - 20] = grid[x, y];
+                                grid9[x - 40, y - 20] = grid[x, y];
                             }
                         }
                     }
@@ -224,9 +224,13 @@ namespace Engine
                         for (int Y = 0; Y < 10; Y++)
                         {
                             if (g[X, Y] == 0)
+                            {
                                 gridList.Remove(g);
+                            }
+                                
                         }
                     }
+                    int p = 0;
                 }
 
                 _grid = new Object[_collums, _rows];
