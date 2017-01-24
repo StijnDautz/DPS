@@ -132,6 +132,107 @@ namespace Engine
                 _collums = grid.GetLength(0);
                 _rows = grid.GetLength(1);
 
+                List<char[,]> gridList = new List<char[,]>();
+                char[,] grid1 = new char[20,10]
+                    , grid2 = new char[20, 10]
+                    , grid3 = new char[20, 10]
+                    , grid4 = new char[20, 10]
+                    , grid5 = new char[20, 10]
+                    , grid6 = new char[20, 10]
+                    , grid7 = new char[20, 10]
+                    , grid8 = new char[20, 10]
+                    , grid9 = new char[20, 10];
+                gridList.Add(grid1);
+                gridList.Add(grid2);
+                gridList.Add(grid3);
+                gridList.Add(grid4);
+                gridList.Add(grid5);
+                gridList.Add(grid6);
+                gridList.Add(grid7);
+                gridList.Add(grid8);
+                gridList.Add(grid9);
+
+                //vult alle grids met een herkenbare character
+                //foreach (char[,] g in gridList)
+                //{
+                //    for (int X = 0; X < 20; X++)
+                //    {
+                //        for (int Y = 0; Y < 10; Y++)
+                //        {
+                //            g[X, Y] = '$';
+                //        }
+                //    }
+                //}
+
+                //splits de grote grid in allemaal kleine grids
+                for (int y = 0; y < _rows; y++)
+                    {
+                    for (int x = 0; x < _collums; x++)
+                    {
+                        if (y < 10)
+                        {
+                            if (x < 20)
+                            {
+                                grid1[x, y] = grid[x, y];
+                            }
+                            if (x > 19 && x < 40)
+                            {
+                                grid2[x - 20, y] = grid[x, y];
+                            }
+                            if (x > 39 && x < 60)
+                            {
+                                grid3[x - 40, y] = grid[x, y];
+                            }
+                        }
+                        if (y > 9 && y < 20)
+                        {
+                            if (x < 20)
+                            {
+                                grid4[x, y - 10] = grid[x, y];
+                            }
+                            if (x > 19 && x < 40)
+                            {
+                                grid5[x - 20, y - 10] = grid[x, y];
+                            }
+                            if (x > 39 && x < 60)
+                            {
+                                grid6[x - 40, y - 10] = grid[x, y];
+                            }
+                        }
+                        if (y > 19 && y < 30)
+                        {
+                            if (x < 20)
+                            {
+                                grid7[x, y - 20] = grid[x, y];
+                            }
+                            if (x > 19 && x < 40)
+                            {
+                                grid8[x - 20, y - 20] = grid[x, y];
+                            }
+                            if (x > 39 && x < 60)
+                            {
+                                grid9[x - 40, y - 20] = grid[x, y];
+                            }
+                        }
+                    }
+                }
+                //vindt met behulp van het herkenningsteken de lege grids en gooit die weg
+                foreach (char[,] g in gridList)
+                {
+                    for (int X = 0; X < 20; X++)
+                    {
+                        for (int Y = 0; Y < 10; Y++)
+                        {
+                            if (g[X, Y] == 0)
+                            {
+                                gridList.Remove(g);
+                            }
+                                
+                        }
+                    }
+                    int p = 0;
+                }
+
                 _grid = new Object[_collums, _rows];
                 ReadTiles(grid);
                 return;
