@@ -9,22 +9,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Content
 {
-    class SpriteSheetCharacter : Engine.SpriteSheet
+    abstract class SpriteSheetPlayer : Engine.SpriteSheet
     {
-        bool _inAir;
+        private bool _inAir;
 
-        public SpriteSheetCharacter(string assetName) : base(assetName)
+        public SpriteSheetPlayer(string spriteSheet) : base(spriteSheet)
         {
-            IsAnimated = true;
-            Add("idle", 0, 2, 320, 256, true);
-            Add("walking", 1, 16, 40, 2048, true);
-            Add("death", 2, 6, 110, 1152, false);
-            Add("jumping", 3, 4, 53, 512, false);
-            Add("inAir", 4, 3, 120, 384, true);
-            Add("falling", 5, 5, 45, 640, false);
-            Add("attack", 6, 7, 40, 1792, false);
-            Add("attackUp", 7, 8, 150, 2048, false);
-            SwitchTo("idle");
+
         }
 
         public override void Update(GameTime gameTime, Engine.Object obj)

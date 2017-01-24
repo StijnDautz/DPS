@@ -35,7 +35,12 @@ namespace Engine
             base.OnCollision(collider);
             if (collider != _owner && collider is Character)
             {
-                DealDamage(collider as Character);
+                var character = collider as Character;
+                DealDamage(character);
+                if(character.Health <= 0 && !(character is Player))
+                {
+                    World.Remove(character);
+                }
             }
             if (collider != _owner && collider is DestructableObject && (collider as DestructableObject).Type == "Normal")
             {

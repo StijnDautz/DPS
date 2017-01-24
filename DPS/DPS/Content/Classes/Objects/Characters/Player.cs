@@ -22,13 +22,13 @@ namespace Engine
         //Einde database gegevens
 
         private Inventory _inventory;
-        private Weapon _weapon1;
+        private Weapon _weapon1, _weapon2;
+        private SpriteSheet _spriteSheetSmall, _spriteSheetBig;
         private float _walkSpeed;
         private float _runSpeed;
 
         private bool _isSuperJumping;
-        private Weapon _weapon2;
-        
+     
         public Inventory Inventory
         {
             get { return _inventory; }
@@ -44,7 +44,7 @@ namespace Engine
             get { return _weapon2; }
         }
 
-        public Player(string id, Engine.Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
+        public Player(string id, Engine.Object parent, SpriteSheet spriteSheetSmall, SpriteSheet spriteSheetBig) : base(id, parent, spriteSheetBig)
         {
             _inventory = new Inventory(id + "inventory", World);
             _walkSpeed = 400;
@@ -59,8 +59,8 @@ namespace Engine
             World.Add(_weapon2);
             Mass = 1.9f;
             SFXManager = new Content.SFXPlayer(this);
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y - 160, 128, 160);
-            _isSuperJumping = false;
+            _spriteSheetSmall = spriteSheetSmall;
+            _spriteSheetBig = spriteSheetBig;
         }
 
         public override void Update(GameTime gameTime)
@@ -68,10 +68,28 @@ namespace Engine
             //set weapon.Visible false, if player attacks, this will be set to true, until loop reaches this point again
             _weapon1.Visible = false;
             base.Update(gameTime);
-            //if (VelocityY < 50 && _isSuperJumping)
-            //{
-            //    _isSuperJumping = false;
-            //}
+            UpdateSpriteSheet();
+        }
+
+        /*
+         * Updates the spriteSheet so it matches the world type
+         */
+        private void UpdateSpriteSheet()
+        {
+            if(World.IsTopDown)
+            {
+                if(SpriteSheet != _spriteSheetSmall)
+                {
+                    SpriteSheet = _spriteSheetSmall;
+                }
+            }
+            else
+            {
+                if(SpriteSheet != _spriteSheetBig)
+                {
+                    SpriteSheet = _spriteSheetBig;
+                }
+            }
         }
 
         #region InputHandling
@@ -210,20 +228,6 @@ namespace Engine
             _isSuperJumping = true;
             _weapon2.Visible = true; 
         }
-
-        //public override void OnCollision(Object collider)
-        //{
-        //    base.OnCollision(collider);
-        //    if (_isSuperJumping)
-        //    {
-        //        if (collider is DestructableObject)
-        //        {
-        //            collider.Visible = false;
-        //            collider.CanCollide = false;
-        //            World.Remove(collider);
-        //        }
-        //    }
-        //}
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
