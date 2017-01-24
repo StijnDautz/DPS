@@ -113,12 +113,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Soundeffects\Death.wav" />
-    <Content Include="Content\Soundeffects\Eend Hit%282%29.wav" />
+    <Content Include="Content\Soundeffects\Eend Hit 2.wav" />
     <Content Include="Content\Soundeffects\Eend Hit.wav" />
-    <Content Include="Content\Soundeffects\Explosie 1%282%29.wav" />
+    <Content Include="Content\Soundeffects\Explosie 1.wav" />
     <Content Include="Content\Soundeffects\Explosie 2.wav" />
     <Content Include="Content\Soundeffects\Hit 2.wav" />
     <Content Include="Content\Soundeffects\Hit.wav" />
+    <Content Include="Content\Soundeffects\Item Pickup.mp3" />
+    <Content Include="Content\Soundeffects\Main Menu.mp3" />
+    <Content Include="Content\Soundeffects\Main Song.mp3" />
     <Content Include="Content\Soundeffects\Medium Enemy Attack.wav" />
     <Content Include="Content\Soundeffects\Medium Enemy Death.wav" />
     <Content Include="Content\Soundeffects\Medium Enemy Hit.wav" />
@@ -126,34 +129,20 @@
     <Content Include="Content\Soundeffects\Player Death.wav" />
     <Content Include="Content\Soundeffects\Player Hit.wav" />
     <Content Include="Content\Soundeffects\Rocket.wav" />
-    <Content Include="Content\Soundeffects\Rocket1.mp3" />
     <Content Include="Content\Soundeffects\Small Enemy Attack.wav" />
     <Content Include="Content\Soundeffects\Small Enemy Death.wav" />
     <Content Include="Content\Soundeffects\Small Enemy Hit.wav" />
-    <Content Include="Content\Soundeffects\snd_music.wma" />
-    <Content Include="Content\Soundeffects\Sound Effects - Eend hit.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Explosie 1.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Explosie 2.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Hit 2.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Hit 3.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Hit 4.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Hit.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Medium enemy attack.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Medium enemy death.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Medium enemy hit.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Player attack.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Player death.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Player hit.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Small enemy attack.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Small enemy death.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Small enemy hit.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Zombie normal.wav" />
-    <Content Include="Content\Soundeffects\Sound Effects - Zombie scream.wav" />
+    <Content Include="Content\Soundeffects\Zombie normal%281%29.wav" />
+    <Content Include="Content\Soundeffects\Zombie normal%282%29.wav" />
+    <Content Include="Content\Soundeffects\Zombie normal%283%29.wav" />
+    <Content Include="Content\Soundeffects\Zombie normal%284%29.wav" />
+    <Content Include="Content\Soundeffects\Zombie scream.wav" />
     <Content Include="Icon.ico" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Engine\Content.mgcb" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
