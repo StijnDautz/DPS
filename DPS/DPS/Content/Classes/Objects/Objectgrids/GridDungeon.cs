@@ -37,9 +37,9 @@ namespace Content
             Tile.CanCollide = true;
             Tile.CanBlock = true;
             Tile.Type = type;
-            return Tile;
-            
+            return Tile;           
         }
+
         private TexturedObject Platform(string id, string assetName, int size)
         {
             TexturedObject Tile = new TexturedObject(id, this, new SpriteSheet("Textures/Tiles/" + assetName));
@@ -103,15 +103,22 @@ namespace Content
 
                 case 'q': return SetupCollisionTile("spike", "q.TileSet4");
                 case 'r': return SetupCollisionTile("spike", "r.TileSet4");
-                case '0':
-                case '-': return new TexturedObject("emptytile", this, new SpriteSheet("Textures/Tiles/0.Overworld"));
+                case '0': return new Engine.Object("emptyobj", this);
+                case '-': return LoadEmptyCollisionBlock();
                 case '!': return new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
                 case '@': return new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
 
                 default: throw new Exception("character of type: " + type + "was not associated with an Object");
             }
         }
+
+        private Engine.Object LoadEmptyCollisionBlock()
+        {
+            var obj = new Engine.Object("emptytile", this);
+            obj.BoundingBox = new Rectangle(0, 0, 96, 96);
+            obj.CanCollide = true;
+            obj.CanBlock = true;
+            return obj;
+        }
     }
 }
-
-
