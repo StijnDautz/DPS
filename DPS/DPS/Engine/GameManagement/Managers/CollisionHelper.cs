@@ -12,6 +12,10 @@ namespace Engine
         public static bool CollidesWith(Object obj1, Vector2 offset1, Object obj2, Vector2 offset2, float elapsedTime)
         {
             Vector2 pos1 = obj1.GlobalPosition + offset1 * elapsedTime;
+            if(obj2 is Player && obj1.GlobalPosition.Y < 7690)
+            {
+                 int x = 0;
+            }
             Vector2 pos2 = obj2.GlobalPosition + offset2 * elapsedTime;
 
             if (pos1.Y + obj1.Height < pos2.Y)
