@@ -24,7 +24,7 @@ namespace Content
             grid.CanCollide = true;
             Add(grid);
 
-            Teleporter teleporterMiniDungeon1 = new Teleporter("teleporter", this, "MiniDungeon1", new Vector2(300, 300));
+            Teleporter teleporterMiniDungeon1 = new Teleporter("teleporter", this, "MiniDungeon2", new Vector2(300, 300));
             teleporterMiniDungeon1.Position = new Vector2(690, 690);
             Add(teleporterMiniDungeon1);
         }

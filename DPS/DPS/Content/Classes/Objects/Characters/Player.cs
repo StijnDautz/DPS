@@ -59,7 +59,7 @@ namespace Engine
             World.Add(_weapon2);
             Mass = 1.9f;
             SFXManager = new Content.SFXPlayer(this);
-            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, 128, 160);
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y - 160, 128, 160);
             _isSuperJumping = false;
         }
 
