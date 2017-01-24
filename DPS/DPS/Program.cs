@@ -32,9 +32,9 @@ namespace Engine
             worlds.Add(new MiniDungeon2("MiniDungeon2", 5760, 2880));
             MainGameMode gameMode = new MainGameMode("MainGM", GameModeManager, worlds);
 
-            gameMode.SwitchTo("MainWorld");
+            gameMode.SwitchTo("Dungeon1");
             gameMode.Player = new Engine.Player("player", gameMode.World, new SpriteSheetCharacter("Textures/Characters/Character"));
-            gameMode.Player.Position = new Microsoft.Xna.Framework.Vector2(600, 300);
+            gameMode.Player.Position = new Microsoft.Xna.Framework.Vector2(33600, 6240);
 
             gameMode.Setup();
             gameMode.SetupWorlds();
