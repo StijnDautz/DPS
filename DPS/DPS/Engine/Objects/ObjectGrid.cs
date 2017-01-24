@@ -146,7 +146,7 @@ namespace Engine
 
         public override void SetupCollision(Object collider, float elapsedTime)
         {
-            Point p = GetPositionInGrid(collider.GlobalPosition);
+            Point p = GetPositionInGrid(collider.GlobalPosition + collider.Velocity * elapsedTime);
             if (WithinBoudaries(p.X, p.Y))
             {
                 Object obj = getTile(p);
@@ -158,14 +158,14 @@ namespace Engine
                 int xBoundary = p.X + 3;
                 int yBoundary = p.Y + 3;
 
-                for (int x = p.X - 1; x < xBoundary; x++)
+                for (int x = p.X - 2; x < xBoundary; x++)
                 {
                     //if x is not in grid
                     if (x < 0 || x > _collums - 1)
                     {
                         continue;
                     }
-                    for (int y = p.Y - 1; y < yBoundary; y++)
+                    for (int y = p.Y - 2; y < yBoundary; y++)
                     {
                         //if y is not in grid
                         if (y < 0 || y > _rows - 1)
