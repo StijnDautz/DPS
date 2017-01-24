@@ -36,6 +36,10 @@ namespace Content
             teleporterMiniDungeon2.Position = new Vector2(4608, 5184);
             teleporterMiniDungeon2.BoundingBox = new Rectangle(0, 0, 96, 96);
 
+            UpgradePickup RocketCape = new UpgradePickup("Rocketcape", this , new SpriteSheet("Textures/Items/Rocketcape"), "Cape making high jumps possible");
+            RocketCape.Position = new Vector2(700,500);
+            Add(RocketCape);
+
 
             Add(teleporterDungeon1);
             Add(teleporterMiniDungeon1);
