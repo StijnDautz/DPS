@@ -26,7 +26,7 @@ namespace Engine
         {
             _discription = new TextObject("discription", "Hud", World.Player.Inventory);
             _discription.Text = discription;
-            SFXManager = new Content.SFXItem(this);
+            //SFXManager = new Content.SFXItem(this);
         }
 
         //waarschijnlijk bug playerpos = null
