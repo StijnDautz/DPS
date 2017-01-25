@@ -48,13 +48,6 @@ namespace Engine
             }
         }
 
-        //TODO remove
-        private void SetupRandomDungeon(RandomDungeonGenerator generator)
-        {
-            char[,] charGrid = generator.Generate();
-
-        }
-
         private void ReadTiles(char[,] grid)
         {
             for (int y = 0; y < grid.GetLength(1); y++)

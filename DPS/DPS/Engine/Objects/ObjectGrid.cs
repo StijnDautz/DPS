@@ -149,10 +149,6 @@ namespace Engine
 
         public override void SetupCollision(Object collider, float elapsedTime)
         {
-            if(collider is Player)
-            {
-                int x = 0;
-            }
             var newPos = collider.GlobalPosition + collider.Velocity * elapsedTime;
             Point p = GetPositionInGrid(newPos);
             int leftX = p.X;
