@@ -12,10 +12,10 @@ namespace Content
 
         public SFXZombie(Engine.Object source) : base(source)
         {
-            Add("normalScream", getSFX("zombieNormal" + Engine.GameInstance.RNG.Next(1, 5)), true);
-            Add("crazyScream", getSFX("zombieCrazy"), true);
-            Add("damaged", getSFX("zombieDamaged"), false);
-            Add("attack", getSFX("zombieAttack"), false);
+            Add("normalScream", getSFX("Zombie normal(" + Engine.GameInstance.RNG.Next(1, 5) + ")") , true);
+            Add("crazyScream", getSFX("Zombie scream"), true);
+            Add("damaged", getSFX("Small Enemy Hit"), false);
+            Add("attack", getSFX("Small Enemy Attack"), false);
             if(source is EnemyZombie)
             {
                 _health = (source as EnemyZombie).Health;

@@ -78,10 +78,10 @@ namespace Engine
         /*Return a tile at a specific point in the grid*/
         public Object getTile(Vector2 p)
         {
-            return getTile(GetPositionInGrid(p));
+            return GetTile(GetPositionInGrid(p));
         }
 
-        public Object getTile(Point p)
+        public Object GetTile(Point p)
         {
             if(WithinBoudaries(p.X, p.Y))
             {
@@ -146,42 +146,30 @@ namespace Engine
 
         public override void SetupCollision(Object collider, float elapsedTime)
         {
-            Point p = GetPositionInGrid(collider.GlobalPosition + collider.Velocity * elapsedTime);
-            if (WithinBoudaries(p.X, p.Y))
+            if(collider is Player)
             {
-                Object obj = getTile(p);
-                if (obj is ObjectGrid)
-                {
-                    obj.SetupCollision(collider, elapsedTime);
-                    return;
-                }
-                int xBoundary = p.X + 3;
-                int yBoundary = p.Y + 3;
+                int x = 0;
+            }
+            var newPos = collider.GlobalPosition + collider.Velocity * elapsedTime;
+            Point p = GetPositionInGrid(newPos);
+            int leftX = p.X;
+            int rightX = GetPositionInGrid(new Vector2((newPos.X + collider.Width), newPos.Y)).X;
+            int topY = p.Y;
+            int bottomY = GetPositionInGrid(new Vector2(newPos.X, newPos.Y + collider.Height)).Y;
 
-                for (int x = p.X - 2; x < xBoundary; x++)
+            for (int x = leftX; x < rightX + 1; x++)
+            {
+                for (int y = topY; y < bottomY + 1; y++)
                 {
-                    //if x is not in grid
-                    if (x < 0 || x > _collums - 1)
+                    Object o = GetTile(new Point(x , y));
+                    if (o != null && o.CanCollide && collider.CanCollide)
                     {
-                        continue;
-                    }
-                    for (int y = p.Y - 2; y < yBoundary; y++)
-                    {
-                        //if y is not in grid
-                        if (y < 0 || y > _rows - 1)
+                        if(o is ObjectGrid)
                         {
-                            continue;
+                            o.SetupCollision(collider, elapsedTime);
                         }
-                        Object o = getTile(new Point(x, y));
-                        if (o != null && o.CanCollide && collider.CanCollide)
+                        else
                         {
-                            //TODO remove
-                            if (collider is Player)
-                            {
-
-                                    int i = 0;
-                                
-                            }
                             o.CheckCollision(collider, elapsedTime);
                         }
                     }

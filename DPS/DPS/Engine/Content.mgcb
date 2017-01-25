@@ -13,143 +13,107 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin Soundeffects/Rocket.wav
+#begin Death.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/Rocket.wav
+/build:Death.wav
 
-#begin Soundeffects/snd_music.wma
-/importer:WmaImporter
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Soundeffects/snd_music.wma
-
-#begin Soundeffects/Sound Effects - Eend hit.wav
+#begin Eend Hit 2.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/Sound Effects - Eend hit.wav
+/build:Eend Hit 2.wav
 
-#begin Soundeffects/Sound Effects - Explosie 1.wav
+#begin Eend Hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/Sound Effects - Explosie 1.wav
+/build:Eend Hit.wav
 
-#begin Soundeffects/Sound Effects - Explosie 2.wav
+#begin Explosie 1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/Sound Effects - Explosie 2.wav
+/build:Explosie 1.wav
 
-#begin Soundeffects/Sound Effects - Hit 2.wav
+#begin Explosie 2.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/Sound Effects - Hit 2.wav
+/build:Explosie 2.wav
 
-#begin Soundeffects/Sound Effects - Hit 3.wav
+#begin Hit 2.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/Sound Effects - Hit 3.wav
+/build:Hit 2.wav
 
-#begin Soundeffects/Sound Effects - Hit 4.wav
+#begin Hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/Sound Effects - Hit 4.wav
+/build:Hit.wav
 
-#begin Soundeffects/Sound Effects - Hit.wav
+#begin Medium Enemy Attack.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/Sound Effects - Hit.wav
+/build:Medium Enemy Attack.wav
 
-#begin Soundeffects/zombieNormal1.wav
+#begin Medium Enemy Death.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/zombieNormal1.wav
+/build:Medium Enemy Death.wav
 
-#begin Soundeffects/zombieNormal2.wav
+#begin Medium Enemy Hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/zombieNormal2.wav
+/build:Medium Enemy Hit.wav
 
-#begin Soundeffects/zombieNormal3.wav
+#begin Player Attack.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/zombieNormal3.wav
+/build:Player Attack.wav
 
-#begin Soundeffects/zombieNormal4.wav
+#begin Player Death.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/zombieNormal4.wav
+/build:Player Death.wav
 
-#begin Soundeffects/zombieDamaged.wav
+#begin Player Hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/zombieDamaged.wav
+/build:Player Hit.wav
 
-#begin Soundeffects\playerAttack.wav
+#begin Rocket.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects\playerAttack.wav
+/build:Rocket.wav
 
-#begin Soundeffects\playerDamaged.wav
+#begin Small Enemy Attack.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects\playerDamaged.wav
+/build:Small Enemy Attack.wav
 
-#begin Soundeffects\snowManDamaged.wav
+#begin Small Enemy Death.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects\snowManDamaged.wav
+/build:Small Enemy Death.wav
 
-#begin Soundeffects\zombieAttack.wav
+#begin Small Enemy Hit.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects\zombieAttack.wav
-
-#begin Soundeffects\snowManAttack.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Soundeffects\snowManAttack.wav
-
-#begin Soundeffects/zombieCrazy.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Soundeffects/zombieCrazy.wav
-
-#begin Soundeffects\playerDeath.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Soundeffects\playerDeath.wav
-
-#begin Soundeffects\zombieDeath.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Soundeffects\zombieDeath.wav
-
-#begin Soundeffects\snowManDeath.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Soundeffects\snowManDeath.wav
+/build:Small Enemy Hit.wav
 
 #begin Soundeffects/Death.wav
 /importer:WavImporter
@@ -157,11 +121,11 @@
 /processorParam:Quality=Best
 /build:Soundeffects/Death.wav
 
-#begin Soundeffects/Eend Hit(2).wav
+#begin Soundeffects/Eend Hit 2.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/Eend Hit(2).wav
+/build:Soundeffects/Eend Hit 2.wav
 
 #begin Soundeffects/Eend Hit.wav
 /importer:WavImporter
@@ -169,11 +133,11 @@
 /processorParam:Quality=Best
 /build:Soundeffects/Eend Hit.wav
 
-#begin Soundeffects/Explosie 1(2).wav
+#begin Soundeffects/Explosie 1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Soundeffects/Explosie 1(2).wav
+/build:Soundeffects/Explosie 1.wav
 
 #begin Soundeffects/Explosie 2.wav
 /importer:WavImporter
@@ -229,17 +193,11 @@
 /processorParam:Quality=Best
 /build:Soundeffects/Player Hit.wav
 
-#begin ../Content/Soundeffects/Rocket.wav
+#begin Soundeffects/Rocket.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:../Content/Soundeffects/Rocket.wav
-
-#begin ../Content/Soundeffects/Rocket1.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:../Content/Soundeffects/Rocket1.mp3
+/build:Soundeffects/Rocket.wav
 
 #begin Soundeffects/Small Enemy Attack.wav
 /importer:WavImporter
@@ -259,99 +217,51 @@
 /processorParam:Quality=Best
 /build:Soundeffects/Small Enemy Hit.wav
 
-#begin ../Content/Soundeffects/Death.wav
+#begin Soundeffects/Zombie normal(2).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:../Content/Soundeffects/Death.wav
+/build:Soundeffects/Zombie normal(2).wav
 
-#begin ../Content/Soundeffects/Eend Hit(2).wav
+#begin Soundeffects/Zombie normal(3).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:../Content/Soundeffects/Eend Hit(2).wav
+/build:Soundeffects/Zombie normal(3).wav
 
-#begin ../Content/Soundeffects/Eend Hit.wav
+#begin Soundeffects/Zombie normal(4).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:../Content/Soundeffects/Eend Hit.wav
+/build:Soundeffects/Zombie normal(4).wav
 
-#begin ../Content/Soundeffects/Explosie 1(2).wav
+#begin Soundeffects/Zombie normal(1).wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:../Content/Soundeffects/Explosie 1(2).wav
+/build:Soundeffects/Zombie normal(1).wav
 
-#begin ../Content/Soundeffects/Explosie 2.wav
+#begin Soundeffects/Zombie scream.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:../Content/Soundeffects/Explosie 2.wav
+/build:Soundeffects/Zombie scream.wav
 
-#begin ../Content/Soundeffects/Hit 2.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Soundeffects/Item Pickup.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:../Content/Soundeffects/Hit 2.wav
+/build:Soundeffects/Item Pickup.mp3
 
-#begin ../Content/Soundeffects/Hit.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Soundeffects/Main Menu.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:../Content/Soundeffects/Hit.wav
+/build:Soundeffects/Main Menu.mp3
 
-#begin ../Content/Soundeffects/Medium Enemy Attack.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
+#begin Soundeffects/Main Song.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
 /processorParam:Quality=Best
-/build:../Content/Soundeffects/Medium Enemy Attack.wav
-
-#begin ../Content/Soundeffects/Medium Enemy Death.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:../Content/Soundeffects/Medium Enemy Death.wav
-
-#begin ../Content/Soundeffects/Medium Enemy Hit.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:../Content/Soundeffects/Medium Enemy Hit.wav
-
-#begin ../Content/Soundeffects/Player Attack.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:../Content/Soundeffects/Player Attack.wav
-
-#begin ../Content/Soundeffects/Player Death.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:../Content/Soundeffects/Player Death.wav
-
-#begin ../Content/Soundeffects/Player Hit.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:../Content/Soundeffects/Player Hit.wav
-
-#begin ../Content/Soundeffects/Small Enemy Attack.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:../Content/Soundeffects/Small Enemy Attack.wav
-
-#begin ../Content/Soundeffects/Small Enemy Death.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:../Content/Soundeffects/Small Enemy Death.wav
-
-#begin ../Content/Soundeffects/Small Enemy Hit.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:../Content/Soundeffects/Small Enemy Hit.wav
+/build:Soundeffects/Main Song.mp3
 
