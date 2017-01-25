@@ -24,7 +24,7 @@ namespace Content
             grid.CanCollide = true;
             Add(grid);
                        
-            Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(32000, 8000));
+            Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(33920, 15840));
             teleporterDungeon1.Position = new Vector2(576, 4032);
             teleporterDungeon1.BoundingBox = new Rectangle(0, 0, 96, 96);
 
@@ -37,7 +37,8 @@ namespace Content
             teleporterMiniDungeon2.BoundingBox = new Rectangle(0, 0, 96, 96);
 
             UpgradePickup RocketCape = new UpgradePickup("Rocketcape", this , new SpriteSheet("Textures/Items/Rocketcape"), "Cape making high jumps possible");
-            RocketCape.Position = new Vector2(700,500);
+            RocketCape.Position = new Vector2(2400,2688);
+            RocketCape.CanCollide = true;
             Add(RocketCape);
 
 
