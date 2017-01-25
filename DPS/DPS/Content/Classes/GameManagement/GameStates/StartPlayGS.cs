@@ -20,6 +20,8 @@ namespace Content
             var healthBar = new HealthBar("healthBar", HUD);
             healthBar.Position = new Vector2(50, 600);
             AddToHud(healthBar);
+
+            SongPlay = Engine.GameInstance.AssetManager.GetSong("Main Song");
         }
 
         public override void Init()

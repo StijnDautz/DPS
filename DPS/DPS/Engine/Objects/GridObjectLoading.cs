@@ -217,21 +217,21 @@ namespace Engine
                     }
                 }
                 //vindt met behulp van het herkenningsteken de lege grids en gooit die weg
-                foreach (char[,] g in gridList)
-                {
-                    for (int X = 0; X < 20; X++)
-                    {
-                        for (int Y = 0; Y < 10; Y++)
-                        {
-                            if (g[X, Y] == 0)
-                            {
-                                gridList.Remove(g);
-                            }
+                //foreach (char[,] g in gridList)
+                //{
+                //    for (int X = 0; X < 20; X++)
+                //    {
+                //        for (int Y = 0; Y < 10; Y++)
+                //        {
+                //            if (g[X, Y] == 0)
+                //            {
+                //                gridList.Remove(g);
+                //            }
                                 
-                        }
-                    }
-                    int p = 0;
-                }
+                //        }
+                //    }
+                //    int p = 0;
+                //}
 
                 _grid = new Object[_collums, _rows];
                 ReadTiles(grid);

@@ -19,6 +19,8 @@ namespace Content
             ExitButton exitButton = new ExitButton("exitButton", HUD, new SpriteSheet("HUD/ExitButton"), "Rocket");
             exitButton.Position = new Microsoft.Xna.Framework.Vector2(550,400);
             AddToHud(exitButton);
+
+            SongPlay = Engine.GameInstance.AssetManager.GetSong("Main Menu");
         }
 
         public override void Init()
