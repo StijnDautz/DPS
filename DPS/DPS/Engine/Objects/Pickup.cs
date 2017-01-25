@@ -5,17 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace Engine
 {
     class Pickup : TexturedObject
     {
         TextObject _discription;
+        bool isPickupUp;
+        bool blablabla;
+
+        public bool IsPickupUp
+        {
+            get { return isPickupUp; }
+        }
+
+        double waitTime;
 
         public Pickup(string id, Object parent, SpriteSheet spriteSheet, string discription) : base(id, parent, spriteSheet)
         {
             _discription = new TextObject("discription", "Hud", World.Player.Inventory);
             _discription.Text = discription;
+            SFXManager = new Content.SFXItem(this);
         }
 
         //waarschijnlijk bug playerpos = null
@@ -25,6 +36,22 @@ namespace Engine
             //Update position
             double t = gameTime.TotalGameTime.TotalSeconds * 3.0f;
             Position = new Vector2(Position.X, Position.Y + (float)Math.Sin(t) * 0.2f);
+
+            
+
+            if (blablabla)
+            {
+                MediaPlayer.Volume = 1;
+                waitTime = gameTime.TotalGameTime.TotalSeconds + (double)12;
+                blablabla = false;
+            }
+
+            if (waitTime == gameTime.TotalGameTime.TotalSeconds)
+            {
+                MediaPlayer.Volume = 1;
+                isPickupUp = true;
+                World.Remove(this);
+            }
         }
 
         /*
@@ -36,7 +63,9 @@ namespace Engine
             Player player = World.Player;
             if(collider == player && player.Inventory.AddPickup(this))
             {
-                World.Remove(this);
+
+                isPickupUp = true;
+                blablabla = true;
             }
         }
 
