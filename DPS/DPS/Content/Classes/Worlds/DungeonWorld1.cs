@@ -15,12 +15,6 @@ namespace Content
 
         }
 
-        public struct RandomRoom
-        {
-            public int x, y;
-
-        }
-
         public override void Setup(GameMode gameMode)
         {
             base.Setup(gameMode);
@@ -233,6 +227,7 @@ namespace Content
                             tempCharGrid[k, j] = charGrid[x * 20 + k, y * 10 + j];
                         }
                     }
+
                     //create objectgrid and pass char[,], so it gets loaded into the grid
                     var room = new Content.GridDungeon("randomRoom", parent, tempCharGrid, 96, 96);
 
