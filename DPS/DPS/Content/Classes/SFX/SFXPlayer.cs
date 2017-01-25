@@ -12,9 +12,9 @@ namespace Content
 
         public SFXPlayer(Engine.Object source) : base(source)
         {
-            Add("attack", getSFX("playerAttack"), false);
-            Add("damaged", getSFX("playerAttack"), false);
-            Add("death", getSFX("playerDeath"), false);
+            Add("attack", getSFX("Player Attack"), false);
+            Add("damaged", getSFX("Player Hit"), false);
+            Add("death", getSFX("Player Death"), false);
             _health = (source as Engine.Player).Health;
         }
 

@@ -18,6 +18,7 @@ namespace Engine
         private int _tileSize;
         private GameMode _gameMode;
         private bool _canUpdate;
+        
 
         //physics
         private float _gravity;

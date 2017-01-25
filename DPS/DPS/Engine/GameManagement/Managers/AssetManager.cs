@@ -31,7 +31,7 @@ namespace Engine
 
         public Song GetSong(string assetName)
         {
-            return _contentManager.Load<Song>(assetName);
+            return _contentManager.Load<Song>("Soundeffects/" + assetName);
         }
 
         public SoundEffect GetSoundEffect(string assetName)

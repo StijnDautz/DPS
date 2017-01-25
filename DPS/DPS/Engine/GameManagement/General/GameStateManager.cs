@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,6 +36,11 @@ namespace Engine
                     _current = g;
                     //intitialize the gameState
                     g.Init();
+                    if (_current.SongPlay != null)
+                    {
+                        MediaPlayer.Play(_current.SongPlay);
+                        MediaPlayer.IsRepeating = true;
+                    }
                     return;
                 }
             }

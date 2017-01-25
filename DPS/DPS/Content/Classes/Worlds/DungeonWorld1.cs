@@ -27,26 +27,55 @@ namespace Content
             IsTopDown = false;
 
             var zombie = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
-            zombie.Position = new Microsoft.Xna.Framework.Vector2(32200, 8200);
+            zombie.Position = new Microsoft.Xna.Framework.Vector2(35808, 16704);
             Add(zombie);
+            var zombie1 = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
+            zombie1.Position = new Microsoft.Xna.Framework.Vector2(32256, 16992);
+            Add(zombie1);
+            var zombie2 = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
+            zombie2.Position = new Microsoft.Xna.Framework.Vector2(35436, 18624);
+            Add(zombie2);
 
             var snowman = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
-            snowman.Position = new Microsoft.Xna.Framework.Vector2(31200, 8100);
+            snowman.Position = new Microsoft.Xna.Framework.Vector2(32836, 16064);
             Add(snowman);
+            var snowman1 = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
+            snowman1.Position = new Microsoft.Xna.Framework.Vector2(34176, 16992);
+            Add(snowman1);
+            var snowman2 = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
+            snowman2.Position = new Microsoft.Xna.Framework.Vector2(29856, 17280);
+            Add(snowman2);
+            var snowman3 = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
+            snowman3.Position = new Microsoft.Xna.Framework.Vector2(35136, 18624);
+            Add(snowman3);
+            var snowman4 = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
+            snowman4.Position = new Microsoft.Xna.Framework.Vector2(35636, 18624);
+            Add(snowman4);
+
+            Teleporter teleporterOverworld = new Teleporter("teleporter", this, "MainWorld", new Vector2(600, 400));
+            teleporterOverworld.Position = new Vector2(40992, 11616);
+            teleporterOverworld.BoundingBox = new Rectangle(0, 0, 96, 96);
 
             //Items to progress in the Dungeon
             Pickup SnowShoes = new Pickup("SnowShoes", World, new SpriteSheet("Textures/Items/SnowShoes"), "Capable of walking on Ice");
             Add(SnowShoes);
-            UpgradePickup RocketCape = new UpgradePickup("Rocketcape", World, new SpriteSheet("Textures/Items/Rocketcape"), "Cape making high jumps possible");
-            Add(RocketCape);
-            Pickup Key1 = new Pickup("Hallowed_Key", World, new SpriteSheet("Textures/Items/Hallowed_Key"), "First ket in the Dungeon");
+
+            Pickup Key1 = new Pickup("Hallowed_Key", World, new SpriteSheet("Textures/Items/Hallowed_Key"), "First key in the Dungeon");
             Add(Key1);
+
             Pickup Key2 = new Pickup("Frozen_Key", World, new SpriteSheet("Textures/Items/Frozen_Key"), "Second key in the Dungeon");
             Add(Key2);
+
             Pickup Key3 = new Pickup("SkeletonKey", World, new SpriteSheet("Textures/Items/SkeletonKey"), "Final key in the Dungeon");
             Add(Key3);
+
             Pickup Presents = new Pickup("BluePresent", World, new SpriteSheet("Textures/Items/BluePresent"), "Present to break certain blocks");
             Add(Presents);
+
+            UpgradePickup RocketCape = new UpgradePickup("Rocketcape", this, new SpriteSheet("Textures/Items/Rocketcape"), "Cape making high jumps possible");
+            RocketCape.Position = new Vector2(41280, 18800);
+            RocketCape.CanCollide = true;
+            Add(RocketCape);
 
             //Setup LevelGrid
             ObjectGrid levelGrid = new ObjectGrid("levelGrid", this, 49, 29, 1920, 960);

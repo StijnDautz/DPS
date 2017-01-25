@@ -11,9 +11,9 @@ namespace Content
         int _health;
         public SFXSnowMan(Engine.Object source) : base(source)
         {
-            Add("attack", getSFX("snowManAttack"), false);
-            Add("damaged", getSFX("snowManDamaged"), false);
-            Add("death", getSFX("snowManDeath"), false);
+            Add("attack", getSFX("Medium Enemy Attack"), false);
+            Add("damaged", getSFX("Medium Enemy Hit"), false);
+            Add("death", getSFX("Medium Enemy Death"), false);
             if(source is EnemySnowMan)
             {
                 _health = (source as EnemySnowMan).Health;

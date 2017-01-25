@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,14 @@ namespace Engine
         private string _id;
         private ObjectList _HUD;
         private GameStateManager _gameStateManager;
+
+        private Song songPlay;
+
+        public Song SongPlay
+        {
+            get { return songPlay; }
+            set { songPlay = value; }
+        }
 
         public string Id
         {
