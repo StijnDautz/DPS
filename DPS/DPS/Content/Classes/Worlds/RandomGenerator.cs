@@ -77,23 +77,6 @@ namespace Engine
         public char[,] Generate()
         {
             grid = new char[width, height];
-            //door1.location = new Vector2(0, 10);
-            //door1.direc = Door.direction.right;
-
-            //door2.location = new Vector2(0, 40);
-            //door2.direc = Door.direction.right;
-
-            //door3.location = new Vector2(59, 10);
-            //door3.direc = Door.direction.left;
-
-            //door4.location = new Vector2(59, 40);
-            //door4.direc = Door.direction.left;
-
-            //doors.Add(door1);
-            //doors.Add(door2);
-            //doors.Add(door3);
-            //doors.Add(door4);
-
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
@@ -170,24 +153,6 @@ namespace Engine
                     }
                 }
             }
-
-            //zet de randjes om de kamers
-            //for (int y = 1; y < height - 1; y++)
-            //{
-            //    for (int x = 1; x < width - 1; x++)
-            //    {
-            //        if (grid[x, y] != '0' && grid[x, y] != '2' && grid[x, y] != 'a')
-            //        {
-            //            if (grid[x + 1, y] == '0' ||
-            //            grid[x - 1, y] == '0' ||
-            //            grid[x, y + 1] == '0' ||
-            //            grid[x, y - 1] == '0')
-            //                grid[x, y] = '4';
-            //        }
-            //    }
-            //}
-
-            //klaar
             return grid;
         }
 
