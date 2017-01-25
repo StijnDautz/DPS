@@ -56,6 +56,7 @@ namespace Engine
         public void Update(GameTime gameTime)
         {
             _current.Update(gameTime);
+            
         }
 
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
