@@ -60,6 +60,9 @@ namespace Engine
         {
             _collums = grid.GetLength(0);
             _rows = grid.GetLength(1);
+            _tileWidth = tileWidth;
+            _tileHeight = tileHeight;
+            _grid = new Object[_collums, _rows];
             ReadTiles(grid);
         }
 
@@ -185,6 +188,10 @@ namespace Engine
             {
                 if (o != null )
                 {
+                    if(o == _grid[16, 6])
+                    {
+                        int x = 0;
+                    }
                     if (!(o.GlobalPosition.X + o.Width < CameraPosition.X || o.GlobalPosition.X > CameraPosition.X + GameInstance.GraphicsDeviceManager.PreferredBackBufferWidth || o.GlobalPosition.Y + o.Height < CameraPosition.Y || o.GlobalPosition.Y > CameraPosition.Y + GameInstance.GraphicsDeviceManager.PreferredBackBufferHeight))
                     {
                         o.Draw(gameTime, spriteBatch);

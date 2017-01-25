@@ -35,6 +35,7 @@ namespace Engine
         int height = 5 * 10;
         char[,] grid;
         int jumpHeight = 3;
+        private Vector2 _position;
 
         //Vector2 door1, door2, door3, door4;
         Door door1 = new Door(), door2 = new Door(), door3 = new Door(), door4 = new Door();
@@ -59,12 +60,17 @@ namespace Engine
             set { height = value; }
         }
 
+        public Vector2 Position
+        {
+            get { return _position; }
+        }
+
         //List<Rectangle> rooms = new List<Rectangle>();
         List<Room> rooms = new List<Room>();
 
-        public RandomDungeonGenerator()
+        public RandomDungeonGenerator(Vector2 position)
         {
-            
+            _position = position;
         }
 
         //Generates dungeons

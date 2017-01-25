@@ -15,6 +15,11 @@ namespace Content
 
         }
 
+        public GridDungeon(string id, Engine.Object parent, char[,] grid, int tileWidth, int tileHeight) : base(id, parent, grid, tileWidth, tileHeight)
+        {
+            CanCollide = true;
+        }
+
         private TexturedObject SetupCollisionTile(string id, string assetName)
         {
             TexturedObject Tile = new TexturedObject(id, this, new SpriteSheet("Textures/Tiles/" + assetName));
