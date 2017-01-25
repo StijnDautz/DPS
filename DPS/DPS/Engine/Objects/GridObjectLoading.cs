@@ -225,7 +225,7 @@ namespace Engine
                         {
                             if (g[X, Y] == 0)
                             {
-                                gridList.Remove(g);
+                                //gridList.Remove(g);
                             }
                                 
                         }
