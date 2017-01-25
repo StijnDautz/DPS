@@ -15,6 +15,12 @@ namespace Content
 
         }
 
+        public struct RandomRoom
+        {
+            public int x, y;
+
+        }
+
         public override void Setup(GameMode gameMode)
         {
             base.Setup(gameMode);
@@ -170,8 +176,13 @@ namespace Content
             grid[15, 0] = "92";
             #endregion
 
-            //create randomDungeonGenerator
-            RandomDungeonGenerator dungeonGenerator = new RandomDungeonGenerator();
+            //load the random dungeons on the correct position in levelGrid
+            loadRandomDungeon(levelGrid, new RDRG1(new Vector2(14, 5)));
+            loadRandomDungeon(levelGrid, new RDRG2(new Vector2(18, 7)));
+            loadRandomDungeon(levelGrid, new RDRG3(new Vector2(7, 14)));
+            loadRandomDungeon(levelGrid, new RDRG4(new Vector2(2, 17)));
+            loadRandomDungeon(levelGrid, new RDRG5(new Vector2(10, 20)));
+            loadRandomDungeon(levelGrid, new RDRG6(new Vector2(15, 0)));
 
             for (int i = 1; i < 93; i++)
             {
@@ -192,6 +203,47 @@ namespace Content
             }
             levelGrid.CanCollide = true;
             Add(levelGrid);
+        }
+
+        private void loadRandomDungeon(Engine.ObjectGrid parent, RandomDungeonGenerator generator)
+        {
+            var rooms = LoadRandomDungeonRooms(parent, generator);
+            for(int x = 0; x < rooms.GetLength(0); x++)
+            {
+                for(int y = 0; y < rooms.GetLength(1); y++)
+                {
+                    parent.setTile(x + (int)generator.Position.X, y + (int)generator.Position.Y, rooms[x, y]);
+                }
+            }
+        }
+
+        public GridDungeon[,] LoadRandomDungeonRooms(Engine.Object parent, RandomDungeonGenerator generator)
+        {
+            var roomGrid = new GridDungeon[generator.Width / 20, generator.Height / 10];
+            char[,] charGrid = generator.Generate();
+            for (int x = 0; x < generator.Width / 20; x++)
+            {
+                char[,] tempCharGrid = new char[20, 10];
+                for (int y = 0; y < generator.Height / 10; y++)
+                {
+                    for (int k = 0; k < 20; k++)
+                    {
+                        for (int j = 0; j < 10; j++)
+                        {
+                            tempCharGrid[k, j] = charGrid[x * 20 + k, y * 10 + j];
+                        }
+                    }
+                    //create objectgrid and pass char[,], so it gets loaded into the grid
+                    var room = new Content.GridDungeon("randomRoom", parent, tempCharGrid, 96, 96);
+
+                    //set the boundingBox
+                    room.BoundingBox = new Rectangle(0, 0, 20 * 96, 10 * 96);
+
+                    //add room to the correct place int the roomGrid
+                    roomGrid[x, y] = room;
+                }
+            }
+            return roomGrid;
         }
     }
 }
