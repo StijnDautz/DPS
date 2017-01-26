@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace Content
 {
@@ -25,6 +26,11 @@ namespace Content
             base.Update(gameTime);
             var time = Engine.GameModeManager.TimeManager;
             _time.Text = time.Minutes + " : " + time.Seconds;
+        }
+
+        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        {
+            base.Draw(gameTime, spriteBatch);
         }
     }
 }

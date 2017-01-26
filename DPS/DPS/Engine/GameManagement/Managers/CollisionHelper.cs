@@ -11,13 +11,11 @@ namespace Engine
     {
         public static bool CollidesWith(Object obj1, Vector2 offset1, Object obj2, Vector2 offset2, float elapsedTime)
         {
+            //calculate new position of both objects
             Vector2 pos1 = obj1.GlobalPosition + offset1 * elapsedTime;
-            if(obj2 is Player && obj1.GlobalPosition.Y < 7690)
-            {
-                 int x = 0;
-            }
             Vector2 pos2 = obj2.GlobalPosition + offset2 * elapsedTime;
 
+            //check collision
             if (pos1.Y + obj1.Height < pos2.Y)
             { return false; }
             if (pos2.Y + obj2.Height < pos1.Y)
@@ -34,24 +32,17 @@ namespace Engine
             return CollidesWith(obj1, Vector2.Zero, obj2, Vector2.Zero, 0);
         }
 
-        public static bool CollidedAtBottom(Object oldObj, Object objC)
+        public static bool CollidesWith(Object obj1, Vector2 mousePos)
         {
-            return oldObj.GlobalPosition.Y + oldObj.Height <= objC.GlobalPosition.Y && oldObj.GlobalPosition.Y + oldObj.Height >= objC.GlobalPosition.Y;
-        }
-
-        public static bool CollidedAtLeft(Object oldObj, Vector2 newPos, Object objC)
-        {
-            return oldObj.GlobalPosition.X >= objC.GlobalPosition.X + objC.Width && newPos.X <= objC.GlobalPosition.X + objC.Width;
-        }
-
-        public static bool CollidedAtRight(Object oldObj, Vector2 newPos, Object objC)
-        {
-            return oldObj.GlobalPosition.X + oldObj.Width <= objC.GlobalPosition.X && newPos.X + oldObj.Width >= objC.GlobalPosition.X;
-        }
-
-        public static bool CollidedAtTop(Object oldObj, Vector2 newPos, Object objC)
-        {
-            return oldObj.GlobalPosition.Y >= objC.GlobalPosition.Y + objC.Height && newPos.Y <= objC.GlobalPosition.Y + objC.Height;
+            if (obj1.GlobalPosition.Y + obj1.Height < mousePos.Y)
+            { return false; }
+            if (obj1.GlobalPosition.Y > mousePos.Y)
+            { return false; }
+            if(obj1.GlobalPosition.X + obj1.Width < mousePos.X)
+            { return false; }
+            if(obj1.GlobalPosition.X > mousePos.X)
+            { return false; }
+            return true;
         }
     }
 }

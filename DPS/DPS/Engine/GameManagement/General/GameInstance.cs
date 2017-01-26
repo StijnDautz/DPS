@@ -77,7 +77,7 @@ namespace Engine
         protected override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            GraphicsDevice.Clear(Color.Beige);
+            GraphicsDevice.Clear(Color.Brown);
             _spriteBatch.Begin();
             _gameModeManager.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();

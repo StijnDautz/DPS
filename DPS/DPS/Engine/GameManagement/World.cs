@@ -125,9 +125,13 @@ namespace Engine
         {
             foreach (Object o in Objects)
             {
-                if (!(o.GlobalPosition.X + o.Width < CameraPosition.X || o.GlobalPosition.X > CameraPosition.X + GameInstance.GraphicsDeviceManager.PreferredBackBufferWidth || o.GlobalPosition.Y + o.Height < CameraPosition.Y || o.GlobalPosition.Y > CameraPosition.Y + GameInstance.GraphicsDeviceManager.PreferredBackBufferHeight))               
+                if (o.Visible)
                 {
-                    o.Draw(gameTime, spriteBatch);
+                    //if o is objectList, the boundingBox is irrelevant, else check if o is within screen boundaries
+                    if (o is ObjectList || !(o.GlobalPosition.X + o.Width < CameraPosition.X || o.GlobalPosition.X > CameraPosition.X + GameInstance.GraphicsDeviceManager.PreferredBackBufferWidth || o.GlobalPosition.Y + o.Height < CameraPosition.Y || o.GlobalPosition.Y > CameraPosition.Y + GameInstance.GraphicsDeviceManager.PreferredBackBufferHeight))
+                    {
+                        o.Draw(gameTime, spriteBatch);
+                    }
                 }
             }
         }

@@ -42,6 +42,7 @@
     <Compile Include="Content\Classes\GameManagement\GameStates\MainMenuGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\InventoryGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\StartPlayGS.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\DescriptionBox.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Timer.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\GridDungeon.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\Overworld.cs" />
