@@ -38,11 +38,14 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Content\Classes\GameManagement\GameStates\GSSettings.cs" />
     <Compile Include="Content\Classes\GameManagement\MainGameMode.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\MainMenuGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\InventoryGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\StartPlayGS.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\ButtonSettings.cs" />
     <Compile Include="Content\Classes\Objects\HUD\DescriptionBox.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\SliderVolume.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Timer.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\GridDungeon.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\Overworld.cs" />
@@ -79,7 +82,7 @@
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
     <Compile Include="Engine\GameManagement\SFXManager.cs" />
     <Compile Include="Engine\GameManagement\WorldUpdate.cs" />
-    <Compile Include="Engine\Objects\Button.cs" />
+    <Compile Include="Engine\Objects\HUD\Button.cs" />
     <Compile Include="Engine\Objects\Character.cs" />
     <Compile Include="Content\Classes\Objects\Characters\Player.cs" />
     <Compile Include="Engine\Objects\DestructableObject.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="Engine\Objects\ObjectUpdate.cs" />
     <Compile Include="Engine\Objects\Pickup.cs" />
     <Compile Include="Engine\Objects\ObjectGrid.cs" />
+    <Compile Include="Engine\Objects\HUD\Slider.cs" />
     <Compile Include="Engine\Objects\Teleporter.cs" />
     <Compile Include="Engine\Objects\TextObject.cs" />
     <Compile Include="Engine\Objects\Weapon.cs" />
