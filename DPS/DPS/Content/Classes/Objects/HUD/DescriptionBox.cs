@@ -26,15 +26,16 @@ namespace Content
             }
         }
 
-        public DescriptionBox(Engine.Object parent, Engine.SpriteSheet spriteSheet, string text) : base("DescriptionBox", parent)
+        public DescriptionBox(Engine.Object parent, string text) : base("DescriptionBox", parent)
         {
             //create TextObject
             _description = new Engine.TextObject("description", "Hud", this);
             _description.Text = text;
+            _description.Color = Color.Gray;
 
             //create the box and its frame
-            _box = new Engine.TexturedObject("box", this, spriteSheet);
-            var textBox = new Rectangle(0, 0, _box.Width - (int)(_description.Width * 0.2), _box.Height);
+            _box = new Engine.TexturedObject("box", this, new Engine.SpriteSheet("Textures/HUD/DescriptionBox"));
+            var textBox = new Rectangle(0, 0, _box.Width - 10, _box.Height);
 
             //set boundingBox equal to the boundingBox of box
             BoundingBox = _box.BoundingBox;

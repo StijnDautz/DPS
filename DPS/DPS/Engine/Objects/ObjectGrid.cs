@@ -36,6 +36,16 @@ namespace Engine
             get { return _grid; }
         }
 
+        //Create ObjectGrid read from a file and already set Position as it may be needed to correctly position Characters
+        public ObjectGrid(string id, Object parent, string assetName, int tileSize, Vector2 position) : base(id, parent)
+        {
+            _tileWidth = tileSize;
+            _tileHeight = tileSize;
+            Position = position;
+            Load(assetName);
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Collums * tileSize, Rows * tileSize);
+        }
+
         //Create ObjectGrid read from a file
         public ObjectGrid(string id, Object parent, string assetName, int tileSize) : base(id, parent)
         {

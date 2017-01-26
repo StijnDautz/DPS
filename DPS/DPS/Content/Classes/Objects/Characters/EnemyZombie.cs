@@ -37,7 +37,7 @@ namespace Content
             Health = 300;
             Mass = 1.1f;
             SFXManager = new SFXZombie(this);
-            _weapon = new Engine.Weapon("weapon", World, new Engine.SpriteSheet("Hud/TimerFrame"), this, 75);
+            _weapon = new Engine.Weapon("weapon", World, new Engine.SpriteSheet("Textures/Hud/TimerFrame"), this, 75);
             World.Add(_weapon);
             BoundingBox = new Rectangle(0, 0, 64, 89);
         }

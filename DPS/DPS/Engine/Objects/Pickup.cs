@@ -33,7 +33,7 @@ namespace Engine
             BoundingBox = _pickup.BoundingBox;
 
             //Create the pickups descriptionBox
-            _descriptionBox = new Content.DescriptionBox(this, new SpriteSheet("HUD/TimerFrame"), description);
+            _descriptionBox = new Content.DescriptionBox(this, description);
 
             //Add both objects in the correct order so they are drawn properly
             Add(_pickup);

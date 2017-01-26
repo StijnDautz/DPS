@@ -66,9 +66,23 @@ namespace Engine
 
         private void AddTile(Object tile, char type, int x, int y)
         {
+            //if tile is null throw exception
+            //else add it to the world/grid
             if (tile != null)
             {
-                setTile(x, y, tile);
+                //if tile is Character, it should be added to the world and to the grid
+                //instead fill the spot in the grid with an empty Object
+                if(tile is Character)
+                {
+                    World.Add(tile);
+                    //as characters parent will not this, but world, add GlobalPosition of this to it, as it happened to be in its txt file
+                    tile.Position = new Vector2(x * _tileWidth, y * _tileHeight) + GlobalPosition;
+                    setTile(x, y, new Object("", this));
+                }
+                else
+                {
+                    setTile(x, y, tile);
+                }
             }
             else
             {
