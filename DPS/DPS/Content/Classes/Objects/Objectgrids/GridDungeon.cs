@@ -10,7 +10,7 @@ namespace Content
 {
     class GridDungeon : ObjectGrid
     {
-        public GridDungeon(string id, Engine.Object parent, string assetName, int tileSize) : base(id, parent, assetName, tileSize)
+        public GridDungeon(string id, Engine.Object parent, string assetName, int tileSize, Vector2 position) : base(id, parent, assetName, tileSize, position)
         {
 
         }
