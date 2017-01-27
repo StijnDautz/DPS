@@ -171,14 +171,6 @@ namespace Content
             grid[15, 0] = "92";
             #endregion
 
-            //load the random dungeons on the correct position in levelGrid
-            loadRandomDungeon(levelGrid, new RDRG1(new Vector2(14, 5)));
-            loadRandomDungeon(levelGrid, new RDRG2(new Vector2(18, 7)));
-            loadRandomDungeon(levelGrid, new RDRG3(new Vector2(7, 14)));
-            loadRandomDungeon(levelGrid, new RDRG4(new Vector2(2, 17)));
-            loadRandomDungeon(levelGrid, new RDRG5(new Vector2(10, 20)));
-            loadRandomDungeon(levelGrid, new RDRG6(new Vector2(15, 0)));
-
             for (int i = 1; i < 93; i++)
             {
                 for (int x = 0; x < 49; x++)
@@ -194,6 +186,14 @@ namespace Content
                     }
                 }
             }
+
+            //load the random dungeons on the correct position in levelGrid
+            loadRandomDungeon(levelGrid, new RDRG1(new Vector2(14, 5)));
+            loadRandomDungeon(levelGrid, new RDRG2(new Vector2(18, 7)));
+            loadRandomDungeon(levelGrid, new RDRG3(new Vector2(7, 14)));
+            loadRandomDungeon(levelGrid, new RDRG4(new Vector2(2, 17)));
+            loadRandomDungeon(levelGrid, new RDRG5(new Vector2(10, 20)));
+            loadRandomDungeon(levelGrid, new RDRG6(new Vector2(15, 0)));
             levelGrid.CanCollide = true;
 
             //Add the levelGrid
