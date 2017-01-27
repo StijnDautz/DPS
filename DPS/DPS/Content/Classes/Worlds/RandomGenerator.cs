@@ -81,8 +81,8 @@ namespace Engine
             {
                 for (int x = 0; x < width; x++)
                 {
-                    if(grid[x,y] == 0)
-                    grid[x, y] = 'k';
+                    if (grid[x, y] == 0)
+                        grid[x, y] = 'k';
                 }
             }
             //creert de deuren
@@ -153,6 +153,35 @@ namespace Engine
                     }
                 }
             }
+
+            //for (int y = 1; y + 1 < height; y++)
+            //{
+            //    for (int x = 1; x + 1 < width; x++)
+            //    {
+            //        if (grid[x, y + 1] == '0' && grid[x, y - 1] == '0' && grid[x + 1, y] == '0' ||
+            //            grid[x, y + 1] == '0' && grid[x, y - 1] == '0' && grid[x - 1, y] == '0' ||
+            //            grid[x, y + 1] == '0' && grid[x + 1, y] == '0' && grid[x - 1, y] == '0' ||
+            //            grid[x, y - 1] == '0' && grid[x + 1, y] == '0' && grid[x - 1, y] == '0')
+
+            //        {
+            //            if(grid[x,y] != 'e' || grid[x,y] != 'd')
+            //                grid[x, y] = '0';
+            //        }
+            //    }
+            //}
+
+            for (int y = 0; y < height; y++)
+            {
+                for (int x = 0; x < width; x++)
+                {
+                    if (grid[x, y] == '#')
+                    {
+                        grid[x, y] = '0';
+                    }
+                }
+            }
+
+
             return grid;
         }
 
@@ -191,11 +220,11 @@ namespace Engine
                                         bool nowLeftRight = false;
 
                                         //maakt de gang breder, zodat je er altijd doorheen kan
-                                        for (int i = 0; i < extended; i++)
+                                        for (int i = -2; i < extended + 2; i++)
                                         {
                                             grid[room.rectangle.Location.X + add, room.rectangle.Location.Y - i] = 'a';
 
-                                            
+
 
                                             //voegt rechts 2 toe
                                             if (room.rectangle.Location.X + add + 2 < width)
@@ -230,9 +259,9 @@ namespace Engine
                                                     if (!nowLeftRight)
                                                     {
                                                         if (leftRight)
-                                                            grid[room.rectangle.Location.X + add - 1, room.rectangle.Location.Y - i] = '2';
+                                                            grid[room.rectangle.Location.X + add - 1, room.rectangle.Location.Y - i] = '#';
                                                         else
-                                                            grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y - i] = '2';
+                                                            grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y - i] = '#';
 
                                                         nowLeftRight = true;
                                                     }
@@ -241,9 +270,9 @@ namespace Engine
                                                     else
                                                     {
                                                         if (leftRight)
-                                                            grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y - i] = '2';
+                                                            grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y - i] = '#';
                                                         else
-                                                            grid[room.rectangle.Location.X + add - 1, room.rectangle.Location.Y - i] = '2';
+                                                            grid[room.rectangle.Location.X + add - 1, room.rectangle.Location.Y - i] = '#';
 
                                                         nowLeftRight = false;
                                                     }
@@ -274,7 +303,7 @@ namespace Engine
                                         room1.connections++;
                                         room.connections++;
                                         room1.connected.Add(room);
-                                        for (int i = 0; i < extended; i++)
+                                        for (int i = -2; i < extended + 2; i++)
                                         {
                                             grid[room.rectangle.Location.X + room.rectangle.Width + i, room.rectangle.Location.Y + add] = 'a';
 
@@ -312,7 +341,7 @@ namespace Engine
                                         bool leftRight = false;
                                         bool nowLeftRight = false;
 
-                                        for (int i = 0; i < extended; i++)
+                                        for (int i = -2; i < extended + 2; i++)
                                         {
                                             grid[room.rectangle.Location.X + add, room.rectangle.Location.Y + room.rectangle.Height + i] = 'a';
 
@@ -338,7 +367,11 @@ namespace Engine
                                                 {
                                                     if (!nowLeftRight)
                                                     {
-                                                        grid[room.rectangle.Location.X + add, room.rectangle.Location.Y + room.rectangle.Height + i] = '2';
+                                                        if (leftRight)
+                                                            grid[room.rectangle.Location.X + add - 1, room.rectangle.Location.Y + room.rectangle.Height + i] = '#';
+                                                        else
+                                                            grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y + room.rectangle.Height + i] = '#';
+
                                                         nowLeftRight = true;
                                                     }
 
@@ -346,9 +379,9 @@ namespace Engine
                                                     else
                                                     {
                                                         if (leftRight)
-                                                            grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y + room.rectangle.Height + i] = '2';
+                                                            grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y + room.rectangle.Height + i] = '#';
                                                         else
-                                                            grid[room.rectangle.Location.X + add - 1, room.rectangle.Location.Y + room.rectangle.Height + i] = '2';
+                                                            grid[room.rectangle.Location.X + add - 1, room.rectangle.Location.Y + room.rectangle.Height + i] = '#';
 
                                                         nowLeftRight = false;
                                                     }
@@ -379,7 +412,7 @@ namespace Engine
                                         room1.connections++;
                                         room.connections++;
                                         room1.connected.Add(room);
-                                        for (int i = 0; i < extended; i++)
+                                        for (int i = -2; i < extended + 2; i++)
                                         {
                                             grid[room.rectangle.Location.X - i, room.rectangle.Location.Y + add] = 'a';
 
