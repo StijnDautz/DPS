@@ -33,7 +33,7 @@ namespace Engine
 
             gameMode.SwitchTo("MainWorld");
             gameMode.Player = new Engine.Player("player", gameMode.World, new SpriteSheetPlayerTopDown("Textures/Characters/CharacterOverWorld"), new SpriteSheetPlayerSide("Textures/Characters/Character"));
-            gameMode.Player.Position = new Microsoft.Xna.Framework.Vector2(600, 400);
+            gameMode.Player.Position = new Microsoft.Xna.Framework.Vector2(700 , 4100);
 
             gameMode.Setup();
             gameMode.SetupWorlds();

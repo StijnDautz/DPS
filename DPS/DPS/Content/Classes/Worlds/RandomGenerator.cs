@@ -110,9 +110,9 @@ namespace Engine
                     grid[(int)d.location.X, (int)d.location.Y + 1] = '0';
                     grid[(int)d.location.X, (int)d.location.Y + 2] = '0';
 
-                    grid[(int)d.location.X - 1, (int)d.location.Y] = '0';
-                    grid[(int)d.location.X - 1, (int)d.location.Y + 1] = '0';
-                    grid[(int)d.location.X - 1, (int)d.location.Y + 2] = '0';
+                    grid[(int)d.location.X + 1, (int)d.location.Y] = '0';
+                    grid[(int)d.location.X + 1, (int)d.location.Y + 1] = '0';
+                    grid[(int)d.location.X + 1, (int)d.location.Y + 2] = '0';
 
                     room.rectangle.Location = new Point((int)d.location.X - 2 - r.Next(2, 7), (int)d.location.Y - 1);
                     room.rectangle.Size = new Point(width - room.rectangle.Location.X - 2, 5);
@@ -190,31 +190,50 @@ namespace Engine
                                         bool leftRight = false;
                                         bool nowLeftRight = false;
 
+                                        //maakt de gang breder, zodat je er altijd doorheen kan
                                         for (int i = 0; i < extended; i++)
                                         {
                                             grid[room.rectangle.Location.X + add, room.rectangle.Location.Y - i] = 'a';
 
-                                            if (room.rectangle.Location.X + add + 1 < width)
+                                            
+
+                                            //voegt rechts 2 toe
+                                            if (room.rectangle.Location.X + add + 2 < width)
                                             {
                                                 grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y - i] = 'a';
+                                                grid[room.rectangle.Location.X + add + 2, room.rectangle.Location.Y - i] = 'a';
+
                                                 leftRight = true;
                                             }
 
+                                            ////voegt links 1 toe en rechts 1 toe
+                                            //if (room.rectangle.Location.X + add + 1 < width && width < room.rectangle.Location.X + add + 2)
+                                            //{
+                                            //    grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y - i] = 'a';
 
+                                            //    leftRight = true;
+                                            //}
+
+                                            //voegt links 2 toe
                                             else
                                             {
                                                 grid[room.rectangle.Location.X + add - 1, room.rectangle.Location.Y - i] = 'a';
+                                                grid[room.rectangle.Location.X + add - 2, room.rectangle.Location.Y - i] = 'a';
                                                 leftRight = false;
                                             }
 
-
+                                            //voegt blokjes toe aan de zijkanten zodat je altijd omhoog kan
                                             if (extended > 3)
                                             {
                                                 if (i % jumpHeight == 0 && i != 0)
                                                 {
                                                     if (!nowLeftRight)
                                                     {
-                                                        grid[room.rectangle.Location.X + add, room.rectangle.Location.Y - i] = '2';
+                                                        if (leftRight)
+                                                            grid[room.rectangle.Location.X + add - 1, room.rectangle.Location.Y - i] = '2';
+                                                        else
+                                                            grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y - i] = '2';
+
                                                         nowLeftRight = true;
                                                     }
 
@@ -297,15 +316,19 @@ namespace Engine
                                         {
                                             grid[room.rectangle.Location.X + add, room.rectangle.Location.Y + room.rectangle.Height + i] = 'a';
 
-                                            if (room.rectangle.Location.X + add + 1 < width)
+                                            //voegt rechts toe
+                                            if (room.rectangle.Location.X + add + 2 < width)
                                             {
                                                 grid[room.rectangle.Location.X + add + 1, room.rectangle.Location.Y + room.rectangle.Height + i] = 'a';
+                                                grid[room.rectangle.Location.X + add + 2, room.rectangle.Location.Y + room.rectangle.Height + i] = 'a';
                                                 leftRight = true;
                                             }
 
+                                            //voegt links toe
                                             else
                                             {
                                                 grid[room.rectangle.Location.X + add - 1, room.rectangle.Location.Y + room.rectangle.Height + i] = 'a';
+                                                grid[room.rectangle.Location.X + add - 2, room.rectangle.Location.Y + room.rectangle.Height + i] = 'a';
                                                 leftRight = false;
                                             }
 
