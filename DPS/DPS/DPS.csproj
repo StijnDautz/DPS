@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Content\Classes\GameManagement\GameStates\GSLogin.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\GSSettings.cs" />
     <Compile Include="Content\Classes\GameManagement\MainGameMode.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\MainMenuGS.cs" />

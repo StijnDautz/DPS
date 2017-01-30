@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Engine;
+using Microsoft.Xna.Framework;
 
 namespace Content
 {
@@ -35,6 +36,15 @@ namespace Content
             World.CanUpdate = false;
             IsMouseVisible = true;
             CanUpdateGameTime = false;
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if(HighScoreManager.HighScore == 0)
+            {
+                GameStateManager.SwitchTo("GSLogin");
+            }
         }
     }
 }

@@ -6,11 +6,17 @@ using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography;
 
-namespace DPS.Engine.GameManagement
+namespace Content
 {
     class HighScoreManager
     {
         private static MySqlConnection dbConn;
+        private static int _highScore;
+
+        public static int HighScore
+        {
+            get { return _highScore; }
+        }
      
         public static string HashSHA1(string value)
         {
@@ -40,7 +46,7 @@ namespace DPS.Engine.GameManagement
             dbConn = new MySqlConnection(connString);
         }
 
-        public bool IsAccountValid(string username, string password)
+        public static bool IsAccountValid(string username, string password)
         {
             InitializeDatabase();
             string hashedpassword = HashSHA1(password);
