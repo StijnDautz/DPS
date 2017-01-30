@@ -167,7 +167,7 @@ namespace Engine
                 string hashedpassword = HashSHA1(userpassword);
 
                 //Score in database zetten QUERY:
-                //string query = string.Format("INSERT INTO highscore(username,score) VALUES ('{0}','{1}')", username, score);
+                string query = string.Format("INSERT INTO highscore(username,score) VALUES ('{0}','{1}')", username, score);
 
                 //Checken of username & wachtwoord in database bestaan:
                 //string query = string.Format("SELECT username FROM users");
@@ -193,12 +193,6 @@ namespace Engine
                 dbConn.Open();
 
                 MySqlDataReader reader = cmd.ExecuteReader();
-
-                while (reader.Read())
-                {
-
-                }
-
 
                 dbConn.Close();
                 //Connectie sluiten is belangrijk.
