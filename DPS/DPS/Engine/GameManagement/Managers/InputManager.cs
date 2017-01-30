@@ -93,7 +93,7 @@ namespace Engine
                 }
             }       
             //if backspace is pressed remove last character in string
-            if(isKeyReleased(Keys.Back))
+            if(isKeyReleased(Keys.Back) && stringBuilder.Length > 0)
             {
                 stringBuilder.Remove(stringBuilder.Length - 1, 1);
             }

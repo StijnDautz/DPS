@@ -11,9 +11,14 @@ namespace Engine
     //TODO make this an objectList and add background object, which is used to set collisionBox as well
     class TextBox : ObjectList
     {
-        TextObject _textObject;
-        StringBuilder _text;
-        Content.ButtonAllowTyping _buttonAllowTyping;
+        private TextObject _textObject;
+        private StringBuilder _text;
+        private Content.ButtonAllowTyping _buttonAllowTyping;
+
+        public string Text
+        {
+            get { return _text.ToString(); }
+        }
 
         public int Capacity
         {
