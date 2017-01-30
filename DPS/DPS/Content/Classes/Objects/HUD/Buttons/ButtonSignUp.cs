@@ -16,6 +16,7 @@ namespace Content
         protected override void ActionWhenPressed()
         {
             base.ActionWhenPressed();
+            //if button is pressed go to sign up page
             System.Diagnostics.Process.Start("http://dpstudios.nl/register.php");
         }
     }
