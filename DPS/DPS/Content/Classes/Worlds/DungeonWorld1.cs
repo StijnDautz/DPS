@@ -20,57 +20,58 @@ namespace Content
             base.Setup(gameMode);
             IsTopDown = false;
 
-            var zombie = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
-            zombie.Position = new Microsoft.Xna.Framework.Vector2(35808, 16704);
-            Add(zombie);
-            var zombie1 = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
-            zombie1.Position = new Microsoft.Xna.Framework.Vector2(32256, 16992);
-            Add(zombie1);
-            var zombie2 = new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
-            zombie2.Position = new Microsoft.Xna.Framework.Vector2(35436, 18624);
-            Add(zombie2);
-
-            var snowman = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
-            snowman.Position = new Microsoft.Xna.Framework.Vector2(32836, 16064);
-            Add(snowman);
-            var snowman1 = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
-            snowman1.Position = new Microsoft.Xna.Framework.Vector2(34176, 16992);
-            Add(snowman1);
-            var snowman2 = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
-            snowman2.Position = new Microsoft.Xna.Framework.Vector2(29856, 17280);
-            Add(snowman2);
-            var snowman3 = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
-            snowman3.Position = new Microsoft.Xna.Framework.Vector2(35136, 18624);
-            Add(snowman3);
-            var snowman4 = new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
-            snowman4.Position = new Microsoft.Xna.Framework.Vector2(35636, 18624);
-            Add(snowman4);
+            AddGrid();
+            AddPickups();
 
             Teleporter teleporterOverworld = new Teleporter("teleporter", this, "MainWorld", new Vector2(600, 400));
             teleporterOverworld.Position = new Vector2(40992, 11616);
             teleporterOverworld.BoundingBox = new Rectangle(0, 0, 96, 96);
+        }
 
-            //Items to progress in the Dungeon
-            Pickup SnowShoes = new Pickup("SnowShoes", World, new SpriteSheet("Textures/Items/SnowShoes"), "Capable of walking on Ice");
-            Add(SnowShoes);
+        private void loadRandomDungeon(Engine.ObjectGrid parent, RandomDungeonGenerator generator)
+        {
+            var rooms = LoadRandomDungeonRooms(parent, generator);
+            for(int x = 0; x < rooms.GetLength(0); x++)
+            {
+                for(int y = 0; y < rooms.GetLength(1); y++)
+                {
+                    parent.setTile(x + (int)generator.Position.X, y + (int)generator.Position.Y, rooms[x, y]);
+                }
+            }
+        }
 
-            Pickup Key1 = new Pickup("Hallowed_Key", World, new SpriteSheet("Textures/Items/Hallowed_Key"), "First key in the Dungeon");
-            Add(Key1);
+        public GridDungeon[,] LoadRandomDungeonRooms(Engine.Object parent, RandomDungeonGenerator generator)
+        {
+            var roomGrid = new GridDungeon[generator.Width / 20, generator.Height / 10];
+            char[,] charGrid = generator.Generate();
+            for (int x = 0; x < generator.Width / 20; x++)
+            {
+                char[,] tempCharGrid = new char[20, 10];
+                for (int y = 0; y < generator.Height / 10; y++)
+                {
+                    for (int k = 0; k < 20; k++)
+                    {
+                        for (int j = 0; j < 10; j++)
+                        {
+                            tempCharGrid[k, j] = charGrid[x * 20 + k, y * 10 + j];
+                        }
+                    }
 
-            Pickup Key2 = new Pickup("Frozen_Key", World, new SpriteSheet("Textures/Items/Frozen_Key"), "Second key in the Dungeon");
-            Add(Key2);
+                    //create objectgrid and pass char[,], so it gets loaded into the grid
+                    var room = new Content.GridDungeon("randomRoom", parent, tempCharGrid, 96, 96);
 
-            Pickup Key3 = new Pickup("SkeletonKey", World, new SpriteSheet("Textures/Items/SkeletonKey"), "Final key in the Dungeon");
-            Add(Key3);
+                    //set the boundingBox
+                    room.BoundingBox = new Rectangle(0, 0, 20 * 96, 10 * 96);
 
-            Pickup Presents = new Pickup("BluePresent", World, new SpriteSheet("Textures/Items/BluePresent"), "Present to break certain blocks");
-            Add(Presents);
+                    //add room to the correct place int the roomGrid
+                    roomGrid[x, y] = room;
+                }
+            }
+            return roomGrid;
+        }
 
-            UpgradePickup RocketCape = new UpgradePickup("Rocketcape", this, new SpriteSheet("Textures/Items/Rocketcape"), "Cape making high jumps possible");
-            RocketCape.Position = new Vector2(41280, 18800);
-            RocketCape.CanCollide = true;
-            Add(RocketCape);
-
+        private void AddGrid()
+        {
             //Setup LevelGrid
             ObjectGrid levelGrid = new ObjectGrid("levelGrid", this, 49, 29, 1920, 960);
 
@@ -170,6 +171,22 @@ namespace Content
             grid[15, 0] = "92";
             #endregion
 
+            for (int i = 1; i < 93; i++)
+            {
+                for (int x = 0; x < 49; x++)
+                {
+                    for (int y = 0; y < 29; y++)
+                    {
+                        if (grid[x, y] != null && int.Parse(grid[x, y]) == i)
+                        {
+                            GridDungeon room = new GridDungeon("level1", levelGrid, i.ToString(), 96, new Vector2(x * 20 * 96, y * 10 * 96));
+                            room.CanCollide = true;
+                            levelGrid.Grid[x, y] = room;
+                        }
+                    }
+                }
+            }
+
             //load the random dungeons on the correct position in levelGrid
             loadRandomDungeon(levelGrid, new RDRG1(new Vector2(14, 5)));
             loadRandomDungeon(levelGrid, new RDRG2(new Vector2(18, 7)));
@@ -177,68 +194,34 @@ namespace Content
             loadRandomDungeon(levelGrid, new RDRG4(new Vector2(2, 17)));
             loadRandomDungeon(levelGrid, new RDRG5(new Vector2(10, 20)));
             loadRandomDungeon(levelGrid, new RDRG6(new Vector2(15, 0)));
-
-            for (int i = 1; i < 93; i++)
-            {
-                GridDungeon room = new GridDungeon("level1", levelGrid, i.ToString(), 96);
-                for (int x = 0; x < 49; x++)
-                {
-                    for (int y = 0; y < 29; y++)
-                    {
-                        if (grid[x, y] != null && int.Parse(grid[x, y]) == i)
-                        {
-                            room.PositionX = x * 20 * 96;
-                            room.PositionY = y * 10 * 96;
-                            levelGrid.setTile(x, y, room);
-                        }
-                    }
-                }
-                room.CanCollide = true;
-            }
             levelGrid.CanCollide = true;
+
+            //Add the levelGrid
             Add(levelGrid);
         }
 
-        private void loadRandomDungeon(Engine.ObjectGrid parent, RandomDungeonGenerator generator)
+        private void AddPickups()
         {
-            var rooms = LoadRandomDungeonRooms(parent, generator);
-            for(int x = 0; x < rooms.GetLength(0); x++)
-            {
-                for(int y = 0; y < rooms.GetLength(1); y++)
-                {
-                    parent.setTile(x + (int)generator.Position.X, y + (int)generator.Position.Y, rooms[x, y]);
-                }
-            }
-        }
+            //Items to progress in the Dungeon
+            Pickup SnowShoes = new Pickup("SnowShoes", World, new SpriteSheet("Textures/Items/SnowShoes"), "Capable of walking on Ice");
+            Add(SnowShoes);
 
-        public GridDungeon[,] LoadRandomDungeonRooms(Engine.Object parent, RandomDungeonGenerator generator)
-        {
-            var roomGrid = new GridDungeon[generator.Width / 20, generator.Height / 10];
-            char[,] charGrid = generator.Generate();
-            for (int x = 0; x < generator.Width / 20; x++)
-            {
-                char[,] tempCharGrid = new char[20, 10];
-                for (int y = 0; y < generator.Height / 10; y++)
-                {
-                    for (int k = 0; k < 20; k++)
-                    {
-                        for (int j = 0; j < 10; j++)
-                        {
-                            tempCharGrid[k, j] = charGrid[x * 20 + k, y * 10 + j];
-                        }
-                    }
+            Pickup Key1 = new Pickup("Hallowed_Key", World, new SpriteSheet("Textures/Items/Hallowed_Key"), "First key in the Dungeon");
+            Add(Key1);
 
-                    //create objectgrid and pass char[,], so it gets loaded into the grid
-                    var room = new Content.GridDungeon("randomRoom", parent, tempCharGrid, 96, 96);
+            Pickup Key2 = new Pickup("Frozen_Key", World, new SpriteSheet("Textures/Items/Frozen_Key"), "Second key in the Dungeon");
+            Add(Key2);
 
-                    //set the boundingBox
-                    room.BoundingBox = new Rectangle(0, 0, 20 * 96, 10 * 96);
+            Pickup Key3 = new Pickup("SkeletonKey", World, new SpriteSheet("Textures/Items/SkeletonKey"), "Final key in the Dungeon");
+            Add(Key3);
 
-                    //add room to the correct place int the roomGrid
-                    roomGrid[x, y] = room;
-                }
-            }
-            return roomGrid;
+            Pickup Presents = new Pickup("BluePresent", World, new SpriteSheet("Textures/Items/BluePresent"), "Present to break certain blocks");
+            Add(Presents);
+
+            UpgradePickup RocketCape = new UpgradePickup("Rocketcape", this, new SpriteSheet("Textures/Items/Rocketcape"), "Cape making high jumps possible");
+            RocketCape.Position = new Vector2(41280, 18800);
+            RocketCape.CanCollide = true;
+            Add(RocketCape);
         }
     }
 }

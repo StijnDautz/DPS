@@ -51,9 +51,9 @@ namespace Engine
             _runSpeed = 600;
             Health = 500;
             Damage = 100;
-            _weapon1 = new Content.WeaponPlayer("sword", World, new SpriteSheet("Hud/Invisible"), this, Damage);
+            _weapon1 = new Content.WeaponPlayer("sword", World, new SpriteSheet("Textures/Hud/Invisible"), this, Damage);
             _weapon1.Visible = false;
-            _weapon2 = new Content.WeaponSuperJump("superJump", World, new Engine.SpriteSheet("Hud/TimerFrame - kopie"), this, 1);
+            _weapon2 = new Content.WeaponSuperJump("superJump", World, new Engine.SpriteSheet("Textures/Hud/TimerFrame - kopie"), this, 1);
             _weapon2.Visible = false;
             World.Add(_weapon1);
             World.Add(_weapon2);

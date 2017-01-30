@@ -36,6 +36,16 @@ namespace Engine
             get { return _grid; }
         }
 
+        //Create ObjectGrid read from a file and already set Position as it may be needed to correctly position Characters
+        public ObjectGrid(string id, Object parent, string assetName, int tileSize, Vector2 position) : base(id, parent)
+        {
+            _tileWidth = tileSize;
+            _tileHeight = tileSize;
+            Position = position;
+            Load(assetName);
+            BoundingBox = new Rectangle((int)Position.X, (int)Position.Y, Collums * tileSize, Rows * tileSize);
+        }
+
         //Create ObjectGrid read from a file
         public ObjectGrid(string id, Object parent, string assetName, int tileSize) : base(id, parent)
         {
@@ -184,6 +194,10 @@ namespace Engine
             {
                 if (o != null )
                 {
+                    if (o.GlobalPosition == new Vector2(26880, 2800))
+                    {
+                        int x = 0;
+                    }
                     if (!(o.GlobalPosition.X + o.Width < CameraPosition.X || o.GlobalPosition.X > CameraPosition.X + GameInstance.GraphicsDeviceManager.PreferredBackBufferWidth || o.GlobalPosition.Y + o.Height < CameraPosition.Y || o.GlobalPosition.Y > CameraPosition.Y + GameInstance.GraphicsDeviceManager.PreferredBackBufferHeight))
                     {
                         o.Draw(gameTime, spriteBatch);

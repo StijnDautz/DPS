@@ -20,11 +20,15 @@ namespace Content
         {
             base.Setup(gameMode);
 
-            Overworld grid = new Overworld("mainGrid", this, "OverWorld", 96);
+            var grid = new Overworld("overWorldGrid", this, "OverWorld", 96);
             grid.CanCollide = true;
             Add(grid);
-                       
-            Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(33920, 15840));
+
+            var pickup = new Pickup("testPickup", this, new SpriteSheet("Textures/Items/SnowShoes"), "With these amazing snowBoots,\nyou'll be able to climb\nthe slippiest hills.");
+            pickup.Position = new Vector2(1000, 100);
+            Add(pickup);
+
+            Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(33600, 6240));
             teleporterDungeon1.Position = new Vector2(576, 4032);
             teleporterDungeon1.BoundingBox = new Rectangle(0, 0, 96, 96);
 
@@ -38,9 +42,7 @@ namespace Content
 
             UpgradePickup RocketCape = new UpgradePickup("SnowShoes", this , new SpriteSheet("Textures/Items/SnowShoes"), "SnowShoes");
             RocketCape.Position = new Vector2(2400,2688);
-            RocketCape.CanCollide = true;
             Add(RocketCape);
-
 
             Add(teleporterDungeon1);
             Add(teleporterMiniDungeon1);
