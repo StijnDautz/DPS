@@ -8,8 +8,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace Content
 {
-    //TODO fix SFX bug, where after playing attack sound the scream is not played again until changing orignal speed before attack
-    class EnemyZombie : Engine.NPC
+    class EnemyZombie : Enemy
     {
         Engine.Weapon _weapon;
         private int _walkSpeed, _sprintSpeed, _reactionRange, _attackRange, _walkLeftBoundary, _walkRightBoudary;
@@ -25,7 +24,7 @@ namespace Content
             get { return _sprintSpeed; }
         }
 
-        public EnemyZombie(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet, string chillScreamSFX, string crazyScreamSFX) : base(id, parent, spriteSheet)
+        public EnemyZombie(Engine.Object parent) : base("zombie", parent, new SpriteSheetZombie("Textures/Characters/IceZombie"))
         {
             _reactionRange = 400;
             _attackRange = 130;

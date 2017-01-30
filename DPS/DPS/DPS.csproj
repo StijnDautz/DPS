@@ -38,17 +38,22 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Content\Classes\GameManagement\GameStates\GSGameFinished.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\GSLogin.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\GSSettings.cs" />
     <Compile Include="Content\Classes\GameManagement\MainGameMode.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\MainMenuGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\InventoryGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\StartPlayGS.cs" />
+    <Compile Include="Content\Classes\Objects\Characters\Enemy.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonAllowTyping.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonBack.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonContinue.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonLogin.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonSettings.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonSignUp.cs" />
     <Compile Include="Content\Classes\Objects\HUD\DescriptionBox.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\HighScorePopUp.cs" />
     <Compile Include="Content\Classes\Objects\HUD\LoginPopUp.cs" />
     <Compile Include="Content\Classes\Objects\HUD\SliderVolume.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Timer.cs" />
@@ -70,7 +75,7 @@
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayerTopDown.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetSnowMan.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetZombie.cs" />
-    <Compile Include="Content\Classes\Objects\HUD\ExitButton.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ExitButton.cs" />
     <Compile Include="Content\Classes\Objects\HUD\HealthBar.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetHealthBar.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponSnowBall.cs" />

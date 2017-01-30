@@ -21,6 +21,11 @@ namespace Engine
             get { return _minutes; }              
         }
 
+        public int TotalSeconds
+        {
+            get { return _minutes * 60 + _seconds; }
+        }
+
         public TimeManager()
         {
 

@@ -97,6 +97,11 @@ namespace Engine
             
         }
 
+        public virtual void OnDamaged(int damage)
+        {
+
+        }
+
         protected void IsAttackReady()
         {
             if (_attackTime > _attackSpeed)
