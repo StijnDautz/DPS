@@ -17,18 +17,20 @@ namespace Engine
             clickSound = GameInstance.AssetManager.GetSoundEffect("Rocket");
             
         }
-
-        
+    
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             
             if (GameInstance.InputManager.LeftMouseButtonPressed)
             {
-                Vector2 mousePosition = GameInstance.InputManager.MousePosition;
-                if (mousePosition.X > Position.X && mousePosition.X < Position.X + Width && mousePosition.Y > Position.Y && mousePosition.Y < Position.Y + Width)
+                if(CollisionHelper.CollidesWith(this, GameInstance.InputManager.MousePosition))
                 {
-                    ActionWhenPressed();                   
+                    ActionWhenPressed();
+                }
+                else
+                {
+                    ActionWhenNotPressed();
                 }
             }       
         }
@@ -36,6 +38,11 @@ namespace Engine
         protected virtual void ActionWhenPressed()
         {
             clickSound.Play();
+        }
+
+        protected virtual void ActionWhenNotPressed()
+        {
+
         }
     }
 }
