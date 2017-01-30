@@ -16,6 +16,7 @@ namespace Content
         protected override void ActionWhenPressed()
         {
             base.ActionWhenPressed();
+            System.Diagnostics.Process.Start("http://dpstudios.nl/register.php");
         }
     }
 }
