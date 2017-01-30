@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
+using System.Security.Cryptography;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
@@ -17,8 +18,8 @@ namespace Engine
                                                         //port = 3306?
         private const String DATABASE = "u13357p9566_highscore";
         private const String UID = "u13357p9566_dps";
-        private const String PASSWORD = "toeganggeweigerd6";
-        private static SqlConnection dbConn;
+        private const String PASSWORD =                                                                                                                                         "toeganggeweigerd6";
+        private static MySqlConnection dbConn;
         //Einde database gegevens
 
         private Inventory _inventory;
@@ -110,51 +111,100 @@ namespace Engine
                     HandleSideInput(speed);
                 }
 
-                //Highscore test. Als je op H drukt wordt er een random waarde in de highscore lijst gezet met als username Random.
-                //Als dit verplaatst wordt, verplaats dan ook de "using MySql.Data.MySqlClient;"
-                if (GameInstance.InputManager.isKeyPressed(Keys.H))
-                {
-                    //Database initializeren (dit kan ook ergens anders, dan hoef je het niet steeds opnieuw te doen.
-                    SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-                    /*builder.Server = SERVER;
-                    builder.UserID = UID;
-                    builder.Password = PASSWORD;
-                    builder.Database = DATABASE;*/
-                    //builder.ConnectionString = "Server="+SERVER+";Database="+DATABASE+";User Id="+UID+";Password="+PASSWORD+";";
-                    builder.ConnectionString = "Server=dpstudios.nl;Database=u13357p9566_highscore;Uid=u13357p9566_dps;Password=toeganggeweigerd6;";
-
-                    String connString = builder.ToString();
-
-                    builder = null;
-
-                    Console.WriteLine(connString);
-
-                    dbConn = new SqlConnection(connString);
-                    //Einde initializatie
-
-                    //Variabeles die nodig zijn voor de query
-                    Random rnd = new Random();
-                    int score = rnd.Next(0, 50);
-                    string username = "Random";
-
-                    //Score in database zetten:
-                    string query = string.Format("INSERT INTO highscore(username,score) VALUES ('{0}','{1}')", username, score);
-                    SqlCommand cmd = new SqlCommand(query, dbConn);
-
-                    /*werkt nog niet:
-                    dbConn.Open();
-
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    dbConn.Close();
-                    //Einde score in database zetten
-                    */
-                }
+                
             }
         }
 
+
+        //Password hash functie voor database check
+        public static string HashSHA1(string value)
+        {
+            var sha1 = SHA1.Create();
+            var inputBytes = Encoding.ASCII.GetBytes(value);
+            var hash = sha1.ComputeHash(inputBytes);
+            var sb = new StringBuilder();
+            for (var i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
+        }
+
+
+
+
+
         private void HandleTopDownInput(float speed)
         {
+
+            //Highscore test. Als je op H drukt wordt er een random waarde in de highscore lijst gezet met als username Random.
+            //Als dit verplaatst wordt, verplaats dan ook de "using MySql.Data.MySqlClient;"
+            if (GameInstance.InputManager.isKeyPressed(Keys.H))
+            {
+                //Database initializeren (dit kan ook ergens anders, dan hoef je het niet steeds opnieuw te doen.
+                MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
+                /*builder.Server = SERVER;
+                builder.UserID = UID;
+                builder.Password = PASSWORD;
+                builder.Database = DATABASE;*/
+                //builder.ConnectionString = "Server="+SERVER+";Database="+DATABASE+";User Id="+UID+";Password="+PASSWORD+";";
+                builder.ConnectionString = "Server=dpstudios.nl;Database=u13357p9566_highscore;Uid=u13357p9566_dps;                                                                         Password=toeganggeweigerd6;";
+
+                String connString = builder.ToString();
+
+                builder = null;
+
+                Console.WriteLine(connString);
+
+                dbConn = new MySqlConnection(connString);
+                //Einde initializatie
+
+                //Variabeles die nodig zijn voor de query
+                Random rnd = new Random();
+                int score = rnd.Next(0, 50);
+                string username = "Augustvc";
+                string userpassword = "mok6vis";
+                string hashedpassword = HashSHA1(userpassword);
+
+                //Score in database zetten QUERY:
+                //string query = string.Format("INSERT INTO highscore(username,score) VALUES ('{0}','{1}')", username, score);
+
+                //Checken of username & wachtwoord in database bestaan:
+                //string query = string.Format("SELECT username FROM users");
+                //LIMIT 1      WHERE username = 'username'
+
+                //Leestest.
+                //string query = string.Format("SELECT username FROM `users`");
+
+                //Checken of username in database bestaat:
+                //string query = string.Format("SELECT * FROM `users` WHERE username = '{0}' AND hashedpassword = '{1}'", username, hashedpassword);
+
+
+                //public bool isAccountValid
+
+
+                //while (reader.Read())
+
+                //if (reader["username"].ToString() == username)
+
+                MySqlCommand cmd = new MySqlCommand(query, dbConn);
+
+
+                dbConn.Open();
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                }
+
+
+                dbConn.Close();
+                //Connectie sluiten is belangrijk.
+            }
+
+
             if (GameInstance.InputManager.isKeyHolding(Keys.D))
             {
                 VelocityX = speed;

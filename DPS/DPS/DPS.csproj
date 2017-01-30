@@ -78,6 +78,7 @@
     <Compile Include="Content\Classes\Worlds\MiniDungeon1.cs" />
     <Compile Include="Content\Classes\Worlds\MiniDungeon2.cs" />
     <Compile Include="Content\Classes\Worlds\RandomGenerator.cs" />
+    <Compile Include="Engine\GameManagement\HighScoreManager.cs" />
     <Compile Include="Engine\GameManagement\Managers\CollisionHelper.cs" />
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
     <Compile Include="Engine\GameManagement\SFXManager.cs" />

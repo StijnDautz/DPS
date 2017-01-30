@@ -13,7 +13,7 @@ namespace Content
         {
             //Add background
             AddToHud(new TexturedObject("background", HUD, new SpriteSheet("Textures/HUD/MainMenu")));
-
+            
             PlayButton playButton = new PlayButton("playButton", HUD, new SpriteSheet("Textures/HUD/PlayButton"), "Rocket");
             playButton.Position = new Microsoft.Xna.Framework.Vector2(550, 225);
             AddToHud(playButton);
