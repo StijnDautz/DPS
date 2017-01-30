@@ -72,9 +72,9 @@ namespace Content
             
         }
 
-        public int getHighscore(string username)//werkt alleen als de persoon ingelogd is lijkt me, daarom ook geen ww nodig.
+        public static void GetHighscore(string username)//werkt alleen als de persoon ingelogd is lijkt me, daarom ook geen ww nodig.
         {
-            return 99;
+            _highScore = 99;
         }
 
         public void uploadHighscore(string username, int score)
