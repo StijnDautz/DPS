@@ -28,7 +28,7 @@ namespace Content
             pickup.Position = new Vector2(1000, 100);
             Add(pickup);
 
-            Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(33600, 6240));
+            Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(26000, 5000));
             teleporterDungeon1.Position = new Vector2(576, 4032);
             teleporterDungeon1.BoundingBox = new Rectangle(0, 0, 96, 96);
 

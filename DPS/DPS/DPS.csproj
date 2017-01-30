@@ -43,8 +43,12 @@
     <Compile Include="Content\Classes\GameManagement\GameStates\MainMenuGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\InventoryGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\StartPlayGS.cs" />
-    <Compile Include="Content\Classes\Objects\HUD\ButtonSettings.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonAllowTyping.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonLogin.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonSettings.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonSignUp.cs" />
     <Compile Include="Content\Classes\Objects\HUD\DescriptionBox.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\LoginPopUp.cs" />
     <Compile Include="Content\Classes\Objects\HUD\SliderVolume.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Timer.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\GridDungeon.cs" />
@@ -69,7 +73,7 @@
     <Compile Include="Content\Classes\Objects\HUD\HealthBar.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetHealthBar.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponSnowBall.cs" />
-    <Compile Include="Content\Classes\Objects\HUD\PlayButton.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\PlayButton.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayerSide.cs" />
     <Compile Include="Content\Classes\Objects\Pickups\UpgradePickup.cs" />
     <Compile Include="Content\Classes\Worlds\DungeonWorld1.cs" />
@@ -94,6 +98,7 @@
     <Compile Include="Engine\Objects\ObjectGrid.cs" />
     <Compile Include="Engine\Objects\HUD\Slider.cs" />
     <Compile Include="Engine\Objects\Teleporter.cs" />
+    <Compile Include="Engine\Objects\HUD\TextBox.cs" />
     <Compile Include="Engine\Objects\TextObject.cs" />
     <Compile Include="Engine\Objects\Weapon.cs" />
     <Compile Include="Engine\GameManagement\Managers\AssetManager.cs" />
