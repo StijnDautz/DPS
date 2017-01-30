@@ -16,6 +16,10 @@ namespace Engine
         private string _text;
         private float _scale;
 
+        public float Scale
+        {
+            set { _scale = value; }
+        }
 
         public Color Color
         {
