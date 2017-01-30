@@ -163,7 +163,7 @@ namespace Engine
                 Random rnd = new Random();
                 int score = rnd.Next(0, 50);
                 string username = "Augustvc";
-                string userpassword = "mok6vis";
+                string userpassword = "";
                 string hashedpassword = HashSHA1(userpassword);
 
                 //Score in database zetten QUERY:
