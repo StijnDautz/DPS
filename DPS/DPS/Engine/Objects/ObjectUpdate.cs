@@ -9,10 +9,7 @@ namespace Engine
 {
     partial class Object
     {
-        private bool _hasPhysics;
-        private bool _canCollide;
-        private bool _canBlock;
-        private bool _inAir;
+        private bool _hasPhysics, _canCollide, _canBlock, _inAir;
         private bool[] _collisionDimension;
         private Engine.SFXManager _sfxManager;
 

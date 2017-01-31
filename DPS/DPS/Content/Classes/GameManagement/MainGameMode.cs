@@ -23,6 +23,7 @@ namespace Content
             GameStateManager.Add(new MainMenuGS(GameStateManager));
             GameStateManager.Add(new GSSettings(GameStateManager));
             GameStateManager.Add(new GSLogin(GameStateManager));
+            GameStateManager.Add(new GSGameFinished(GameStateManager));
             GameStateManager.SwitchTo("GSMainMenu");
         }
     }

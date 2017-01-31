@@ -26,10 +26,15 @@ namespace Content
         protected override void UpdateBehaviour(GameTime gameTime)
         {
             base.UpdateBehaviour(gameTime);
-            //update distance to player
-            _distanceToPlayer = World.Player.GlobalPosition - GlobalOrigin;
-            //enemy tries to attack when player is in range
-            TryAttack = _reactionRange > _distanceToPlayer.Length();
+
+            //if not staggered set value of try to attack
+            if (!IsStaggered)
+            {
+                //update distance to player
+                _distanceToPlayer = World.Player.GlobalPosition - GlobalOrigin;
+                //enemy tries to attack when player is in range
+                TryAttack = _reactionRange > _distanceToPlayer.Length();
+            }
         }
 
         protected override void OnAttack()

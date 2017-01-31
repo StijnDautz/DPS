@@ -25,8 +25,7 @@ namespace Engine
         private Inventory _inventory;
         private Weapon _weapon1, _weapon2;
         private SpriteSheet _spriteSheetSmall, _spriteSheetBig;
-        private float _walkSpeed;
-        private float _runSpeed;
+        private float _topDownSpeed, _sideSpeed; 
 
         private bool _isSuperJumping;
      
@@ -48,8 +47,8 @@ namespace Engine
         public Player(string id, Engine.Object parent, SpriteSheet spriteSheetSmall, SpriteSheet spriteSheetBig) : base(id, parent, spriteSheetBig)
         {
             _inventory = new Inventory(id + "inventory", World);
-            _walkSpeed = 400;
-            _runSpeed = 600;
+            _topDownSpeed = 400;
+            _sideSpeed = 450;
             Health = 500;
             Damage = 100;
             _weapon1 = new Content.WeaponPlayer("sword", World, new SpriteSheet("Textures/Hud/Invisible"), this, Damage);
@@ -99,22 +98,19 @@ namespace Engine
         /*TODO Improve this method look at UpdateMovementState <3*/
         public virtual void HandleInput(GameTime gameTime)
         {
-            if (!Death)
+            //if player is not death or staggered, handleinput
+            if (!Death && !IsStaggered)
             {
-                float speed = GameInstance.InputManager.isKeyHolding(Keys.LeftShift) ? _runSpeed : _walkSpeed;
                 if (World.IsTopDown)
                 {
-                    HandleTopDownInput(speed);
+                    HandleTopDownInput();
                 }
                 else
                 {
-                    HandleSideInput(speed);
-                }
-
-                
+                    HandleSideInput();
+                }              
             }
         }
-
 
         //Password hash functie voor database check
         public static string HashSHA1(string value)
@@ -130,13 +126,8 @@ namespace Engine
             return sb.ToString();
         }
 
-
-
-
-
-        private void HandleTopDownInput(float speed)
+        private void HandleTopDownInput()
         {
-
             //Highscore test. Als je op H drukt wordt er een random waarde in de highscore lijst gezet met als username Random.
             //Als dit verplaatst wordt, verplaats dan ook de "using MySql.Data.MySqlClient;"
             if (GameInstance.InputManager.isKeyPressed(Keys.H))
@@ -198,15 +189,14 @@ namespace Engine
                 //Connectie sluiten is belangrijk.
             }
 
-
             if (GameInstance.InputManager.isKeyHolding(Keys.D))
             {
-                VelocityX = speed;
+                VelocityX = _topDownSpeed;
                 Mirrored = false;
             }
             else if (GameInstance.InputManager.isKeyHolding(Keys.A))
             {
-                VelocityX = -speed;
+                VelocityX = -_topDownSpeed;
                 Mirrored = true;
             }
             else
@@ -215,11 +205,11 @@ namespace Engine
             }
             if(GameInstance.InputManager.isKeyHolding(Keys.S))
             {
-                VelocityY = speed;
+                VelocityY = _topDownSpeed;
             }
             else if(GameInstance.InputManager.isKeyHolding(Keys.W))
             {
-                VelocityY = -speed;
+                VelocityY = -_topDownSpeed;
             }
             else
             {
@@ -227,7 +217,7 @@ namespace Engine
             }                                       
         }
 
-        private void HandleSideInput(float speed)
+        private void HandleSideInput()
         {
             if(GameInstance.InputManager.LeftMouseButtonPressed)
             {
@@ -239,21 +229,21 @@ namespace Engine
             }
             if (GameInstance.InputManager.isKeyHolding(Keys.D))
             {
-                VelocityX = speed;
+                VelocityX = _sideSpeed;
                 Mirrored = false;
             }
             else if (GameInstance.InputManager.isKeyHolding(Keys.A))
             {
-                VelocityX = -speed;
+                VelocityX = -_sideSpeed;
                 Mirrored = true;
             }
             else
             {
                 VelocityX = 0;
             }
-            if (GameInstance.InputManager.isKeyPressed(Keys.Space))
+            if (GameInstance.InputManager.isKeyPressed(Keys.Space) && !InAir)
             {
-                Velocity = new Vector2(VelocityX, -550);
+                Velocity = new Vector2(VelocityX, -650);
             }
             if (GameInstance.InputManager.isKeyPressed(Keys.R))
             {
@@ -264,7 +254,6 @@ namespace Engine
                 _isSuperJumping = false;
                 _weapon2.Visible = false;
             }
-
         }
         #endregion
 
@@ -281,7 +270,7 @@ namespace Engine
         }
 
         #region Combat
-        protected override void UpdateCombat(float elapsedTime)
+        protected override void UpdateCombat(int elapsedTime)
         {
             base.UpdateCombat(elapsedTime);
             //set weapon position according to player movement
