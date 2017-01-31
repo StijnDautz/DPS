@@ -3,7 +3,6 @@ using Microsoft.Xna.Framework;
 
 namespace Engine
 {
-    //TODO make this an objectList and add background object, which is used to set collisionBox as well
     class TextBox : ObjectList
     {
         private TextObject _textObject;

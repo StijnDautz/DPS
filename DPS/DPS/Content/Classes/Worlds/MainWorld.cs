@@ -28,7 +28,7 @@ namespace Content
             pickup.Position = new Vector2(1000, 100);
             Add(pickup);
 
-            Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(26000, 5000));
+            Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(29700, 500));
             teleporterDungeon1.Position = new Vector2(576, 4032);
             teleporterDungeon1.BoundingBox = new Rectangle(0, 0, 96, 96);
 
@@ -43,6 +43,10 @@ namespace Content
             UpgradePickup RocketCape = new UpgradePickup("SnowShoes", this , new SpriteSheet("Textures/Items/SnowShoes"), "SnowShoes");
             RocketCape.Position = new Vector2(2400,2688);
             Add(RocketCape);
+
+            var bossSanta = new BossSanta(this);
+            bossSanta.Position = new Vector2(29500, 500);
+            Add(bossSanta);
 
             Add(teleporterDungeon1);
             Add(teleporterMiniDungeon1);
