@@ -73,6 +73,11 @@ namespace Engine
             set { _isStaggered = value; }
         }
 
+        public int StaggerDuration
+        {
+            set { _staggerDuration = value; }
+        }
+
         public Character(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
             HasPhysics = true;
@@ -85,7 +90,6 @@ namespace Engine
         {
             base.Update(gameTime);
             int elapsedTime = gameTime.ElapsedGameTime.Milliseconds;
-
 
             UpdateCombat(elapsedTime);
         }
@@ -119,7 +123,6 @@ namespace Engine
             {
                 if (_tryAttack)
                 {
-                    //OnAttack
                     _tryAttack = false;
                     _attacking = true;
                     _attackTime = 0;

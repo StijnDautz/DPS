@@ -12,6 +12,11 @@ namespace Content
             SwitchTo("explosion");
         }
 
+        protected override string UpdateAnimationState(Object o)
+        {
+            return "explosion";
+        }
+
         protected override void AfterLastFrame(Object obj)
         {
             base.AfterLastFrame(obj);

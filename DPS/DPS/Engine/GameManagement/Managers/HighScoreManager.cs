@@ -129,9 +129,14 @@ namespace Content
             dbConn.Close();
         }
         
-        public static void CalculateNewHighScore(int timeInSeconds)
+        public static int CalculateNewHighScore(int timeInSeconds, bool finished)
         {
-            _highScore = (_highScore / 10000) * (10000 - _totalDamageTaken - timeInSeconds + _totalDamageDealt);
+            float highScoreModf = (float)_highScore / 50000;
+            float damageTakenScore = _totalDamageTaken * -(1 - highScoreModf);
+            float damageDealtScore = _totalDamageDealt * highScoreModf;
+            float timeScore = finished ? ((3000 - timeInSeconds) / (1 - highScoreModf)) * 2.5f : 0;
+            float finishingScore = finished ? 5000 : 0;
+            return (int)(damageTakenScore + damageDealtScore + finishingScore + timeScore);
         }
     }
 }

@@ -69,13 +69,14 @@ namespace Engine
                 character.Death = true;
             }
 
-            //get vector from player to character
-            int x = 200;
-            if(World.Player.GlobalPosition.X - character.GlobalPosition.X > 0)
+            //add to damage to totaldamage taken
+            if(character is Player)
             {
-                x = -x;
+                Content.HighScoreManager.IncrementTotalDamageTaken = _damage;
             }
-            character.Velocity += new Vector2(x, -100);
+
+            //check if collision was on left or right
+            character.Velocity = character.GlobalPosition.X > GlobalPosition.X ? new Vector2(200, 100) : new Vector2(-200, 100);
 
             //stagger the character, this way the velocity wont be changed immediately in next Update cycle and will result in a knockback effect
             character.IsStaggered = true;

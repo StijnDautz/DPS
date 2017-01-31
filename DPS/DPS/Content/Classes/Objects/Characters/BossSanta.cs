@@ -6,16 +6,18 @@ namespace Content
     class BossSanta : Enemy
     {
         private int _runOverET, _bombET, _bulletET, _runOverTime, _bombTime, _bulletTime, _movementSpeed;
-        bool runningOver;
+        private bool runningOver;
+        private float _runOverVelocityX;
         
         public BossSanta(Object parent) : base("bossSanta", parent, new SpriteSheetSanta())
         {
             _runOverTime = 12000;
-            _bombTime = 5000;
-            _bulletTime = 900;
+            _bombTime = 8000;
+            _bulletTime = 2500;
             _movementSpeed = 25;
             Health = 1500;
             Mass = 2;
+            StaggerDuration = 2000;
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)
@@ -23,6 +25,12 @@ namespace Content
             base.UpdateBehaviour(gameTime);
             int elapsedTime = gameTime.ElapsedGameTime.Milliseconds;
 
+            //if runningOver there is a constant amount of power, so santa does not slow down
+            if(runningOver)
+            {
+                Velocity = new Vector2(_runOverVelocityX, Velocity.Y);
+            }
+            
             if (!runningOver && !IsStaggered)
             {
                 //if santa is not trying to run player over, update weapon elapsedtimes
@@ -58,7 +66,7 @@ namespace Content
         private void RunOverAttack(float distanceToPlayerX)
         {
             //determine direction to go based on player position
-            VelocityX = distanceToPlayerX < 0 ? -700 : 700;
+            _runOverVelocityX = distanceToPlayerX < 0 ? -700 : 700;
 
             //set runningOver true, this is set to false when on x axis is detected
             runningOver = true;
@@ -99,23 +107,27 @@ namespace Content
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
-            //TODO check if collision was on x axis
-            if(CollisionHelper.CollidesWith(this, new Vector2(Velocity.X, 0), collider, Vector2.Zero, 0.016f))
+            if(!(collider is Weapon) && CollisionHelper.CollidesWith(this, new Vector2(Velocity.X, 0), collider, Vector2.Zero, 0.016f))
             {
                 runningOver = false;
 
-                if (collider is Character)
+                if (collider != this)
                 {
-                    var character = collider as Character;
-                    character.IsStaggered = true;
-                    character.Health -= 200;
+                    if (collider is Character)
+                    {
+                        var character = collider as Character;
+                        character.IsStaggered = true;
+                        character.Health -= 200;
 
-                    //add knockback effect on hit
-                    character.Velocity = collider.GlobalPosition.X > GlobalPosition.X ? new Vector2(600, -300) : new Vector2(-600, -300);
-                }
-                else
-                {
-                    IsStaggered = true;
+                        HighScoreManager.IncrementTotalDamageTaken = 200;
+
+                        //add knockback effect on hit
+                        character.Velocity = collider.GlobalPosition.X > GlobalPosition.X ? new Vector2(600, -300) : new Vector2(-600, -300);
+                    }
+                    else
+                    {
+                        IsStaggered = true;
+                    }
                 }
             }
         }
