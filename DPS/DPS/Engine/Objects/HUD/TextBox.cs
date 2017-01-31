@@ -29,8 +29,10 @@ namespace Engine
         {
             _text = new StringBuilder();
 
+            //setup textObject
             _textObject = new TextObject("text", "Hud", this);
-            _textObject.Color = Color.Gray;
+            _textObject.Color = new Color(124, 93, 72);
+
             _buttonAllowTyping = new Content.ButtonAllowTyping(this);
 
             //set boundingbox equal to the boundingbox of button
@@ -52,10 +54,9 @@ namespace Engine
 
                 //set the text, which is printed to the screen and resize it relative to the boundingBox
                 _textObject.Text = _text.ToString();
-                _textObject.FitIntoRectangle(BoundingBox);
+                _textObject.FitIntoRectangle(new Rectangle((int)Position.X, (int)Position.Y, Width - 5, Height - 5));
                 //center text on y axis
                 _textObject.Position = new Vector2(0, Height / 2 - _textObject.Height / 2);
-
             }
         }
     }

@@ -36,8 +36,14 @@ namespace Engine
             if (collider != _owner && collider is Character)
             {
                 var character = collider as Character;
+                //deal damage to the character that is hit
                 DealDamage(character);
-                if(character.Health <= 0 && !(character is Player))
+
+                //call OnDamaged
+                character.OnDamaged(_damage);
+
+                //if characters health is <= 0 the character is death and it should be removed from the world
+                if (character.Health <= 0 && !(character is Player))
                 {
                     World.Remove(character);
                 }

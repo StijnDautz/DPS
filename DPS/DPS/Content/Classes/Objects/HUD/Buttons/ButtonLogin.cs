@@ -24,6 +24,7 @@ namespace Content
             if(HighScoreManager.IsAccountValid(_userNameBox.Text, _passWordBox.Text))
             {
                 World.GameMode.GameStateManager.SwitchTo("GSMainMenu");
+                HighScoreManager.GetHighscore();
             }
             else
             {

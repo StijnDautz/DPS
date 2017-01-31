@@ -38,19 +38,25 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Content\Classes\GameManagement\GameStates\GSGameFinished.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\GSLogin.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\GSSettings.cs" />
     <Compile Include="Content\Classes\GameManagement\MainGameMode.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\MainMenuGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\InventoryGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\StartPlayGS.cs" />
+    <Compile Include="Content\Classes\Objects\Characters\Enemy.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonAllowTyping.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonBack.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonContinue.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonLogin.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonSettings.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonSignUp.cs" />
     <Compile Include="Content\Classes\Objects\HUD\DescriptionBox.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\HighScorePopUp.cs" />
     <Compile Include="Content\Classes\Objects\HUD\LoginPopUp.cs" />
-    <Compile Include="Content\Classes\Objects\HUD\SliderVolume.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Sliders\SliderMusicVolume.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Sliders\SliderSFXVolume.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Timer.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\GridDungeon.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\Overworld.cs" />
@@ -70,7 +76,7 @@
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayerTopDown.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetSnowMan.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetZombie.cs" />
-    <Compile Include="Content\Classes\Objects\HUD\ExitButton.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ExitButton.cs" />
     <Compile Include="Content\Classes\Objects\HUD\HealthBar.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetHealthBar.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponSnowBall.cs" />
@@ -83,10 +89,10 @@
     <Compile Include="Content\Classes\Worlds\MiniDungeon1.cs" />
     <Compile Include="Content\Classes\Worlds\MiniDungeon2.cs" />
     <Compile Include="Content\Classes\Worlds\RandomGenerator.cs" />
-    <Compile Include="Engine\GameManagement\HighScoreManager.cs" />
+    <Compile Include="Engine\GameManagement\Managers\HighScoreManager.cs" />
     <Compile Include="Engine\GameManagement\Managers\CollisionHelper.cs" />
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
-    <Compile Include="Engine\GameManagement\SFXManager.cs" />
+    <Compile Include="Engine\GameManagement\Managers\SFXManager.cs" />
     <Compile Include="Engine\GameManagement\WorldUpdate.cs" />
     <Compile Include="Engine\Objects\HUD\Button.cs" />
     <Compile Include="Engine\Objects\Character.cs" />
@@ -113,7 +119,7 @@
     <Compile Include="Engine\Objects\GridObjectLoading.cs" />
     <Compile Include="Engine\Objects\Object.cs" />
     <Compile Include="Engine\Objects\ObjectList.cs" />
-    <Compile Include="Engine\GameManagement\SpriteSheet.cs" />
+    <Compile Include="Engine\GameManagement\Managers\SpriteSheet.cs" />
     <Compile Include="Engine\Objects\TexturedObject.cs" />
     <Compile Include="Engine\GameManagement\World.cs" />
     <Compile Include="Engine\Objects\Portal.cs" />

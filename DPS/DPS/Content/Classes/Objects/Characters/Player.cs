@@ -293,6 +293,12 @@ namespace Engine
             base.OnAttack();
             _weapon1.Visible = true;
         }
+
+        public override void OnDamaged(int damage)
+        {
+            base.OnDamaged(damage);
+            Content.HighScoreManager.IncrementTotalDamageTaken = damage;
+        }
         #endregion
     }
 }
