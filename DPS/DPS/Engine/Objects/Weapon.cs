@@ -43,9 +43,13 @@ namespace Engine
                 character.OnDamaged(_damage);
 
                 //if characters health is <= 0 the character is death and it should be removed from the world
-                if (character.Health <= 0 && !(character is Player))
+                if (character.Health <= 0)
                 {
-                    World.Remove(character);
+                    character.OnDeath();
+                    if (!(character is Player))
+                    {
+                        World.Remove(character);
+                    }
                 }
             }
             if (collider != _owner && collider is DestructableObject && (collider as DestructableObject).Type == "Normal")
@@ -71,6 +75,9 @@ namespace Engine
                 x = -x;
             }
             character.Velocity += new Vector2(x, -100);
+
+            //stagger the character, this way the velocity wont be changed immediately in next Update cycle and will result in a knockback effect
+            character.IsStaggered = true;
         }
 
         protected void DealDamage(DestructableObject block)

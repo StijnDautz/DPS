@@ -45,6 +45,7 @@
     <Compile Include="Content\Classes\GameManagement\GameStates\MainMenuGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\InventoryGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\StartPlayGS.cs" />
+    <Compile Include="Content\Classes\Objects\Characters\BossSanta.cs" />
     <Compile Include="Content\Classes\Objects\Characters\Enemy.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonAllowTyping.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonBack.cs" />

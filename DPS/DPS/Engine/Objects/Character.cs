@@ -9,9 +9,9 @@ namespace Engine
 {
     class Character : TexturedObject
     {
-        int _health, _damage, _speed, _maxHealth;
+        int _health, _damage, _speed, _maxHealth, _staggerTime, _elapsedStaggerTime, _staggerDuration;
         double _attackSpeed, _attackTime;
-        bool _tryAttack, _attacking, _death;
+        bool _tryAttack, _attacking, _death, _isStaggered;
 
         public int Health
         {
@@ -67,6 +67,12 @@ namespace Engine
             set { _death = value; }
         }
 
+        public bool IsStaggered
+        {
+            get { return _isStaggered; }
+            set { _isStaggered = value; }
+        }
+
         public Character(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
             HasPhysics = true;
@@ -77,18 +83,17 @@ namespace Engine
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            float elapsedTime = (float)gameTime.ElapsedGameTime.Milliseconds;
+            int elapsedTime = gameTime.ElapsedGameTime.Milliseconds;
+
+
             UpdateCombat(elapsedTime);
         }
 
         //Updates the attack state
-        protected virtual void UpdateCombat(float elapsedTime)
+        protected virtual void UpdateCombat(int elapsedTime)
         {
+            UpdateStaggerSystem(elapsedTime);
             _attackTime += elapsedTime;
-            //TODO sync attackSpeed with anim speed
-            /* if tryAttack && canAttack -> attack
-             * This variable may be set to false when the fitting animation has ended
-             * else when attackTime took longer then the attackSpeed*/
              IsAttackReady();
         }
 
@@ -98,6 +103,11 @@ namespace Engine
         }
 
         public virtual void OnDamaged(int damage)
+        {
+
+        }
+
+        public virtual void OnDeath()
         {
 
         }
@@ -113,6 +123,20 @@ namespace Engine
                     _attacking = true;
                     _attackTime = 0;
                     OnAttack();
+                }
+            }
+        }
+
+        private void UpdateStaggerSystem(int elapsedTime)
+        {
+            //if character is staggered update elapsedStaggerTime and check whether the staggereffect is over or not
+            if (_isStaggered)
+            {
+                _staggerTime += elapsedTime;
+                if (_staggerTime > _staggerDuration)
+                {
+                    _isStaggered = false;
+                    _staggerTime = 0;
                 }
             }
         }
