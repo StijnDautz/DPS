@@ -130,8 +130,8 @@ namespace Engine
                 _elapsedTime = 0;
                 if (_currentFrame > _sprite.frames - 1)
                 {
-                    AfterLastFrame(obj);
                     _currentFrame = 0;
+                    AfterLastFrame(obj);
                 }
             }
         }

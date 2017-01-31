@@ -7,7 +7,9 @@ namespace Content
         public SpriteSheetExplosion() : base("Textures/Effects/explosion")
         {
             IsAnimated = true;
+            CanUpdate = false;
             Add("explosion", 0, 8, 40, 2000, false);
+            SwitchTo("explosion");
         }
 
         protected override void AfterLastFrame(Object obj)

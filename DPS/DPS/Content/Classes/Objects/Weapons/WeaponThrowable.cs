@@ -19,7 +19,7 @@ namespace Content
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
-            if(_destroyOnCollision)
+            if(_destroyOnCollision && collider != Owner)
             {
                 World.Remove(this);
             }

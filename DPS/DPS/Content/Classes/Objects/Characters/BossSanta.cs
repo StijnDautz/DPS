@@ -8,12 +8,14 @@ namespace Content
         private int _runOverET, _bombET, _bulletET, _runOverTime, _bombTime, _bulletTime, _movementSpeed;
         bool runningOver;
         
-        public BossSanta(Object parent) : base("bossSanta", parent, new SpriteSheet("Textures/Characters/SantaBoss"))
+        public BossSanta(Object parent) : base("bossSanta", parent, new SpriteSheetSanta())
         {
             _runOverTime = 12000;
             _bombTime = 5000;
-            _bulletTime = 700;
+            _bulletTime = 900;
             _movementSpeed = 25;
+            Health = 1500;
+            Mass = 2;
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)
@@ -56,7 +58,7 @@ namespace Content
         private void RunOverAttack(float distanceToPlayerX)
         {
             //determine direction to go based on player position
-            VelocityX = distanceToPlayerX < 0 ? -300 : 300;
+            VelocityX = distanceToPlayerX < 0 ? -700 : 700;
 
             //set runningOver true, this is set to false when on x axis is detected
             runningOver = true;
@@ -65,17 +67,21 @@ namespace Content
         private void BombAttack()
         {
             var bomb = new WeaponBomb(World, this);
-            int x = Mirrored ? 300 : -300;
-            Velocity = new Vector2(x, 400);
+            int x = Mirrored ? 1000 : -1000;
+            bomb.Velocity = new Vector2(x, -200);
+            bomb.Position = Mirrored ? Position : new Vector2(Position.X + Width, Position.Y);
+            bomb.Mass = 1.4f;
             World.Add(bomb);
         }
 
         private void BulletAttack()
         {
-            var bullet = new WeaponThrowable("bullet", World, new SpriteSheet("Textures/Weapons/Bullet"), this, 50);
+            var bullet = new WeaponThrowable("bullet", World, new SpriteSheetBullet(), this, 50);
             bullet.DestroyOnCollision = true;
             int x = Mirrored ? 600 : -600;
             bullet.VelocityX = x;
+            bullet.Position = Mirrored ? new Vector2(Position.X + 100, Position.Y + 90) : new Vector2(Position.X - 40, Position.Y + 90);
+            bullet.Mirrored = Mirrored ? true : false;
             World.Add(bullet);
         }
 
@@ -105,7 +111,7 @@ namespace Content
                     character.Health -= 200;
 
                     //add knockback effect on hit
-                    character.Velocity = collider.GlobalPosition.X > GlobalPosition.X ? new Vector2(300, 200) : new Vector2(-300, 200);
+                    character.Velocity = collider.GlobalPosition.X > GlobalPosition.X ? new Vector2(600, -300) : new Vector2(-600, -300);
                 }
                 else
                 {

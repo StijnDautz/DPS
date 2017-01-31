@@ -7,7 +7,7 @@ namespace Content
     {
         public WeaponBomb(Object parent, Object owner) : base("bomb", parent, new Engine.SpriteSheet("Textures/Weapons/bomb"), owner, 300)
         {
-
+            HasPhysics = true;
         }
 
         public override void Update(GameTime gameTime)

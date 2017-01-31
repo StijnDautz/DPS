@@ -44,10 +44,6 @@ namespace Content
             RocketCape.Position = new Vector2(2400,2688);
             Add(RocketCape);
 
-            var bossSanta = new BossSanta(this);
-            bossSanta.Position = new Vector2(29500, 500);
-            Add(bossSanta);
-
             Add(teleporterDungeon1);
             Add(teleporterMiniDungeon1);
             Add(teleporterMiniDungeon2);

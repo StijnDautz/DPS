@@ -73,13 +73,14 @@
     <Compile Include="Content\Classes\RDRGs\RDRG3.cs" />
     <Compile Include="Content\Classes\RDRGs\RDRG4.cs" />
     <Compile Include="Content\Classes\RDRGs\RDRG5.cs" />
-    <Compile Include="Content\Classes\RDRGs\RDRG6.cs" />
     <Compile Include="Content\Classes\SFX\SFXExplosion.cs" />
     <Compile Include="Content\Classes\SFX\SFXPlayer.cs" />
     <Compile Include="Content\Classes\SFX\SFXSnowMan.cs" />
     <Compile Include="Content\Classes\SFX\SFXZombie.cs" />
     <Compile Include="Content\Classes\SpriteSheets\Effects\SpriteSheetExplosion.cs" />
+    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetBullet.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayerTopDown.cs" />
+    <Compile Include="Content\Classes\SpriteSheets\SpriteSheetSanta.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetSnowMan.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetZombie.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Buttons\ExitButton.cs" />
