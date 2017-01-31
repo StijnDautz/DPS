@@ -28,7 +28,7 @@ namespace Content
             AddGridToLevelGrid(0, 1, levelGrid, new string[] { "26" });
             AddGridToLevelGrid(0, 2, levelGrid, new string[] { "100"});
             AddGridToLevelGrid(1, 1, levelGrid, new string[] { "99" });
-            AddGridToLevelGrid(1, 2, levelGrid, new string[] { "93" });
+            AddGridToLevelGrid(1, 2, levelGrid, new string[] { "110" });
             Add(levelGrid);
 
             var teleporterback = new Teleporter("teleporter", this, "MainWorld", new Microsoft.Xna.Framework.Vector2(4416, 5184)); 
