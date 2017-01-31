@@ -93,7 +93,25 @@ namespace Content
         //username is opgeslagen in class, nadat account info valid is verklaard in IsAccountValid
         public static void GetHighscore()//werkt alleen als de persoon ingelogd is lijkt me, daarom ook geen ww nodig.
         {
-            _highScore = 99;
+            _highScore = 0;
+            InitializeDatabase();
+            string query = string.Format("SELECT score FROM `highscore` WHERE username = '{0}'", _userName);
+
+            MySqlCommand cmd = new MySqlCommand(query, dbConn);
+
+            dbConn.Open();
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                if (int.Parse(reader["score"].ToString()) >= _highScore)
+                {
+                    _highScore = int.Parse(reader["score"].ToString());
+                }
+            }
+
+            dbConn.Close();
         }
 
         public static void uploadHighscore(int score)

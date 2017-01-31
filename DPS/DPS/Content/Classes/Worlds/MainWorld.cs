@@ -25,7 +25,7 @@ namespace Content
             Add(grid);
 
             var pickup = new Pickup("testPickup", this, new SpriteSheet("Textures/Items/SnowShoes"), "With these amazing snowBoots,\nyou'll be able to climb\nthe slippiest hills.");
-            pickup.Position = new Vector2(1000, 100);
+            pickup.Position = new Vector2(600, 400);
             Add(pickup);
 
             Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(29700, 500));
