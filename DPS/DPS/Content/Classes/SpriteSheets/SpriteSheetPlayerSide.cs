@@ -83,6 +83,10 @@ namespace Content
                         CanUpdate = true;
                         (obj as Player).Attacking = false;
                         break;
+                    case "death":
+                        CanUpdate = false;
+                        CurrentFrame = 5;
+                        break;
                 }
             }
         }

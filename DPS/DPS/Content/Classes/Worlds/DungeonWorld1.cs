@@ -23,9 +23,9 @@ namespace Content
             AddGrid();
             AddPickups();
 
-            Teleporter teleporterOverworld = new Teleporter("teleporter", this, "MainWorld", new Vector2(600, 400));
-            teleporterOverworld.Position = new Vector2(40992, 11616);
-            teleporterOverworld.BoundingBox = new Rectangle(0, 0, 96, 96);
+            var bossSanta = new BossSanta(this);
+            bossSanta.Position = new Vector2(29500, 1000);
+            Add(bossSanta);
         }
 
         private void loadRandomDungeon(Engine.ObjectGrid parent, RandomDungeonGenerator generator)
@@ -165,13 +165,15 @@ namespace Content
             grid[13, 21] = "86";
             grid[14, 21] = "87";
             grid[15, 1] = "88";
-            grid[15, 2] = "89";
-            grid[15, 3] = "90";
-            grid[15, 4] = "91";
+            grid[15, 3] = "89";
+            grid[15, 2] = "90";
+            grid[15, 1] = "91";
             grid[15, 0] = "92";
+            grid[16, 1] = "93";
+            grid[16, 0] = "94";            
             #endregion
 
-            for (int i = 1; i < 93; i++)
+            for (int i = 1; i < 95; i++)
             {
                 for (int x = 0; x < 49; x++)
                 {
@@ -193,7 +195,6 @@ namespace Content
             loadRandomDungeon(levelGrid, new RDRG3(new Vector2(7, 14)));
             loadRandomDungeon(levelGrid, new RDRG4(new Vector2(2, 17)));
             loadRandomDungeon(levelGrid, new RDRG5(new Vector2(10, 20)));
-            loadRandomDungeon(levelGrid, new RDRG6(new Vector2(15, 0)));
             levelGrid.CanCollide = true;
 
             //Add the levelGrid

@@ -93,7 +93,7 @@ namespace Content
         //username is opgeslagen in class, nadat account info valid is verklaard in IsAccountValid
         public static void GetHighscore()//werkt alleen als de persoon ingelogd is lijkt me, daarom ook geen ww nodig.
         {
-            _highScore = 0;
+            _highScore = 5000;
             InitializeDatabase();
             string query = string.Format("SELECT score FROM `highscore` WHERE username = '{0}'", _userName);
 

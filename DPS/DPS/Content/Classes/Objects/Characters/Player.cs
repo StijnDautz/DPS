@@ -95,7 +95,6 @@ namespace Engine
         }
 
         #region InputHandling
-        /*TODO Improve this method look at UpdateMovementState <3*/
         public virtual void HandleInput(GameTime gameTime)
         {
             //if player is not death or staggered, handleinput

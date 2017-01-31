@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace Engine
 {
     class Weapon : TexturedObject
     {
         private int _damage;
-        private Character _owner;
+        private Object _owner;
 
         public int Damage
         {
             set { _damage = value; }
+            get { return _damage; }
         }
 
-        public Weapon(string id, Object parent, SpriteSheet spriteSheet, Character owner, int damage) : base(id, parent, spriteSheet)
+        public Object Owner
+        {
+            get { return _owner; }
+        }
+
+        public Weapon(string id, Object parent, SpriteSheet spriteSheet, Object owner, int damage) : base(id, parent, spriteSheet)
         {
             _damage = damage;
             _owner = owner;
