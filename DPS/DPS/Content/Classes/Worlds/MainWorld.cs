@@ -24,10 +24,11 @@ namespace Content
             grid.CanCollide = true;
             Add(grid);
 
-            var pickup = new Pickup("testPickup", this, new SpriteSheet("Textures/Items/SnowShoes"), "With these amazing snowBoots,\nyou'll be able to climb\nthe slippiest hills.");
+            /*var pickup = new Pickup("testPickup", this, new SpriteSheet("Textures/Items/SnowShoes"), "With these amazing snowBoots,\nyou'll be able to climb\nthe slippiest hills.");
             pickup.Position = new Vector2(600, 400);
-            Add(pickup);
+            Add(pickup);*/
 
+            //Add teleporters to different worlds
             Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(29700, 500));
             teleporterDungeon1.Position = new Vector2(576, 4032);
             teleporterDungeon1.BoundingBox = new Rectangle(0, 0, 96, 96);
@@ -40,9 +41,34 @@ namespace Content
             teleporterMiniDungeon2.Position = new Vector2(4608, 5184);
             teleporterMiniDungeon2.BoundingBox = new Rectangle(0, 0, 96, 96);
 
-            UpgradePickup RocketCape = new UpgradePickup("SnowShoes", this , new SpriteSheet("Textures/Items/SnowShoes"), "SnowShoes");
-            RocketCape.Position = new Vector2(2400,2688);
-            Add(RocketCape);
+
+            //Add Items available for pickup
+            UpgradePickup Speed100 = new UpgradePickup("Speed100", this , new SpriteSheet("Textures/Items/Speed100"), "Increases speed by 100!");
+            Speed100.Position = new Vector2(2400,2688);
+            Speed100.Speed = 100;
+
+            UpgradePickup Attackspeed100 = new UpgradePickup("Attackspeed100", this, new SpriteSheet("Textures/Items/Attackspeed100"), "Increases Attackspeed by 100!");
+            Attackspeed100.Position = new Vector2(480, 1248);
+            Attackspeed100.AttackSpeed = 100;
+
+            UpgradePickup Damage100 = new UpgradePickup("Damage100", this, new SpriteSheet("Textures/Items/Damage100"), "Increases damage by 100!");
+            Damage100.Position = new Vector2(5952, 768);
+            Damage100.Damage = 100;
+
+            UpgradePickup Health250 = new UpgradePickup("Health250", this, new SpriteSheet("Textures/Items/Health250"), "Increases Health by 250!");
+            Health250.Position = new Vector2(10752, 1920);
+            Health250.Health = 250;
+
+            UpgradePickup Speed200 = new UpgradePickup("Speed200", this, new SpriteSheet("Textures/Items/Speed200"), "Increases speed by 200!");
+            Speed200.Position = new Vector2(8544, 5664);
+            Speed200.Speed = 200;
+
+
+            Add(Speed100);
+            Add(Attackspeed100);
+            Add(Damage100);
+            Add(Health250);
+            Add(Speed200);
 
             Add(teleporterDungeon1);
             Add(teleporterMiniDungeon1);
