@@ -110,8 +110,8 @@ namespace Content
                 case 'r': return SetupCollisionTile("spike", "r.TileSet4");
                 case '0': return new Engine.Object("emptyobj", this);
                 case '-': return LoadEmptyCollisionBlock();
-                case '!': return new EnemyZombie("zombie", this, new SpriteSheetZombie("Textures/Characters/IceZombie"), "zombieNormal", "Sound Effects - Zombie scream");
-                case '@': return new EnemySnowMan("snowman", this, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"));
+                case '!': return new EnemyZombie(this);
+                case '@': return new EnemySnowMan(this);
 
                 default: throw new Exception("character of type: " + type + "was not associated with an Object");
             }

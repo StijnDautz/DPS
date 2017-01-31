@@ -8,8 +8,7 @@ using Microsoft.Xna.Framework.Audio;
 
 namespace Content
 {
-    //TODO fix SFX bug, where after playing attack sound the scream is not played again until changing orignal speed before attack
-    class EnemyZombie : Engine.NPC
+    class EnemyZombie : Enemy
     {
         Engine.Weapon _weapon;
         private int _walkSpeed, _sprintSpeed, _reactionRange, _attackRange, _walkLeftBoundary, _walkRightBoudary;
@@ -25,7 +24,7 @@ namespace Content
             get { return _sprintSpeed; }
         }
 
-        public EnemyZombie(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet, string chillScreamSFX, string crazyScreamSFX) : base(id, parent, spriteSheet)
+        public EnemyZombie(Engine.Object parent) : base("zombie", parent, new SpriteSheetZombie("Textures/Characters/IceZombie"))
         {
             _reactionRange = 400;
             _attackRange = 130;
@@ -50,34 +49,39 @@ namespace Content
 
         protected override void UpdateBehaviour(GameTime gameTime)
         {
-            base.UpdateBehaviour(gameTime);
-            float elapedTime = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
-
-            Vector2 distanceToPlayer = World.Player.GlobalOrigin - GlobalOrigin;
-
-            //Update player following behaviour
-            //Check if player is in range to attack
-            if (_attackRange > distanceToPlayer.Length())
+            //if not staggered update behaviour
+            if (!IsStaggered)
             {
-                TryAttack = true;
-            }
-            //Check if player is in range to follow
-            else if (_reactionRange > distanceToPlayer.Length())
-            {
-                Speed = _sprintSpeed;
-                VelocityX = distanceToPlayer.X < 0 ? -_sprintSpeed : _sprintSpeed;
-            }
-            //if none of the above, walk and TryAttack = false
-            else
-            {
-                TryAttack = false;
-                Speed = _walkSpeed;
-                VelocityX = VelocityX < 0 && _walkPath > _walkLeftBoundary ? -_walkSpeed : _walkSpeed;
-                VelocityX = VelocityX > 0 && _walkPath < _walkRightBoudary ? _walkSpeed : -_walkSpeed;
-                _walkPath += Velocity.X * elapedTime;
-            }
+                base.UpdateBehaviour(gameTime);
 
-            _weapon.Position = Mirrored ? new Vector2(Position.X + Width, Position.Y + 30) : new Vector2(Position.X - _weapon.Width, Position.Y + 30);
+                float elapedTime = (float)gameTime.ElapsedGameTime.Milliseconds / 1000;
+
+                Vector2 distanceToPlayer = World.Player.GlobalOrigin - GlobalOrigin;
+
+                //Update player following behaviour
+                //Check if player is in range to attack
+                if (_attackRange > distanceToPlayer.Length())
+                {
+                    TryAttack = true;
+                }
+                //Check if player is in range to follow
+                else if (_reactionRange > distanceToPlayer.Length())
+                {
+                    Speed = _sprintSpeed;
+                    VelocityX = distanceToPlayer.X < 0 ? -_sprintSpeed : _sprintSpeed;
+                }
+                //if none of the above, walk and TryAttack = false
+                else
+                {
+                    TryAttack = false;
+                    Speed = _walkSpeed;
+                    VelocityX = VelocityX < 0 && _walkPath > _walkLeftBoundary ? -_walkSpeed : _walkSpeed;
+                    VelocityX = VelocityX > 0 && _walkPath < _walkRightBoudary ? _walkSpeed : -_walkSpeed;
+                    _walkPath += Velocity.X * elapedTime;
+                }
+
+                _weapon.Position = Mirrored ? new Vector2(Position.X + Width, Position.Y + 30) : new Vector2(Position.X - _weapon.Width, Position.Y + 30);
+            }
         }
 
         protected override void OnAttack()
@@ -86,7 +90,7 @@ namespace Content
             _weapon.Visible = true;
         }
 
-        protected override void UpdateCombat(float elapsedTime)
+        protected override void UpdateCombat(int elapsedTime)
         {
             base.UpdateCombat(elapsedTime);
         }

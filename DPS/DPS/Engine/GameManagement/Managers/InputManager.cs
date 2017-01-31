@@ -14,6 +14,7 @@ namespace Engine
         private MouseState _currentMouseState;
         private KeyboardState _previousKeyboardState;
         private KeyboardState _currentKeyboardState;
+        private Keys lastKey;
 
         public InputManager()
         {
@@ -61,6 +62,42 @@ namespace Engine
         public bool isKeyHolding(Keys key)
         {
             return _currentKeyboardState.IsKeyDown(key) && _previousKeyboardState.IsKeyDown(key);
+        }
+
+        public bool isKeyReleased(Keys key)
+        {
+            return _currentKeyboardState.IsKeyUp(key) && _previousKeyboardState.IsKeyDown(key);
+        }
+
+        public StringBuilder WriteToString(StringBuilder stringBuilder)
+        {
+            //check if space was pressed and add it to string
+            if (isKeyReleased(Keys.Space))
+            {
+                stringBuilder.Append(" ");
+            }
+            //loop through alfabet
+            for (Keys key = Keys.A; key < Keys.LeftWindows; key++)
+            {
+                //if key is released check if determine whether key should be uppercase or lowercase and add it to the string
+                if(isKeyReleased(key))
+                {
+                    if(_currentKeyboardState.IsKeyDown(Keys.LeftShift) || _currentKeyboardState.IsKeyDown(Keys.RightShift))
+                    {
+                        stringBuilder.Append(key.ToString());
+                    }
+                    else
+                    {
+                        stringBuilder.Append(key.ToString().ToLower());
+                    }
+                }
+            }       
+            //if backspace is pressed remove last character in string
+            if(isKeyReleased(Keys.Back) && stringBuilder.Length > 0)
+            {
+                stringBuilder.Remove(stringBuilder.Length - 1, 1);
+            }
+            return stringBuilder;
         }
     }
 }

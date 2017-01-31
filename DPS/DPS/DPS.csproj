@@ -38,14 +38,26 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Content\Classes\GameManagement\GameStates\GSGameFinished.cs" />
+    <Compile Include="Content\Classes\GameManagement\GameStates\GSLogin.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\GSSettings.cs" />
     <Compile Include="Content\Classes\GameManagement\MainGameMode.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\MainMenuGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\InventoryGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\StartPlayGS.cs" />
-    <Compile Include="Content\Classes\Objects\HUD\ButtonSettings.cs" />
+    <Compile Include="Content\Classes\Objects\Characters\BossSanta.cs" />
+    <Compile Include="Content\Classes\Objects\Characters\Enemy.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonAllowTyping.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonBack.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonContinue.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonLogin.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonSettings.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ButtonSignUp.cs" />
     <Compile Include="Content\Classes\Objects\HUD\DescriptionBox.cs" />
-    <Compile Include="Content\Classes\Objects\HUD\SliderVolume.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\HighScorePopUp.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\LoginPopUp.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Sliders\SliderMusicVolume.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Sliders\SliderSFXVolume.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Timer.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\GridDungeon.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\Overworld.cs" />
@@ -65,11 +77,11 @@
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayerTopDown.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetSnowMan.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetZombie.cs" />
-    <Compile Include="Content\Classes\Objects\HUD\ExitButton.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\ExitButton.cs" />
     <Compile Include="Content\Classes\Objects\HUD\HealthBar.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetHealthBar.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponSnowBall.cs" />
-    <Compile Include="Content\Classes\Objects\HUD\PlayButton.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Buttons\PlayButton.cs" />
     <Compile Include="Content\Classes\SpriteSheets\SpriteSheetPlayerSide.cs" />
     <Compile Include="Content\Classes\Objects\Pickups\UpgradePickup.cs" />
     <Compile Include="Content\Classes\Worlds\DungeonWorld1.cs" />
@@ -78,9 +90,10 @@
     <Compile Include="Content\Classes\Worlds\MiniDungeon1.cs" />
     <Compile Include="Content\Classes\Worlds\MiniDungeon2.cs" />
     <Compile Include="Content\Classes\Worlds\RandomGenerator.cs" />
+    <Compile Include="Engine\GameManagement\Managers\HighScoreManager.cs" />
     <Compile Include="Engine\GameManagement\Managers\CollisionHelper.cs" />
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
-    <Compile Include="Engine\GameManagement\SFXManager.cs" />
+    <Compile Include="Engine\GameManagement\Managers\SFXManager.cs" />
     <Compile Include="Engine\GameManagement\WorldUpdate.cs" />
     <Compile Include="Engine\Objects\HUD\Button.cs" />
     <Compile Include="Engine\Objects\Character.cs" />
@@ -93,6 +106,7 @@
     <Compile Include="Engine\Objects\ObjectGrid.cs" />
     <Compile Include="Engine\Objects\HUD\Slider.cs" />
     <Compile Include="Engine\Objects\Teleporter.cs" />
+    <Compile Include="Engine\Objects\HUD\TextBox.cs" />
     <Compile Include="Engine\Objects\TextObject.cs" />
     <Compile Include="Engine\Objects\Weapon.cs" />
     <Compile Include="Engine\GameManagement\Managers\AssetManager.cs" />
@@ -106,7 +120,7 @@
     <Compile Include="Engine\Objects\GridObjectLoading.cs" />
     <Compile Include="Engine\Objects\Object.cs" />
     <Compile Include="Engine\Objects\ObjectList.cs" />
-    <Compile Include="Engine\GameManagement\SpriteSheet.cs" />
+    <Compile Include="Engine\GameManagement\Managers\SpriteSheet.cs" />
     <Compile Include="Engine\Objects\TexturedObject.cs" />
     <Compile Include="Engine\GameManagement\World.cs" />
     <Compile Include="Engine\Objects\Portal.cs" />
@@ -117,7 +131,10 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -153,7 +170,10 @@
   <ItemGroup>
     <MonoGameContentReference Include="Engine\Content.mgcb" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

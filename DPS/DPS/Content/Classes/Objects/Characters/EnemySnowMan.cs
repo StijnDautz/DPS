@@ -7,12 +7,12 @@ using Microsoft.Xna.Framework;
 
 namespace Content
 {
-    class EnemySnowMan : Engine.NPC
+    class EnemySnowMan : Enemy
     {
         private int _reactionRange;
         private Vector2 _distanceToPlayer;
 
-        public EnemySnowMan(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
+        public EnemySnowMan(Engine.Object parent) : base("enemySnowMan", parent, new Engine.SpriteSheet("Textures/Characters/SnowmanThrower"))
         {
             _reactionRange = 1500;
             AttackSpeed = 1800;
@@ -26,10 +26,15 @@ namespace Content
         protected override void UpdateBehaviour(GameTime gameTime)
         {
             base.UpdateBehaviour(gameTime);
-            //update distance to player
-            _distanceToPlayer = World.Player.GlobalPosition - GlobalOrigin;
-            //enemy tries to attack when player is in range
-            TryAttack = _reactionRange > _distanceToPlayer.Length();
+
+            //if not staggered set value of try to attack
+            if (!IsStaggered)
+            {
+                //update distance to player
+                _distanceToPlayer = World.Player.GlobalPosition - GlobalOrigin;
+                //enemy tries to attack when player is in range
+                TryAttack = _reactionRange > _distanceToPlayer.Length();
+            }
         }
 
         protected override void OnAttack()
