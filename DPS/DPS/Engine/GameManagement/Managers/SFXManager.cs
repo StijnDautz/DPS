@@ -15,6 +15,7 @@ namespace Engine
         SoundEffectInstance _playingSFXInstance;
         Object _source;
         private bool _canUpdate;
+        private static float _volumeModifier;
 
         public struct SFX
         {
@@ -38,6 +39,11 @@ namespace Engine
         protected SFX PlayingSFX
         {
             get { return _playingSFX; }
+        }
+
+        public static float VolumeModifier
+        {
+            set { _volumeModifier = value; }
         }
 
         public SFXManager(Object source)
@@ -93,16 +99,18 @@ namespace Engine
 
         private void UpdateVolume(Character character)
         {
+            //calculate distance
             float distance = (character.GlobalPosition - _source.GlobalPosition).Length();
-            if (distance == 0)
-            {
-                distance += .1f;
-            }
-            float volume = 100 / distance;
+
+            //calculate volume based on settings and on distance from source
+            float volume = 100 * _volumeModifier / distance;
+
+            //if volume is too low, stop _playingSFXInstance, as it wont be heard anyway and there's a maximum on sfxs played simultaneously
             if (volume < 0.1)
             {
                 _playingSFXInstance.Stop();
             }
+            //make sure volume max = 1, as volume has to be an value from 0 to 1
             else if (volume > 1)
             {
                 volume = 1;

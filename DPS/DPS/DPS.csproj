@@ -55,7 +55,8 @@
     <Compile Include="Content\Classes\Objects\HUD\DescriptionBox.cs" />
     <Compile Include="Content\Classes\Objects\HUD\HighScorePopUp.cs" />
     <Compile Include="Content\Classes\Objects\HUD\LoginPopUp.cs" />
-    <Compile Include="Content\Classes\Objects\HUD\SliderVolume.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Sliders\SliderMusicVolume.cs" />
+    <Compile Include="Content\Classes\Objects\HUD\Sliders\SliderSFXVolume.cs" />
     <Compile Include="Content\Classes\Objects\HUD\Timer.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\GridDungeon.cs" />
     <Compile Include="Content\Classes\Objects\Objectgrids\Overworld.cs" />
@@ -91,7 +92,7 @@
     <Compile Include="Engine\GameManagement\Managers\HighScoreManager.cs" />
     <Compile Include="Engine\GameManagement\Managers\CollisionHelper.cs" />
     <Compile Include="Engine\GameManagement\Managers\TimeManager.cs" />
-    <Compile Include="Engine\GameManagement\SFXManager.cs" />
+    <Compile Include="Engine\GameManagement\Managers\SFXManager.cs" />
     <Compile Include="Engine\GameManagement\WorldUpdate.cs" />
     <Compile Include="Engine\Objects\HUD\Button.cs" />
     <Compile Include="Engine\Objects\Character.cs" />
@@ -118,7 +119,7 @@
     <Compile Include="Engine\Objects\GridObjectLoading.cs" />
     <Compile Include="Engine\Objects\Object.cs" />
     <Compile Include="Engine\Objects\ObjectList.cs" />
-    <Compile Include="Engine\GameManagement\SpriteSheet.cs" />
+    <Compile Include="Engine\GameManagement\Managers\SpriteSheet.cs" />
     <Compile Include="Engine\Objects\TexturedObject.cs" />
     <Compile Include="Engine\GameManagement\World.cs" />
     <Compile Include="Engine\Objects\Portal.cs" />

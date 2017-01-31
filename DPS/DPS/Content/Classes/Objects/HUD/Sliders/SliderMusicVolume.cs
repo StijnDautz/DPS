@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Content
 {
-    class SliderVolume : Engine.Slider
+    class SliderMusicVolume : Engine.Slider
     {
-        public SliderVolume(Engine.Object parent, Engine.SpriteSheet spriteSheetBar, Engine.SpriteSheet spriteSheetSlider) : base("sliderVolume", parent, spriteSheetBar, spriteSheetSlider)
+        public SliderMusicVolume(Engine.Object parent) : base("sliderVolume", parent, new Engine.SpriteSheet("Textures/HUD/SliderBar"), new Engine.SpriteSheet("Textures/HUD/Slider"))
         {
 
         }
