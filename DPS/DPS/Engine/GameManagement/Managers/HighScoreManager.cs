@@ -52,8 +52,6 @@ namespace Content
 
             builder = null;
 
-            Console.WriteLine(connString);
-
             dbConn = new MySqlConnection(connString);
         }
 
@@ -66,21 +64,27 @@ namespace Content
 
             MySqlCommand cmd = new MySqlCommand(query, dbConn);
 
-            dbConn.Open();
+            try {
+                dbConn.Open();
 
-            MySqlDataReader reader = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
-            if (reader.Read())
-            {
-                dbConn.Close();
+                if (reader.Read())
+                {
+                    dbConn.Close();
 
-                //if account information was valid, player is logged in and the used username is saved
-                _userName = username;
-                return true;
+                    //if account information was valid, player is logged in and the used username is saved
+                    _userName = username;
+                    return true;
+                }
+                else
+                {
+                    dbConn.Close();
+                    return false;
+                }
             }
-            else
+            catch
             {
-                dbConn.Close();
                 return false;
             }           
         }
@@ -94,19 +98,26 @@ namespace Content
 
             MySqlCommand cmd = new MySqlCommand(query, dbConn);
 
-            dbConn.Open();
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                if (int.Parse(reader["score"].ToString()) >= _highScore)
-                {
-                    _highScore = int.Parse(reader["score"].ToString());
-                }
-            }
+                dbConn.Open();
 
-            dbConn.Close();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (int.Parse(reader["score"].ToString()) >= _highScore)
+                    {
+                        _highScore = int.Parse(reader["score"].ToString());
+                    }
+                }
+
+                dbConn.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         public static void uploadHighscore(int score)
@@ -117,11 +128,19 @@ namespace Content
 
             MySqlCommand cmd = new MySqlCommand(query, dbConn);
 
-            dbConn.Open();
+            try
+            {
 
-            MySqlDataReader reader = cmd.ExecuteReader();
-            
-            dbConn.Close();
+                dbConn.Open();
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                dbConn.Close();
+            }
+            catch
+            {
+
+            }
         }
         
         public static int CalculateNewHighScore(int timeInSeconds, bool finished)
