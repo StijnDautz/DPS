@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace Engine
 {
     class Weapon : TexturedObject
     {
         private int _damage;
-        private Character _owner;
+        private Object _owner;
 
         public int Damage
         {
             set { _damage = value; }
+            get { return _damage; }
         }
 
-        public Weapon(string id, Object parent, SpriteSheet spriteSheet, Character owner, int damage) : base(id, parent, spriteSheet)
+        public Object Owner
+        {
+            get { return _owner; }
+        }
+
+        public Weapon(string id, Object parent, SpriteSheet spriteSheet, Object owner, int damage) : base(id, parent, spriteSheet)
         {
             _damage = damage;
             _owner = owner;
@@ -68,13 +69,14 @@ namespace Engine
                 character.Death = true;
             }
 
-            //get vector from player to character
-            int x = 200;
-            if(World.Player.GlobalPosition.X - character.GlobalPosition.X > 0)
+            //add to damage to totaldamage taken
+            if(character is Player)
             {
-                x = -x;
+                Content.HighScoreManager.IncrementTotalDamageTaken = _damage;
             }
-            character.Velocity += new Vector2(x, -100);
+
+            //check if collision was on left or right
+            character.Velocity = character.GlobalPosition.X > GlobalPosition.X ? new Vector2(200, 100) : new Vector2(-200, 100);
 
             //stagger the character, this way the velocity wont be changed immediately in next Update cycle and will result in a knockback effect
             character.IsStaggered = true;

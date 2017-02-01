@@ -19,7 +19,6 @@ namespace Content
         {
             base.Setup();
             GameStateManager.Add(new StartPlayGS("StartPlay", GameStateManager));
-            GameStateManager.Add(new InventoryGS("inventory", GameStateManager));
             GameStateManager.Add(new MainMenuGS(GameStateManager));
             GameStateManager.Add(new GSSettings(GameStateManager));
             GameStateManager.Add(new GSLogin(GameStateManager));

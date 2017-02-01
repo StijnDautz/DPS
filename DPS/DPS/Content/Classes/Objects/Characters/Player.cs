@@ -5,29 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using MySql.Data.MySqlClient;
-using System.Security.Cryptography;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Engine
 {
     class Player : Character
     {
-        //Database gegevens
-        private const String SERVER = "dpstudios.nl";//<-- moet nog vervangen worden?
-                                                        //port = 3306?
-        private const String DATABASE = "u13357p9566_highscore";
-        private const String UID = "u13357p9566_dps";
-        private const String PASSWORD =                                                                                                                                         "toeganggeweigerd6";
-        private static MySqlConnection dbConn;
-        //Einde database gegevens
 
         private Inventory _inventory;
         private Weapon _weapon1, _weapon2;
         private SpriteSheet _spriteSheetSmall, _spriteSheetBig;
-        private float _topDownSpeed, _sideSpeed; 
+        private float _topDownSpeed, _sideSpeed;
 
-        private bool _isSuperJumping;
+        private bool _isSuperJumping, _canJump;
      
         public Inventory Inventory
         {
@@ -49,7 +39,7 @@ namespace Engine
             _inventory = new Inventory(id + "inventory", World);
             _topDownSpeed = 400;
             _sideSpeed = 450;
-            Health = 500;
+            Health = 50000;
             Damage = 100;
             _weapon1 = new Content.WeaponPlayer("sword", World, new SpriteSheet("Textures/Hud/Invisible"), this, Damage);
             _weapon1.Visible = false;
@@ -69,6 +59,10 @@ namespace Engine
             _weapon1.Visible = false;
             base.Update(gameTime);
             UpdateSpriteSheet();
+            if(!InAir)
+            {
+                _canJump = true;
+            }
         }
 
         /*
@@ -95,7 +89,6 @@ namespace Engine
         }
 
         #region InputHandling
-        /*TODO Improve this method look at UpdateMovementState <3*/
         public virtual void HandleInput(GameTime gameTime)
         {
             //if player is not death or staggered, handleinput
@@ -112,84 +105,11 @@ namespace Engine
             }
         }
 
-        //Password hash functie voor database check
-        public static string HashSHA1(string value)
-        {
-            var sha1 = SHA1.Create();
-            var inputBytes = Encoding.ASCII.GetBytes(value);
-            var hash = sha1.ComputeHash(inputBytes);
-            var sb = new StringBuilder();
-            for (var i = 0; i < hash.Length; i++)
-            {
-                sb.Append(hash[i].ToString("X2"));
-            }
-            return sb.ToString();
-        }
+       
 
         private void HandleTopDownInput()
         {
-            //Highscore test. Als je op H drukt wordt er een random waarde in de highscore lijst gezet met als username Random.
-            //Als dit verplaatst wordt, verplaats dan ook de "using MySql.Data.MySqlClient;"
-            if (GameInstance.InputManager.isKeyPressed(Keys.H))
-            {
-                //Database initializeren (dit kan ook ergens anders, dan hoef je het niet steeds opnieuw te doen.
-                MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
-                /*builder.Server = SERVER;
-                builder.UserID = UID;
-                builder.Password = PASSWORD;
-                builder.Database = DATABASE;*/
-                //builder.ConnectionString = "Server="+SERVER+";Database="+DATABASE+";User Id="+UID+";Password="+PASSWORD+";";
-                builder.ConnectionString = "Server=dpstudios.nl;Database=u13357p9566_highscore;Uid=u13357p9566_dps;                                                                         Password=toeganggeweigerd6;";
-
-                String connString = builder.ToString();
-
-                builder = null;
-
-                Console.WriteLine(connString);
-
-                dbConn = new MySqlConnection(connString);
-                //Einde initializatie
-
-                //Variabeles die nodig zijn voor de query
-                Random rnd = new Random();
-                int score = rnd.Next(0, 50);
-                string username = "Augustvc";
-                string userpassword = "";
-                string hashedpassword = HashSHA1(userpassword);
-
-                //Score in database zetten QUERY:
-                string query = string.Format("INSERT INTO highscore(username,score) VALUES ('{0}','{1}')", username, score);
-
-                //Checken of username & wachtwoord in database bestaan:
-                //string query = string.Format("SELECT username FROM users");
-                //LIMIT 1      WHERE username = 'username'
-
-                //Leestest.
-                //string query = string.Format("SELECT username FROM `users`");
-
-                //Checken of username in database bestaat:
-                //string query = string.Format("SELECT * FROM `users` WHERE username = '{0}' AND hashedpassword = '{1}'", username, hashedpassword);
-
-
-                //public bool isAccountValid
-
-
-                //while (reader.Read())
-
-                //if (reader["username"].ToString() == username)
-
-                MySqlCommand cmd = new MySqlCommand(query, dbConn);
-
-
-                dbConn.Open();
-
-                MySqlDataReader reader = cmd.ExecuteReader();
-
-                dbConn.Close();
-                //Connectie sluiten is belangrijk.
-            }
-
-            if (GameInstance.InputManager.isKeyHolding(Keys.D))
+           if (GameInstance.InputManager.isKeyHolding(Keys.D))
             {
                 VelocityX = _topDownSpeed;
                 Mirrored = false;
@@ -241,9 +161,20 @@ namespace Engine
             {
                 VelocityX = 0;
             }
-            if (GameInstance.InputManager.isKeyPressed(Keys.Space) && !InAir)
+            //_canJump is a variable that allows for doubleJumps
+            if (GameInstance.InputManager.isKeyPressed(Keys.Space) && (!InAir || _canJump))
             {
-                Velocity = new Vector2(VelocityX, -650);
+                //if inAir, player double Jumped, so canJump is now false
+                if(InAir)
+                {
+                    _canJump = false;
+                    //the double jump is smaller
+                    Velocity = new Vector2(VelocityX, -450);
+                }
+                else
+                {
+                    Velocity = new Vector2(VelocityX, -630);
+                }
             }
             if (GameInstance.InputManager.isKeyPressed(Keys.R))
             {

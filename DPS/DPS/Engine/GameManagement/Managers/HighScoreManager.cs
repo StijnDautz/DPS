@@ -55,8 +55,6 @@ namespace Content
 
             builder = null;
 
-            Console.WriteLine(connString);
-
             dbConn = new MySqlConnection(connString);
         }
 
@@ -70,21 +68,27 @@ namespace Content
 
             MySqlCommand cmd = new MySqlCommand(query, dbConn);
 
-            dbConn.Open();
+            try {
+                dbConn.Open();
 
-            MySqlDataReader reader = cmd.ExecuteReader();
+                MySqlDataReader reader = cmd.ExecuteReader();
 
-            if (reader.Read())
-            {
-                dbConn.Close();
+                if (reader.Read())
+                {
+                    dbConn.Close();
 
-                //if account information was valid, player is logged in and the used username is saved
-                _userName = username;
-                return true;
+                    //if account information was valid, player is logged in and the used username is saved
+                    _userName = username;
+                    return true;
+                }
+                else
+                {
+                    dbConn.Close();
+                    return false;
+                }
             }
-            else
+            catch
             {
-                dbConn.Close();
                 return false;
             }
             
@@ -93,25 +97,32 @@ namespace Content
         //username is opgeslagen in class, nadat account info valid is verklaard in IsAccountValid
         public static void GetHighscore()//werkt alleen als de persoon ingelogd is lijkt me, daarom ook geen ww nodig.
         {
-            _highScore = 0;
+            _highScore = 5000;
             InitializeDatabase();
             string query = string.Format("SELECT score FROM `highscore` WHERE username = '{0}'", _userName);
 
             MySqlCommand cmd = new MySqlCommand(query, dbConn);
 
-            dbConn.Open();
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                if (int.Parse(reader["score"].ToString()) >= _highScore)
-                {
-                    _highScore = int.Parse(reader["score"].ToString());
-                }
-            }
+                dbConn.Open();
 
-            dbConn.Close();
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (int.Parse(reader["score"].ToString()) >= _highScore)
+                    {
+                        _highScore = int.Parse(reader["score"].ToString());
+                    }
+                }
+
+                dbConn.Close();
+            }
+            catch
+            {
+
+            }
         }
 
         public static void uploadHighscore(int score)
@@ -122,16 +133,29 @@ namespace Content
 
             MySqlCommand cmd = new MySqlCommand(query, dbConn);
 
-            dbConn.Open();
+            try
+            {
 
-            MySqlDataReader reader = cmd.ExecuteReader();
-            
-            dbConn.Close();
+                dbConn.Open();
+
+                MySqlDataReader reader = cmd.ExecuteReader();
+
+                dbConn.Close();
+            }
+            catch
+            {
+
+            }
         }
         
-        public static void CalculateNewHighScore(int timeInSeconds)
+        public static int CalculateNewHighScore(int timeInSeconds, bool finished)
         {
-            _highScore = (_highScore / 10000) * (10000 - _totalDamageTaken - timeInSeconds + _totalDamageDealt);
+            float highScoreModf = (float)_highScore / 50000;
+            float damageTakenScore = _totalDamageTaken * -(1 - highScoreModf);
+            float damageDealtScore = _totalDamageDealt * highScoreModf;
+            float timeScore = finished ? ((3000 - timeInSeconds) / (1 - highScoreModf)) * 2.5f : 0;
+            float finishingScore = finished ? 5000 : 0;
+            return (int)(damageTakenScore + damageDealtScore + finishingScore + timeScore);
         }
     }
 }

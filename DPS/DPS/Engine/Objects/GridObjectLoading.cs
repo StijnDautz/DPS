@@ -72,7 +72,7 @@ namespace Engine
             {
                 //if tile is Character, it should be added to the world and to the grid
                 //instead fill the spot in the grid with an empty Object
-                if(tile is Character)
+                if(tile is Character || tile is Pickup)
                 {
                     World.Add(tile);
                     //as characters parent will not this, but world, add GlobalPosition of this to it, as it happened to be in its txt file

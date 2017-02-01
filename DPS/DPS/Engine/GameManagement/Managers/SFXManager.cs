@@ -57,8 +57,10 @@ namespace Engine
         {
             if (_playingSFXInstance != null)
             {
+                //when SFX doesnt loop and it has stopped playing, canupdate is true and call AtEndSFX()
                 if (!_playingSFX.loop && _playingSFXInstance.State == SoundState.Stopped)
                 {
+                    AtEndSFX();
                     _canUpdate = true;
                 }
                 UpdateVolume(character);
@@ -120,5 +122,11 @@ namespace Engine
                 _playingSFXInstance.Volume = volume;
             }
         }
+
+        protected virtual void AtEndSFX()
+        {
+
+        }
+
     }
 }

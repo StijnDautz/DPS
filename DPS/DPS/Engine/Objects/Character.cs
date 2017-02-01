@@ -9,7 +9,7 @@ namespace Engine
 {
     class Character : TexturedObject
     {
-        int _health, _damage, _speed, _maxHealth, _staggerTime, _elapsedStaggerTime, _staggerDuration;
+        int _health, _damage, _speed, _maxHealth, _elapsedStaggerTime, _staggerDuration;
         double _attackSpeed, _attackTime;
         bool _tryAttack, _attacking, _death, _isStaggered;
 
@@ -73,18 +73,23 @@ namespace Engine
             set { _isStaggered = value; }
         }
 
+        public int StaggerDuration
+        {
+            set { _staggerDuration = value; }
+        }
+
         public Character(string id, Object parent, SpriteSheet spriteSheet) : base(id, parent, spriteSheet)
         {
             HasPhysics = true;
             CanCollide = true;
             CanBlock = true;
+            _staggerDuration = 1000;
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             int elapsedTime = gameTime.ElapsedGameTime.Milliseconds;
-
 
             UpdateCombat(elapsedTime);
         }
@@ -118,7 +123,6 @@ namespace Engine
             {
                 if (_tryAttack)
                 {
-                    //OnAttack
                     _tryAttack = false;
                     _attacking = true;
                     _attackTime = 0;
@@ -132,11 +136,11 @@ namespace Engine
             //if character is staggered update elapsedStaggerTime and check whether the staggereffect is over or not
             if (_isStaggered)
             {
-                _staggerTime += elapsedTime;
-                if (_staggerTime > _staggerDuration)
+                _elapsedStaggerTime += elapsedTime;
+                if (_elapsedStaggerTime > _staggerDuration)
                 {
                     _isStaggered = false;
-                    _staggerTime = 0;
+                    _elapsedStaggerTime = 0;
                 }
             }
         }

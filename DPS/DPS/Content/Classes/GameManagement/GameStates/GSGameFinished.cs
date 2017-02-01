@@ -11,14 +11,28 @@ namespace Content
     {
         public GSGameFinished(GameStateManager gameStateManager) : base("GSGameFinished", gameStateManager)
         {
+
+        }
+
+        public override void Init()
+        {
+            base.Init();
+            CanUpdateGameTime = false;
+            World.CanUpdate = false;
+
             //set background
             var backGround = new TexturedObject("background", HUD, new SpriteSheet("Textures/HUD/MainMenu"));
 
             //calculate new HighScore
             var time = GameModeManager.TimeManager.TotalSeconds;
             var oldHighScore = HighScoreManager.HighScore;
-            HighScoreManager.CalculateNewHighScore(time);
-            var newHighScore = HighScoreManager.HighScore;
+            var newHighScore = HighScoreManager.CalculateNewHighScore(time, !World.Player.Death);
+
+            //if the newHighScore is higher than the previous one, upload it to the website
+            if(newHighScore > oldHighScore)
+            {
+                HighScoreManager.uploadHighscore(newHighScore);
+            }
 
             //add highScorePopUpWindow to HUD
             var highScorePopUpWindow = new HighScorePopUp(HUD, oldHighScore, newHighScore);
