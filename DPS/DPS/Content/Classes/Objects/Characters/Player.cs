@@ -10,18 +10,6 @@ namespace Engine
 {
     class Player : Character
     {
-<<<<<<< HEAD
-=======
-        //Database gegevens
-        private const String SERVER = "dpstudios.nl";//<-- moet nog vervangen worden?
-                                                        //port = 3306?
-        private const String DATABASE = "u13357p9566_highscore";
-        private const String UID = "u13357p9566_dps";
-        private const String PASSWORD = "toeganggeweigerd6";
-        private static MySqlConnection dbConn;
-        //Einde database gegevens
->>>>>>> a29218219be71d8631a9d1b47d89570edb48fd8a
-
         private Inventory _inventory;
         private Weapon _weapon1, _weapon2;
         private SpriteSheet _spriteSheetSmall, _spriteSheetBig;
