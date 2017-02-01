@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Engine;
+﻿using Engine;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Content
 {
-    class SpriteSheetZombie : Engine.SpriteSheet
+    class SpriteSheetZombie : SpriteSheet
     {
         public SpriteSheetZombie(string assetName) : base(assetName)
         {
@@ -20,7 +15,7 @@ namespace Content
             MaxIndex = 1;
         }
 
-        protected override string UpdateAnimationState(Engine.Object obj)
+        protected override string UpdateAnimationState(Object obj)
         {
             string anim = "walking";
             if (obj is EnemyZombie)

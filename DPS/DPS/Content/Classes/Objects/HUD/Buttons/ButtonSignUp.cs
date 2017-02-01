@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Engine;
+using System.Diagnostics;
 
 namespace Content
 {
-    class ButtonSignUp : Engine.Button
+    class ButtonSignUp : Button
     {
-        public ButtonSignUp(Engine.Object parent) : base("buttonSignIn", parent, new Engine.SpriteSheet("Textures/HUD/ButtonSignUp"), "")
+        public ButtonSignUp(Object parent) : base("buttonSignIn", parent, new SpriteSheet("Textures/HUD/ButtonSignUp"), "")
         {
 
         }
@@ -17,7 +14,7 @@ namespace Content
         {
             base.ActionWhenPressed();
             //if button is pressed go to sign up page
-            System.Diagnostics.Process.Start("http://dpstudios.nl/register.php");
+            Process.Start("http://dpstudios.nl/register.php");
         }
     }
 }

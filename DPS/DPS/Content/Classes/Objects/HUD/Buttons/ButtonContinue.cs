@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Engine;
 
 namespace Content
 {
-    class ButtonContinue : Engine.Button
+    class ButtonContinue : Button
     {
         private string _gameStateId;
 
-        public ButtonContinue(Engine.Object parent, string gameStateId) : base("buttonContinue", parent, new Engine.SpriteSheet("Textures/HUD/ButtonContinue"), "Rocket")
+        public ButtonContinue(Object parent, string gameStateId) : base("buttonContinue", parent, new SpriteSheet("Textures/HUD/ButtonContinue"), "Rocket")
         {
             _gameStateId = gameStateId;
         }

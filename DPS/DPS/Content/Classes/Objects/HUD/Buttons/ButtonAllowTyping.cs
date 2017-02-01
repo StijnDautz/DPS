@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Engine;
 
 namespace Content
 {
-    class ButtonAllowTyping : Engine.Button
+    class ButtonAllowTyping : Button
     {
         private bool _canType;
 
@@ -17,7 +12,7 @@ namespace Content
             set { _canType = value; }
         }
 
-        public ButtonAllowTyping(Engine.Object parent) : base("buttonAllowTyping", parent, new Engine.SpriteSheet("Textures/HUD/TextBoxBackGround"), "")
+        public ButtonAllowTyping(Object parent) : base("buttonAllowTyping", parent, new SpriteSheet("Textures/HUD/TextBoxBackGround"), "")
         {
 
         }

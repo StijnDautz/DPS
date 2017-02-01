@@ -66,10 +66,6 @@ namespace Content
 
                 Vector2 distanceToPlayer = World.Player.GlobalOrigin - GlobalOrigin;
 
-                if(distanceToPlayer.Length() < 400)
-                {
-                    int x = 0;
-                }
                 //Update player following behaviour
                 //Check if player is in range to attack
                 if (_attackRange > distanceToPlayer.Length())

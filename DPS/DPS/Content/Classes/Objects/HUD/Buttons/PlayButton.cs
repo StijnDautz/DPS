@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Engine;
 
 namespace Content
 {
-    class PlayButton : Engine.Button
+    class PlayButton : Button
     {
-        public PlayButton(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet, string soundName) : base(id, parent, spriteSheet,soundName)
+        public PlayButton(string id, Object parent, SpriteSheet spriteSheet, string soundName) : base(id, parent, spriteSheet,soundName)
         {
 
         }

@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Engine;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Engine;
 
 namespace Content
 {
-    class SpriteSheetSnowMan : Engine.SpriteSheet
+    class SpriteSheetSnowMan : SpriteSheet
     {
         public SpriteSheetSnowMan(string assetName) : base(assetName)
         {
@@ -20,7 +13,7 @@ namespace Content
             CanUpdate = true;
         }
 
-        protected override string UpdateAnimationState(Engine.Object obj)
+        protected override string UpdateAnimationState(Object obj)
         {
             string anim = "idle";
             Mirrored = obj.World.Player.GlobalPosition.X > obj.GlobalPosition.X ? true : false;
@@ -34,7 +27,7 @@ namespace Content
             return anim;
         }
 
-        protected override void AfterLastFrame(Engine.Object obj)
+        protected override void AfterLastFrame(Object obj)
         {
             base.AfterLastFrame(obj);
             if(CurrentSprite.name == "attack")

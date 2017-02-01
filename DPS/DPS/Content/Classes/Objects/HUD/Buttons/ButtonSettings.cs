@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Engine;
 
 namespace Content
 {
-    class ButtonSettings : Engine.Button
+    class ButtonSettings : Button
     {
-        public ButtonSettings(Engine.Object parent) : base("buttonOptions", parent, new Engine.SpriteSheet("Textures/HUD/ButtonSettings"), "Rocket")
+        public ButtonSettings(Object parent) : base("buttonOptions", parent, new SpriteSheet("Textures/HUD/ButtonSettings"), "Rocket")
         {
 
         }

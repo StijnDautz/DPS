@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Engine;
+﻿using Engine;
 
 namespace Content
 { 
-    class SpriteSheetPlayerTopDown : Engine.SpriteSheet
+    class SpriteSheetPlayerTopDown : SpriteSheet
     {
         public SpriteSheetPlayerTopDown(string assetName) : base(assetName)
         {
@@ -17,7 +12,7 @@ namespace Content
             SwitchTo("idle");
         }
 
-        protected override string UpdateAnimationState(Engine.Object o)
+        protected override string UpdateAnimationState(Object o)
         {
             string anim = "idle";
             if(o.Velocity.Length() != 0)

@@ -129,7 +129,6 @@
     <Compile Include="Engine\GameManagement\Managers\SpriteSheet.cs" />
     <Compile Include="Engine\Objects\TexturedObject.cs" />
     <Compile Include="Engine\GameManagement\World.cs" />
-    <Compile Include="Engine\Objects\Portal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

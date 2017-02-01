@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Engine;
 
 namespace Content
 {
-    class SliderSFXVolume : Engine.Slider
+    class SliderSFXVolume : Slider
     {
-        public SliderSFXVolume(Engine.Object parent) : base("sliderSFXVolume", parent, new Engine.SpriteSheet("Textures/HUD/SliderBar"), new Engine.SpriteSheet("Textures/HUD/Slider"))
+        public SliderSFXVolume(Object parent) : base("sliderSFXVolume", parent, new SpriteSheet("Textures/HUD/SliderBar"), new SpriteSheet("Textures/HUD/Slider"))
         {
 
         }
@@ -16,7 +12,7 @@ namespace Content
         protected override void UseNewSliderValue(float value)
         {
             base.UseNewSliderValue(value);
-            Engine.SFXManager.VolumeModifier = value;
+            SFXManager.VolumeModifier = value;
         }
     }
 }

@@ -1,10 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Audio;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Engine
 {
@@ -111,10 +107,6 @@ namespace Engine
             //calculate distance, + 1 to avoid division by 0
             float distance = (character.GlobalPosition - _source.GlobalPosition).Length() + 1;
 
-            if(distance < 500)
-            {
-                int x = 0;
-            }
             //calculate volume based on settings and on distance from source
             float volume = 230 * _volumeModifier / distance;
 

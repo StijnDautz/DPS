@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Engine;
 
 namespace Content
 {
-    class ButtonLogin : Engine.Button
+    class ButtonLogin : Button
     {
-        private Engine.TextBox _userNameBox, _passWordBox;
-        private Engine.TextObject _warningMessage;
+        private TextBox _userNameBox, _passWordBox;
+        private TextObject _warningMessage;
 
-        public ButtonLogin(Engine.Object parent, Engine.TextBox userNameBox, Engine.TextBox passWordBox, Engine.TextObject warningMessage) : base("buttonLogin", parent, new Engine.SpriteSheet("Textures/HUD/ButtonSignIn"), "Rocket")
+        public ButtonLogin(Object parent, TextBox userNameBox, TextBox passWordBox, TextObject warningMessage) : base("buttonLogin", parent, new SpriteSheet("Textures/HUD/ButtonSignIn"), "Rocket")
         {
             _userNameBox = userNameBox;
             _passWordBox = passWordBox;

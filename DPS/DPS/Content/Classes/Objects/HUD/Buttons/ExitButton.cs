@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Engine;
 
 namespace Content
 {
-    class ExitButton : Engine.Button
+    class ExitButton : Button
     {
-        public ExitButton(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet, string soundName) : base(id, parent, spriteSheet, soundName)
+        public ExitButton(string id, Object parent, SpriteSheet spriteSheet, string soundName) : base(id, parent, spriteSheet, soundName)
         {
 
         }

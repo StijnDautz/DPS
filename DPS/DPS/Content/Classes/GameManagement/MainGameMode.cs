@@ -10,7 +10,6 @@ namespace Content
             
         }
 
-
         public override void Setup()
         {
             base.Setup();
