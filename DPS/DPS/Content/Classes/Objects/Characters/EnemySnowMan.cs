@@ -12,7 +12,7 @@ namespace Content
         private int _reactionRange;
         private Vector2 _distanceToPlayer;
 
-        public EnemySnowMan(Engine.Object parent) : base("enemySnowMan", parent, new Engine.SpriteSheet("Textures/Characters/SnowmanThrower"))
+        public EnemySnowMan(Engine.Object parent) : base("enemySnowMan", parent, new SpriteSheetSnowMan("Textures/Characters/SnowmanThrower"))
         {
             _reactionRange = 1500;
             AttackSpeed = 1800;

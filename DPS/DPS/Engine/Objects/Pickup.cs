@@ -63,7 +63,7 @@ namespace Engine
         {
             var mousePosRelativeToWorld = GameInstance.InputManager.MousePosition + World.CameraPosition;
 
-            //check wheter the mouse collides with the mouse
+            //check whether the mouse collides with the mouse
             if (CollisionHelper.CollidesWith(this, mousePosRelativeToWorld))
             {
                 OnHoverOver(mousePosRelativeToWorld);
