@@ -69,6 +69,7 @@ namespace Engine
             _spriteSheetSmall = spriteSheetSmall;
             _spriteSheetBig = spriteSheetBig;
             StaggerDuration = 400;
+            AttackSpeed = 800;
             Death = false;
         }
 

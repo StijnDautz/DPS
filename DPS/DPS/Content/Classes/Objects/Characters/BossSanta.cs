@@ -17,7 +17,7 @@ namespace Content
             _movementSpeed = 25;
             Health = 1500;
             Mass = 2;
-            StaggerDuration = 1900;
+            StaggerDuration = 1200;
         }
 
         public override void Reset()
@@ -123,7 +123,7 @@ namespace Content
                     {
                         var character = collider as Character;
                         character.IsStaggered = true;
-                        character.Health -= 200;
+                        character.Health -= 600;
 
                         HighScoreManager.IncrementTotalDamageTaken = 600;
 
