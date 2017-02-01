@@ -25,9 +25,9 @@ namespace Engine
         private Inventory _inventory;
         private Weapon _weapon1, _weapon2;
         private SpriteSheet _spriteSheetSmall, _spriteSheetBig;
-        private float _topDownSpeed, _sideSpeed; 
+        private float _topDownSpeed, _sideSpeed;
 
-        private bool _isSuperJumping;
+        private bool _isSuperJumping, _canJump;
      
         public Inventory Inventory
         {
@@ -69,6 +69,10 @@ namespace Engine
             _weapon1.Visible = false;
             base.Update(gameTime);
             UpdateSpriteSheet();
+            if(!InAir)
+            {
+                _canJump = true;
+            }
         }
 
         /*
@@ -240,9 +244,20 @@ namespace Engine
             {
                 VelocityX = 0;
             }
-            if (GameInstance.InputManager.isKeyPressed(Keys.Space) && !InAir)
+            //_canJump is a variable that allows for doubleJumps
+            if (GameInstance.InputManager.isKeyPressed(Keys.Space) && (!InAir || _canJump))
             {
-                Velocity = new Vector2(VelocityX, -650);
+                //if inAir, player double Jumped, so canJump is now false
+                if(InAir)
+                {
+                    _canJump = false;
+                    //the double jump is smaller
+                    Velocity = new Vector2(VelocityX, -450);
+                }
+                else
+                {
+                    Velocity = new Vector2(VelocityX, -630);
+                }
             }
             if (GameInstance.InputManager.isKeyPressed(Keys.R))
             {

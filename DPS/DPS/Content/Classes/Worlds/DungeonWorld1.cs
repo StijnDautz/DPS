@@ -24,7 +24,7 @@ namespace Content
             AddPickups();
 
             var bossSanta = new BossSanta(this);
-            bossSanta.Position = new Vector2(29500, 1000);
+            bossSanta.Position = new Vector2(30000, 1500);
             Add(bossSanta);
         }
 

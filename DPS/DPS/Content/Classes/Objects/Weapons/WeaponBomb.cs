@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework;
 
 namespace Content
 {
-    class WeaponBomb : Engine.Weapon
+    class WeaponBomb : Weapon
     {
-        public WeaponBomb(Object parent, Object owner) : base("bomb", parent, new Engine.SpriteSheet("Textures/Weapons/bomb"), owner, 300)
+        public WeaponBomb(Object parent, Object owner) : base("bomb", parent, new SpriteSheet("Textures/Weapons/bomb"), owner, 300)
         {
             HasPhysics = true;
         }
