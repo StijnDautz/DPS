@@ -9,12 +9,16 @@ namespace Content
 
         }
 
+        /*
+         * OnCollision heal player for 1000
+         */
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
-            if (collider is Player)
+            var player = World.Player;
+            if (collider == player)
             {
-                World.Player.Health = World.Player.MaxHealth;
+                player.Heal(1000);
             }
         }
     }

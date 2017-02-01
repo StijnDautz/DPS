@@ -11,6 +11,14 @@ namespace Engine
     {
         public override void Update(GameTime gameTime)
         {
+            if(World.Id == "MainWorld")
+            {
+                if (Objects.Count > 12)
+                {
+
+                    int x = 0;
+                }
+            }
             if (_canUpdate)
             {
                 UpdateCollision(gameTime);
@@ -115,7 +123,6 @@ namespace Engine
                 if (o.CanCollide)
                 {
                     _collisionObjects.Remove(o);
-
                 }
                 Objects.Remove(o);
             }

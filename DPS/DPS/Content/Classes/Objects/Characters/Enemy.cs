@@ -18,5 +18,13 @@ namespace Content
             base.OnDamaged(damage);
             HighScoreManager.IncrementTotalDamageDealt = damage;
         }
+
+        public override void ScaleStatsWithHighScore(int HighScore)
+        {
+            base.ScaleStatsWithHighScore(HighScore);
+            int highScoreModf = HighScore / 10000;
+            Health *= highScoreModf;
+            Damage *= highScoreModf;
+        }
     }
 }

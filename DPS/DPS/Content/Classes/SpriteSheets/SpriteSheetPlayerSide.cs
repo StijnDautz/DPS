@@ -86,6 +86,7 @@ namespace Content
                     case "death":
                         CanUpdate = false;
                         CurrentFrame = 5;
+                        obj.World.GameMode.GameStateManager.SwitchTo("GSGameFinished");
                         break;
                 }
             }

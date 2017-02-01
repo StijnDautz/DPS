@@ -21,7 +21,7 @@ namespace Content
             if (collider != Owner)
             {
                 //calculate damage based on distance to collider
-                Damage = (int)(collider.GlobalOrigin - GlobalOrigin).Length();
+                Damage = (int)(collider.GlobalOrigin - GlobalOrigin).Length() * 2;
                 if (Damage < 20)
                 {
                     Damage = 0;

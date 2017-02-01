@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 using System.Security.Cryptography;
 
@@ -67,7 +64,6 @@ namespace Content
 
             string query = string.Format("SELECT username FROM `users` WHERE username = '{0}' AND hashedpassword = '{1}'", username, hashedpassword);
 
-
             MySqlCommand cmd = new MySqlCommand(query, dbConn);
 
             dbConn.Open();
@@ -86,8 +82,7 @@ namespace Content
             {
                 dbConn.Close();
                 return false;
-            }
-            
+            }           
         }
 
         //username is opgeslagen in class, nadat account info valid is verklaard in IsAccountValid

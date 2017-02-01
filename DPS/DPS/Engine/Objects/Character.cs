@@ -144,5 +144,16 @@ namespace Engine
                 }
             }
         }
+
+        public void Heal(int health)
+        {
+            //if health would restore more than maxhealth, restore to maxhealth
+            _health = _maxHealth - health > _health ? _maxHealth : _health + health;
+        }
+
+        public virtual void ScaleStatsWithHighScore(int HighScore)
+        {
+            Reset();
+        }
     }
 }

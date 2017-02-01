@@ -1,15 +1,11 @@
-﻿using Microsoft.Xna.Framework.Media;
-using System;
+﻿using Engine;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Content
 {
-    class MainGameMode : Engine.GameMode
+    class MainGameMode : GameMode
     {
-        public MainGameMode(string id, Engine.GameModeManager gm, List<Engine.World> worlds) : base(id, gm, worlds)
+        public MainGameMode(string id, GameModeManager gm, List<World> worlds) : base(id, gm, worlds)
         {
             
         }
@@ -24,6 +20,15 @@ namespace Content
             GameStateManager.Add(new GSLogin(GameStateManager));
             GameStateManager.Add(new GSGameFinished(GameStateManager));
             GameStateManager.SwitchTo("GSMainMenu");
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            SwitchTo("MainWorld");
+            Player = new Player("player", World, new SpriteSheetPlayerTopDown("Textures/Characters/CharacterOverWorld"), new SpriteSheetPlayerSide("Textures/Characters/Character"));
+            Player.Position = new Microsoft.Xna.Framework.Vector2(600, 300);
+            World.Add(Player);
         }
     }
 }

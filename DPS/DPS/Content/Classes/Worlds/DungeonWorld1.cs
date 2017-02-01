@@ -10,7 +10,7 @@ namespace Content
 {
     class DungeonWorld1 : Engine.World
     {
-        public DungeonWorld1(string id, int width, int height) : base(id, width, height)
+        public DungeonWorld1(int width, int height) : base("Dungeon1", width, height)
         {
 
         }
@@ -219,7 +219,7 @@ namespace Content
             Pickup Presents = new Pickup("BluePresent", World, new SpriteSheet("Textures/Items/BluePresent"), "Present to break certain blocks");
             Add(Presents);
 
-            UpgradePickup RocketCape = new UpgradePickup("Rocketcape", this, new SpriteSheet("Textures/Items/Rocketcape"), "Cape making high jumps possible");
+            var RocketCape = new PickupSuperJump(this);
             RocketCape.Position = new Vector2(41280, 18800);
             Add(RocketCape);
         }

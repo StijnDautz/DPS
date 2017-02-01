@@ -13,11 +13,17 @@ namespace Content
         {
             _runOverTime = 12000;
             _bombTime = 8000;
-            _bulletTime = 2500;
+            _bulletTime = 2400;
             _movementSpeed = 25;
             Health = 1500;
             Mass = 2;
-            StaggerDuration = 2000;
+            StaggerDuration = 1900;
+        }
+
+        public override void Reset()
+        {
+            base.Reset();
+            Health = 1500;      
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)
@@ -84,7 +90,7 @@ namespace Content
 
         private void BulletAttack()
         {
-            var bullet = new WeaponThrowable("bullet", World, new SpriteSheetBullet(), this, 50);
+            var bullet = new WeaponThrowable("bullet", World, new SpriteSheetBullet(), this, 250);
             bullet.DestroyOnCollision = true;
             int x = Mirrored ? 600 : -600;
             bullet.VelocityX = x;
@@ -119,7 +125,7 @@ namespace Content
                         character.IsStaggered = true;
                         character.Health -= 200;
 
-                        HighScoreManager.IncrementTotalDamageTaken = 200;
+                        HighScoreManager.IncrementTotalDamageTaken = 600;
 
                         //add knockback effect on hit
                         character.Velocity = collider.GlobalPosition.X > GlobalPosition.X ? new Vector2(600, -300) : new Vector2(-600, -300);

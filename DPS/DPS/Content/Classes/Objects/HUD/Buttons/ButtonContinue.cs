@@ -20,6 +20,7 @@ namespace Content
             base.ActionWhenPressed();
             //switch to the gamestate with _gameStateId
             World.GameMode.GameStateManager.SwitchTo(_gameStateId);
+            World.GameMode.Reset();
         }
     }
 }

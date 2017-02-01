@@ -25,7 +25,7 @@ namespace Engine
             base.LoadContent();
 
             var worlds = new List<World>();
-            worlds.Add(new DungeonWorld1("Dungeon1", 94080, 26880));
+            worlds.Add(new DungeonWorld1(94080, 26880));
             worlds.Add(new MainWorld("MainWorld", 50000, 50000));
             worlds.Add(new MiniDungeon1("MiniDungeon1", 7680, 2880));
             worlds.Add(new MiniDungeon2("MiniDungeon2", 5760, 2880));

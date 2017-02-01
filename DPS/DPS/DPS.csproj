@@ -64,6 +64,7 @@
     <Compile Include="Content\Classes\Objects\Characters\EnemySnowMan.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemyZombie.cs" />
     <Compile Include="Content\Classes\Objects\Pickups\PickupHealthPotion.cs" />
+    <Compile Include="Content\Classes\Objects\Pickups\PickupSuperJump.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponBomb.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponSuperJump.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponPlayer.cs" />
@@ -105,7 +106,6 @@
     <Compile Include="Engine\Objects\Character.cs" />
     <Compile Include="Content\Classes\Objects\Characters\Player.cs" />
     <Compile Include="Engine\Objects\DestructableObject.cs" />
-    <Compile Include="Engine\Objects\Inventory.cs" />
     <Compile Include="Engine\Objects\NPC.cs" />
     <Compile Include="Engine\Objects\ObjectUpdate.cs" />
     <Compile Include="Engine\Objects\Pickup.cs" />

@@ -38,6 +38,13 @@ namespace Content
             }
         }
 
+        public override void Reset()
+        {
+            base.Reset();
+            Health = 500;
+            Damage = 100;
+        }
+
         protected override void OnAttack()
         {
             base.OnAttack();

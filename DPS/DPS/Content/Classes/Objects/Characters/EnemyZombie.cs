@@ -29,9 +29,10 @@ namespace Content
             _walkRightBoudary = 96;
             AttackSpeed = 2300;
             Health = 300;
+            Damage = 75;
             Mass = 1.1f;
             SFXManager = new SFXZombie(this);
-            _weapon = new Engine.Weapon("weapon", World, new Engine.SpriteSheet("Textures/Hud/TimerFrame"), this, 75);
+            _weapon = new Weapon("weapon", World, new Engine.SpriteSheet("Textures/Hud/TimerFrame"), this, Damage);
             World.Add(_weapon);
             BoundingBox = new Rectangle(0, 0, 64, 89);
         }
@@ -40,6 +41,18 @@ namespace Content
         {
             _weapon.Visible = false;
             base.Update(gameTime);
+        }
+
+        /*
+         * Reset damage as well, as that has been affected by the highScoreScaling of enemies
+         */
+        public override void Reset()
+        {
+            base.Reset();
+            Health = 300;
+            Damage = 75;
+            _weapon = new Weapon("weapon", World, new Engine.SpriteSheet("Textures/Hud/TimerFrame"), this, Damage);
+            World.Add(_weapon);
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
@@ -21,17 +19,11 @@ namespace Engine
         private static MySqlConnection dbConn;
         //Einde database gegevens
 
-        private Inventory _inventory;
         private Weapon _weapon1, _weapon2;
         private SpriteSheet _spriteSheetSmall, _spriteSheetBig;
         private float _topDownSpeed, _sideSpeed;
 
-        private bool _isSuperJumping, _canJump;
-     
-        public Inventory Inventory
-        {
-            get { return _inventory; }
-        }
+        private bool _canSuperJump, _canJump;
 
         public Weapon Weapon1
         {
@@ -43,9 +35,9 @@ namespace Engine
             get { return _weapon2; }
         }
 
-        public bool IsSuperJumping
+        public bool CanSuperJump
         {
-            set { _isSuperJumping = value; }
+            set { _canSuperJump = value; }
         }
 
         public float TopDownSpeed
@@ -62,7 +54,6 @@ namespace Engine
 
         public Player(string id, Object parent, SpriteSheet spriteSheetSmall, SpriteSheet spriteSheetBig) : base(id, parent, spriteSheetBig)
         {
-            _inventory = new Inventory(id + "inventory", World);
             _topDownSpeed = 400;
             _sideSpeed = 450;
             Health = 2000;
@@ -85,6 +76,12 @@ namespace Engine
             //set weapon.Visible false, if player attacks, this will be set to true, until loop reaches this point again
             _weapon1.Visible = false;
             base.Update(gameTime);
+
+            //if falling SuperJumpWeapon becomes invisible
+            if(Velocity.Y > 0)
+            {
+                _weapon2.Visible = false;
+            }
             UpdateSpriteSheet();
             if(!InAir)
             {
@@ -121,13 +118,28 @@ namespace Engine
             //if player is not death or staggered, handleinput
             if (!Death && !IsStaggered)
             {
+                var input = GameInstance.InputManager;
+                if(input.isKeyPressed(Keys.B))
+                {
+                    //remove player from current world
+                    World.Remove(this);
+
+                    if (World.Id != "Dungeon1")
+                    {
+                        World.GameMode.SwitchTo("Dungeon1");
+                    }
+
+                    //add player to new world at correct position
+                    World.GameMode.World.Add(this);
+                    Position = new Vector2(30000, 400);
+                }
                 if (World.IsTopDown)
                 {
-                    HandleTopDownInput();
+                    HandleTopDownInput(input);
                 }
                 else
                 {
-                    HandleSideInput();
+                    HandleSideInput(input);
                 }              
             }
         }
@@ -146,11 +158,11 @@ namespace Engine
             return sb.ToString();
         }
 
-        private void HandleTopDownInput()
+        private void HandleTopDownInput(InputManager input)
         {
             //Highscore test. Als je op H drukt wordt er een random waarde in de highscore lijst gezet met als username Random.
             //Als dit verplaatst wordt, verplaats dan ook de "using MySql.Data.MySqlClient;"
-            if (GameInstance.InputManager.isKeyPressed(Keys.H))
+            if (input.isKeyPressed(Keys.H))
             {
                 //Database initializeren (dit kan ook ergens anders, dan hoef je het niet steeds opnieuw te doen.
                 MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder();
@@ -209,12 +221,12 @@ namespace Engine
                 //Connectie sluiten is belangrijk.
             }
 
-            if (GameInstance.InputManager.isKeyHolding(Keys.D))
+            if (input.isKeyHolding(Keys.D))
             {
                 VelocityX = _topDownSpeed;
                 Mirrored = false;
             }
-            else if (GameInstance.InputManager.isKeyHolding(Keys.A))
+            else if (input.isKeyHolding(Keys.A))
             {
                 VelocityX = -_topDownSpeed;
                 Mirrored = true;
@@ -223,11 +235,11 @@ namespace Engine
             {
                 VelocityX = 0;
             }
-            if(GameInstance.InputManager.isKeyHolding(Keys.S))
+            if(input.isKeyHolding(Keys.S))
             {
                 VelocityY = _topDownSpeed;
             }
-            else if(GameInstance.InputManager.isKeyHolding(Keys.W))
+            else if(input.isKeyHolding(Keys.W))
             {
                 VelocityY = -_topDownSpeed;
             }
@@ -237,9 +249,9 @@ namespace Engine
             }                                       
         }
 
-        private void HandleSideInput()
+        private void HandleSideInput(InputManager input)
         {
-            if(GameInstance.InputManager.LeftMouseButtonPressed)
+            if(input.LeftMouseButtonPressed)
             {
                 TryAttack = true;
             }
@@ -247,12 +259,12 @@ namespace Engine
             {
                 TryAttack = false;
             }
-            if (GameInstance.InputManager.isKeyHolding(Keys.D))
+            if (input.isKeyHolding(Keys.D))
             {
                 VelocityX = _sideSpeed;
                 Mirrored = false;
             }
-            else if (GameInstance.InputManager.isKeyHolding(Keys.A))
+            else if (input.isKeyHolding(Keys.A))
             {
                 VelocityX = -_sideSpeed;
                 Mirrored = true;
@@ -262,7 +274,7 @@ namespace Engine
                 VelocityX = 0;
             }
             //_canJump is a variable that allows for doubleJumps
-            if (GameInstance.InputManager.isKeyPressed(Keys.Space) && (!InAir || _canJump))
+            if (input.isKeyPressed(Keys.Space) && (!InAir || _canJump))
             {
                 //if inAir, player double Jumped, so canJump is now false
                 if(InAir)
@@ -276,22 +288,17 @@ namespace Engine
                     Velocity = new Vector2(VelocityX, -630);
                 }
             }
-            if (GameInstance.InputManager.isKeyPressed(Keys.R))
+            //if R is pressed and the player has picked up the required pickup, perform a superjump
+            else if (input.isKeyPressed(Keys.R) && _canSuperJump)
             {
                 SuperJump();               
-            }
-            if (GameInstance.InputManager.isKeyPressed(Keys.E))
-            {
-                _isSuperJumping = false;
-                _weapon2.Visible = false;
             }
         }
         #endregion
 
         private void SuperJump()
         {
-            Velocity = new Vector2(VelocityX, -550 * 10);
-            _isSuperJumping = true;
+            Velocity = new Vector2(VelocityX, -5500);
             _weapon2.Visible = true; 
         }
 

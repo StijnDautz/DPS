@@ -41,13 +41,16 @@ namespace Content
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
-            if (collider is Player)
+            var player = World.Player;
+            if (collider == player)
             {
-                World.Player.Health += _health;
-                World.Player.TopDownSpeed += _speed;
-                World.Player.SideSpeed += _speed;
-                World.Player.AttackSpeed += _attackSpeed;
-                World.Player.Damage += _damage;
+                //reset player to maxHealth, then add extra health, so maxHealth gets affected as well
+                player.Heal(player.MaxHealth);
+                player.Health += _health;
+                player.TopDownSpeed += _speed;
+                player.SideSpeed += _speed;
+                player.AttackSpeed += _attackSpeed;
+                player.Damage += _damage;
             }
         }
     }

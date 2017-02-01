@@ -1,11 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Engine
 {
@@ -62,11 +58,11 @@ namespace Engine
 
         }
 
-        public void Reset()
+        public virtual void Reset()
         {
-            if (_current != null)
+            foreach(World w in _worlds)
             {
-                _current.Reset();
+                w.Reset();
             }
             _gameStateManager.Reset();
         }
@@ -103,10 +99,8 @@ namespace Engine
             foreach(World w in _worlds)
             {
                 if(w.Id == id)
-                {
-                    
-                    _current = w;
-                    
+                {                 
+                    _current = w;                    
                     return;
                 }
             }
@@ -120,6 +114,5 @@ namespace Engine
                 w.Setup(this);
             }
         }
-
     }
 }
