@@ -7,7 +7,6 @@ namespace Content
         public WeaponSnowBall(string id, Object parent, SpriteSheet spriteSheet, Character owner, int damage) : base(id, parent, spriteSheet, owner, damage)
         {
             HasPhysics = true;
-            CanCollide = true;
             Mass = 0.4f;
         }
 

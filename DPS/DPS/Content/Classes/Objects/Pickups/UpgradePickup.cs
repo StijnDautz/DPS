@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Engine;
 
 namespace Content
 {
-    class UpgradePickup : Engine.Pickup
+    class UpgradePickup : Pickup
     {
         private int _damage;
         private int _speed;
@@ -37,9 +33,22 @@ namespace Content
             set { _attackSpeed = value; }
         }
 
-        public UpgradePickup(string id, Engine.Object parent, Engine.SpriteSheet spriteSheet, string description) : base(id, parent, spriteSheet, description)
+        public UpgradePickup(string id, Object parent, SpriteSheet spriteSheet, string description) : base(id, parent, spriteSheet, description)
         {
 
+        }
+
+        public override void OnCollision(Object collider)
+        {
+            base.OnCollision(collider);
+            if (collider is Player)
+            {
+                World.Player.Health += _health;
+                World.Player.TopDownSpeed += _speed;
+                World.Player.SideSpeed += _speed;
+                World.Player.AttackSpeed += _attackSpeed;
+                World.Player.Damage += _damage;
+            }
         }
     }
 }

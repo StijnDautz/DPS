@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Engine;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 
 namespace Content
 {
     class EnemyZombie : Enemy
     {
-        Engine.Weapon _weapon;
+        Weapon _weapon;
         private int _walkSpeed, _sprintSpeed, _reactionRange, _attackRange, _walkLeftBoundary, _walkRightBoudary;
         private float _walkPath;
         
@@ -93,6 +88,13 @@ namespace Content
         protected override void UpdateCombat(int elapsedTime)
         {
             base.UpdateCombat(elapsedTime);
+        }
+
+        public override void OnDeath()
+        {
+            base.OnDeath();
+            //if dead remove weapon from world
+            World.Remove(_weapon);
         }
     }
 }

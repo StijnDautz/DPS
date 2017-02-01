@@ -221,7 +221,6 @@ namespace Content
 
             UpgradePickup RocketCape = new UpgradePickup("Rocketcape", this, new SpriteSheet("Textures/Items/Rocketcape"), "Cape making high jumps possible");
             RocketCape.Position = new Vector2(41280, 18800);
-            RocketCape.CanCollide = true;
             Add(RocketCape);
         }
     }

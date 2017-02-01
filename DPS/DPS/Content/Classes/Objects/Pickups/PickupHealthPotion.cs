@@ -12,7 +12,10 @@ namespace Content
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
-            World.Player.Health = World.Player.MaxHealth;
+            if (collider is Player)
+            {
+                World.Player.Health = World.Player.MaxHealth;
+            }
         }
     }
 }

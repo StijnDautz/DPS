@@ -43,7 +43,7 @@ namespace Engine
                 //call OnDamaged
                 character.OnDamaged(_damage);
 
-                //if characters health is <= 0 the character is death and it should be removed from the world
+                //if characters health is <= 0 the character is death and it should be removed from the worldd
                 if (character.Health <= 0)
                 {
                     character.OnDeath();

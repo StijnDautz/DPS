@@ -42,7 +42,7 @@ namespace Engine
         }
 
         /*
-         * if collision with player, check if object can be added to inventory, if so remove it from the ObjectList
+         * if collision with player, remove it from the world
          */
         public override void OnCollision(Object collider)
         {
