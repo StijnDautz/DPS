@@ -29,7 +29,7 @@ namespace Content
             Add(pickup);*/
 
             //Add teleporters to different worlds
-            Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(29700, 500));
+            Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(33600, 6240));
             teleporterDungeon1.Position = new Vector2(576, 4032);
             teleporterDungeon1.BoundingBox = new Rectangle(0, 0, 96, 96);
 

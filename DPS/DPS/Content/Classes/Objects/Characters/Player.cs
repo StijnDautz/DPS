@@ -49,7 +49,7 @@ namespace Engine
             _inventory = new Inventory(id + "inventory", World);
             _topDownSpeed = 400;
             _sideSpeed = 450;
-            Health = 500;
+            Health = 50000;
             Damage = 100;
             _weapon1 = new Content.WeaponPlayer("sword", World, new SpriteSheet("Textures/Hud/Invisible"), this, Damage);
             _weapon1.Visible = false;
