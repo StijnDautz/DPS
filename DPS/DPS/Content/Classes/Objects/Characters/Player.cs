@@ -69,7 +69,7 @@ namespace Engine
             _spriteSheetSmall = spriteSheetSmall;
             _spriteSheetBig = spriteSheetBig;
             StaggerDuration = 400;
-            AttackSpeed = 100;
+            AttackSpeed = 300;
             Death = false;
         }
 
@@ -125,6 +125,8 @@ namespace Engine
                 {
                     //remove player from current world
                     World.Remove(this);
+                    World.Remove(_weapon1);
+                    World.Remove(_weapon2);
 
                     if (World.Id != "Dungeon1")
                     {
@@ -133,8 +135,12 @@ namespace Engine
 
                     //add player to new world at correct position
                     World.GameMode.World.Add(this);
+                    World.GameMode.World.Add(_weapon1);
+                    World.GameMode.World.Add(_weapon2);
                     World.CanUpdate = true;
                     Position = new Vector2(30000, 400);
+
+                    
                 }
                 if (World.IsTopDown)
                 {
