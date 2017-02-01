@@ -21,6 +21,7 @@ namespace Content
             Mass = 2;
             SFXManager = new SFXSnowMan(this);
             BoundingBox = new Rectangle(0, 0, 112, 116);
+            StaggerDuration = 2000;
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)

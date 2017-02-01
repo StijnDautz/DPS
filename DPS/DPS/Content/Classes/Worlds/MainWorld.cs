@@ -24,10 +24,6 @@ namespace Content
             grid.CanCollide = true;
             Add(grid);
 
-            /*var pickup = new Pickup("testPickup", this, new SpriteSheet("Textures/Items/SnowShoes"), "With these amazing snowBoots,\nyou'll be able to climb\nthe slippiest hills.");
-            pickup.Position = new Vector2(600, 400);
-            Add(pickup);*/
-
             //Add teleporters to different worlds
             Teleporter teleporterDungeon1 = new Teleporter("teleporter", this, "Dungeon1", new Vector2(33600, 6240));
             teleporterDungeon1.Position = new Vector2(576, 4032);
@@ -40,7 +36,6 @@ namespace Content
             Teleporter teleporterMiniDungeon2 = new Teleporter("teleporter", this, "MiniDungeon2", new Vector2(2220, 1200));
             teleporterMiniDungeon2.Position = new Vector2(4608, 5184);
             teleporterMiniDungeon2.BoundingBox = new Rectangle(0, 0, 96, 96);
-
 
             //Add Items available for pickup
             UpgradePickup Speed100 = new UpgradePickup("Speed100", this , new SpriteSheet("Textures/Items/Speed100"), "Increases speed by 100!");
@@ -62,7 +57,6 @@ namespace Content
             UpgradePickup Speed200 = new UpgradePickup("Speed200", this, new SpriteSheet("Textures/Items/Speed200"), "Increases speed by 200!");
             Speed200.Position = new Vector2(8544, 5664);
             Speed200.Speed = 200;
-
 
             Add(Speed100);
             Add(Attackspeed100);

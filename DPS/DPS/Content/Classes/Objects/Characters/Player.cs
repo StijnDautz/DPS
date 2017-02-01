@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
@@ -11,6 +10,17 @@ namespace Engine
 {
     class Player : Character
     {
+<<<<<<< HEAD
+=======
+        //Database gegevens
+        private const String SERVER = "dpstudios.nl";//<-- moet nog vervangen worden?
+                                                        //port = 3306?
+        private const String DATABASE = "u13357p9566_highscore";
+        private const String UID = "u13357p9566_dps";
+        private const String PASSWORD = "toeganggeweigerd6";
+        private static MySqlConnection dbConn;
+        //Einde database gegevens
+>>>>>>> a29218219be71d8631a9d1b47d89570edb48fd8a
 
         private Inventory _inventory;
         private Weapon _weapon1, _weapon2;
@@ -34,12 +44,29 @@ namespace Engine
             get { return _weapon2; }
         }
 
-        public Player(string id, Engine.Object parent, SpriteSheet spriteSheetSmall, SpriteSheet spriteSheetBig) : base(id, parent, spriteSheetBig)
+        public bool IsSuperJumping
+        {
+            set { _isSuperJumping = value; }
+        }
+
+        public float TopDownSpeed
+        {
+            set { _topDownSpeed = value; }
+            get { return _topDownSpeed; }
+        }
+
+        public float SideSpeed
+        {
+            set { _sideSpeed = value; }
+            get { return _sideSpeed; }
+        }
+
+        public Player(string id, Object parent, SpriteSheet spriteSheetSmall, SpriteSheet spriteSheetBig) : base(id, parent, spriteSheetBig)
         {
             _inventory = new Inventory(id + "inventory", World);
             _topDownSpeed = 400;
             _sideSpeed = 450;
-            Health = 50000;
+            Health = 2000;
             Damage = 100;
             _weapon1 = new Content.WeaponPlayer("sword", World, new SpriteSheet("Textures/Hud/Invisible"), this, Damage);
             _weapon1.Visible = false;
@@ -51,6 +78,7 @@ namespace Engine
             SFXManager = new Content.SFXPlayer(this);
             _spriteSheetSmall = spriteSheetSmall;
             _spriteSheetBig = spriteSheetBig;
+            StaggerDuration = 400;
         }
 
         public override void Update(GameTime gameTime)

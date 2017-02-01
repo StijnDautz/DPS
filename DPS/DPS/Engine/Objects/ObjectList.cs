@@ -149,6 +149,7 @@ namespace Engine
                     o.CheckCollision(collider, elapsedTime);
                 }
             }
+            CheckCollision(collider, elapsedTime);
         }
     }
 }

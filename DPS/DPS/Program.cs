@@ -32,8 +32,8 @@ namespace Engine
             MainGameMode gameMode = new MainGameMode("MainGM", GameModeManager, worlds);
 
             gameMode.SwitchTo("MainWorld");
-            gameMode.Player = new Engine.Player("player", gameMode.World, new SpriteSheetPlayerTopDown("Textures/Characters/CharacterOverWorld"), new SpriteSheetPlayerSide("Textures/Characters/Character"));
-            gameMode.Player.Position = new Microsoft.Xna.Framework.Vector2(700 , 4100);
+            gameMode.Player = new Player("player", gameMode.World, new SpriteSheetPlayerTopDown("Textures/Characters/CharacterOverWorld"), new SpriteSheetPlayerSide("Textures/Characters/Character"));
+            gameMode.Player.Position = new Microsoft.Xna.Framework.Vector2(600 , 300);
 
             gameMode.Setup();
             gameMode.SetupWorlds();
