@@ -76,9 +76,6 @@ namespace Content
             //get newest HighScore
             int newHighScore = Math.Max(oldScore, newScore);
 
-            //Upload updated highScore to the website
-            HighScoreManager.uploadHighscore(newHighScore);
-
             //create textObject
             var highScore = new TextObject("newHighScore", "Hud", this);
             highScore.Text = newHighScore.ToString();
