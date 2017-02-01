@@ -15,7 +15,7 @@ namespace Content
             _bombTime = 8000;
             _bulletTime = 2400;
             _movementSpeed = 25;
-            Health = 1500;
+            Health = 2000;
             Mass = 2;
             StaggerDuration = 1200;
         }

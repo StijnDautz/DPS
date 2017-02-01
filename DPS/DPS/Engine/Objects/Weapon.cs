@@ -34,6 +34,7 @@ namespace Engine
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
+
             if (collider != _owner && collider is Character)
             {
                 var character = collider as Character;
