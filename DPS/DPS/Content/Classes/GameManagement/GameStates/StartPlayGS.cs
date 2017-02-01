@@ -21,7 +21,7 @@ namespace Content
             healthBar.Position = new Vector2(50, 600);
             AddToHud(healthBar);
 
-            SongPlay = Engine.GameInstance.AssetManager.GetSong("Main Song");
+            SongPlay = GameInstance.AssetManager.GetSong("Main Song");
         }
 
         public override void Init()

@@ -45,7 +45,7 @@ namespace Content
             if (collider == player)
             {
                 //reset player to maxHealth, then add extra health, so maxHealth gets affected as well
-                player.Heal(player.MaxHealth);
+                player.Health = player.MaxHealth;
                 player.Health += _health;
                 player.TopDownSpeed += _speed;
                 player.SideSpeed += _speed;

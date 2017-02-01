@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Engine
 {
@@ -15,7 +14,6 @@ namespace Engine
         private GameMode _gameMode;
         private bool _canUpdate;
         
-
         //physics
         private float _gravity;
 
@@ -115,6 +113,15 @@ namespace Engine
                 World.Remove(o);
             }
             World.Setup(_gameMode);
+        }
+
+        public void ScaleEnemies()
+        {
+            var highScore = Content.HighScoreManager.HighScore;
+            foreach(Character c in _characters)
+            {
+                c.ScaleStatsWithHighScore(highScore);
+            }
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

@@ -18,7 +18,7 @@ namespace Content
             var player = World.Player;
             if (collider == player)
             {
-                player.Heal(1000);
+                player.Health = player.MaxHealth;
             }
         }
     }

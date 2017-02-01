@@ -17,6 +17,9 @@ namespace Content
         {
             base.ActionWhenPressed();
             World.GameMode.GameStateManager.SwitchTo("StartPlay");
+
+            //on start play scale the enemies according to highscore
+            World.ScaleEnemies();
         }
     }
 }

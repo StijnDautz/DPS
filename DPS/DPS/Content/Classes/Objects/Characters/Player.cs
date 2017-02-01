@@ -69,6 +69,7 @@ namespace Engine
             _spriteSheetSmall = spriteSheetSmall;
             _spriteSheetBig = spriteSheetBig;
             StaggerDuration = 400;
+            Death = false;
         }
 
         public override void Update(GameTime gameTime)
@@ -131,6 +132,7 @@ namespace Engine
 
                     //add player to new world at correct position
                     World.GameMode.World.Add(this);
+                    World.CanUpdate = true;
                     Position = new Vector2(30000, 400);
                 }
                 if (World.IsTopDown)
