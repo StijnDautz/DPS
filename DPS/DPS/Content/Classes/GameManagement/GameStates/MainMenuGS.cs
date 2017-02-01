@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Engine;
+﻿using Engine;
 using Microsoft.Xna.Framework;
 
 namespace Content
@@ -42,7 +37,7 @@ namespace Content
         public override void Init()
         {
             base.Init();
-            World.CanUpdate = false;
+            CanUpdateWorld = false;
             IsMouseVisible = true;
             CanUpdateGameTime = false;
         }

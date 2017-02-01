@@ -31,7 +31,7 @@ namespace Content
                 //remove this object and spawn explosion effect
                 World.Remove(this);
 
-                var explosion = new TexturedObject("explosion", World, new SpriteSheetExplosion());
+                var explosion = new Explosion(World);
                 explosion.Position = new Vector2(GlobalPosition.X - 100, GlobalPosition.Y - 100);
                 World.Add(explosion);
             }

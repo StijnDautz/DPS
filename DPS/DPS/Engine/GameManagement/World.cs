@@ -12,7 +12,6 @@ namespace Engine
         private Vector2 _cameraPosition;
         private int _tileSize;
         private GameMode _gameMode;
-        private bool _canUpdate;
         
         //physics
         private float _gravity;
@@ -45,11 +44,6 @@ namespace Engine
             get { return _gameMode.Player; }
         }
 
-        public bool CanUpdate
-        {
-            set { _canUpdate = value; }
-        }
-
         public List<Object> CollisionObjects
         {
             get { return _collisionObjects; }
@@ -78,7 +72,6 @@ namespace Engine
             _cameraPosition = Vector2.Zero;
             _tileSize = 60;
             _gravity = 350f;
-            _canUpdate = true;
         }
 
         public virtual void Setup(GameMode gameMode)
@@ -106,21 +99,15 @@ namespace Engine
             o = null;
         }
 
-        public override void Reset()
-        {
-            foreach(Object o in Objects)
-            {
-                World.Remove(o);
-            }
-            World.Setup(_gameMode);
-        }
-
         public void ScaleEnemies()
         {
             var highScore = Content.HighScoreManager.HighScore;
-            foreach(Character c in _characters)
+            foreach(Object o in _collisionObjects)
             {
-                c.ScaleStatsWithHighScore(highScore);
+                if(o is Character)
+                {
+                    (o as Character).ScaleStatsWithHighScore((float)highScore / 15000);
+                }
             }
         }
 

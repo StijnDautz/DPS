@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Engine;
+﻿using Engine;
 
 namespace Content
 {
@@ -18,7 +13,7 @@ namespace Content
         {
             base.Init();
             CanUpdateGameTime = false;
-            World.CanUpdate = false;
+            CanUpdateWorld = false;
 
             //set background
             var backGround = new TexturedObject("background", HUD, new SpriteSheet("Textures/HUD/MainMenu"));
@@ -41,6 +36,9 @@ namespace Content
             //add objects to HUD
             AddToHud(backGround);
             AddToHud(highScorePopUpWindow);
+
+            //reset world for next playthrough
+            GameStateManager.GameMode.Reset();
         }
     }
 }

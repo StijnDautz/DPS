@@ -25,6 +25,9 @@ namespace Content
         public override void Reset()
         {
             base.Reset();
+            ClearWorlds();
+            SetupWorlds();
+
             SwitchTo("MainWorld");
             Player = new Player("player", World, new SpriteSheetPlayerTopDown("Textures/Characters/CharacterOverWorld"), new SpriteSheetPlayerSide("Textures/Characters/Character"));
             Player.Position = new Microsoft.Xna.Framework.Vector2(600, 300);

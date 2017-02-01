@@ -10,6 +10,11 @@ namespace Content
             SwitchTo("explosion");
         }
 
+        protected override string UpdateSFX()
+        {
+            return "explosion";
+        }
+
         protected override void AtEndSFX()
         {
             base.AtEndSFX();

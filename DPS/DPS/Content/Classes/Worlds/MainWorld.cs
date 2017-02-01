@@ -13,7 +13,6 @@ namespace Content
         public MainWorld(string id, int width, int height) : base(id, width, height)
         {
             IsTopDown = true;
-            CanUpdate = true;
         }
 
         public override void Setup(GameMode gameMode)

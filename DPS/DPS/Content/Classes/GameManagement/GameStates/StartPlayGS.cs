@@ -1,16 +1,12 @@
 ﻿using Engine;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 
 namespace Content
 {
     class StartPlayGS : GameState
     {
+        private bool _enemiesScaled;
+
         public StartPlayGS(string id, GameStateManager gameStateManager) : base(id, gameStateManager)
         {
             var timer = new Timer("timer", HUD);
@@ -24,12 +20,24 @@ namespace Content
             SongPlay = GameInstance.AssetManager.GetSong("Main Song");
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if (!_enemiesScaled)
+            {
+                //scale the enemies in all worlds according to highscore
+                GameStateManager.GameMode.ScaleEnemies();
+                _enemiesScaled = true;
+            }
+        }
+
         public override void Init()
         {
             base.Init();
             IsMouseVisible = true;
-            World.CanUpdate = true;
-            CanUpdateGameTime = true;          
+            CanUpdateWorld = true;
+            CanUpdateGameTime = true;
+            _enemiesScaled = false;
         }
     }
 }

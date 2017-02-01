@@ -32,7 +32,7 @@ namespace Content
             Damage = 75;
             Mass = 1.1f;
             SFXManager = new SFXZombie(this);
-            _weapon = new Weapon("weapon", World, new Engine.SpriteSheet("Textures/Hud/TimerFrame"), this, Damage);
+            _weapon = new Weapon("weapon", World, new SpriteSheet("Textures/Hud/TimerFrame"), this, Damage);
             World.Add(_weapon);
             BoundingBox = new Rectangle(0, 0, 64, 89);
         }
@@ -51,7 +51,7 @@ namespace Content
             base.Reset();
             Health = 300;
             Damage = 75;
-            _weapon = new Weapon("weapon", World, new Engine.SpriteSheet("Textures/Hud/TimerFrame"), this, Damage);
+            _weapon = new Weapon("weapon", World, new SpriteSheet("Textures/Hud/TimerFrame"), this, Damage);
             World.Add(_weapon);
         }
 
@@ -66,6 +66,10 @@ namespace Content
 
                 Vector2 distanceToPlayer = World.Player.GlobalOrigin - GlobalOrigin;
 
+                if(distanceToPlayer.Length() < 400)
+                {
+                    int x = 0;
+                }
                 //Update player following behaviour
                 //Check if player is in range to attack
                 if (_attackRange > distanceToPlayer.Length())
@@ -87,7 +91,6 @@ namespace Content
                     VelocityX = VelocityX > 0 && _walkPath < _walkRightBoudary ? _walkSpeed : -_walkSpeed;
                     _walkPath += Velocity.X * elapedTime;
                 }
-
                 _weapon.Position = Mirrored ? new Vector2(Position.X + Width, Position.Y + 30) : new Vector2(Position.X - _weapon.Width, Position.Y + 30);
             }
         }
@@ -108,6 +111,13 @@ namespace Content
             base.OnDeath();
             //if dead remove weapon from world
             World.Remove(_weapon);
+        }
+
+        public override void ScaleStatsWithHighScore(float highScoreModifier)
+        {
+            base.ScaleStatsWithHighScore(highScoreModifier);
+            Damage = (int)(Damage * highScoreModifier);
+            Health = (int)(Health * highScoreModifier);
         }
     }
 }

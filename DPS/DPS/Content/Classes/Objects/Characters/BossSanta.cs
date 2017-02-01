@@ -11,19 +11,13 @@ namespace Content
         
         public BossSanta(Object parent) : base("bossSanta", parent, new SpriteSheetSanta())
         {
-            _runOverTime = 12000;
-            _bombTime = 8000;
-            _bulletTime = 2400;
+            _runOverTime = 14000;
+            _bombTime = 9000;
+            _bulletTime = 2600;
             _movementSpeed = 25;
-            Health = 2000;
-            Mass = 2;
-            StaggerDuration = 1200;
-        }
-
-        public override void Reset()
-        {
-            base.Reset();
-            Health = 1500;      
+            Health = 2200;
+            Mass = 3;
+            StaggerDuration = 2000;
         }
 
         protected override void UpdateBehaviour(GameTime gameTime)
@@ -36,7 +30,11 @@ namespace Content
             {
                 Velocity = new Vector2(_runOverVelocityX, Velocity.Y);
             }
-            
+
+            _runOverET += elapsedTime;
+            _bulletET += elapsedTime;
+            _bombET += elapsedTime;
+
             if (!runningOver && !IsStaggered)
             {
                 //if santa is not trying to run player over, update weapon elapsedtimes
@@ -110,6 +108,14 @@ namespace Content
             World.GameMode.GameStateManager.SwitchTo("GSGameFinished");
         }
 
+        public override void ScaleStatsWithHighScore(float highScoreModifier)
+        {
+            base.ScaleStatsWithHighScore(highScoreModifier);
+            _runOverTime = (int)(_runOverTime / highScoreModifier);
+            _bombTime = (int)(_bombTime / highScoreModifier);
+            _bulletTime = (int)(_bulletTime / highScoreModifier);
+        }
+
         public override void OnCollision(Object collider)
         {
             base.OnCollision(collider);
@@ -122,12 +128,18 @@ namespace Content
                     if (collider is Character)
                     {
                         var character = collider as Character;
-                        character.IsStaggered = true;
                         character.Health -= 600;
 
-                        HighScoreManager.IncrementTotalDamageTaken = 600;
+                        HighScoreManager.TotalDamageTaken += 600;
+
+                        //check if character is death after hit
+                        if(character.Health <= 0)
+                        {
+                            character.Death = true;
+                        }
 
                         //add knockback effect on hit
+                        character.IsStaggered = true;
                         character.Velocity = collider.GlobalPosition.X > GlobalPosition.X ? new Vector2(600, -300) : new Vector2(-600, -300);
                     }
                     else

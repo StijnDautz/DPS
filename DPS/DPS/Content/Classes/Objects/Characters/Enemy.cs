@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Content
+﻿namespace Content
 {
     class Enemy : Engine.NPC
     {
@@ -16,15 +10,7 @@ namespace Content
         public override void OnDamaged(int damage)
         {
             base.OnDamaged(damage);
-            HighScoreManager.IncrementTotalDamageDealt = damage;
-        }
-
-        public override void ScaleStatsWithHighScore(int HighScore)
-        {
-            base.ScaleStatsWithHighScore(HighScore);
-            int highScoreModf = HighScore / 10000;
-            Health *= highScoreModf;
-            Damage *= highScoreModf;
+            HighScoreManager.TotalDamageDealt += damage;
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace Content
 {
@@ -38,13 +33,6 @@ namespace Content
             }
         }
 
-        public override void Reset()
-        {
-            base.Reset();
-            Health = 500;
-            Damage = 100;
-        }
-
         protected override void OnAttack()
         {
             base.OnAttack();
@@ -56,6 +44,13 @@ namespace Content
             _distanceToPlayer.Normalize();
             snowball.Velocity = _distanceToPlayer * 800;
             World.Add(snowball);
+        }
+
+        public override void ScaleStatsWithHighScore(float highScoreModifier)
+        {
+            base.ScaleStatsWithHighScore(highScoreModifier);
+            Damage = (int)(Damage * highScoreModifier);
+            Health = (int)(Health * highScoreModifier);
         }
     }
 }

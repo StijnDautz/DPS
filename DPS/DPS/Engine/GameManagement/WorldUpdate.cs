@@ -11,13 +11,13 @@ namespace Engine
     {
         public override void Update(GameTime gameTime)
         {
-            if (_canUpdate)
+            if (GameMode.CanUpdateWorld)
             {
                 UpdateCollision(gameTime);
                 UpdateCamera();
                 foreach (Object o in Objects)
                 {
-                    if (_canUpdate && o != null && o.Visible)
+                    if (o != null && o.Visible)
                     {
                         o.Update(gameTime);
                     }

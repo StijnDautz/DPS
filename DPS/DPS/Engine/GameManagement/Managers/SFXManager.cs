@@ -51,6 +51,7 @@ namespace Engine
             _soundEffects = new Dictionary<string, SFX>();
             _source = source;
             _canUpdate = true;
+            _volumeModifier = 1;
         }
 
         public void Update(GameTime gameTime, Character character)
@@ -65,9 +66,16 @@ namespace Engine
                 }
                 UpdateVolume(character);
             }
-            if(_canUpdate)
+            if (_canUpdate)
             {
-                UpdateSFX();
+                string newSFX = UpdateSFX();
+                if(newSFX != "")
+                {
+                    if (_playingSFXInstance == null || (newSFX != _playingSFX.name && _playingSFX.loop) || (!_playingSFX.loop  && _playingSFXInstance.State == SoundState.Stopped))
+                    {
+                        SwitchTo(newSFX);
+                    }
+                }
             }
         }
 
@@ -76,9 +84,9 @@ namespace Engine
             _soundEffects.Add(name, new SFX(name, sfx, loop));
         }
 
-        protected virtual void UpdateSFX()
+        protected virtual string UpdateSFX()
         {
-
+            return null;
         }
 
         protected void SwitchTo(string id)
@@ -91,21 +99,24 @@ namespace Engine
             _playingSFXInstance = _playingSFX.sfx.CreateInstance();
             _playingSFXInstance.Play();
             _playingSFXInstance.IsLooped = _playingSFX.loop;
-            _canUpdate = _playingSFX.loop;
         }
 
         protected SoundEffect getSFX(string assetName)
         {
-            return Engine.GameInstance.AssetManager.GetSoundEffect(assetName);
+            return GameInstance.AssetManager.GetSoundEffect(assetName);
         }
 
         private void UpdateVolume(Character character)
         {
-            //calculate distance
-            float distance = (character.GlobalPosition - _source.GlobalPosition).Length();
+            //calculate distance, + 1 to avoid division by 0
+            float distance = (character.GlobalPosition - _source.GlobalPosition).Length() + 1;
 
+            if(distance < 500)
+            {
+                int x = 0;
+            }
             //calculate volume based on settings and on distance from source
-            float volume = 100 * _volumeModifier / distance;
+            float volume = 230 * _volumeModifier / distance;
 
             //if volume is too low, stop _playingSFXInstance, as it wont be heard anyway and there's a maximum on sfxs played simultaneously
             if (volume < 0.1)

@@ -73,7 +73,7 @@ namespace Engine
             //add to damage to totaldamage taken
             if(character is Player)
             {
-                Content.HighScoreManager.IncrementTotalDamageTaken = _damage;
+                Content.HighScoreManager.TotalDamageTaken += _damage;
             }
 
             //check if collision was on left or right

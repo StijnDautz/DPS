@@ -17,16 +17,16 @@ namespace Content
             get { return _highScore; }
         }
 
-        public static int IncrementTotalDamageTaken
+        public static int TotalDamageTaken
         {
             get { return _totalDamageTaken; }
             set { _totalDamageTaken = value; }
         }
 
-        public static int IncrementTotalDamageDealt
+        public static int TotalDamageDealt
         {
             get { return _totalDamageDealt; }
-            set { _totalDamageDealt += value; }
+            set { _totalDamageDealt = value; }
         }
      
         public static string HashSHA1(string value)
@@ -125,7 +125,6 @@ namespace Content
             InitializeDatabase();
             string query = string.Format("INSERT INTO highscore(username,score) VALUES ('{0}','{1}')", _userName, score);
 
-
             MySqlCommand cmd = new MySqlCommand(query, dbConn);
 
             try
@@ -146,11 +145,10 @@ namespace Content
         public static int CalculateNewHighScore(int timeInSeconds, bool finished)
         {
             float highScoreModf = (float)_highScore / 50000;
-            float damageTakenScore = _totalDamageTaken * -(1 - highScoreModf);
-            float damageDealtScore = _totalDamageDealt * highScoreModf;
+            float damageRatioScore = ((float)_totalDamageDealt / _totalDamageTaken) * highScoreModf * 5000;
             float timeScore = finished ? ((3000 - timeInSeconds) / (1 - highScoreModf)) * 2.5f : 0;
             float finishingScore = finished ? 5000 : 0;
-            return (int)(damageTakenScore + damageDealtScore + finishingScore + timeScore);
+            return (int)(damageRatioScore + finishingScore + timeScore);
         }
     }
 }

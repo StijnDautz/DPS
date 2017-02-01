@@ -137,10 +137,7 @@ namespace Engine
                     World.GameMode.World.Add(this);
                     World.GameMode.World.Add(_weapon1);
                     World.GameMode.World.Add(_weapon2);
-                    World.CanUpdate = true;
-                    Position = new Vector2(30000, 400);
-
-                    
+                    Position = new Vector2(30000, 400);                  
                 }
                 if (World.IsTopDown)
                 {
@@ -328,12 +325,6 @@ namespace Engine
         {
             base.OnAttack();
             _weapon1.Visible = true;
-        }
-
-        public override void OnDamaged(int damage)
-        {
-            base.OnDamaged(damage);
-            Content.HighScoreManager.IncrementTotalDamageTaken = damage;
         }
         #endregion
     }

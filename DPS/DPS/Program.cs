@@ -36,9 +36,10 @@ namespace Engine
             gameMode.Player.Position = new Microsoft.Xna.Framework.Vector2(600 , 300);
 
             gameMode.Setup();
+            
             gameMode.SetupWorlds();
             gameMode.World.Add(gameMode.Player);
-
+            
             GameModeManager.Add(gameMode);
             GameModeManager.SwitchTo("MainGM");
         }

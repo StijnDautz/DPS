@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 
 namespace Engine
 {
@@ -128,6 +123,10 @@ namespace Engine
                     _attackTime = 0;
                     OnAttack();
                 }
+                else
+                {
+                    Attacking = false;
+                }
             }
         }
 
@@ -145,9 +144,9 @@ namespace Engine
             }
         }
 
-        public virtual void ScaleStatsWithHighScore(int HighScore)
+        public virtual void ScaleStatsWithHighScore(float highScoreModifier)
         {
-            Reset();
+            
         }
     }
 }

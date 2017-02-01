@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Engine;
 using Microsoft.Xna.Framework;
 
@@ -12,7 +8,6 @@ namespace Content
     {
         public HighScorePopUp(Engine.Object parent, int oldHighScore, int newHighScore) : base("highScorePopUp", parent)
         {
-            //TODO set proper positions of objects
             //create background
             var backGround = new TexturedObject("background", this, new SpriteSheet("Textures/HUD/HighScorePopUpWindow"));
 
@@ -31,13 +26,13 @@ namespace Content
             newScore.Position = new Vector2(160, 305);
 
             var totalDamageDealt = new TextObject("totalDamageDealt", "Hud", this);
-            totalDamageDealt.Text = HighScoreManager.IncrementTotalDamageDealt.ToString();
+            totalDamageDealt.Text = HighScoreManager.TotalDamageDealt.ToString();
             totalDamageDealt.Color = new Color(124, 93, 72);
             totalDamageDealt.Position = new Vector2(160, 175);
             totalDamageDealt.Scale = 0.6f;
 
             var totalDamageTaken = new TextObject("totalDamageTaken", "Hud", this);
-            totalDamageTaken.Text = HighScoreManager.IncrementTotalDamageTaken.ToString();
+            totalDamageTaken.Text = HighScoreManager.TotalDamageTaken.ToString();
             totalDamageTaken.Color = new Color(124, 93, 72);
             totalDamageTaken.Position = new Vector2(160, 202);
             totalDamageTaken.Scale = 0.6f;

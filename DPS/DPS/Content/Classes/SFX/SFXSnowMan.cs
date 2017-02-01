@@ -20,7 +20,7 @@ namespace Content
             }
         }
 
-        protected override void UpdateSFX()
+        protected override string UpdateSFX()
         {
             base.UpdateSFX();
             if(Source is EnemySnowMan)
@@ -28,18 +28,19 @@ namespace Content
                 var snowMan = Source as EnemySnowMan;
                 if(snowMan.Death)
                 {
-                    SwitchTo("death");
+                    return "death";
                 }
                 else if(snowMan.Attacking)
                 {
-                    SwitchTo("attack");
+                    return "attack";
                 }
                 else if(_health > snowMan.Health)
                 {
-                    SwitchTo("damaged");
+                    return "damaged";
                 }
                 _health = snowMan.Health;
             }
+            return "";
         }
     }
 }

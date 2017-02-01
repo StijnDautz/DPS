@@ -18,7 +18,7 @@ namespace Content
             _health = (source as Engine.Player).Health;
         }
 
-        protected override void UpdateSFX()
+        protected override string UpdateSFX()
         {
             base.UpdateSFX();
             if(Source is Engine.Player)
@@ -26,20 +26,20 @@ namespace Content
                 var player = Source as Engine.Player;
                 if(player.Death)
                 {
-                    SwitchTo("death");
+                    return "death";
                 }
-                else if(player.Attacking)
+                if(player.Attacking)
                 {
-                    SwitchTo("attack");
+                    return "attack";
                 }
-                else if(_health > player.Health)
+                if(_health > player.Health)
                 {
+                    //update health of player, so damaged sfx wont play if it wasnt able to when the player was actually damaged
+                    _health = player.Health;
                     SwitchTo("damaged");
                 }
-
-                //update health of player, so damaged sfx wont play if it wasnt able to when the player was actually damaged
-                _health = player.Health;
             }
+            return "";
         }
     }
 }

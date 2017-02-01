@@ -63,6 +63,11 @@ namespace Engine
             set { GameStateManager.GameMode.GameModeManager.CanUpdateGameTime = value; }
         }
 
+        public bool CanUpdateWorld
+        {
+            set { _gameStateManager.GameMode.CanUpdateWorld = value; }
+        }
+
         public GameState(string id, GameStateManager gameStateManager)
         {
             _id = id;

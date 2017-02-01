@@ -17,6 +17,7 @@ namespace Engine
         private GameStateManager _gameStateManager;
         private GameModeManager _parent;
         private Player _player;
+        private bool _canUpdateWorld;
 
         public string Id
         {
@@ -43,6 +44,12 @@ namespace Engine
         {
             get { return _player; }
             set { _player = value; }
+        }
+
+        public bool CanUpdateWorld
+        {
+            get { return _canUpdateWorld; }
+            set { _canUpdateWorld = value; }
         }
 
         public GameMode(string id, GameModeManager gm, List<World> worlds)
@@ -100,7 +107,7 @@ namespace Engine
             {
                 if(w.Id == id)
                 {                 
-                    _current = w;                    
+                    _current = w;
                     return;
                 }
             }
@@ -114,5 +121,25 @@ namespace Engine
                 w.Setup(this);
             }
         }
+
+        public void ClearWorlds()
+        {
+            foreach(World w in _worlds)
+            {
+                foreach(Object o in w.Objects)
+                {
+                    w.Remove(o);
+                }
+            }
+        }
+
+        public void ScaleEnemies()
+        {
+            foreach(World w in _worlds)
+            {
+                w.ScaleEnemies();
+            }
+        }
+
     }
 }
