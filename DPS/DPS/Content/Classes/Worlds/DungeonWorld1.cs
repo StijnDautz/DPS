@@ -58,7 +58,7 @@ namespace Content
                     }
 
                     //create objectgrid and pass char[,], so it gets loaded into the grid
-                    var room = new Content.GridDungeon("randomRoom", parent, tempCharGrid, 96, 96);
+                    var room = new GridDungeon("randomRoom", parent, tempCharGrid, 96, 96);
 
                     //set the boundingBox
                     room.BoundingBox = new Rectangle(0, 0, 20 * 96, 10 * 96);

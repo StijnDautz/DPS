@@ -31,14 +31,5 @@ namespace Content
             World.CanUpdate = true;
             CanUpdateGameTime = true;          
         }
-
-        public override void HandleInput(GameTime gameTime)
-        {
-            base.HandleInput(gameTime);
-            if (GameInstance.InputManager.isKeyPressed(Keys.I))
-            {
-                GameStateManager.SwitchTo("inventory");
-            }
-        }
     }
 }

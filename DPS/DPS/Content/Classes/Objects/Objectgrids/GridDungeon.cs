@@ -112,6 +112,7 @@ namespace Content
                 case '-': return LoadEmptyCollisionBlock();
                 case '!': return new EnemyZombie(this);
                 case '@': return new EnemySnowMan(this);
+                case '&': return new PickupHealthPotion(this);
 
                 default: throw new Exception("character of type: " + type + "was not associated with an Object");
             }

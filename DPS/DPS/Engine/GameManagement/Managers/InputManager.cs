@@ -14,7 +14,6 @@ namespace Engine
         private MouseState _currentMouseState;
         private KeyboardState _previousKeyboardState;
         private KeyboardState _currentKeyboardState;
-        private Keys lastKey;
 
         public InputManager()
         {
@@ -76,6 +75,7 @@ namespace Engine
             {
                 stringBuilder.Append(" ");
             }
+
             //loop through alfabet
             for (Keys key = Keys.A; key < Keys.LeftWindows; key++)
             {
@@ -92,6 +92,7 @@ namespace Engine
                     }
                 }
             }       
+
             //if backspace is pressed remove last character in string
             if(isKeyReleased(Keys.Back) && stringBuilder.Length > 0)
             {

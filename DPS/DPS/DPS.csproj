@@ -43,7 +43,6 @@
     <Compile Include="Content\Classes\GameManagement\GameStates\GSSettings.cs" />
     <Compile Include="Content\Classes\GameManagement\MainGameMode.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\MainMenuGS.cs" />
-    <Compile Include="Content\Classes\GameManagement\GameStates\InventoryGS.cs" />
     <Compile Include="Content\Classes\GameManagement\GameStates\StartPlayGS.cs" />
     <Compile Include="Content\Classes\Objects\Characters\BossSanta.cs" />
     <Compile Include="Content\Classes\Objects\Characters\Enemy.cs" />
@@ -64,6 +63,7 @@
     <Compile Include="Content\Classes\Objects\Objectgrids\Overworld.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemySnowMan.cs" />
     <Compile Include="Content\Classes\Objects\Characters\EnemyZombie.cs" />
+    <Compile Include="Content\Classes\Objects\Pickups\PickupHealthPotion.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponBomb.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponSuperJump.cs" />
     <Compile Include="Content\Classes\Objects\Weapons\WeaponPlayer.cs" />

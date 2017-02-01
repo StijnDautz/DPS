@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
+﻿using Microsoft.Xna.Framework;
 
 namespace Engine
 {
@@ -17,12 +10,6 @@ namespace Engine
     {
         TexturedObject _pickup;
         Content.DescriptionBox _descriptionBox;
-        bool isPickupUp;
-
-        public bool IsPickupUp
-        {
-            get { return isPickupUp; }
-        }
 
         public Pickup(string id, Object parent, SpriteSheet spriteSheet, string description) : base(id, parent)
         {
@@ -48,7 +35,7 @@ namespace Engine
             base.Update(gameTime);
             //Update position
             double t = gameTime.TotalGameTime.TotalSeconds * 3.0f;
-            Position = new Vector2(Position.X, Position.Y + (float)Math.Sin(t) * 0.2f);
+            Position = new Vector2(Position.X, Position.Y + (float)System.Math.Sin(t) * 0.2f);
 
             //check if mouse is on top of pickup
             CheckMouseOn();
@@ -61,9 +48,10 @@ namespace Engine
         {
             base.OnCollision(collider);
             Player player = World.Player;
-            if(collider == player && player.Inventory.AddPickup(this))
+            if(collider == player)
             {
-                isPickupUp = true;
+                //remove it from the world
+                World.Remove(this);
             }
         }
 
